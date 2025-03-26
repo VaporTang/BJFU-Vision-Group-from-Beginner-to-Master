@@ -28,7 +28,7 @@ jobs:
             [ -f "$file" ] || continue
             pandoc "$file" \
               -o "output/${file%.md}.pdf" \
-              --toc --from=utf8 --to=utf8 \  
+              --toc \  
           done
 
       - name: Upload PDFs as artifacts
