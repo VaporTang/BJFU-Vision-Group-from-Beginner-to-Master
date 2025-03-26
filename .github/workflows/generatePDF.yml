@@ -33,7 +33,7 @@ jobs:
               -V pagestyle=plain \
               -V mainfont="Noto Sans CJK SC" \
               -V header-includes="\\usepackage{fancyhdr}\\pagestyle{fancy}\\fancyhf{}\\rfoot{\\thepage}\\usepackage{amsmath}" \
-              --css=typora.css \
+              --css=github.css \
               -o "output/${file%.md}.pdf"
           done
 
