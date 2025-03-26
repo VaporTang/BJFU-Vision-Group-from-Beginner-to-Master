@@ -19,13 +19,20 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y pandoc texlive-xetex
+          sudo apt install -y pandoc texlive-xetex fonts-noto-cjk
 
       - name: Convert Markdown to PDF
         run: |
           mkdir -p output
           for file in *.md; do
-            pandoc "$file" -o "${file%.md}.pdf" --pdf-engine=xelatex
+            pandoc "$file" \
+              --pdf-engine=xelatex \
+              -V geometry:margin=1in \
+              -V toc=true \
+              -V pagestyle=plain \
+              -V mainfont="Noto Sans CJK SC" \
+              -V header-includes="\\usepackage{fancyhdr}\\pagestyle{fancy}\\fancyhf{}\\rfoot{\\thepage}" \
+              -o "output/${file%.md}.pdf"
           done
 
       - name: Upload PDFs as artifacts
