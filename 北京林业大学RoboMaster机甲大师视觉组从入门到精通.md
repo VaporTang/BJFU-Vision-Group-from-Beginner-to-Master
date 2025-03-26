@@ -3363,12 +3363,12 @@ int main()
 >
 >```text
 >$x^{y^z}=(1+e^x)^{-2xy^w}$
->$\sideset{^1_2}{^3_4}{\underset{6}{\bigotimes}}$
+>$\sideset{^1_2}{^3_4}{\underset{6}{\bigotimes}}\nolimits$
 >```
 
 >效果:
 >$x^{y^z}=(1+e^x)^{-2xy^w}$
->$\sideset{^1_2}{^3_4}{\underset{6}{\bigotimes}}$
+>$\sideset{^1_2}{^3_4}{\underset{6}{\bigotimes}}\nolimits$
 
 #### 4.13.3 括号和分隔符
 
