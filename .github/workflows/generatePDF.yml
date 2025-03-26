@@ -32,7 +32,7 @@ jobs:
               -V toc=true \
               -V pagestyle=plain \
               -V header-includes="\\usepackage{fancyhdr}\\pagestyle{fancy}\\fancyhf{}\\rfoot{\\thepage}" \
-              --from markdown+html \
+              --from markdown \
               -o "output/${file%.md}.pdf"
           done
 
