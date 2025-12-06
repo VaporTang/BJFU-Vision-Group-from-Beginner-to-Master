@@ -511,7 +511,8 @@ timedatectl
 ```
 sudo apt update
 sudo apt-get install build-essential
-sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev
+sudo apt-get install libavformat-dev libswscale-dev
 sudo apt install -y make
 ```
 
@@ -709,19 +710,25 @@ make -j8
 
 ##### 2.3.1.1 Ubuntu
 
-下载好的 VScode 的.deb安装包放到桌面
+下载好的 VSCode 的.deb安装包放到桌面
 
 在桌面打开终端，输入以下指令
 
-```
-sudo dpkg -i 你的安装包名字.deb 
+```bash
+sudo apt install ./<VSCode安装包文件名>.deb
 ```
 
 安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
 
+注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
 安装完成后在终端输入以下指令回车执行
 
-```
+```bash
 code
 ```
 
