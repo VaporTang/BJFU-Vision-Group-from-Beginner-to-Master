@@ -27,13 +27,17 @@ $$\Huge \textbf{目录}$$
 
 ## 1 硬件
 
-> Contributors: 叶睿聪 (dgsyrc@github)
+> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
 ### 1.1 分电板
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
 
-黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:5%;" />
+
+图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
+
+图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
 
 ### 1.2 电池架
 
@@ -45,7 +49,7 @@ $$\Huge \textbf{目录}$$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.jpg" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:20%;" />
 
-黄色接头为XT30母头（接分电板XT30公头），黑色为DC（接迷你PC电源）
+黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
 ### 1.4 电池
 
@@ -64,7 +68,7 @@ $$\Huge \textbf{目录}$$
 | CPU                 | Intel Core i5-1135G7 |
 | GPU                 | 集显 Intel Xe        |
 | RAM                 | 16G DDR4             |
-| 硬盘                | PCIe4.0 Nvme 512G    |
+| 硬盘                | PCIe4.0 NVMe 512G    |
 | 无线网卡            | 有                   |
 | USB 3.1 接口        | 3个                  |
 | 雷电3接口（Type-C） | 2个                  |
@@ -133,6 +137,30 @@ $$\Huge \textbf{目录}$$
 | 红色 | 红方 |
 | 蓝色 | 蓝方 |
 | 紫色 | 离线 |
+
+#### 1.9.2 拆解
+
+装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
+
+通过逆向分析，每颗LED灯珠型号为SMD3528红蓝双色反极贴片式发光二极管。经比对，目前确认其规格与型号 **XL-3528SURUBC-FJ** 一致。
+
+灯珠详细原理及规格图如下：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.png" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
+
+##### 驱动方式：
+
+**注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
+
+每个灯珠内部实际包含两个极性相反、相互独立的LED芯片，分别发出红光和蓝光。因此，在驱动红光和蓝光时，可采用一块 3.7 V 软包电池，通过 5 V USB 充放电管理模块进行电能管理。从充放电管理模块输出 5 V 电压，并分为两路：
+
+- 红光 LED 支路串联 **150 Ω** 限流电阻；
+- 蓝光 LED 支路串联 **100 Ω** 限流电阻。
+
+推荐从充放电管理模块获取 5 V 电源的原因在于，其输出电压较为稳定。然而，也可以考虑直接使用电池作为输出电源。在这种情况下：
+
+- 红光 LED 支路应串联 **110 Ω** 限流电阻；
+- 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
 
 ### 1.10 外置MiniPC完整装机展示
 
@@ -511,7 +539,8 @@ timedatectl
 ```
 sudo apt update
 sudo apt-get install build-essential
-sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev
+sudo apt-get install libavformat-dev libswscale-dev
 sudo apt install -y make
 ```
 
@@ -709,19 +738,25 @@ make -j8
 
 ##### 2.3.1.1 Ubuntu
 
-下载好的 VScode 的.deb安装包放到桌面
+下载好的 VSCode 的.deb安装包放到桌面
 
 在桌面打开终端，输入以下指令
 
-```
-sudo dpkg -i 你的安装包名字.deb 
+```bash
+sudo apt install ./<VSCode安装包文件名>.deb
 ```
 
 安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
 
+注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
 安装完成后在终端输入以下指令回车执行
 
-```
+```bash
 code
 ```
 
@@ -3044,7 +3079,7 @@ IMU 一般指6轴传感器，内部包含了3轴陀螺仪和3轴加速度计，3
 
 3轴陀螺仪测量的是每个轴上面的角速度，精度一般为 °/s ，也就是按照这个趋势旋转，每秒钟能走过的度数。
 
-3轴加速度计测量的是每个轴所受的重力加速度，比如传感器水平放置水平地面时，理论上只受到z轴负向的重力加速度，大小为 $9.8 m/s^2$
+3轴加速度计测量的是每个轴所受的重力加速度，比如传感器水平放置水平地面时，理论上只受到z轴负向的重力加速度，大小为 9.8 m/s<sup>2</sup>
 
 **原理**
 
