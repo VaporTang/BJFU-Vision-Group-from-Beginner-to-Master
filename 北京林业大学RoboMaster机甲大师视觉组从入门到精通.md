@@ -4,7 +4,9 @@
 
 
 
-$$\Huge \textbf{Contributor}$$
+$$
+\Huge \textbf{Contributor}
+$$
 
 ------------------------------
 
@@ -15,8 +17,9 @@ $$\Huge \textbf{Contributor}$$
 叶睿聪（[CCongCirno](https://github.com/CCongCirno)）、刘明楷（[milchstrasse565](https://github.com/milchstrasse565)）、洪佳（[Xiancaijiang](https://github.com/Xiancaijiang)）、杜雨蒙、邱万理、程英杰（[cheng-lao](https://github.com/cheng-lao)）、胡彦祺（[huer512](https://github.com/huer512)）、唐锦梁（[VaporTang](https://github.com/VaporTang)）
 
 <div STYLE="page-break-after: always;"></div>
-
-$$\Huge \textbf{目录}$$
+$$
+\Huge \textbf{目录}
+$$
 
 ------------------
 
@@ -43,7 +46,13 @@ $$\Huge \textbf{目录}$$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.jpg" alt="f602d63510250d8df700e72b8e18b27" style="zoom:20%;" />
 
-黄色接头为XT60公头（接分电板XT60母头）
+电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
+
+- 符号 |（竖线）：代表 **开启 (ON)**。
+
+- 符号 O（圆圈）：代表 **关闭 (OFF)**。
+
+> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
 
 ### 1.3 DC-DC（24V-19V）变压器
 
@@ -55,13 +64,21 @@ $$\Huge \textbf{目录}$$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.jpg" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:20%;" />
 
-圆形按钮为开关，短按一次再长按打开（关闭同理）
+电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
 
-### 1.5 迷你PC（以NUC 11为例）
+电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
+
+旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
+
+> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
+
+> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
+
+### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.jpg" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:20%;" />
 
-#### 1.5.1 参数
+#### 1.5.1 参数（以 NUC 11 为例）
 
 | 属性                | 参数                 |
 | ------------------- | -------------------- |
@@ -97,25 +114,74 @@ $$\Huge \textbf{目录}$$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.jpg" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:20%;" />
 
-### 1.7 各种线缆
+### 1.7 激光雷达
 
-#### 1.7.1 USB-Camera
+#### 1.7.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
+
+| 参数                    | 说明                                   |
+| ----------------------- | -------------------------------------- |
+| **激光波长**            | 905 nm                                 |
+| **人眼安全级别¹**       | Class 1 (IEC60825-1:2014) 人眼安全     |
+| **量程 (@ 100 klx)**    | 40 m @ 10% 反射率<br>70 m @ 80% 反射率 |
+| **近处盲区²**           | 0.1 m                                  |
+| **FOV**                 | 水平 360°, 竖直 -7°~52°                |
+| **测距随机误差³ (1σ)**  | ≤ 2 cm ⁴ (@ 10m)<br>≤ 3 cm ⁵ (@ 0.2m)  |
+| **角度随机误差（1σ）**  | < 0.15º                                |
+| **点云输出**            | 200,000 点/秒 (可配置第一回波)         |
+| **点云帧率**            | 10 Hz (典型值)                         |
+| **数据网口**            | 100 BASE-TX 以太网                     |
+| **数据同步方式**        | IEEE 1588-2008 (PTPv2), GPS            |
+| **抗串扰功能**          | 有                                     |
+| **虚警率 (@ 100 klx)⁶** | < 0.01%                                |
+| **IMU**                 | 内置 IMU 型号：ICM40609                |
+| **工作环境温度⁷**       | -20℃ 至 55℃                            |
+| **防护等级**            | IP67                                   |
+| **功率⁸**               | 6.5 W                                  |
+| **供电电压范围**        | 9 ~ 27 V DC                            |
+| **尺寸**                | 65×65×60 mm                            |
+| **重量**                | 265 g                                  |
+
+#### 1.7.2 官方文档与手册
+
+[Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
+
+#### 1.7.3 配置
+
+**硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
+
+**IP 设置：**为确保通讯正常，需将 PC（MiniPC）与雷达置于同一网段。请手动修改 PC 的 IPv4 设置：
+
+- **IP 地址：** 推荐设置为 `192.168.1.50`（或 `192.168.1.x` 网段下的其他空闲地址）。
+
+- **子网掩码：** `255.255.255.0`
+
+> 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
+
+#### 1.7.4 SDK
+
+***placeholder，update later by VaporTang***
+
+***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
+
+### 1.8 各种线缆
+
+#### 1.8.1 USB-Camera
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.jpg" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:20%;" />
 
-#### 1.7.2 网线
+#### 1.8.2 RJ45 网线
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.jpg" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:20%;" />
 
-#### 1.7.3 HDMI-HDMI
+#### 1.8.3 HDMI-HDMI
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.jpg" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:20%;" />
 
-### 1.8 USB to TTL
+### 1.9 USB to TTL
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.jpg" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:20%;" />
 
-#### 1.8.1 接口
+#### 1.9.1 接口
 
 | 接口 | 用法          |
 | ---- | ------------- |
@@ -124,13 +190,13 @@ $$\Huge \textbf{目录}$$
 | RXD  | 接另一端的TXD |
 | GND  | 接GND（地线） |
 
-### 1.9 手持装甲板调试模块
+### 1.10 手持装甲板调试模块
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.jpg" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:20%;" />
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.jpg" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:20%;" />
 
-#### 1.9.1 参数
+#### 1.10.1 参数
 
 | 颜色 | 状态 |
 | ---- | ---- |
@@ -138,7 +204,7 @@ $$\Huge \textbf{目录}$$
 | 蓝色 | 蓝方 |
 | 紫色 | 离线 |
 
-#### 1.9.2 拆解
+#### 1.10.2 拆解
 
 装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
 
@@ -162,7 +228,7 @@ $$\Huge \textbf{目录}$$
 - 红光 LED 支路应串联 **110 Ω** 限流电阻；
 - 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
 
-### 1.10 外置MiniPC完整装机展示
+### 1.11 外置MiniPC完整装机展示
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.jpg" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:20%;" />
 
@@ -4704,6 +4770,8 @@ cv2.destroyAllWindows()
 
 
 <div STYLE="page-break-after: always;"></div>
+
+### 3.5 调试技巧
 
 ## 4 文档编写
 
