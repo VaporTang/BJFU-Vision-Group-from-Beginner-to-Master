@@ -4773,6 +4773,23 @@ cv2.destroyAllWindows()
 
 ### 3.5 调试技巧
 
+#### 3.5.1 录制终端会话到文件
+**启动录制**
+
+```bash
+script my_session.log
+```
+执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
+
+**停止录制**
+
+当操作完成需要结束录制时，可以使用以下任意一种方法：
+
+- **输入命令：** `exit`
+- **快捷键：** `Ctrl` + `D`
+
+系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
+
 ## 4 文档编写
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳
