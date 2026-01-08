@@ -6531,19 +6531,19 @@ sudo ./bin/MiracleVision
 
 1. 进入`base/MiracleVision.cpp`注释掉`#define RELEASE`
 
-![微信图片_20250912224255](D:\项目\RM\BJFU-Vision-Group-from-Beginner-to-Master\北京林业大学RoboMaster机甲大师视觉组从入门到精通\微信图片_20250912224255.png)
+![微信图片_20250912224255](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224255.png)
 
 2. 将`switch (serial_.returnReceiveMode())`改为`switch (uart::AUTO_AIM)`
 
-![微信图片_20250912224303](D:\项目\RM\BJFU-Vision-Group-from-Beginner-to-Master\北京林业大学RoboMaster机甲大师视觉组从入门到精通\微信图片_20250912224303.png)
+![微信图片_20250912224303](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224303.png)
 
 3. 在`configs/armor/basic_armor_config.xml`中，将`DEBUG_MODE`改为`1`
 
-![微信图片_20250912224154](D:\项目\RM\BJFU-Vision-Group-from-Beginner-to-Master\北京林业大学RoboMaster机甲大师视觉组从入门到精通\微信图片_20250912224154.png)
+![微信图片_20250912224154](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224154.png)
 
 4. 可以按需要调整的参数设置EDIT参数，若要调整灰度阈值，则将`GRAY_EDIT`设为1，程序启动后将弹出滑块窗口。
 
-![微信图片_20250912224518](D:\项目\RM\BJFU-Vision-Group-from-Beginner-to-Master\北京林业大学RoboMaster机甲大师视觉组从入门到精通\微信图片_20250912224518.png)
+![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.png)
 
 #### 6.3.2 串口
 
