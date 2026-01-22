@@ -5172,9 +5172,9 @@ $公式$
 >```
 
 >效果:
->$$
->公式
->$$
+$$
+公式
+$$
 
 #### 4.13.2 上下标
 
@@ -5259,9 +5259,9 @@ $\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightar
 >```
 
 >效果:
->$$
->\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
->$$
+$$
+\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
+$$
 
 #### 4.13.9 极限
 
@@ -5428,9 +5428,9 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
->$$
+$$
+f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
+$$
 
 >说明:如果你想将行内显示的分隔符也变大,也可以使用`\middle`命令
 
@@ -5443,9 +5443,9 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
->$$
+$$
+\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
+$$
 
 #### 4.13.15 其他命令
 
@@ -5458,9 +5458,9 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
->$$
+$$
+f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
+$$
 
 **③文字颜色**
 
@@ -5526,16 +5526,16 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->\require{cancel}\begin{array}{r1}
->\verb|y+\cancel{x}|&y+\cancel{x}\\
->\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
->\verb|y+\bcancel{x}|&y+\bcancel{x}\\
->\verb|y+\xcancel{x}|&y+\xcancel{x}\\
->\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
->\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
->\end{array}
->$$
+$$
+\require{cancel}\begin{array}{r1}
+\verb|y+\cancel{x}|&y+\cancel{x}\\
+\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
+\verb|y+\bcancel{x}|&y+\bcancel{x}\\
+\verb|y+\xcancel{x}|&y+\xcancel{x}\\
+\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
+\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
+\end{array}
+$$
 
 >说明:  使用`\require{enclose}`来允许**整段删除线**的显示，再使用`\enclose{删除线效果}{字符}`来使用各种整段删除线效果。其中，删除线效果有`horizontalstrike`、`verticalstrike`、`updiagonalstrike`和`downdiagonalstrike`,可以叠加使用。
 
@@ -5554,15 +5554,15 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->\require{enclose}\begin{array}{r1}
->\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
->\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
->\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
->\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
->\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
->\end{array}
->$$
+$$
+\require{enclose}\begin{array}{r1}
+\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
+\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
+\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
+\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
+\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
+\end{array}
+$$
 
 #### 4.13.16 矩阵
 
@@ -5581,13 +5581,13 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->\begin{matrix}
->1&x&x^2\\
->1&y&y^2\\
->1&z&z^2\\
->\end{matrix}
->$$
+$$
+\begin{matrix}
+1&x&x^2\\
+1&y&y^2\\
+1&z&z^2\\
+\end{matrix}
+$$
 
 **②边框矩阵**
 
@@ -5615,14 +5615,14 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
->$$
->\left[
->\begin{array}{cc|c}
->1&2&3\\
->4&5&6
->\end{array}
->\right]
->$$
+$$
+\left[
+\begin{array}{cc|c}
+1&2&3\\
+4&5&6
+\end{array}
+\right]
+$$
 
 **④行中矩阵**
 
@@ -5682,15 +5682,15 @@ $\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
 >```
 
 >效果:
->$$
->\begin{align}
->\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
->&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
->&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
->&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
->&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
->\end{align}
->$$
+$$
+\begin{align}
+\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
+&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
+&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
+&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
+&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
+\end{align}
+$$
 
 ***
 
@@ -5723,13 +5723,13 @@ $$
 >```
 
 >效果:
->$$
->f(n)=
->\begin{cases}
->n/2,&\text{if $n$ is even}\\
->3n+1,&\text{if $n$ is odd}
->\end{cases}
->$$
+$$
+f(n)=
+\begin{cases}
+n/2,&\text{if $n$ is even}\\
+3n+1,&\text{if $n$ is odd}
+\end{cases}
+$$
 
 #### 4.13.19 配置行高
 
@@ -5757,13 +5757,13 @@ $$
 >```
 
 >效果:
->$$
->f(n)=
->\begin{cases}
->\dfrac n2,&\text{if $n$ is even}\\[2ex]
->3n+1,&\text{if $n$ is odd}
->\end{cases}\tag{适配[2ex]}
->$$
+$$
+f(n)=
+\begin{cases}
+\dfrac n2,&\text{if $n$ is even}\\[2ex]
+3n+1,&\text{if $n$ is odd}
+\end{cases}\tag{适配[2ex]}
+$$
 
 ***
 
@@ -5794,15 +5794,15 @@ $$
 >```
 
 >效果:
->$$
->\begin{array}{c|lcr}
->n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
->\hline
->1&0.24&1&125\\
->2&-1&189&-8\\
->3&-20&2000&1+10i
->\end{array}
->$$
+$$
+\begin{array}{c|lcr}
+n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
+\hline
+1&0.24&1&125\\
+2&-1&189&-8\\
+3&-20&2000&1+10i
+\end{array}
+$$
 
 #### 4.13.21 嵌套表格或数组
 
