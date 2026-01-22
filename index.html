@@ -7,12 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
+    
     <style>
-        /* 修复 medium-zoom 放大后的 z-index 问题，防止被某些元素遮挡 */
-        .medium-zoom-overlay, .medium-zoom-image--opened {
-            z-index: 9999 !important;
+        /* 修复 medium-zoom 遮罩层级，防止被导航栏遮挡 */
+        .medium-zoom-overlay {
+            z-index: 100 !important;
+        }
+        .medium-zoom-image--opened {
+            z-index: 101 !important;
+        }
+        /* 针对移动端优化，防止过大的图片撑破布局 */
+        .markdown-section img {
+            max-width: 100%;
         }
     </style>
 </head>
@@ -28,34 +38,22 @@
             subMaxLevel: 3,
             auto2top: true,
             coverpage: false,
-            
-            // 配置 medium-zoom 插件
+
+            // medium-zoom 插件配置
             mediumZoom: {
-                selector: '.markdown-section img', // 明确指定选择器
-                background: 'rgba(255, 255, 255, 0.95)'
+                selector: '.markdown-section img',
+                background: 'rgba(255, 255, 255, 0.95)',
+                margin: 24,
+                scrollOffset: 0
             },
 
-            // 定义一个自定义插件来修复 zoom 属性
+            // 核心修复逻辑：在解析前替换 zoom 为 width
             plugins: [
-                function(hook) {
-                    hook.doneEach(function() {
-                        // 获取所有内容区的图片
-                        var imgs = document.querySelectorAll('.markdown-section img');
-                        imgs.forEach(function(img) {
-                            // 检查是否有行内样式的 zoom
-                            if (img.style.zoom) {
-                                // 将 zoom 的值赋给 width
-                                img.style.width = img.style.zoom;
-                                // 移除非标准的 zoom 属性，避免干扰插件
-                                img.style.zoom = ''; 
-                            }
-                        });
-                        
-                        // 强制刷新 medium-zoom，确保它识别到新的样式
-                        if (window.MediumZoom) {
-                            window.MediumZoom.detach();
-                            window.MediumZoom.attach('.markdown-section img');
-                        }
+                function(hook, vm) {
+                    hook.beforeEach(function(html) {
+                        // 正则表达式：查找所有 style="zoom:..." 并替换为 style="width:..."
+                        // 这样浏览器和插件渲染时，看到的就是标准的 width 属性
+                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
                     });
                 }
             ]
