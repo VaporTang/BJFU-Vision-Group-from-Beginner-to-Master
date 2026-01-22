@@ -14,9 +14,15 @@
       font-family: "Microsoft YaHei", sans-serif;
     }
     
-    /* 鼠标提示可缩放 */
-    .markdown-section img: not(.emoji):not([data-no-zoom]) {
+    /* 鼠标提示可缩放 - 使用正确的选择器 */
+    .markdown-section img:not(.emoji):not([data-no-zoom]) {
       cursor: zoom-in;
+    }
+    
+    /* 确保 zoom 层级正确 */
+    .medium-zoom-overlay,
+    .medium-zoom-image--opened {
+      z-index: 9999 !important;
     }
   </style>
 </head>
@@ -28,17 +34,53 @@
     window.$docsify = {
       name: '北林视觉组教程',
       repo: '',
-      homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通. md',
+      homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
       loadSidebar: false,
       subMaxLevel: 3,
       auto2top: true,
     }
   </script>
 
-  <script src="//cdn. jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  
-  <!-- 使用官方 zoom-image 插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min. js"></script>
+
+  <script>
+    (function () {
+      var zoom;
+      
+      var myZoomPlugin = function (hook, vm) {
+        hook.doneEach(function () {
+          // 使用 docsify 官方相同的选择器
+          var imgs = document.querySelectorAll(
+            '. markdown-section img:not(.emoji):not([data-no-zoom])'
+          );
+          
+          // 过滤掉链接内的图片（a 标签内的 img）
+          var filteredImgs = Array.from(imgs).filter(function(img) {
+            return !img.closest('a');
+          });
+          
+          if (filteredImgs.length === 0) return;
+
+          // 销毁之前的实例
+          if (zoom) {
+            zoom.detach();
+          }
+
+          // 正确创建 mediumZoom 实例：直接传入元素
+          zoom = mediumZoom(filteredImgs, {
+            background: 'rgba(0, 0, 0, 0.6)',
+            margin: 24,
+            scrollOffset: 40
+          });
+        });
+      };
+
+      // 注册插件
+      window.$docsify.plugins = (window.$docsify.plugins || []);
+      window.$docsify. plugins.push(myZoomPlugin);
+    }());
+  </script>
 </body>
 
 </html>
