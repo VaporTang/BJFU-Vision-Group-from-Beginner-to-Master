@@ -13,14 +13,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
     
     <style>
-        /* 修复 medium-zoom 遮罩层级，防止被导航栏遮挡 */
-        .medium-zoom-overlay {
-            z-index: 100 !important;
-        }
-        .medium-zoom-image--opened {
-            z-index: 101 !important;
-        }
-        /* 针对移动端优化，防止过大的图片撑破布局 */
+        /* 移动端优化 */
         .markdown-section img {
             max-width: 100%;
         }
@@ -39,20 +32,13 @@
             auto2top: true,
             coverpage: false,
 
-            // medium-zoom 插件配置
-            mediumZoom: {
-                selector: '.markdown-section img',
-                background: 'rgba(255, 255, 255, 0.95)',
-                margin: 24,
-                scrollOffset: 0
-            },
-
             // 核心修复逻辑：在解析前替换 zoom 为 width
+            // 这一步对于 zoom-image 插件同样至关重要！
+            // 它可以修复非标准 zoom 属性导致的坐标计算偏移问题。
             plugins: [
                 function(hook, vm) {
                     hook.beforeEach(function(html) {
-                        // 正则表达式：查找所有 style="zoom:..." 并替换为 style="width:..."
-                        // 这样浏览器和插件渲染时，看到的就是标准的 width 属性
+                        // 将 style="zoom:..." 替换为 style="width:..."
                         return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
                     });
                 }
@@ -62,11 +48,12 @@
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/docsify-plugin-medium-zoom/dist/plugin.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
+
 </html>
