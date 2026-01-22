@@ -5994,7 +5994,6 @@ $$
 
 >效果:
 $$
-\require{AMScd}
 \begin{CD}
 A@>a>>B\\
 @V b V V\# @VV c V\\
@@ -6017,13 +6016,13 @@ $$
 >```
 
 >效果:
->$$
->\begin{CD}
->A@>>>B@>{\text{very long label}}>>C\\
->@.@AAA@|\\
->D@=E@<<<F
->\end{CD}
->$$
+$$
+\begin{CD}
+A@>>>B@>{\text{very long label}}>>C\\
+@.@AAA@|\\
+D@=E@<<<F
+\end{CD}
+$$
 
 #### 4.13.25 其他
 
