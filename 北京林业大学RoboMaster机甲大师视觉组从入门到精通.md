@@ -5361,7 +5361,7 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 | \check{x}      | $\check{x}$      | \breve{y}       | $\breve{y}$       |
 | \grave{x}      | $\grave{x}$      | \acute{y}       | $\acute{y}$       |
 | \dot{x}        | $\dot{x}$        | \ddot{x}        | $\ddot{x}$        |
-| \overparen{xy} | $\overparen{xy}$ |                 |                   |
+
 
 **⑧选取符号**
 
@@ -5403,8 +5403,8 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 | ---- | -------- | --------------- | ----- | ---------- | ----------------- |
 | \rm  | 罗马体   | ${\rm{Sample}}$ | \cal  | 花体       | ${\cal{Sample}}$  |
 | \it  | 意大利体 | ${\it{Sample}}$ | \Bbb  | 黑板粗体   | ${\Bbb{Sample}}$  |
-| \bf  | 粗体     | ${\bf{Sample}}$ | \mit  | 数学斜体   | ${\mit{Sample}}$  |
-| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\scr{Sample}}$  |
+| \bf  | 粗体     | ${\bf{Sample}}$ | \mit  | 数学斜体   | ${\mathit{Sample}}$  |
+| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$  |
 | \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$ |
 
 #### 4.13.14 大括号和行标
