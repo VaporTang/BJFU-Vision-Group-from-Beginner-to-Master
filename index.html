@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <!-- 固定使用 docsify@4 主题 -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 
     <style>
@@ -15,22 +14,21 @@
             font-family: "Microsoft YaHei", sans-serif;
         }
 
-        /* 强制 medium-zoom overlay 居中（兼容不同版本的 class 名称） */
+        /* overlay 居中并保持 fixed（overlay 本身不是图片） */
         .medium-zoom-overlay,
         .medium-zoom-overlay--open {
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            /* 保证覆盖背景为固定定位，不被祖先 transform 影响 */
             position: fixed !important;
             inset: 0 !important;
             z-index: 9999 !important;
+            background: rgba(0, 0, 0, 0.6) !important;
         }
 
-        /* 强制放大的图片居中（兼容 --open / --opened） */
+        /* 只在“放大打开”状态下才使图片居中（不要把基础类 .medium-zoom-image 包含进来） */
         .medium-zoom-image--open,
-        .medium-zoom-image--opened,
-        .medium-zoom-image {
+        .medium-zoom-image--opened {
             position: fixed !important;
             left: 50% !important;
             top: 50% !important;
@@ -40,9 +38,6 @@
             z-index: 10000 !important;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
         }
-
-        /* 如果你的页面里某个祖先使用了 transform，会导致 fixed 行为变成相对定位。
-       尝试找出并移除该 transform（见下面的检测脚本）。 */
     </style>
 </head>
 
@@ -57,35 +52,24 @@
             loadSidebar: false,
             subMaxLevel: 3,
             auto2top: true,
-            // 其他配置...
         }
     </script>
 
-    <!-- docsify 主脚本（固定版本） -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-    <!-- 直接引入 medium-zoom（使用稳定版本），并在 docsify 渲染完成后手动初始化 -->
     <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
 
     <script>
-            // 当 docsify 每次渲染完毕时（包括切页、首次加载），初始化/重置 zoom
             (function () {
-                // 注册一个 docsify 插件，利用 doneEach 钩子
                 var myZoomPlugin = function (hook, vm) {
                     hook.doneEach(function () {
-                        // 如果页面里没有图片，则跳过
                         if (!document.querySelector('main img')) return;
 
-                        // 先销毁已有的 zoom 实例（如果有的话）
                         try {
                             if (window._docsify_mediumZoomInstance) {
                                 window._docsify_mediumZoomInstance.detach();
                             }
-                        } catch (e) {
-                            // ignore
-                        }
+                        } catch (e) { }
 
-                        // 选择器按需修改：这里对 main 区域的所有 img 生效，也可以指定某个 class
                         window._docsify_mediumZoomInstance = mediumZoom('main img, .content img', {
                             background: 'rgba(0,0,0,0.6)',
                             margin: 24,
@@ -94,19 +78,16 @@
                     });
                 };
 
-                // 将插件加入到现有插件数组前端
                 window.$docsify.plugins = (window.$docsify.plugins || []);
                 window.$docsify.plugins.unshift(myZoomPlugin);
             }());
     </script>
 
-    <!-- 可选：保留 docsify 官方的 zoom-image plugin（版本化）以防其他功能依赖 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
-    <!-- 调试脚本：在 console 输出可能有 transform 的元素，便于你查找问题根源 -->
     <script>
-        // 仅在开发/调试时使用：打开控制台会看到前 20 个有 transform 的元素
-        console.log('检查页面中带 transform 的元素（如果有，会影响 fixed 定位）：',
+        // 调试用（可移除）：列出页面中含 transform 的元素，帮助定位 ancestor transform 问题
+        console.log('检查带 transform 的元素：',
             Array.from(document.querySelectorAll('*'))
                 .filter(el => getComputedStyle(el).transform !== 'none')
                 .slice(0, 20)
