@@ -4791,7 +4791,7 @@ script my_session.log
 
 ## 4 文档编写
 
-> Contributors: 叶睿聪 (dgsyrc@github)、洪佳
+> Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
 
 > 参考文献：
 >
@@ -4881,13 +4881,13 @@ script my_session.log
 >代码:
 >
 >```text
->x^2^
->H~2~O
+>x^{2}
+>H_{2}O
 >```
 
 >效果:
-$x^2$
-$ H~2~O $
+>$x^{2}$
+>$H_{2}O$
 
 ### 4.4 列表
 
@@ -4923,7 +4923,6 @@ $ H~2~O $
 >```
 
 >效果:
->
 >1. 第一个标题
 >2. 第二个标题
 >3. 第三个标题
@@ -4944,7 +4943,6 @@ $ H~2~O $
 >```
 
 >效果:
->
 >- [ ] 吃早餐
 >- [x] 背单词
 
@@ -4957,7 +4955,6 @@ $ H~2~O $
 >```
 
 >效果:
->
 >>这是最外层区块
 >
 >>>这是内层区块
@@ -5079,12 +5076,11 @@ int main()
 >```
 
 >效果:
->
->| 1    |  2   |    3 |
->| ---- | :--: | ---: |
->| 4    |  5   |    6 |
->| 7    |  8   |    9 |
->| 10   |  11  |   12 |
+| 1    |  2   |    3 |
+| ---- | :--: | ---: |
+| 4    |  5   |    6 |
+| 7    |  8   |    9 |
+| 10   |  11  |   12 |
 
 >快捷键:  Ctrl+T
 
@@ -5106,15 +5102,14 @@ int main()
 > ````
 
 >效果:
->
->```mermaid
->graph LR
->A[方形]==>B(圆角)
->B==>C{条件a}
->C-->|a=1|D[结果1]
->C-->|a=2|E[结果2]
->F[横向流程图]
->```
+```mermaid
+graph LR
+A[方形]==>B(圆角)
+B==>C{条件a}
+C-->|a=1|D[结果1]
+C-->|a=2|E[结果2]
+F[横向流程图]
+```
 
 #### 4.11.2 竖向流程图
 
@@ -5132,26 +5127,24 @@ int main()
 > ````
 
 >效果:
->
->```mermaid
->graph TD
->A[方形]==>B(圆角)
->B==>C{条件a}
->C-->|a=1|D[结果1]
->C-->|a=2|E[结果2]
->F[竖向流程图]
->```
+```mermaid
+graph TD
+A[方形]==>B(圆角)
+B==>C{条件a}
+C-->|a=1|D[结果1]
+C-->|a=2|E[结果2]
+F[竖向流程图]
+```
 
 ### 4.12 表情符号
 
 >代码:
->
 >```text
 >:happy:、:cry:、:man:
 >```
 
 >效果:
->:happy:、 :cry:、 :man:
+:happy:、 :cry:、 :man:
 
 ### 4.13 数学公式（Latex）
 
@@ -5166,7 +5159,7 @@ int main()
 >```
 
 >效果:
->$公式$
+$公式$
 
 **②独立公式**
 
@@ -5193,8 +5186,8 @@ int main()
 >```
 
 >效果:
->$x^{y^z}=(1+e^x)^{-2xy^w}$
->$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
+$x^{y^z}=(1+e^x)^{-2xy^w}$
+$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
 
 #### 4.13.3 括号和分隔符
 
@@ -5207,9 +5200,9 @@ int main()
 >```
 
 >效果:
->$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
->$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
->$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
+$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
+$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
+$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
 
 #### 4.13.4 分数
 
@@ -5220,7 +5213,7 @@ int main()
 >```
 
 >效果:
->$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
+$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
 
 #### 4.13.5 开方
 
@@ -5231,7 +5224,7 @@ int main()
 >```
 
 >效果:
->$\sqrt{2}\quad\sqrt[3]{2}$
+$\sqrt{2}\quad\sqrt[3]{2}$
 
 #### 4.13.6 省略号
 
@@ -5242,7 +5235,7 @@ int main()
 >```
 
 >效果:
->$\cdots\quad\ldots\quad\vdots\quad\ddots$
+$\cdots\quad\ldots\quad\vdots\quad\ddots$
 
 #### 4.13.7 矢量和均值
 
@@ -5253,7 +5246,7 @@ int main()
 >```
 
 >效果:
->$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
+$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
 
 #### 4.13.8 积分
 
@@ -5279,7 +5272,7 @@ int main()
 >```
 
 >效果:
->$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
+$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 
 #### 4.13.10 累加、累乘及交集、并集
 
@@ -5288,7 +5281,7 @@ int main()
 >```
 
 >效果:
->$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
+$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
 #### 4.13.11 希腊字母
 
