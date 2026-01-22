@@ -10,46 +10,56 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 
     <style>
-        :root {
-            --docsifytabs-border-color: #ededed;
-            --docsifytabs-tab-highlight-color: #42b983;
+        /* 修复字体和一些基础样式 */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
         }
 
-        /* 让放大的图片背景稍微暗一点，体验更好 */
+        /* 即使在深色背景下，大图背景也保持白色 (可选) */
         .medium-zoom-overlay {
-            background: #fff !important;
-            /* 或者改成 #000 如果你喜欢暗色背景 */
+            background: #fff;
         }
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
+
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
             repo: '',
-
-            // 你的主页文件
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
 
             loadSidebar: false,
             subMaxLevel: 3,
             auto2top: true,
 
-            // medium-zoom 插件的配置 (可选)
-            // 你可以在这里控制放大后的背景色、边距等
-            mediumZoom: {
-                background: '#ffffff', // 放大后的背景色
-                margin: 24,            // 图片距离屏幕边缘的距离
-                scrollOffset: 0        // 滚动多少距离自动关闭大图
-            }
+            // 【核心修改】这里不再使用 mediumZoom 配置对象
+            // 而是通过 plugins 钩子手动控制，这样最稳定
+            plugins: [
+                function (hook) {
+                    // doneEach 钩子：每次路由切换（页面加载）完成后触发
+                    hook.doneEach(function () {
+                        // 1. 找到内容区域的所有图片
+                        // 2. 排除掉 emoji 表情图片（如果有的话）
+                        // 3. 手动绑定 mediumZoom
+                        if (typeof mediumZoom === 'function') {
+                            mediumZoom('.markdown-section img:not(.emoji)', {
+                                background: '#ffffff', // 放大后的背景色
+                                margin: 24,            // 边距
+                                scrollOffset: 0        // 滚动关闭阈值
+                            });
+                        }
+                    });
+                }
+            ]
         }
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/docsify-plugin-medium-zoom/dist/plugin.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
