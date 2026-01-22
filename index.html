@@ -5,9 +5,22 @@
     <meta charset="UTF-8">
     <title>北林 RoboMaster 视觉组文档</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Description">
+    <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+
+    <style>
+        :root {
+            --docsifytabs-border-color: #ededed;
+            --docsifytabs-tab-highlight-color: #42b983;
+        }
+
+        /* 让放大的图片背景稍微暗一点，体验更好 */
+        .medium-zoom-overlay {
+            background: #fff !important;
+            /* 或者改成 #000 如果你喜欢暗色背景 */
+        }
+    </style>
 </head>
 
 <body>
@@ -15,21 +28,31 @@
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '', // 如果你想在右上角显示 GitHub 链接，可以在这里填入仓库 URL
+            repo: '',
 
-            // 关键设置：指定主页是哪个 md 文件
-            // 注意：文件名包含中文和空格，建议最好重命名为 home.md 或 README.md
-            // 如果不重命名，必须确保文件名完全一致（包括扩展名）
+            // 你的主页文件
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
 
-            // 开启侧边栏导航（会自动解析 markdown 中的标题）
             loadSidebar: false,
-            subMaxLevel: 3, // 抓取标题生成目录的层级
-            auto2top: true  // 切换页面后自动跳转到顶部
+            subMaxLevel: 3,
+            auto2top: true,
+
+            // medium-zoom 插件的配置 (可选)
+            // 你可以在这里控制放大后的背景色、边距等
+            mediumZoom: {
+                background: '#ffffff', // 放大后的背景色
+                margin: 24,            // 图片距离屏幕边缘的距离
+                scrollOffset: 0        // 滚动多少距离自动关闭大图
+            }
         }
     </script>
+
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-plugin-medium-zoom/dist/plugin.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
 </body>
 
 </html>
