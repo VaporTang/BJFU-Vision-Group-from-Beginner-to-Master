@@ -8,64 +8,58 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    
+
     <style>
-        body { font-family: "Microsoft YaHei", sans-serif; }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+        }
 
         /* ============================================================
-           最终修复方案：解除容器限制 + 正确层级
+           CSS 修正区：只做层级和背景修正，不碰位置
            ============================================================ */
-        
-        /* 1. 蒙版层：黑色半透明，层级设为很高 */
+
+        /* 1. 蒙版：黑色半透明 */
         .medium-zoom-overlay {
-            background: rgba(0, 0, 0, 0.85) !important; 
-            z-index: 99998 !important; 
+            background: rgba(0, 0, 0, 0.85) !important;
+            z-index: 9999 !important;
+            /* 盖住侧边栏 */
         }
 
-        /* 2. 图片层：层级最高 */
+        /* 2. 图片：只提升层级，严禁设置 position */
         .medium-zoom-image--opened {
-            z-index: 99999 !important;
-            /* 核心修正：删除了 position: fixed，改回 relative 以配合插件计算 */
-            position: relative !important; 
-            /* 确保图片不透明 */
-            opacity: 1 !important;
-        }
-
-        /* 3. 关键修复：解除 Docsify 内容区域的“溢出隐藏”限制 
-           原来的图片“加载不出来”通常是因为被父容器切掉了 (overflow: hidden)
-        */
-        .content, .markdown-section {
-            overflow: visible !important;
+            z-index: 10000 !important;
+            /* 必须比蒙版高 */
         }
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
-    
+
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '', 
+            repo: '',
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-            
+
             loadSidebar: false,
-            subMaxLevel: 3, 
+            subMaxLevel: 3,
             auto2top: true,
-            
-            // 缩放插件配置
+
+            // 缩放配置
             zoom: {
-                maxLevel: 2,   // 放大倍数，2-3 比较合适
-                offset: 500    // 滚动 500px 自动关闭
+                maxLevel: 3,
+                offset: 500
             }
         }
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-    
+
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
+
 </html>
