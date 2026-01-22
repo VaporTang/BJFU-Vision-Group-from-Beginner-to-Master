@@ -1766,7 +1766,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 
 第一次进入会提示设置密码，设置为12345678
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.PNG" alt="1280X1280" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.png" alt="1280X1280" style="zoom: 33%;" />
 
 进入后到常用设置的WIFI设置中
 
@@ -1778,7 +1778,7 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 其余可以使用默认设置
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).PNG" alt="1280X1280 (1)" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).png" alt="1280X1280 (1)" style="zoom: 33%;" />
 
 进入常用设置的局域网设置中
 
@@ -1786,7 +1786,7 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 开启DHCP服务，并且设置开始IP为2(因为作为服务器主机的电脑将要设置为192.168.1.2,所以需要确保可以使用此IP)，结束IP则无严格要求
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).PNG" alt="1280X1280 (2)" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).png" alt="1280X1280 (2)" style="zoom: 33%;" />
 
 进入高级设置中的DHCP静态IP分配
 
