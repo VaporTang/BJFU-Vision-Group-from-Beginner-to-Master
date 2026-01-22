@@ -5127,14 +5127,14 @@ F[横向流程图]
 > ````
 
 >效果:
-```mermaid
-graph TD
-A[方形]==>B(圆角)
-B==>C{条件a}
-C-->|a=1|D[结果1]
-C-->|a=2|E[结果2]
-F[竖向流程图]
-```
+>```mermaid
+>graph TD
+>A[方形]==>B(圆角)
+>B==>C{条件a}
+>C-->|a=1|D[结果1]
+>C-->|a=2|E[结果2]
+>F[竖向流程图]
+>```
 
 ### 4.12 表情符号
 
@@ -5428,9 +5428,9 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 >```
 
 >效果:
-$$
-f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
-$$
+>$$
+>f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
+>$$
 
 >说明:如果你想将行内显示的分隔符也变大,也可以使用`\middle`命令
 
@@ -5443,8 +5443,8 @@ $$
 >```
 
 >效果:
-$$
-\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
+>$$
+>\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
 >$$
 
 #### 4.13.15 其他命令
@@ -5458,9 +5458,9 @@ $$
 >```
 
 >效果:
-$$
-f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
-$$
+>$$
+>f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
+>$$
 
 **③文字颜色**
 
@@ -5526,16 +5526,16 @@ $$
 >```
 
 >效果:
-$$
-\require{cancel}\begin{array}{r1}
-\verb|y+\cancel{x}|&y+\cancel{x}\\
-\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
-\verb|y+\bcancel{x}|&y+\bcancel{x}\\
-\verb|y+\xcancel{x}|&y+\xcancel{x}\\
-\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
-\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
-\end{array}
-$$
+>$$
+>\require{cancel}\begin{array}{r1}
+>\verb|y+\cancel{x}|&y+\cancel{x}\\
+>\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
+>\verb|y+\bcancel{x}|&y+\bcancel{x}\\
+>\verb|y+\xcancel{x}|&y+\xcancel{x}\\
+>\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
+>\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
+>\end{array}
+>$$
 
 >说明:  使用`\require{enclose}`来允许**整段删除线**的显示，再使用`\enclose{删除线效果}{字符}`来使用各种整段删除线效果。其中，删除线效果有`horizontalstrike`、`verticalstrike`、`updiagonalstrike`和`downdiagonalstrike`,可以叠加使用。
 
@@ -5554,15 +5554,15 @@ $$
 >```
 
 >效果:
-$$
-\require{enclose}\begin{array}{r1}
-\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
-\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
-\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
-\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
-\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
-\end{array}
-$$
+>$$
+>\require{enclose}\begin{array}{r1}
+>\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
+>\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
+>\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
+>\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
+>\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
+>\end{array}
+>$$
 
 #### 4.13.16 矩阵
 
@@ -5581,13 +5581,13 @@ $$
 >```
 
 >效果:
-$$
-\begin{matrix}
-1&x&x^2\\
-1&y&y^2\\
-1&z&z^2\\
-\end{matrix}
-$$
+>$$
+>\begin{matrix}
+>1&x&x^2\\
+>1&y&y^2\\
+>1&z&z^2\\
+>\end{matrix}
+>$$
 
 **②边框矩阵**
 
@@ -5615,14 +5615,14 @@ $$
 >```
 
 >效果:
-$$
-\left[
-\begin{array}{cc|c}
-1&2&3\\
-4&5&6
-\end{array}
-\right]
-$$
+>$$
+>\left[
+>\begin{array}{cc|c}
+>1&2&3\\
+>4&5&6
+>\end{array}
+>\right]
+>$$
 
 **④行中矩阵**
 
@@ -5682,15 +5682,15 @@ $\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
 >```
 
 >效果:
-$$
-\begin{align}
-\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
-&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
-&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
-&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
-&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
-\end{align}
-$$
+>$$
+>\begin{align}
+>\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
+>&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
+>&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
+>&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
+>&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
+>\end{align}
+>$$
 
 ***
 
@@ -5723,13 +5723,13 @@ $$
 >```
 
 >效果:
-$$
-f(n)=
-\begin{cases}
-n/2,&\text{if $n$ is even}\\
-3n+1,&\text{if $n$ is odd}
-\end{cases}
-$$
+>$$
+>f(n)=
+>\begin{cases}
+>n/2,&\text{if $n$ is even}\\
+>3n+1,&\text{if $n$ is odd}
+>\end{cases}
+>$$
 
 #### 4.13.19 配置行高
 
@@ -5757,13 +5757,13 @@ $$
 >```
 
 >效果:
-$$
-f(n)=
-\begin{cases}
-\dfrac n2,&\text{if $n$ is even}\\[2ex]
-3n+1,&\text{if $n$ is odd}
-\end{cases}\tag{适配[2ex]}
-$$
+>$$
+>f(n)=
+>\begin{cases}
+>\dfrac n2,&\text{if $n$ is even}\\[2ex]
+>3n+1,&\text{if $n$ is odd}
+>\end{cases}\tag{适配[2ex]}
+>$$
 
 ***
 
@@ -5794,15 +5794,15 @@ $$
 >```
 
 >效果:
-$$
-\begin{array}{c|lcr}
-n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
-\hline
-1&0.24&1&125\\
-2&-1&189&-8\\
-3&-20&2000&1+10i
-\end{array}
-$$
+>$$
+>\begin{array}{c|lcr}
+>n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
+>\hline
+>1&0.24&1&125\\
+>2&-1&189&-8\\
+>3&-20&2000&1+10i
+>\end{array}
+>$$
 
 #### 4.13.21 嵌套表格或数组
 
@@ -5851,45 +5851,45 @@ $$
 >```
 
 >效果:
-$$
-% outer vertical array of arrays 外层垂直表格
-\begin{array}{c}
-% inner horizontal array of arrays 内层水平表格
-\begin{array}{cc}
-% inner array of minimum values 内层"最小值"数组
-\begin{array}{c|cccc}
-\text{min}&0&1&2&3\\
-\hline
-0&0&0&0&0\\
-1&0&1&1&1\\
-2&0&1&2&2\\
-3&0&1&2&3\\
-\end{array}
-&
-% inner array of maximum values 内层"最大值"数组
-\begin{array}{c|cccc}
-\text{max}&0&1&2&3\\
-\hline
-0&0&1&2&3\\
-1&1&1&2&3\\
-2&2&2&2&3\\
-3&3&3&3&3
-\end{array}
-\end{array}
-% 内层第一行表格组结束
-\\
-% inner array of delta values 内层第二行Delta值数组
-\begin{array}{c|cccc}
-\Delta&0&1&2&3\\
-\hline
-0&0&1&2&3\\
-1&1&0&1&2\\
-2&2&1&0&1\\
-3&3&2&1&0
-\end{array}
-% 内层第二行表格组结束
-\end{array}
-$$
+>$$
+>% outer vertical array of arrays 外层垂直表格
+>\begin{array}{c}
+>% inner horizontal array of arrays 内层水平表格
+>\begin{array}{cc}
+>% inner array of minimum values 内层"最小值"数组
+>\begin{array}{c|cccc}
+>\text{min}&0&1&2&3\\
+>\hline
+>0&0&0&0&0\\
+>1&0&1&1&1\\
+>2&0&1&2&2\\
+>3&0&1&2&3\\
+>\end{array}
+>&
+>% inner array of maximum values 内层"最大值"数组
+>\begin{array}{c|cccc}
+>\text{max}&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&1&2&3\\
+>2&2&2&2&3\\
+>3&3&3&3&3
+>\end{array}
+>\end{array}
+>% 内层第一行表格组结束
+>\\
+>% inner array of delta values 内层第二行Delta值数组
+>\begin{array}{c|cccc}
+>\Delta&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&0&1&2\\
+>2&2&1&0&1\\
+>3&3&2&1&0
+>\end{array}
+>% 内层第二行表格组结束
+>\end{array}
+>$$
 
 #### 4.13.22 方程组
 
@@ -5916,21 +5916,21 @@ $$
 >```
 
 >效果:
-$$
-\left\{
-\begin{array}{l}
-a_1x+b_1y+c_1z=d_1\\
-a_2x+b_2y+c_2z=d_2\\
-a_3x+b_3y+c_1z=d_3
-\end{array}
-\right.
-\quad\text{或者}\quad
-\begin{cases}
-a_1x+b_1y+c_1z=d_1\\
-a_2x+b_2y+c_2z=d_2\\
-a_3x+b_3y+c_1z=d_3
-\end{cases}
-$$
+>$$
+>\left\{
+>\begin{array}{l}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{array}
+>\right.
+>\quad\text{或者}\quad
+>\begin{cases}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{cases}
+>$$
 
 #### 4.13.23 连分式
 
@@ -5945,9 +5945,9 @@ $$
 >```
 
 >效果:
-$$
-x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
-$$
+>$$
+>x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
+>$$
 
 >反例:
 >
@@ -5956,9 +5956,9 @@ $$
 >```
 
 >效果:
-$$
-x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
-$$
+>$$
+>x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
+>$$
 
 >补充:  当然,你可以使用`\frac`来表达连分数的**紧缩记法**。
 
@@ -5971,9 +5971,9 @@ $$
 >```
 
 >效果:
-$$
-x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
-$$
+>$$
+>x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
+>$$
 
 #### 4.13.24 交换图表
 
@@ -5993,14 +5993,14 @@ $$
 >```
 
 >效果:
-$$
-\require{AMScd}
-\begin{CD}
-A@>a>>B\\
-@V b V V\# @VV c V\\
-C @>>d> D
-\end{CD}
-$$
+>$$
+>\require{AMScd}
+>\begin{CD}
+>A@>a>>B\\
+>@V b V V\# @VV c V\\
+>C @>>d> D
+>\end{CD}
+>$$
 
 >补充:  其中,`@>>>`代表右箭头、`@<<<`代表左箭头、`@VVV`代表下箭头、`@AAA`代表上箭头、`@=`代表水平双实线、`@|`代表竖直双实线、`@.`代表没有箭头。在`@>>>`的`>>>`之间任意插入文字即代表该箭头的注释文字。
 
@@ -6017,13 +6017,13 @@ $$
 >```
 
 >效果:
-$$
-\begin{CD}
-A@>>>B@>{\text{very long label}}>>C\\
-@.@AAA@|\\
-D@=E@<<<F
-\end{CD}
-$$
+>$$
+>\begin{CD}
+>A@>>>B@>{\text{very long label}}>>C\\
+>@.@AAA@|\\
+>D@=E@<<<F
+>\end{CD}
+>$$
 
 #### 4.13.25 其他
 
