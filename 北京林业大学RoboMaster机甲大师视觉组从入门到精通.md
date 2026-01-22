@@ -4789,7 +4789,7 @@ script my_session.log
 
 系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
 
-## 4 文档编写
+## 4 文档维护
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
 
@@ -6110,6 +6110,21 @@ $$
 效果为生成pdf时遇到分页符则新开一页再放分页符后内容
 
 <div STYLE="page-break-after: always;"></div>
+
+### 4.15 文档在线版本维护
+> Contributors: 唐锦梁
+
+由于队内长期缺乏系统性的文档和指南，我们视觉组有幸还传承下来了一份可用的文档。但原有的 PDF 发行版更新不及时，在线访问 GitHub 又容易出现各种网络上的问题，导致仅存的文档的利用率也很低，原有迁移到飞书的念头，但是飞书对插入文件有限制，对 Markdown 及 Latex 的语法支持也有限，故还是想把文档主题放在 GitHub 上便于更新和维护。
+
+但放在 GitHub 上终究还是不方便查阅，故将其托管在一个在线网站上。
+
+文档的在线版本基于 Cloudflare 的 pages 功能，实现 serverless 的在线文档部署。
+
+操作步骤如下：
+
+登录 Cloudflare 控制面板
+
+<img src="C:\Users\tangj\AppData\Roaming\Typora\typora-user-images\image-20260122195736676.png" alt="image-20260122195736676" style="zoom:50%;" />
 
 ## 5 各兵种相关文档
 
