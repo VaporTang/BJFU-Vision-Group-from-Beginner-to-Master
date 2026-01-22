@@ -33,9 +33,9 @@ $$
 
 ### 1.1 分电板
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
 
 图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
 
@@ -43,7 +43,7 @@ $$
 
 ### 1.2 电池架
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
 
 电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
 
@@ -55,13 +55,13 @@ $$
 
 ### 1.3 DC-DC（24V-19V）变压器
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
 
 黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
 ### 1.4 电池
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
 
 电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
 
@@ -75,7 +75,7 @@ $$
 
 ### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
 
 #### 1.5.1 参数（以 NUC 11 为例）
 
@@ -91,13 +91,13 @@ $$
 
 #### 1.5.2 各种接口/硬件位置
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
 
 ### 1.6 工业相机
 
@@ -111,7 +111,7 @@ $$
 
 #### 1.6.2 接口
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
 
 ### 1.7 激光雷达
 
@@ -166,19 +166,19 @@ $$
 
 #### 1.8.1 USB-Camera
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
 
 #### 1.8.2 RJ45 网线
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
 
 #### 1.8.3 HDMI-HDMI
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
 
 ### 1.9 USB to TTL
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
 
 #### 1.9.1 接口
 
@@ -191,9 +191,9 @@ $$
 
 ### 1.10 手持装甲板调试模块
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
 
 #### 1.10.1 参数
 
@@ -229,7 +229,7 @@ $$
 
 ### 1.11 外置MiniPC完整装机展示
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:35%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -2792,10 +2792,10 @@ namedWindow("窗口名字", 窗口类型); // 窗口类型值缺省为1
 
 窗口类型有以下两种常用类型
 
-| 窗口类型        | 作用                                               | 值   |
-| --------------- | -------------------------------------------------- | ---- |
-| WINDOW_NORMAL   | 可通过代码改变窗口大小，图像默认等比例缩放         | 0    |
-| WINDOW_AUTOSIZE | 不可通过代码改变窗口大小，窗口大小根据图像大小确定 | 1    |
+| 窗口类型        | 作用                                               | 值  |
+| --------------- | -------------------------------------------------- | --- |
+| WINDOW_NORMAL   | 可通过代码改变窗口大小，图像默认等比例缩放         | 0   |
+| WINDOW_AUTOSIZE | 不可通过代码改变窗口大小，窗口大小根据图像大小确定 | 1   |
 
 其它功能用的较少，这里暂不给出
 
@@ -3319,11 +3319,11 @@ RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通
 
 使用右手定义,对于ROS机器人，如果以它为坐标系的原点，那么
 
-|  轴  | 方位 |
-| :--: | :--: |
-| x轴  | 前方 |
-| y轴  | 左方 |
-| z轴  | 上方 |
+|  轴   | 方位  |
+| :---: | :---: |
+|  x轴  | 前方  |
+|  y轴  | 左方  |
+|  z轴  | 上方  |
 
 旋转运动
 
@@ -5074,11 +5074,11 @@ int main()
 
 >效果:
 
-| 1    |  2   |    3 |
-| ---- | :--: | ---: |
-| 4    |  5   |    6 |
-| 7    |  8   |    9 |
-| 10   |  11  |   12 |
+| 1   |   2   |    3 |
+| --- | :---: | ---: |
+| 4   |   5   |    6 |
+| 7   |   8   |    9 |
+| 10  |  11   |   12 |
 
 >快捷键:  Ctrl+T
 
@@ -5354,13 +5354,13 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 
 **⑦带帽符号**
 
-| 输入           | 显示             | 输入            | 显示              |
-| -------------- | ---------------- | --------------- | ----------------- |
-| \hat{xy}       | $\hat{xy}$       | \widehat{xyz}   | $\widehat{xyz}$   |
-| \tilde{xy}     | $\tilde{xy}$     | \widetilde{xyz} | $\widetilde{xyz}$ |
-| \check{x}      | $\check{x}$      | \breve{y}       | $\breve{y}$       |
-| \grave{x}      | $\grave{x}$      | \acute{y}       | $\acute{y}$       |
-| \dot{x}        | $\dot{x}$        | \ddot{x}        | $\ddot{x}$        |
+| 输入       | 显示         | 输入            | 显示              |
+| ---------- | ------------ | --------------- | ----------------- |
+| \hat{xy}   | $\hat{xy}$   | \widehat{xyz}   | $\widehat{xyz}$   |
+| \tilde{xy} | $\tilde{xy}$ | \widetilde{xyz} | $\widetilde{xyz}$ |
+| \check{x}  | $\check{x}$  | \breve{y}       | $\breve{y}$       |
+| \grave{x}  | $\grave{x}$  | \acute{y}       | $\acute{y}$       |
+| \dot{x}    | $\dot{x}$    | \ddot{x}        | $\ddot{x}$        |
 
 
 **⑧选取符号**
@@ -5386,10 +5386,10 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 
 **⑩空格**
 
-| 输入 | 效果   | 输入    | 效果   | 输入   | 效果       |
-| ---- | ------ | ------- | ------ | ------ | ---------- |
-| \\!  | $|\!|$ | 默认    | $||$   | \quad  | $|\quad|$  |
-| \,   | $|\,|$ | \;(\\ ) | $|\;|$ | \qquad | $|\qquad|$ |
+| 输入 | 效果 | 输入 | 效果 | 输入    | 效果 |
+| ---- | ---- | ---- | ---- | ------- | ---- |
+| \\!  | $    | \!   | $    | 默认    | $    |    | $ | \quad  | $ | \quad  | $ |
+| \,   | $    | \,   | $    | \;(\\ ) | $    | \; | $ | \qquad | $ | \qquad | $ |
 
 #### 4.13.13 字体
 
@@ -5399,13 +5399,13 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 > ${\字体{需要转换的字符}}$
 > ```
 
-| 输入 | 说明     | 显示            | 输入  | 说明       | 显示              |
-| ---- | -------- | --------------- | ----- | ---------- | ----------------- |
-| \rm  | 罗马体   | ${\rm{Sample}}$ | \cal  | 花体       | ${\cal{Sample}}$  |
-| \it  | 意大利体 | ${\it{Sample}}$ | \Bbb  | 黑板粗体   | ${\Bbb{Sample}}$  |
+| 输入 | 说明     | 显示            | 输入  | 说明       | 显示                 |
+| ---- | -------- | --------------- | ----- | ---------- | -------------------- |
+| \rm  | 罗马体   | ${\rm{Sample}}$ | \cal  | 花体       | ${\cal{Sample}}$     |
+| \it  | 意大利体 | ${\it{Sample}}$ | \Bbb  | 黑板粗体   | ${\Bbb{Sample}}$     |
 | \bf  | 粗体     | ${\bf{Sample}}$ | \mit  | 数学斜体   | ${\mathit{Sample}}$  |
-| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$  |
-| \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$ |
+| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$ |
+| \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$    |
 
 #### 4.13.14 大括号和行标
 
@@ -6114,17 +6114,423 @@ $$
 ### 4.15 文档在线版本维护
 > Contributors: 唐锦梁
 
+#### 4.15.1 前言
+
 由于队内长期缺乏系统性的文档和指南，我们视觉组有幸还传承下来了一份可用的文档。但原有的 PDF 发行版更新不及时，在线访问 GitHub 又容易出现各种网络上的问题，导致仅存的文档的利用率也很低，原有迁移到飞书的念头，但是飞书对插入文件有限制，对 Markdown 及 Latex 的语法支持也有限，故还是想把文档主题放在 GitHub 上便于更新和维护。
 
 但放在 GitHub 上终究还是不方便查阅，故将其托管在一个在线网站上。
 
 文档的在线版本基于 Cloudflare 的 pages 功能，实现 serverless 的在线文档部署。
 
-操作步骤如下：
+> 注意：以下流程用作记录和原理展示，现 Docsify 已部署完毕，当仓库出现变动时会自动同步更新至在线文档
 
-登录 Cloudflare 控制面板
+#### 4.15.2 Github 仓库配置流程
 
-<img src="C:\Users\tangj\AppData\Roaming\Typora\typora-user-images\image-20260122195736676.png" alt="image-20260122195736676" style="zoom:50%;" />
+在 GitHub 仓库根目录添加 `index.html` 文件，修改内容如下
+
+值得一提的是，使用 typora 编辑的 markdown 文件的图片缩放使用非标准的 CSS 样式语法 `style="zoom:50%;"`，导致 Docsify 加载图片时无法正确处理缩放，故在 `index.html` 中使用正则表达式 将 style="zoom:..." 替换为 style="width:..."
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>北林 RoboMaster 视觉组文档</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="从入门到精通">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+
+    <style>
+        /* 移动端优化 */
+        .markdown-section img {
+            max-width: 100%;
+        }
+
+        /* 修复 KaTeX 公式可能出现的滚动条问题 */
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">加载中...</div>
+
+    <script>
+        window.$docsify = {
+            name: '北林视觉组教程',
+            homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
+            loadSidebar: false,
+            subMaxLevel: 3,
+            auto2top: true,
+            coverpage: false,
+
+            // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
+            latex: {
+                inlineOpen: '$',
+                inlineClose: '$',
+                blockOpen: '$$',
+                blockClose: '$$',
+                kramed: false, // 禁用 kramed 兼容模式，使用默认 marked
+                customOptions: {} // 这里可以透传 KaTeX 的原生配置
+            },
+
+            plugins: [
+                function (hook, vm) {
+                    hook.beforeEach(function (html) {
+                        // 将 style="zoom:..." 替换为 style="width:..."
+                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                    });
+                }
+            ]
+        }
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+</body>
+
+</html>
+```
+
+#### 4.15.3 Cloudflare 部署流程
+
+登录 Cloudflare 控制面板，点击 "计算和AI" 栏目下的 "Workers 和  Pages"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-00-15.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+进入 "Workers 和  Pages" 后，点击 "创建应用程序"，点击下方小字 `开始使用` （因为我们要使用 pages，默认是 workers）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-03-17.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-05-23.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+选择 "导入现有 Git 存储库" 后 `开始使用`，在随后的页面选择你 fork 的 `BJFU-Vision-Group-from-Beginner-to-Master` 仓库（需要将你的 GitHub 连接至 Cloudflare ），再点击 `开始设置`。进入下一个页面后无需改动，直接点击 `保存并部署即可`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-06-53.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+#### 4.15.4 后续
+
+后续当 GitHub 仓库内容发生变动时（因为权限限制，所以 Cloudflare 连接的是我的个人的 GitHub 账号下的视觉组文档的 fork），会自动触发 Cloudflare 上的部署，等待30s后刷新浏览器即可获得最新效果
+
+### 4.16 文档图片维护
+
+#### 4.16.1 统一分辨率
+
+由于不同设备拍摄的照片及截图的分辨率差异巨大，会导致在 typora 和在线文档中图片的比例失调，故编写了一个 python 脚本用于批量处理高分辨率且文件体积较大的图片文件（通常高分辨率意味着是拍摄的照片，加上文件体积的判定是防止不慎压缩如长截图和流程图等内容）
+
+运行前注意安装相关依赖
+
+有三个主要参数：
+
+- `width_threshold` 图片的宽度阈值
+- `size_threshold_mb` 图片的文件体积阈值
+- `target_width` 图片处理后的目标宽度
+
+```python
+import os
+import sys
+import argparse
+from PIL import Image
+
+
+def resize_images(input_dir, width_threshold=2500, size_threshold_mb=1.5, target_width=2000):
+    """
+    1. 遍历 input_dir
+    2. 条件：宽度 > 2500 且 文件体积 > 1.5MB
+    3. 动作：缩放到 2000 宽，保存到 resized_output 子文件夹
+    """
+
+    # 1. 基础校验
+    if not os.path.exists(input_dir):
+        print(f"错误：找不到路径 '{input_dir}'")
+        return
+
+    # 2. 计算字节阈值 (1.5MB = 1.5 * 1024 * 1024 字节)
+    size_threshold_bytes = size_threshold_mb * 1024 * 1024
+
+    # 3. 创建输出目录
+    output_dir = os.path.join(input_dir, "resized_output")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp')
+    count = 0
+
+    print("-" * 50)
+    print(f"扫描目录: {input_dir}")
+    print(f"过滤条件: 宽度 > {width_threshold}px 且 体积 > {size_threshold_mb}MB")
+    print("-" * 50)
+
+    files = os.listdir(input_dir)
+
+    for filename in files:
+        if filename.lower().endswith(supported_formats):
+            file_path = os.path.join(input_dir, filename)
+
+            try:
+                # 获取文件大小 (字节)
+                file_size_bytes = os.path.getsize(file_path)
+                # 换算成 MB 用于显示
+                file_size_mb = file_size_bytes / (1024 * 1024)
+
+                # 优化：如果文件本身很小，直接跳过，不用打开图片读取像素，节省性能
+                # (如果你希望严格打印所有图片的尺寸，可以去掉这个预判断)
+                if file_size_bytes <= size_threshold_bytes:
+                    continue
+
+                with Image.open(file_path) as img:
+                    width, height = img.size
+
+                    # 核心判断逻辑：宽度超标 AND 体积超标
+                    if width > width_threshold and file_size_bytes > size_threshold_bytes:
+
+                        # 计算新尺寸
+                        ratio = target_width / width
+                        new_height = int(height * ratio)
+
+                        # 执行缩放
+                        resized_img = img.resize((target_width, new_height), Image.Resampling.LANCZOS)
+
+                        # 保存
+                        save_path = os.path.join(output_dir, filename)
+                        resized_img.save(save_path)
+
+                        print(f"[处理] {filename}")
+                        print(f"      - 原参数: 宽{width}px | 体积 {file_size_mb:.2f}MB")
+                        print(f"      - 新参数: 宽{target_width}px -> 保存至子目录")
+                        count += 1
+                    else:
+                        # 虽然体积够大，但宽度不够，所以不处理
+                        pass
+
+            except Exception as e:
+                print(f"[错误] 无法读取 {filename}: {e}")
+
+    print("-" * 50)
+    if count == 0:
+        print("未发现满足条件的图片（同时满足宽>2500且体积>1.5MB）。")
+        # 清理空目录
+        if os.path.exists(output_dir) and not os.listdir(output_dir):
+            os.rmdir(output_dir)
+    else:
+        print(f"任务完成！共压缩 {count} 张图片。")
+        print(f"输出路径: {output_dir}")
+
+
+def get_path_from_user():
+    """获取动态路径输入"""
+    parser = argparse.ArgumentParser(description="图片压缩脚本")
+    parser.add_argument("path", nargs="?", help="图片文件夹路径")
+    args = parser.parse_args()
+
+    if args.path:
+        return args.path
+
+    while True:
+        path = input("请输入图片文件夹路径 (输入 q 退出): ").strip()
+        path = path.strip('"').strip("'")  # 去除可能的引号
+
+        if path.lower() == 'q':
+            sys.exit()
+
+        if os.path.isdir(path):
+            return path
+        else:
+            print("路径无效，请重新输入。")
+
+
+if __name__ == "__main__":
+    target_path = get_path_from_user()
+    resize_images(target_path)
+```
+
+#### 4.16.2 统一图片格式
+
+WebP 是一种由 **Google** 推出的现代图像格式，旨在在保证画质的同时，大幅减小图片文件体积，适用于网页和移动端应用。
+
+具有高压缩率、支持有损与无损压缩、支持透明通道、支持动画、支持元数据等特性。
+
+可以提高加载速度，减少网页流量，提高用户体验并节省带宽与存储空间。WebP 一个格式即可覆盖 JPEG、PNG、GIF 的主要使用场景。
+
+现代浏览器对 WebP 都有良好的支持。
+
+以下是一个使用 `libwebp` 库的批量 JPEG/PNG 转WebP 的简易 python 示例
+
+> 注意：使用前需确保系统内已配置 `libwebp`，Windows中可下载 Google 官方的预编译版本 [下载并安装 WebP  | Google for Developers](https://developers.google.com/speed/webp/download?hl=zh-cn)，选择对应的系统和处理器架构，将解压出来的文件夹下的 `bin` 目录添加至系统环境变量并重启计算机。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-43-57.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+该脚本的主要功能为对传入文件夹下的 `.jpg` `.jpeg` `.png` 格式的图片转换为 WebP，转换 `.png` 默认使用无损模式；由于 `.jpg` `.jpeg` 自身即为有损压缩，故可能出现转换后的 WebP 文件大于源文件的情况，故脚本中还加入了是否保留大体积文件的功能。
+
+```python
+import os
+import subprocess
+import multiprocessing
+import argparse
+import sys
+from pathlib import Path
+
+
+def convert_to_webp(file_info):
+    # 解包参数：新增 keep_larger (是否保留大体积文件)
+    file_path, quality_jpg, keep_original, source_root, output_root, keep_larger = file_info
+    file_path = Path(file_path)
+
+    # --- 计算输出路径 ---
+    if output_root:
+        try:
+            rel_path = file_path.relative_to(source_root)
+        except ValueError:
+            rel_path = Path(file_path.name)
+        output_path = output_root / rel_path.with_suffix('.webp')
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        except FileExistsError:
+            pass
+    else:
+        output_path = file_path.with_suffix('.webp')
+    # ------------------
+
+    ext = file_path.suffix.lower()
+
+    if ext == '.png':
+        cmd = ["cwebp", "-lossless", str(file_path), "-o", str(output_path)]
+    elif ext in ['.jpg', '.jpeg']:
+        cmd = ["cwebp", "-q", str(quality_jpg), "-m", "6", "-sharp_yuv", str(file_path), "-o", str(output_path)]
+    else:
+        return
+
+    try:
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        if output_path.exists():
+            orig_size = file_path.stat().st_size
+            webp_size = output_path.stat().st_size
+
+            is_smaller = webp_size < orig_size
+
+            # 逻辑判断：
+            # 1. 如果体积变小 -> 总是保留
+            # 2. 如果体积变大 且 用户允许保留(keep_larger) -> 保留
+            # 3. 如果体积变大 且 用户不允许 -> 删除 WebP
+
+            if not is_smaller and not keep_larger:
+                print(f"[-] 忽略 {file_path.name}: 转换后体积变大 ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
+                output_path.unlink()  # 删除生成的 webp
+            else:
+                # 确定提示前缀
+                prefix = "[+]" if is_smaller else "[!]"
+                status_msg = "优化" if is_smaller else "保留(体积增大)"
+
+                print(f"{prefix} {status_msg}: {file_path.name} ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
+
+                # 只有在决定保留 WebP 的情况下，才检查是否需要删除原图
+                if not keep_original:
+                    file_path.unlink()
+
+    except Exception as e:
+        print(f"[!] 错误 {file_path.name}: {e}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="图片批量转 WebP 脚本")
+    parser.add_argument("path", nargs="?", help="源文件夹路径")
+    parser.add_argument("-o", "--output", help="输出文件夹名称或路径")
+    parser.add_argument("-q", "--quality", type=int, default=90, help="JPG 质量 (默认 90)")
+    parser.add_argument("--delete", action="store_true", help="转换成功后删除原图")
+    # 新增命令行参数
+    parser.add_argument("--keep-larger", action="store_true", help="即使 WebP 体积大于原图也保留")
+
+    args = parser.parse_args()
+
+    source_path = args.path
+    output_input = args.output
+    keep_larger = args.keep_larger
+
+    # --- 1. 获取源路径 ---
+    if not source_path:
+        print(">>> 提示：你可以直接将文件夹拖入此窗口")
+        source_path = input("1. 请输入[图片源文件夹]路径: ").strip()
+        source_path = source_path.replace('"', '').replace("'", "")
+
+    source_dir = Path(source_path).resolve()
+
+    if not source_dir.is_dir():
+        print(f"❌ 错误: '{source_path}' 不是一个有效的文件夹。")
+        sys.exit(1)
+
+    # --- 2. 获取输出路径 ---
+    if not output_input:
+        print(f"\n>>> (可选) 请输入输出文件夹名称 (默认为原目录)")
+        output_input = input("2. 请输入[输出文件夹]名称/路径: ").strip()
+        output_input = output_input.replace('"', '').replace("'", "")
+
+    output_dir = None
+    if output_input:
+        p_out = Path(output_input)
+        if p_out.is_absolute():
+            output_dir = p_out
+        else:
+            output_dir = source_dir / p_out
+
+    # --- 3. 询问是否保留大文件 (仅在没有通过命令行指定时询问) ---
+    if not args.path and not keep_larger:
+        print("\n>>> (可选) 默认情况下，如果 WebP 比原图大，脚本会忽略该文件")
+        k_input = input("3. 是否强制保留体积变大的 WebP? (输入 y 保留，直接回车不保留): ").strip().lower()
+        if k_input == 'y':
+            keep_larger = True
+
+    # 扫描任务
+    extensions = ['*.png', '*.jpg', '*.jpeg']
+    files_to_process = []
+
+    print("\n🔍 正在扫描文件...")
+    for ext in extensions:
+        for p in source_dir.rglob(ext):
+            if output_dir and output_dir in p.parents:
+                continue
+            # 将 keep_larger 传入参数元组
+            files_to_process.append((p, args.quality, not args.delete, source_dir, output_dir, keep_larger))
+
+    if not files_to_process:
+        print("⚠️ 未发现可转换的图片文件。")
+        return
+
+    target_msg = f" -> {output_dir}" if output_dir else " (原目录)"
+    keep_msg = "是 (强制格式统一)" if keep_larger else "否 (体积优先)"
+
+    print(f"\n🚀 开始处理: {len(files_to_process)} 张图片")
+    print(f"📂 来源: {source_dir}")
+    print(f"📂 目标:{target_msg}")
+    print(f"💾 强制保留大文件: {keep_msg}")
+    print("-" * 30)
+
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+        pool.map(convert_to_webp, files_to_process)
+
+    print("-" * 30)
+    print("✅ 所有任务已完成！")
+
+    if not args.path:
+        input("\n按回车键退出...")
+
+
+if __name__ == "__main__":
+    main()
+```
 
 ## 5 各兵种相关文档
 
@@ -6659,22 +7065,22 @@ sudo systemctl status autoaim.service
 #### 6.5.1 接收数据
 
 
-| 数据位 | 内容                      | 解释                                                         |
-| :----- | :------------------------ | :----------------------------------------------------------- |
-| 0      | 头帧                      | ‘S’ (0x53)                                                   |
-| 1      | 颜色                      | ALL (0), RED (1), BLUE (2)                                   |
-| 2      | 模式                      | 0~9 (见表格后注释)                                           |
+| 数据位 | 内容                      | 解释                                                                                          |
+| :----- | :------------------------ | :-------------------------------------------------------------------------------------------- |
+| 0      | 头帧                      | ‘S’ (0x53)                                                                                    |
+| 1      | 颜色                      | ALL (0), RED (1), BLUE (2)                                                                    |
+| 2      | 模式                      | 0~9 (见表格后注释)                                                                            |
 | 3      | 机器人 ID                 | 英雄 HERO (0), 无人机 UAV (1), 工程机器人 ENGINEERING (2), 步兵 INFANTRY (3), 哨兵 SENTRY (4) |
-| 4      | yaw轴陀螺仪低八位         | 二进制数 (换算见注释)，单位：角度                            |
-| 5      | yaw轴陀螺仪数据高八位     | 二进制数 (换算见注释)，单位：角度                            |
-| 6      | pitch轴陀螺仪低八位       | 二进制数 (换算见注释)，单位：角度                            |
-| 7      | pitch轴陀螺仪数据高八位   | 二进制数 (换算见注释)，单位：角度                            |
-| 8      | yaw轴陀螺仪加速度低八位   | 二进制数 (换算见注释)，单位：角度                            |
-| 9      | yaw轴陀螺仪加速度高八位   | 二进制数 (换算见注释)，单位：角度                            |
-| 10     | pitch轴陀螺仪加速度低八位 | 二进制数 (换算见注释)，单位：角度                            |
-| 11     | pitch轴陀螺仪加速度高八位 | 二进制数 (换算见注释)，单位：角度                            |
-| 12     | 子弹速度                  | 二进制数 (换算见注释)，单位：m/s                             |
-| 13     | 尾帧                      | ‘E’ (0x45)                                                   |
+| 4      | yaw轴陀螺仪低八位         | 二进制数 (换算见注释)，单位：角度                                                             |
+| 5      | yaw轴陀螺仪数据高八位     | 二进制数 (换算见注释)，单位：角度                                                             |
+| 6      | pitch轴陀螺仪低八位       | 二进制数 (换算见注释)，单位：角度                                                             |
+| 7      | pitch轴陀螺仪数据高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 8      | yaw轴陀螺仪加速度低八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 9      | yaw轴陀螺仪加速度高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 10     | pitch轴陀螺仪加速度低八位 | 二进制数 (换算见注释)，单位：角度                                                             |
+| 11     | pitch轴陀螺仪加速度高八位 | 二进制数 (换算见注释)，单位：角度                                                             |
+| 12     | 子弹速度                  | 二进制数 (换算见注释)，单位：m/s                                                              |
+| 13     | 尾帧                      | ‘E’ (0x45)                                                                                    |
 
 **模式**
 
@@ -6696,23 +7102,23 @@ sudo systemctl status autoaim.service
 #### 6.5.2 发送数据
 
 
-| 数据位 | 内容                                  | 解释                                                         |
-| :----- | :------------------------------------ | :----------------------------------------------------------- |
-| 0      | 头帧                                  | ‘S’ (0x53)                                                   |
+| 数据位 | 内容                                  | 解释                                                             |
+| :----- | :------------------------------------ | :--------------------------------------------------------------- |
+| 0      | 头帧                                  | ‘S’ (0x53)                                                       |
 | 1      | 装甲板数量 / 是否识别到能量机关装甲板 | 识别到的机器人装甲板数量 / 能量机关：未发现目标 (0) 发现目标 (1) |
-| 2      | 开火命令                              | 不开火(0) 开火 (1)                                           |
-| 3      | yaw 轴增加量低八位                    | 二进制数 (换算见注释)，单位：角度                            |
-| 4      | yaw 轴增加量低高八位                  | 二进制数 (换算见注释)，单位：角度                            |
-| 5      | pitch 轴增加量低低八位                | 二进制数 (换算见注释)，单位：角度                            |
-| 6      | pitch 轴增加量低高八位                | 二进制数 (换算见注释)，单位：角度                            |
-| 7      | 预测坐标x低八位                       | 二进制数 (换算见注释)，单位：像素                            |
-| 8      | 预测坐标x高八位                       | 二进制数 (换算见注释)，单位：像素                            |
-| 9      | 预测坐标y低八位                       | 二进制数 (换算见注释)，单位：像素                            |
-| 10     | 预测坐标y高八位                       | 二进制数 (换算见注释)，单位：像素                            |
-| 11     | 深度低八位                            | 二进制数 (换算见注释)                                        |
-| 12     | 深度高八位                            | 二进制数 (换算见注释)                                        |
-| 13     | CRC 校验位                            | CRC8                                                         |
-| 14     | 尾帧                                  | ‘E’ (0x45)                                                   |
+| 2      | 开火命令                              | 不开火(0) 开火 (1)                                               |
+| 3      | yaw 轴增加量低八位                    | 二进制数 (换算见注释)，单位：角度                                |
+| 4      | yaw 轴增加量低高八位                  | 二进制数 (换算见注释)，单位：角度                                |
+| 5      | pitch 轴增加量低低八位                | 二进制数 (换算见注释)，单位：角度                                |
+| 6      | pitch 轴增加量低高八位                | 二进制数 (换算见注释)，单位：角度                                |
+| 7      | 预测坐标x低八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 8      | 预测坐标x高八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 9      | 预测坐标y低八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 10     | 预测坐标y高八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 11     | 深度低八位                            | 二进制数 (换算见注释)                                            |
+| 12     | 深度高八位                            | 二进制数 (换算见注释)                                            |
+| 13     | CRC 校验位                            | CRC8                                                             |
+| 14     | 尾帧                                  | ‘E’ (0x45)                                                       |
 
 **二进制数换算**
 
