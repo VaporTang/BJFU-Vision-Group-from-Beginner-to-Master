@@ -8,69 +8,58 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    
+
     <style>
-        body { font-family: "Microsoft YaHei", sans-serif; }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+        }
 
         /* =========== 核心修复：把背景改成深色 =========== */
-        
-        /* 1. 蒙版层：改为黑色半透明 (rgba 0,0,0,0.85) */
-        /* z-index 设置极高，防止被侧边栏遮挡 */
+
+        /* 1. 蒙版层：改为黑色半透明 */
         .medium-zoom-overlay {
-            background: rgba(0, 0, 0, 0.85) !important; 
-            z-index: 20000 !important; 
+            background: rgba(0, 0, 0, 0.85) !important;
+            /* 确保蒙版在侧边栏之上 */
+            z-index: 9998 !important;
         }
 
         /* 2. 图片层：确保图片在蒙版之上 */
         .medium-zoom-image--opened {
-            z-index: 20001 !important;
-            /* 强制不透明，防止 CSS 干扰 */
-            opacity: 1 !important;
-            visibility: visible !important;
+            /* 必须比 overlay 的 z-index 大 */
+            z-index: 9999 !important;
+            /* 注意：这里删除了 opacity: 1 !important，否则会破坏缩放动画导致图片消失 */
         }
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
-    
+
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '', 
+            repo: '',
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-            
+
             loadSidebar: false,
-            subMaxLevel: 3, 
+            subMaxLevel: 3,
             auto2top: true,
 
-            plugins: [
-                function(hook) {
-                    hook.doneEach(function() {
-                        // 每次页面加载完成后，手动绑定 medium-zoom
-                        if (typeof mediumZoom === 'function') {
-                            // 1. 先清理旧的绑定（防止重复绑定导致的 Bug）
-                            // mediumZoom('.markdown-section img').detach();
-                            
-                            // 2. 重新绑定正文内的所有图片
-                            mediumZoom('.markdown-section img:not(.emoji)', {
-                                // 这里的 background 会被上面的 CSS !important 覆盖，但为了保险还是写上
-                                background: 'rgba(0, 0, 0, 0.85)', 
-                                margin: 24,
-                                scrollOffset: 150 // 滚动超过 150px 关闭大图
-                            });
-                        }
-                    });
-                }
-            ]
+            // 官方缩放插件的配置（可选）
+            zoom: {
+                maxLevel: 3, // 默认放大倍数
+                offset: 500  // 滚动多少像素自动关闭
+                // 注意：背景颜色不在这里配，由上面的 CSS 控制
+            }
         }
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
+
 </html>
