@@ -34,9 +34,9 @@ $$
 
 ### 1.1 分电板
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
 
 图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
 
@@ -44,7 +44,7 @@ $$
 
 ### 1.2 电池架
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.jpg" alt="f602d63510250d8df700e72b8e18b27" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:20%;" />
 
 电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
 
@@ -56,13 +56,13 @@ $$
 
 ### 1.3 DC-DC（24V-19V）变压器
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.jpg" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:20%;" />
 
 黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
 ### 1.4 电池
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.jpg" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:20%;" />
 
 电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
 
@@ -76,7 +76,7 @@ $$
 
 ### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.jpg" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:20%;" />
 
 #### 1.5.1 参数（以 NUC 11 为例）
 
@@ -92,13 +92,13 @@ $$
 
 #### 1.5.2 各种接口/硬件位置
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.jpg" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.jpg" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.jpg" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.jpg" alt="99019c63fdd45189d07e09be77347de" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:20%;" />
 
 ### 1.6 工业相机
 
@@ -112,7 +112,7 @@ $$
 
 #### 1.6.2 接口
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.jpg" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:20%;" />
 
 ### 1.7 激光雷达
 
@@ -167,19 +167,19 @@ $$
 
 #### 1.8.1 USB-Camera
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.jpg" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:20%;" />
 
 #### 1.8.2 RJ45 网线
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.jpg" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:20%;" />
 
 #### 1.8.3 HDMI-HDMI
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.jpg" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:20%;" />
 
 ### 1.9 USB to TTL
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.jpg" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:20%;" />
 
 #### 1.9.1 接口
 
@@ -192,9 +192,9 @@ $$
 
 ### 1.10 手持装甲板调试模块
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.jpg" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.jpg" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:20%;" />
 
 #### 1.10.1 参数
 
@@ -212,7 +212,7 @@ $$
 
 灯珠详细原理及规格图如下：
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.png" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
 
 ##### 驱动方式：
 
@@ -230,7 +230,7 @@ $$
 
 ### 1.11 外置MiniPC完整装机展示
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.jpg" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:20%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -250,19 +250,19 @@ $$
 
 盘的容量不一定要200G左右，可以比这个大，后面多的空间可以单独再分出来存东西
 
-![image-20230713153049184](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153049184-1699090495506-20.png)
+![image-20230713153049184](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153049184-1699090495506-20.webp)
 
 右键，此电脑->管理
 
-![image-20230713153304347](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153304347-1699090555520-22.png)
+![image-20230713153304347](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153304347-1699090555520-22.webp)
 
 进入存储->磁盘管理，右键删除刚才清理出来的盘
 
-![image-20230713153531600](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153531600-1699090580234-24.png)
+![image-20230713153531600](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153531600-1699090580234-24.webp)
 
 删完后会变成这样
 
-![image-20230713153609066](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153609066-1699090595617-26.png)
+![image-20230713153609066](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153609066-1699090595617-26.webp)
 
 其它方法：例如用Diskgenius等工具的方法这里就不细讲，方法很多，只要能不丢失原有数据分出空闲分区即可
 
@@ -276,11 +276,11 @@ $$
 
 解压下好的Ventoy，打开
 
-![image-20230713152631709](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713152631709-1699090648360-28.png)
+![image-20230713152631709](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713152631709-1699090648360-28.webp)
 
 选择你的U盘，点击安装
 
-![image-20230713154300474](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154300474-1699090719320-33.png)
+![image-20230713154300474](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154300474-1699090719320-33.webp)
 
 下载Ubuntu 22.04
 
@@ -288,7 +288,7 @@ $$
 
 安装好后会看到电脑里有个叫 Ventoy 的盘，把下好的 Ubuntu 22.04 镜像放进去
 
-![image-20230713154523447](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154523447-1699090731798-35.png)
+![image-20230713154523447](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154523447-1699090731798-35.webp)
 
 *图片例为22.04.2，下载链接更新为22.04.5，安装22.04.5的即可*
 
@@ -327,19 +327,19 @@ sudo systemctl reboot --firmware-setup
 
 插入制作的Ventoy启动盘后显示：
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e9d0256177cdae101e9ed14fd12d2549.png" alt="img" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e9d0256177cdae101e9ed14fd12d2549.webp" alt="img" style="zoom:50%;" />
 
 选择OK后选择Enroll Key
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014657546.png" alt="image-20250215014657546" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014657546.webp" alt="image-20250215014657546" style="zoom:50%;" />
 
 回车
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014747223.png" alt="image-20250215014747223" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014747223.webp" alt="image-20250215014747223" style="zoom:50%;" />
 
 选择.cer即可，确认后reboot即可进入ventoy
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014712038.png" alt="image-20250215014712038" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014712038.webp" alt="image-20250215014712038" style="zoom:50%;" />
 
 ##### 2.1.3.1 双系统下Ubuntu安装
 
@@ -355,11 +355,11 @@ sudo systemctl reboot --firmware-setup
 
 进入下图后回车即可
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/992d6035218781a390a1584b98bda98-1699090847110-37.jpg" alt="992d6035218781a390a1584b98bda98" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/992d6035218781a390a1584b98bda98-1699090847110-37.webp" alt="992d6035218781a390a1584b98bda98" style="zoom: 25%;" />
 
 选择第一个然后回车
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1c6ef2bb427842de9e35b6955bd28bc-1699090876871-39.jpg" alt="1c6ef2bb427842de9e35b6955bd28bc" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1c6ef2bb427842de9e35b6955bd28bc-1699090876871-39.webp" alt="1c6ef2bb427842de9e35b6955bd28bc" style="zoom: 50%;" />
 
 等待进入Ubuntu的安装界面
 
@@ -369,29 +369,29 @@ sudo systemctl reboot --firmware-setup
 
 进入Ubuntu安装界面，点击Install
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2d540ce7b97ed2c8fa821bc9d056c83-1699103425924-41.jpg" alt="2d540ce7b97ed2c8fa821bc9d056c83" style="zoom: 30%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2d540ce7b97ed2c8fa821bc9d056c83-1699103425924-41.webp" alt="2d540ce7b97ed2c8fa821bc9d056c83" style="zoom: 30%;" />
 
 语言选**English**，因为中文下自动生成的中文路径在后面使用过程中容易出问题
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/056956bafba0f412f4c2af4f56106ed-1699103485274-43.jpg" alt="056956bafba0f412f4c2af4f56106ed" style="zoom:30%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/056956bafba0f412f4c2af4f56106ed-1699103485274-43.webp" alt="056956bafba0f412f4c2af4f56106ed" style="zoom:30%;" />
 
 连接wifi，后面需要联网自动安装驱动（不要使用需要网页登录的wifi，如学校的，这里没法登录）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/67a62d677cec452208b7273afc192df-1699103523013-45.jpg" alt="67a62d677cec452208b7273afc192df" style="zoom:30%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/67a62d677cec452208b7273afc192df-1699103523013-45.webp" alt="67a62d677cec452208b7273afc192df" style="zoom:30%;" />
 
 把 `Install third-party` 勾上，这个是自动安装驱动
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/50b36f817644504fed935c43d12a4dc-1699103538149-47.jpg" alt="50b36f817644504fed935c43d12a4dc" style="zoom:30%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/50b36f817644504fed935c43d12a4dc-1699103538149-47.webp" alt="50b36f817644504fed935c43d12a4dc" style="zoom:30%;" />
 
 这一步很**重要**，别选错了，选错你的电脑数据就没了
 
 选择 `Something else`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.png" alt="image-20230713160924192" style="zoom:40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.webp" alt="image-20230713160924192" style="zoom:40%;" />
 
 接着找到前面步骤中预留的空间（显示 `free space` 字样的）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161200118-1699103616156-51.png" alt="image-20230713161200118" style="zoom:40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161200118-1699103616156-51.webp" alt="image-20230713161200118" style="zoom:40%;" />
 
 点击 `+` 
 
@@ -403,7 +403,7 @@ sudo systemctl reboot --firmware-setup
 
 下面 `Use as` 选择 `swap area`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161326158-1699103634546-53.png" alt="image-20230713161326158" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161326158-1699103634546-53.webp" alt="image-20230713161326158" style="zoom:50%;" />
 
 确定后再新建 `boot` 分区
 
@@ -415,7 +415,7 @@ sudo systemctl reboot --firmware-setup
 
  `Mount Point` 选择 `/boot`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162017982-1699103844672-55.png" alt="image-20230713162017982" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162017982-1699103844672-55.webp" alt="image-20230713162017982" style="zoom:50%;" />
 
 确定后再新建 `/` 分区
 
@@ -427,7 +427,7 @@ sudo systemctl reboot --firmware-setup
 
  `Mount Point` 选择 `/`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162816368.png" alt="image-20230713162816368" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162816368.webp" alt="image-20230713162816368" style="zoom:50%;" />
 
 确定后再新建 `/home` 分区
 
@@ -439,23 +439,23 @@ sudo systemctl reboot --firmware-setup
 
  `Mount Point` 选择 `/home`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163328631-1699104129254-59.png" alt="image-20230713163328631" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163328631-1699104129254-59.webp" alt="image-20230713163328631" style="zoom: 50%;" />
 
 下面的 `Device for boot loader installation` 选择 `/boot` 所在的 `Device`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163419499-1699104140456-61.png" alt="image-20230713163419499" style="zoom:60%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163419499-1699104140456-61.webp" alt="image-20230713163419499" style="zoom:60%;" />
 
 接着点 `Install Now`
 
 位置选 `Shanghai`，这个是用来确定时区的
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163617658-1699104169521-63.png" alt="image-20230713163617658" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163617658-1699104169521-63.webp" alt="image-20230713163617658" style="zoom:50%;" />
 
 下一步要填写用户名与密码，如果不想每次登录输密码把 `Log in automatically` 选上
 
 等待安装完成即可，可能比较慢，取决于网络环境
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163727691-1699104185993-65.png" alt="image-20230713163727691" style="zoom:40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163727691-1699104185993-65.webp" alt="image-20230713163727691" style="zoom:40%;" />
 
 安装完成后会提示重启，后面还会提示拔U盘，拔掉U盘回车即可
 
@@ -471,7 +471,7 @@ sudo systemctl reboot --firmware-setup
 
 同2.1.3.1节中 选择 `Something else` 步骤
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.png" alt="image-20230713160924192" style="zoom:40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.webp" alt="image-20230713160924192" style="zoom:40%;" />
 
 但进入后删除目标安装硬盘（例nvme02）中的所有原有分区（除了efi），不要删错删成U盘的或别的硬盘
 
@@ -491,7 +491,7 @@ sudo systemctl reboot --firmware-setup
 >
 > [4] [重装Ubuntu后开机停在Grub命令行的解决办法_ubuntu开机卡在命令行-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/weixin_44481159/article/details/109240338)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231203161811736.png" alt="image-20231203161811736" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231203161811736.webp" alt="image-20231203161811736" style="zoom: 50%;" />
 
 **触发原因：**未知
 
@@ -578,7 +578,7 @@ timedatectl
 
 在右侧空白处右键，选择 新建 (New) -> DWORD (32-bit) Value
 
-![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/双系统时间错乱修复-方式二-修改Windows注册表截图.png)
+![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/双系统时间错乱修复-方式二-修改Windows注册表截图.webp)
 
 将其命名为 `RealTimeIsUniversal`，双击该项，将其数值数据（Value data）修改为 `1`
 
@@ -616,7 +616,7 @@ sudo apt install -y make
 
 如果执行 `sudo apt-get install build-essential` 时遇到
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241125192633780.png" alt="image-20241125192633780" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241125192633780.webp" alt="image-20241125192633780" style="zoom:33%;" />
 
 请先执行以下指令即可解决
 
@@ -628,7 +628,7 @@ sudo apt-get update
 
 即下图：
 
-![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713165504671-1699104265052-67.png)
+![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713165504671-1699104265052-67.webp)
 
 在上面这个文件夹内右键打开终端 `Terminal`
 
@@ -691,7 +691,7 @@ make -j8
 
   此时会打开文本编辑器
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231104165159479.png" alt="image-20231104165159479" style="zoom:50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231104165159479.webp" alt="image-20231104165159479" style="zoom:50%;" />
 
   前文提到将 `ippicv_2020_lnx_intel64_20191018_general.tgz` 放在了桌面，故将框出的这行改为桌面的目录（原本是一个网址）
 
@@ -711,7 +711,7 @@ make -j8
 
   **报错信息：**
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-24 23-57-29.png" alt="Screenshot from 2024-01-24 23-57-29" style="zoom:67%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-24 23-57-29.webp" alt="Screenshot from 2024-01-24 23-57-29" style="zoom:67%;" />
 
   **解决方案：**
 
@@ -723,11 +723,11 @@ make -j8
 
   下好之后放在桌面，注意如果是官方链接下载的需要重新命名这个包为下面这个名字
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-07-56.png" alt="Screenshot from 2024-01-25 00-07-56" style="zoom: 50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-07-56.webp" alt="Screenshot from 2024-01-25 00-07-56" style="zoom: 50%;" />
 
   打开`opencv-4.5.5/modules/gapi/cmake/DownloadADE.cmake`
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-00-23.png" alt="Screenshot from 2024-01-25 00-00-23" style="zoom: 50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-00-23.webp" alt="Screenshot from 2024-01-25 00-00-23" style="zoom: 50%;" />
 
   将github那行的链接改为（保留引号）
 
@@ -747,11 +747,11 @@ make -j8
 
   WSL下使用make命令编译发生冲突
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1.png" style="zoom: 33%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1.webp" style="zoom: 33%;" />
 
   opencv_crontrib中的插件无法编译，检查$PATH发现存在大量Windows系统下共享的环境变量
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2.png" style="zoom: 25%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2.webp" style="zoom: 25%;" />
 
   关闭该功能，修改文件`/etc/wsl.conf`
   
@@ -785,7 +785,7 @@ make -j8
 
   **报错信息：**
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250121210719167.png" alt="image-20250121210719167" style="zoom: 50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250121210719167.webp" alt="image-20250121210719167" style="zoom: 50%;" />
 
   **解决方案：**
 
@@ -840,49 +840,49 @@ code
 
 点击
 
-![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.png)
+![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.webp)
 
 进入插件安装页面
 
 在搜索栏上输入 `Chinese` 安装这个语言包
 
-![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.png)
+![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.webp)
 
 #### 2.3.3 OpenCV环境配置
 
 安装这四个包即可
 
-![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.png)
+![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.webp)
 
-![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.png)
+![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.webp)
 
 #### 2.3.4 Tensorflow
 
-![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.png)
+![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.webp)
 
 打开扩展管理
 
 安装以下扩展包
 
-![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.png)
+![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.webp)
 
-![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.png)
+![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.webp)
 
 安装完成后，在左侧菜单打开远程资源管理器
 
-![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.png)
+![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.webp)
 
 选择你装好环境的WSL
 
-![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.png)
+![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.webp)
 
 选择打开文件夹，此时会提示要打开的目录，推荐 `/home/用户名` （用户名为前面设置的username）
 
-![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.png)
+![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.webp)
 
 安装这两个扩展，注意是安装在WSL内，即点击这种按钮
 
-![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.png)
+![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.webp)
 
 **例程训练**
 
@@ -899,19 +899,19 @@ code
 
 将文件在windows下解压后，将整个class5文件夹拖进vscode的资源管理器中，即
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.png" alt="image-20231102001018674" style="zoom:30%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.webp" alt="image-20231102001018674" style="zoom:30%;" />
 
 打开 `class5/CIFAR10_CNN/p46_cifar10_resnet18.py` 
 
-![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.png)
+![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.webp)
 
 此时会提示找不到tensorflow库的位置，鼠标移到标黄线处选择快速修复
 
-![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.png)
+![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.webp)
 
 选择选择其他解释器
 
-![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.png)
+![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.webp)
 
 选择 `Python 3.9.18('tf')`
 
@@ -938,17 +938,17 @@ from tensorflow.python.keras import Model
 from keras.layers import BatchNormalization
 ```
 
-点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.png)
+点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.webp)
 
 训练模型（第一次跑时会先自动下载训练数据）
 
-![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.png)
+![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.webp)
 
 注意，训练完成后需要等待一段时间才会显示图表
 
 跑出该图即可（不一定一样）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.png" alt="image-20231102004837869" style="zoom: 40%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.webp" alt="image-20231102004837869" style="zoom: 40%;" />
 
 尝试修改代码中的参数使得 Validation Accuracy 达到0.9以上
 
@@ -978,7 +978,7 @@ from keras.layers import BatchNormalization
 
 进入hello_test包的src目录写helloworld程序：
 
-![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2023-08-14_16-59.png)
+![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2023-08-14_16-59.webp)
 
 ```cpp
 #include "ros/ros.h"
@@ -1025,7 +1025,7 @@ add_executable生成的可执行文件名一般就是包名，即${PROJECT_NAME}
 
 rosrun后面跟包名+可执行文件名
 
-![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p2.png)
+![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p2.webp)
 
 #### 2.4.4 创建发布者
 
@@ -1190,9 +1190,9 @@ rosrun hello_test test_sub
 
 将分别看到：
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p3.png" alt="helloworld" style="zoom:60%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p3.webp" alt="helloworld" style="zoom:60%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p4.png" alt="helloworld" style="zoom:60%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p4.webp" alt="helloworld" style="zoom:60%;" />
 
 
 #### 2.4.6 安装turtlebot3仿真需要其他的功能包 
@@ -1283,7 +1283,7 @@ wsl --install
 
 提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
 
-![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.png)
+![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
 
 打开Powershell，输入一下命令查看支持的版本
 
@@ -1291,7 +1291,7 @@ wsl --install
 wsl --list --online
 ```
 
-![image-20231101015843375](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015843375.png)
+![image-20231101015843375](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015843375.webp)
 
 输入以下命令设置版本为22.04
 
@@ -1301,17 +1301,17 @@ wsl --install Ubuntu-22.04 -n
 
 安装完成后，右键Powershell标题栏
 
-![image-20231101210913942](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210913942.png)
+![image-20231101210913942](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210913942.webp)
 
 点击属性，选择终端选择卡，将默认终端应用程序改为 **Windows 终端**
 
-![image-20231101210955130](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210955130.png)
+![image-20231101210955130](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210955130.webp)
 
 关掉Powershell重新打开**（不要使用管理员模式）**
 
 在最上面的下拉菜单选择Ubuntu 22.04.2打开
 
-![image-20231101020428285](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020428285.png)
+![image-20231101020428285](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020428285.webp)
 
 打开后会提示设置用户名和密码，正常设置即可
 
@@ -1327,7 +1327,7 @@ sudo apt update && sudo apt upgrade
 wsl -l -v
 ```
 
-![image-20231101020824525](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020824525.png)
+![image-20231101020824525](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020824525.webp)
 
 #### 2.5.2 迁移系统
 
@@ -1389,23 +1389,23 @@ wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
 
   如下图所示情况
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.png" alt="image-20240122235506269" style="zoom:67%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.png" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
 
   解决方式：
 
   `win+R` 打开运行，进入服务管理界面
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.png" alt="image-20240122235656272" style="zoom:67%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
 
   找到`WSL Service`项，将其启动即可
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.png" alt="image-20240122235746522" style="zoom:50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
 
   其中启动类型设置为自动
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.png" alt="image-20240122235801991" style="zoom:50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
 
   重启命令行即可修复以上问题
 
@@ -1427,11 +1427,11 @@ wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
 
 安装电脑GPU对应的Nvidia驱动（查询请在 此电脑-管理-设备管理器-显示适配器 查看）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231116135651422.png" alt="image-20231116135651422" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231116135651422.webp" alt="image-20231116135651422" style="zoom:33%;" />
 
 [Official Drivers | NVIDIA - https://www.nvidia.com/](https://www.nvidia.com/Download/index.aspx)
 
-![image-20231031230258617](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231031230258617.png)
+![image-20231031230258617](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231031230258617.webp)
 
 下载安装即可
 
@@ -1471,7 +1471,7 @@ rm ./cuda-repo-wsl-ubuntu-12-1-local_12.1.0-1_amd64.deb
 
 图例：
 
-![image-20231101002600073](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101002600073.png)
+![image-20231101002600073](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101002600073.webp)
 
 **命令执行信息**
 
@@ -1479,7 +1479,7 @@ rm ./cuda-repo-wsl-ubuntu-12-1-local_12.1.0-1_amd64.deb
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
 ```
 
-![image-20231101002103546](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101002103546.png)
+![image-20231101002103546](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101002103546.webp)
 
 -------------------------
 
@@ -1495,7 +1495,7 @@ sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda-repo-wsl-ubuntu-12-1-local_12.1.0-1_amd64.deb
 ```
 
-![image-20231101004635263](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101004635263.png)
+![image-20231101004635263](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101004635263.webp)
 
 --------------------------------------
 
@@ -1503,7 +1503,7 @@ wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/
 sudo dpkg -i cuda-repo-wsl-ubuntu-12-1-local_12.1.0-1_amd64.deb
 ```
 
-![image-20231101004808455](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101004808455.png)
+![image-20231101004808455](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101004808455.webp)
 
 -----------------------------
 
@@ -1521,7 +1521,7 @@ sudo apt-get update
 
 前面Get/Hit的部分留意有没有Ign，如果有请在该命令执行完毕后重新执行一次命令，若依然存在Ign提示请尝试更换网络环境（一般挂了梯子就没这个问题，有的话换条线），后面所有涉及该类提示的同理
 
-![image-20231101005156793](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101005156793.png)
+![image-20231101005156793](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101005156793.webp)
 
 -----------------------------
 
@@ -1533,9 +1533,9 @@ sudo apt-get -y install cuda
 
 注意有无报错即可
 
-![image-20231101012446989](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012446989.png)
+![image-20231101012446989](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012446989.webp)
 
-![image-20231101012632938](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012632938.png)
+![image-20231101012632938](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012632938.webp)
 
 --------------------------------
 
@@ -1547,7 +1547,7 @@ sudo apt-get -y install cuda
 curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Miniconda3-latest-Linux-x86_64.sh
 ```
 
-![image-20231101011050897](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011050897.png)
+![image-20231101011050897](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011050897.webp)
 
 --------------
 
@@ -1555,23 +1555,23 @@ curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o Mi
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
-![image-20231101011118050](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011118050.png)
+![image-20231101011118050](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011118050.webp)
 
 需要按多次回车，直至
 
-![image-20231101011318770](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011318770.png)
+![image-20231101011318770](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011318770.webp)
 
 输入 `yes` 回车
 
-![image-20231101011357841](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011357841.png)
+![image-20231101011357841](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011357841.webp)
 
 再次回车确认conda安装位置
 
-![image-20231101011457893](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011457893.png)
+![image-20231101011457893](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011457893.webp)
 
 这一步同样输入 `yes` 回车即可
 
-![image-20231101011530449](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011530449.png)
+![image-20231101011530449](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011530449.webp)
 
 ----------------
 
@@ -1581,7 +1581,7 @@ source ~/.bashrc
 
 该命令执行后conda就开始运行了
 
-![image-20231101011614973](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011614973.png)
+![image-20231101011614973](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011614973.webp)
 
 ---------------
 
@@ -1593,11 +1593,11 @@ source ~/.bashrc
 conda create --name tf python=3.9
 ```
 
-![image-20231101011743882](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011743882.png)
+![image-20231101011743882](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011743882.webp)
 
 输入 `y` 回车
 
-![image-20231101011829268](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011829268.png)
+![image-20231101011829268](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101011829268.webp)
 
 -------------------
 
@@ -1607,7 +1607,7 @@ conda activate tf
 
 前面环境的提示信息变为了tf
 
-![image-20231101012703132](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012703132.png)
+![image-20231101012703132](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012703132.webp)
 
 -----------------
 
@@ -1627,7 +1627,7 @@ pip install （库名） -i http://pypi.douban.com/simple --trusted-host pypi.do
 nvidia-smi
 ```
 
-![image-20231101012822931](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012822931.png)
+![image-20231101012822931](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101012822931.webp)
 
 看下显卡型号与本机是否一致，本人电脑此处显示为 `NVIDIA GeForce RTX 3060 Laptop` 
 
@@ -1637,11 +1637,11 @@ nvidia-smi
 conda install -c conda-forge cudatoolkit=11.8.0
 ```
 
-![image-20231101013136871](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013136871.png)![image-20231101013057366](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013057366.png)
+![image-20231101013136871](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013136871.webp)![image-20231101013057366](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013057366.webp)
 
 输入 `y` 回车
 
-![image-20231101013847296](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013847296.png)
+![image-20231101013847296](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101013847296.webp)
 
 --------------------
 
@@ -1649,11 +1649,11 @@ conda install -c conda-forge cudatoolkit=11.8.0
 pip install nvidia-cudnn-cu11==8.6.0.163
 ```
 
-![image-20231101014305276](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014305276.png)
+![image-20231101014305276](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014305276.webp)
 
 若提示
 
-![image-20231101014326659](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014326659.png)
+![image-20231101014326659](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014326659.webp)
 
 可以直接跳过，不影响后面配置
 
@@ -1677,7 +1677,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64/stubs/:/usr/local/cuda-12.1/lib64:/usr/local/cuda-12.1/cudnn/lib:$LD_LIBRARY_PATH
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003627389.png" alt="image-20231102003627389" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003627389.webp" alt="image-20231102003627389" style="zoom:50%;" />
 
 **注意**，第三条指令的12.1为CUDA版本，请输入 `nvidia-smi` 查看本机的CUDA Version根据实际情况填写，不要直接复制粘贴
 
@@ -1697,7 +1697,7 @@ pip install （库名） -i http://pypi.douban.com/simple --trusted-host pypi.do
 pip install --upgrade pip
 ```
 
-![image-20231101014617429](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014617429.png)
+![image-20231101014617429](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014617429.webp)
 
 ---------------
 
@@ -1705,11 +1705,11 @@ pip install --upgrade pip
 pip install tensorflow==2.12.0
 ```
 
-![image-20231101014828621](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014828621.png)
+![image-20231101014828621](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014828621.webp)
 
 中间信息省略
 
-![image-20231101014849642](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014849642.png)
+![image-20231101014849642](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101014849642.webp)
 
 ------------------
 
@@ -1721,7 +1721,7 @@ pip install tensorflow==2.12.0
 python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
 ```
 
-![image-20231101015018100](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015018100.png)
+![image-20231101015018100](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015018100.webp)
 
 **GPU 验证**
 
@@ -1729,7 +1729,7 @@ python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000,
 python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
 ```
 
-![image-20231101015041196](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015041196.png)
+![image-20231101015041196](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015041196.webp)
 
 若没有上述的信息，输入下面的配置到终端或者关闭终端重新打开再试（要进入tf环境）
 
@@ -1756,7 +1756,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 
 ##### 2.7.2.1 连接方式
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.png" alt="image-20240121233742010" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.webp" alt="image-20240121233742010" style="zoom: 25%;" />
 
 注意网线和电脑连接时接2号的LAN口，而不是接3号的WAN口
 
@@ -1766,7 +1766,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 
 第一次进入会提示设置密码，设置为12345678
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.png" alt="1280X1280" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.webp" alt="1280X1280" style="zoom: 33%;" />
 
 进入后到常用设置的WIFI设置中
 
@@ -1778,7 +1778,7 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 其余可以使用默认设置
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).png" alt="1280X1280 (1)" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).webp" alt="1280X1280 (1)" style="zoom: 33%;" />
 
 进入常用设置的局域网设置中
 
@@ -1786,7 +1786,7 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 开启DHCP服务，并且设置开始IP为2(因为作为服务器主机的电脑将要设置为192.168.1.2,所以需要确保可以使用此IP)，结束IP则无严格要求
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).png" alt="1280X1280 (2)" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).webp" alt="1280X1280 (2)" style="zoom: 33%;" />
 
 进入高级设置中的DHCP静态IP分配
 
@@ -1794,9 +1794,9 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 (如果配置不成功可以尝试拔掉网线重新连接)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/3338de21-5add-4c64-9ff1-999e05808fe2.png" alt="3338de21-5add-4c64-9ff1-999e05808fe2" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/3338de21-5add-4c64-9ff1-999e05808fe2.webp" alt="3338de21-5add-4c64-9ff1-999e05808fe2" style="zoom: 33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/9df7eb37-1132-4aca-9c85-59224fb7aff7.png" alt="9df7eb37-1132-4aca-9c85-59224fb7aff7" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/9df7eb37-1132-4aca-9c85-59224fb7aff7.webp" alt="9df7eb37-1132-4aca-9c85-59224fb7aff7" style="zoom: 33%;" />
 
 如果还未成功，设置－＞网络和Internet－＞高级网络设置－＞更改适配器选项
 
@@ -1808,11 +1808,11 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 确定后关机重启
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944.png" alt="5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944.webp" alt="5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944" style="zoom: 33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d92ede77-0048-4ced-9dd9-6e4cda0100cb.png" alt="d92ede77-0048-4ced-9dd9-6e4cda0100cb" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d92ede77-0048-4ced-9dd9-6e4cda0100cb.webp" alt="d92ede77-0048-4ced-9dd9-6e4cda0100cb" style="zoom: 33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.png" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.webp" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
 
 #### 2.7.3 软件安装
 
@@ -1826,19 +1826,19 @@ https://dev.mysql.com/downloads/mysql/
 
 然后配置一下环境变量(不清楚在哪里自己在设置中搜索环境变量）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8b8a6f13-5ea5-4c86-82a0-9aa06042969b.png" alt="8b8a6f13-5ea5-4c86-82a0-9aa06042969b" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8b8a6f13-5ea5-4c86-82a0-9aa06042969b.webp" alt="8b8a6f13-5ea5-4c86-82a0-9aa06042969b" style="zoom:33%;" />
 
 系统属性界面右下角的环境变量中，在系统变量找到`Path`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d62674cc-d8f4-4162-8eba-e4f5387e6952.png" alt="d62674cc-d8f4-4162-8eba-e4f5387e6952" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d62674cc-d8f4-4162-8eba-e4f5387e6952.webp" alt="d62674cc-d8f4-4162-8eba-e4f5387e6952" style="zoom:33%;" />
 
 点击编辑，新建一个环境变量名称为刚刚安装的路径再加上`/bin`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ea802741-5189-4b5e-987c-7cbb7f54c150.png" alt="ea802741-5189-4b5e-987c-7cbb7f54c150" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ea802741-5189-4b5e-987c-7cbb7f54c150.webp" alt="ea802741-5189-4b5e-987c-7cbb7f54c150" style="zoom:33%;" />
 
 ③在刚刚的bin文件的同一位置新建一个`data`文件夹和一个`mysql.ini`文件
 
-![5ba868a2-8e93-4690-898e-6b2b0ec24a51](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5ba868a2-8e93-4690-898e-6b2b0ec24a51.png)
+![5ba868a2-8e93-4690-898e-6b2b0ec24a51](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5ba868a2-8e93-4690-898e-6b2b0ec24a51.webp)
 
 `mysql.ini`文件先创建一个`.txt`文件，加入以下内容后再修改后缀名变更为`.ini`文件
 
@@ -1909,7 +1909,7 @@ net start mysql
 
 或者再次打开服务界面，右键点击启动也可
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.png" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.webp" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
 
 ##### 2.7.3.2 大疆官方服务器
 
@@ -1919,21 +1919,21 @@ net start mysql
 
 https://www.robomaster.com/zh-CN/products/components/detail/2518
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0e5d6040-a014-4b9c-9e91-c7eb86a37b42.png" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0e5d6040-a014-4b9c-9e91-c7eb86a37b42.webp" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2ff831b2-b26c-4607-88e7-0e59d7789b9b.png" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2ff831b2-b26c-4607-88e7-0e59d7789b9b.webp" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1e4ce0be-abaf-4f0e-8df7-9b74f38bee76.png" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1e4ce0be-abaf-4f0e-8df7-9b74f38bee76.webp" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:33%;" />
 
 2020赛季的服务器RoboMaster Server里面文件如下图，打开RMServerStart.exe文件，直接点击最下面的StartAll，进入后Play能够打开以下界面即可。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2befb81e-b765-4d33-8ed4-525afc8437be.png" alt="2befb81e-b765-4d33-8ed4-525afc8437be" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2befb81e-b765-4d33-8ed4-525afc8437be.webp" alt="2befb81e-b765-4d33-8ed4-525afc8437be" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/c343c74f-d9b2-489b-b209-b0ec09972dbc.png" alt="c343c74f-d9b2-489b-b209-b0ec09972dbc" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/c343c74f-d9b2-489b-b209-b0ec09972dbc.webp" alt="c343c74f-d9b2-489b-b209-b0ec09972dbc" style="zoom: 50%;" />
 
 最终效果图
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.png" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.webp" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
 
 #### 2.7.4 完整流程
 
@@ -1983,11 +1983,11 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 - 官网下载地址：[NoMachine - Download Free Remote Desktop Access](https://downloads.nomachine.com/)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010159271.png" alt="image-20240125010159271" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010159271.webp" alt="image-20240125010159271" style="zoom:33%;" />
 
 点击`for Linux`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010301693.png" alt="image-20240125010301693" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010301693.webp" alt="image-20240125010301693" style="zoom:33%;" />
 
 使用以下代码查一下你的架构， 我的是x86_64，选择DEB amd64(Ubuntu专门下载的)
 
@@ -1995,11 +1995,11 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 uname -a 
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010122304.png" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010122304.webp" style="zoom:33%;" />
 
 点击download，注意安装目录，下载完双击打开即可，进行安装
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010552041.png" alt="image-20240125010552041" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010552041.webp" alt="image-20240125010552041" style="zoom:33%;" />
 
 安装完成后有服务端和客户端，打开客户端
 
@@ -2007,7 +2007,7 @@ uname -a
 
 #### 2.8.3 使用介绍
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010654198.png" alt="image-20240125010654198" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010654198.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
 注意：控制端至少应该下载NoMachine的服务端，才能顺利连接
 
@@ -2027,11 +2027,11 @@ uname -a
 
 系统设置—>区域和语言—>管理已安装的语言—>在“语言”tab下—>点击“添加或删除语言”
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.png" alt="image-20240124183255432" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.webp" alt="image-20240124183255432" style="zoom:33%;" />
 
 弹出“已安装语言”窗口，勾选中文（简体），点击应用
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.png" alt="image-20240124183315544" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.webp" alt="image-20240124183315544" style="zoom:33%;" />
 
 以下两节（2.9.2/2.9.3）二选一即可
 
@@ -2047,15 +2047,15 @@ sudo apt-get install ibus-pinyin
 
 重启前往 `Setting->Keyboard`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.png" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.webp" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
 
 点击 `+` 号
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.png" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.webp" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
 
 选择 `Chinses`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.png" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.webp" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
 
 选择 `Intelligenc Pinyin` 即可
 
@@ -2065,7 +2065,7 @@ sudo apt-get install ibus-pinyin
 
 回到“语言支持”窗口，在键盘输入法系统中，选择`fcitx`
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.png" alt="image-20240124183327528" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.webp" alt="image-20240124183327528" style="zoom:33%;" />
 
 如果你没有`fcitx`选项，先打开终端手动安装`fcitx`，等安装成功之后再执行上述步骤：
 
@@ -2087,7 +2087,7 @@ sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
 打开终端输入`uname -a` 查看系统架构
 进入[搜狗输入法`linux`下载页面](https://shurufa.sogou.com/linux)，选择适合你ubuntu架构的版本download
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.png" alt="image-20240124183346251" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.webp" alt="image-20240124183346251" style="zoom:33%;" />
 
 ##### 2.9.3.3 安装输入法和依赖
 
@@ -2109,11 +2109,11 @@ sudo apt install libgsettings-qt1
 
 ①查看桌面右上角的键盘图标，看到列表中出现了搜狗，需要配置一下才能使用
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.png" alt="image-20240124183358842" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.webp" alt="image-20240124183358842" style="zoom:33%;" />
 
 ②点击配置当前输入法，进入输入法配置界面，我的和原作者一样是直接自动添加好了（如果你也是看完3和4点再来尝试），正常来说这里是没有添加搜狗输入法的
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.png" alt="image-20240124183413892" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.webp" alt="image-20240124183413892" style="zoom:33%;" />
 
 如果你点配置，出现以下报错，就是缺少图形界面的依赖，需要安装一下`fcitx-config-gtk`
 
@@ -2123,7 +2123,7 @@ sudo apt install fcitx-config-gtk
 
 ③点击+号，然后弹出“添加输入法”的窗口，这里一定要把下面的“仅显示当前语言”取消勾选，然后在下面的搜索框中输入`sogou`，再选择搜狗输入法，点击确认添加进来
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.png" alt="image-20240124183426547" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.webp" alt="image-20240124183426547" style="zoom:33%;" />
 
 4)如果在2步是自动添加好的搜狗输入法，选中搜狗输入法点`-`取消掉，然后再执行第3步，不然你永远也调不出来搜狗输入法或者输入中文。
 
@@ -2189,7 +2189,7 @@ cmake --version
 
 举例：
 
-![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.png)
+![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.webp)
 
 ### 2.11 onnxruntime
 
@@ -2236,7 +2236,7 @@ sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_ru
 
 此时可能会提示cmake版本过低，请根据 `2.10` 内容升级cmake
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.png" alt="image-20240222190207012" style="zoom: 67%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.webp" alt="image-20240222190207012" style="zoom: 67%;" />
 
 升级完成后重新执行上述命令即可成功编译（编译时间较长）
 
@@ -2246,7 +2246,7 @@ sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_ru
 >
 > 在看到开始编译时（如下图）
 >
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.png" alt="image-20240222185820853" style="zoom: 50%;" />
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.webp" alt="image-20240222185820853" style="zoom: 50%;" />
 >
 > 按下 `Ctrl+C` 终止编译
 >
@@ -2260,7 +2260,7 @@ sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_ru
 >
 > **报错1**
 >
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.png" alt="image-20240222191128295" style="zoom: 67%;" />
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.webp" alt="image-20240222191128295" style="zoom: 67%;" />
 >
 > 缺少python环境
 >
@@ -2272,7 +2272,7 @@ sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_ru
 >
 > **报错2**
 >
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.png" alt="image-20240222191704374" style="zoom:67%;" />
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.webp" alt="image-20240222191704374" style="zoom:67%;" />
 >
 > 缺少 `numpy` 库
 >
@@ -2305,7 +2305,7 @@ sudo make install
 
 官方地址（最新版）：[Download Now | Anaconda](https://www.anaconda.com/download/success)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.png" alt="image-20250204153055921" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.webp" alt="image-20250204153055921" style="zoom:50%;" />
 
 安装完成，开始菜单进入anaconda prompt
 
@@ -2335,7 +2335,7 @@ conda env list
 nvidia-smi
 ```
 
-![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.png)
+![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.webp)
 
 即12.6，安装对应CUDA工具包，版本小于等于上图版本号
 
@@ -2343,11 +2343,11 @@ nvidia-smi
 
 CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit-archive)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.png" alt="image-20250204153127184" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.webp" alt="image-20250204153127184" style="zoom: 33%;" />
 
 安装CUDA
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.png" alt="image-20250204153150013" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.webp" alt="image-20250204153150013" style="zoom:50%;" />
 
 选择精简安装，安装完成后打开cmd检查安装情况
 
@@ -2355,7 +2355,7 @@ CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.n
 nvcc -V
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.png" alt="image-20250204153206530" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.webp" alt="image-20250204153206530" style="zoom:50%;" />
 
 #### 2.12.3 cuDNN安装
 
@@ -2369,7 +2369,7 @@ cuDNN官方地址：[cuDNN Archive | NVIDIA Developer](https://developer.nvidia.
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.png" alt="image-20250204153217917" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.webp" alt="image-20250204153217917" style="zoom:50%;" />
 
 验证cudnn是否安装成功
 
@@ -2387,13 +2387,13 @@ deviceQuery.exe
 
 检查安装
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.png" alt="image-20250204153237425" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.webp" alt="image-20250204153237425" style="zoom:50%;" />
 
 #### 2.12.4 安装PyTorch
 
 官方地址：[PyTorch](https://pytorch.org/)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153247322.png" alt="image-20250204153247322" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153247322.webp" alt="image-20250204153247322" style="zoom:50%;" />
 
 将pip命令粘贴到anaconda的已配置好的虚拟环境中
 
@@ -2403,7 +2403,7 @@ deviceQuery.exe
 pip list
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153300299.png" alt="image-20250204153300299" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153300299.webp" alt="image-20250204153300299" style="zoom:50%;" />
 
 打开vscode，进入工作目录
 
@@ -2426,7 +2426,7 @@ else:
     print("CUDA is not available")
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.png" alt="image-20250204153322387" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
 
 #### 2.12.5 测试例：mnist手写数字识别
 
@@ -2569,17 +2569,17 @@ show_predictions(model, test_loader, num_images=10)
 
 运行以上代码
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153521410.png" alt="image-20250204153521410" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153521410.webp" alt="image-20250204153521410" style="zoom:50%;" />
 
-![image-20250204153533872](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153533872.png)
+![image-20250204153533872](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153533872.webp)
 
 若mnist数据集下载失败，`shift+右键` MNIST
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153546080.png" alt="image-20250204153546080" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153546080.webp" alt="image-20250204153546080" style="zoom:50%;" />
 
 交换mirrors中两个链接的位置，交换后为
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.png" alt="image-20250204153556588" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.webp" alt="image-20250204153556588" style="zoom:50%;" />
 
 ### 2.13 无线网卡驱动安装（Ubuntu）
 
@@ -2712,11 +2712,11 @@ int main()
 
 第一次输入opencv相关头文件时，由于C++扩展没有引入opencv库的目录，会弹出报错，按以下方式解决
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241116232941180.png" alt="image-20241116232941180" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241116232941180.webp" alt="image-20241116232941180" style="zoom: 50%;" />
 
 选择
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241116232948457.png" alt="image-20241116232948457" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241116232948457.webp" alt="image-20241116232948457" style="zoom:50%;" />
 
 选择第一个即可
 
@@ -2767,7 +2767,7 @@ img = imread("读取路径");
 
 imread()参数的功能
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117124316116.png" alt="image-20241117124316116" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117124316116.webp" alt="image-20241117124316116" style="zoom:33%;" />
 
 ##### 3.1.3.2 图像的展示
 
@@ -2864,7 +2864,7 @@ while (true)
 
 get() 方法的详细功能
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117125136873.png" alt="image-20241117125136873" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117125136873.webp" alt="image-20241117125136873" style="zoom:33%;" />
 
 录制视频
 
@@ -2944,7 +2944,7 @@ Mat img3=img1.copyTo();
 
 **数据类型**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117111755022.png" alt="image-20241117111755022" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117111755022.webp" alt="image-20241117111755022" style="zoom:33%;" />
 
 若定义单通道图像，可不写 `C1` ，3通道图像写 `C3`。例如 `CV_8UC3` 表示数据为8位无符号整数的三通道图像
 
@@ -3006,7 +3006,7 @@ Mat支持加减乘除四则运算，加法减法都是矩阵对应元素相加�
 
 两个矩阵相乘是矩阵乘法，要求必须A的列数等于B的行数
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117121741373.png" alt="image-20241117121741373" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117121741373.webp" alt="image-20241117121741373" style="zoom:33%;" />
 
 矩阵乘常数是对应每个元素乘该常数，如果要两个矩阵的对应元素相乘作为结果矩阵的值，则
 
@@ -3014,9 +3014,9 @@ Mat支持加减乘除四则运算，加法减法都是矩阵对应元素相加�
 m = a.mul(b); // a,b,m均为Mat矩阵，大小相同
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122150712.png" alt="image-20241117122150712" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122150712.webp" alt="image-20241117122150712" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122158378.png" alt="image-20241117122158378" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122158378.webp" alt="image-20241117122158378" style="zoom:33%;" />
 
 矩阵点乘
 
@@ -3024,7 +3024,7 @@ m = a.mul(b); // a,b,m均为Mat矩阵，大小相同
 m = a.dot(b); // a,b均为Mat矩阵，大小相同，m为一个数
 ```
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122133982.png" alt="image-20241117122133982" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122133982.webp" alt="image-20241117122133982" style="zoom:33%;" />
 
 矩阵除法不论是除常数还是除矩阵均为被除矩阵对应位置元素除除数（若为常数，则除常数，为矩阵则除对应位置的元素值）
 
@@ -3032,7 +3032,7 @@ m = a.dot(b); // a,b均为Mat矩阵，大小相同，m为一个数
 
 参考下表
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122626148.png" alt="image-20241117122626148" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117122626148.webp" alt="image-20241117122626148" style="zoom:33%;" />
 
 访问方式示例：
 
@@ -3053,11 +3053,11 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
 颜色转换标志
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117132501256.png" alt="image-20241117132501256" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117132501256.webp" alt="image-20241117132501256" style="zoom:33%;" />
 
 示例：
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117133535765.png" alt="image-20241117133535765" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117133535765.webp" alt="image-20241117133535765" style="zoom:33%;" />
 
 从左到右从上到下分别是BGR、GRAY、YUV、HSV、Lab
 
@@ -3077,11 +3077,11 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
   注意在执行 `cmake ..` 后终端的输出信息，如 `ffmpeg` 部分提示为 `YES` 即可继续编译安装
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322134426787.png" alt="image-20240322134426787" style="zoom: 33%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322134426787.webp" alt="image-20240322134426787" style="zoom: 33%;" />
 
 - 视频可读取，但相机录制视频无法保存
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322135316813.png" alt="image-20240322135316813" style="zoom:33%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322135316813.webp" alt="image-20240322135316813" style="zoom:33%;" />
 
   **原因：** fps, frameSize 参数错误（一般表现为0）
 
@@ -3200,7 +3200,7 @@ ROS提供的相关包`imu_tools`进行滤波
 
 可以在启动文件中修改配置，如下所示：
 
-![image-20231129141340231](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231129141340231.png)
+![image-20231129141340231](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231129141340231.webp)
 
 **运行**
 
@@ -3266,7 +3266,7 @@ Timing
 
 想象一下，机器人姿势过滤器上次更新的时间是t_0。在*到达每个*传感器的至少一次测量值且时间戳晚于 t_0 之前，节点不会更新机器人姿势过滤器。例如，当在时间戳t_1 > t_0的 `odom` 主题和时间戳t_2 > t_1 > t_0的 `imu_data` 主题上收到消息时，过滤器现在将更新到有关所有传感器的信息可用的最新时间，在本例中为时间t_1。直接给出t_1处的 `odom` 位姿，通过对 t_1 和 t_0 之间的 `imu` 位姿进行线性插值得到 t_2 处的 `imu `位姿。机器人姿势过滤器使用` odom `和` imu `的相对姿势进行更新，介于 t_0 和 t_1 之间。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/robot_pose_ekfaction=AttachFile&do=get&target=robot_pose_ekf.png" alt="robot_pose_ekf.png" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/robot_pose_ekfaction=AttachFile&do=get&target=robot_pose_ekf.webp" alt="robot_pose_ekf.webp" style="zoom:50%;" />
 
 上图显示了PR2机器人从给定的初始位置（绿点）开始，驱动并返回初始位置时的实验结果。完美的里程计 x-y 图应显示精确的闭环。蓝线表示车轮里程计的输入，蓝点表示估计的结束位置。红线表示`robot_pose_ekf`的输出，它结合了车轮里程计和`imu`的信息，红点是估计的结束位置。
 
@@ -3295,17 +3295,17 @@ RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通
 
 （全向轮与麦克纳姆轮的共同点在于他们都由两大部分组成：轮毂和辊子（roller）。轮毂是整个轮子的主体支架，辊子则是安装在轮毂上的鼓状物。全向轮的轮毂轴与辊子转轴相互垂直，而麦克纳姆轮的轮毂轴与辊子转轴呈 45° 角。理论上，这个夹角可以是任意值，根据不同的夹角可以制作出不同的轮子，但最常用的还是这两种。）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126010416033.png" alt="image-20240126010416033" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126010416033.webp" alt="image-20240126010416033" style="zoom:33%;" />
 
 ##### 3.2.3.2 麦轮安装
 
 同轴安装，分为左旋和右旋两种
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015014818.png" alt="image-20240126015014818" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015014818.webp" alt="image-20240126015014818" style="zoom:33%;" />
 
 安装方式如下图，分别为：**X-正方形（X-square）、X-长方形（X-rectangle）、O-正方形（O-square）、O-长方形（O-rectangle）**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015110765.png" alt="image-20240126015110765" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015110765.webp" alt="image-20240126015110765" style="zoom:33%;" />
 
 - X-正方形：轮子转动产生的力矩会经过同一个点，所以 yaw 轴无法主动旋转，也无法主动保持 yaw 轴的角度。
 - X-长方形：轮子转动可以产生 yaw 轴转动力矩，但转动力矩的力臂一般会比较短。
@@ -3346,11 +3346,11 @@ ROS使用公制 ：
 
 - 底盘中心
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013124388.png" alt="image-20240126013124388" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013124388.webp" alt="image-20240126013124388" style="zoom:33%;" />
 
 - 麦轮轴心（取右上角麦轮即一号轮子分析）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013249796.png" alt="image-20240126013249796" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013249796.webp" alt="image-20240126013249796" style="zoom:33%;" />
 
 
 
@@ -3360,23 +3360,23 @@ ROS使用公制 ：
 
 ①轮子轴心速度
 
-![image-20240126013514833](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013514833.png)
+![image-20240126013514833](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013514833.webp)
 
 ②辊子方向的速度分量v1∥
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013654586.png" alt="image-20240126013654586" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013654586.webp" alt="image-20240126013654586" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013846204.png" alt="image-20240126013846204" style="zoom: 67%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013846204.webp" alt="image-20240126013846204" style="zoom: 67%;" />
 
 ③轮子转速
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014229717.png" alt="image-20240126014229717" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014229717.webp" alt="image-20240126014229717" style="zoom:33%;" />
 
-![image-20240126014243401](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014243401.png)
+![image-20240126014243401](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014243401.webp)
 
 ④整合得出底盘四个轮子转速，即底盘运动学模型
 
-![image-20240126014625107](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014625107.png)
+![image-20240126014625107](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014625107.webp)
 
 
 
@@ -3406,33 +3406,33 @@ ROS使用公制 ：
 
 对于源代码包，我们只有编译才能在系统上运行。而Linux下的编译器有``gcc、g++``，随着源文件的增加，直接用``gcc/g++``命令的方式显得效率低下，人们开始用`Makefile`来进行编译。然而随着工程体量的增大，`Makefile`也不能满足需求，于是便出现了`Cmake`工具。`CMake`是对make工具的生成器，是更高层的工具，它简化了编译构建过程，能够管理大型项目，具有良好的扩展性。对于ROS这样大体量的平台来说，就采用的是`CMake`，并且ROS对`CMake`进行了扩展，于是便有了Catkin编译系统。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.png" alt="image-20240129164912808" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.webp" alt="image-20240129164912808" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.png" alt="image-20240129164930341" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.webp" alt="image-20240129164930341" style="zoom:33%;" />
 
 其实早期是`rosbuild`，目前还支持使用，但是`ros`的核心软件包都已经被转换为Catkin
 
 ##### 3.2.4.2 catkin_make 结构和特点
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.png" alt="image-20240129165146937" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.webp" alt="image-20240129165146937" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.png" alt="image-20240129165635113" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.webp" alt="image-20240129165635113" style="zoom:33%;" />
 
 ##### 3.2.4.3 catkin_make编译流程
 
 - 建立工作空间
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.png" alt="image-20240129165753173" style="zoom:50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.webp" alt="image-20240129165753173" style="zoom:50%;" />
 
 - 编译
 
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.png" alt="image-20240129165829990" style="zoom:50%;" />
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.webp" alt="image-20240129165829990" style="zoom:50%;" />
 
 source用来配置环境，不然`roslaunch`找不到对应的包
 
 ##### 3.2.4.4 catkin_make文件系统
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.png" alt="img" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.webp" alt="img" style="zoom: 33%;" />
 
 ##### 3.2.4.5 package
 
@@ -3442,13 +3442,13 @@ package也是ROS源代码存放的地方，任何ROS的代码无论是C++还是P
 
 **package结构**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.png" alt="img" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.webp" alt="img" style="zoom:33%;" />
 
 **package指令**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.png" alt="img" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.webp" alt="img" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.png" alt="image-20240129171704680" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.webp" alt="image-20240129171704680" style="zoom:33%;" />
 
 ##### 3.2.4.6 常见问题
 
@@ -3587,7 +3587,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 **注意：在单独启动rviz时，需要先启动master节点：`roscore`，然后另启一终端运行：`rosrun rviz rviz`。但是对.launch文件，运行之后，若master节点没有启动会自动去启动它，因此在第二步运行rviz时，master节点已经被启动了，无需再次运行`roscore`。
 每次打开rviz都要重新配置很麻烦，可以使用ctrl+s命令保存当前配置，保存到路径`opt/ros/melodic/share/rviz/default.rviz`，若提示无法写入该文件，则是当前文件权限为“only read”，启动一个终端，输入并运行命令`sudo chmod 777 /opt/ros/melodic/share/rviz/default.rviz`，然后再此尝试`ctrl+s`保存即可成功**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172132705.png" alt="image-20240127172132705" style="zoom:67%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172132705.webp" alt="image-20240127172132705" style="zoom:67%;" />
 
 4)灰度地图和代价地图
 
@@ -3606,7 +3606,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 缺点：旋转过快易发生漂移，无回环检测
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172707169.png" alt="image-20240127172707169" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172707169.webp" alt="image-20240127172707169" style="zoom: 50%;" />
 
 ##### 3.2.5.3 Karto
 
@@ -3616,7 +3616,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 缺点：无法实时构建子图，耗费时间
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172725405.png" alt="image-20240127172725405" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172725405.webp" alt="image-20240127172725405" style="zoom:50%;" />
 
 ##### 3.2.5.4 Cartographer
 
@@ -3631,7 +3631,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 缺点：在几何对称环境中，易回环出错
 
-![image-20240127172736432](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172736432.png)
+![image-20240127172736432](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172736432.webp)
 
 #### 3.2.6 pgm 转 posegraph
 
@@ -3645,9 +3645,9 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 根据需求添加或删除围挡。最重要的是将障碍物完全涂黑，障碍物内部不要保留任何白色区域！
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214091419.png" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214091419.webp" style="zoom: 25%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217152911916.png" alt="image-20250217152911916" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217152911916.webp" alt="image-20250217152911916" style="zoom: 25%;" />
 
 ##### 3.2.6.2 使用 Ogm2Pgbm 获取带有点云和位姿的 rosbag
 
@@ -3722,7 +3722,7 @@ sudo apt-get install -y nvidia-container-toolkit
 ```
 
 (建议) 开启独显直连, 按下图完成后重启生效
-![[Pasted image 20250214104010.png]]
+![[Pasted image 20250214104010.webp]]
 
 基于 `lihanchen2004/ogm2pgbm:latest` 创建容器
 
@@ -3739,7 +3739,7 @@ sudo ./autorun.sh
 
 请确保当前终端已经进入 Docker container 中
 进入终端后会出现一个绿色的→箭头, 如下图
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105219.png" style="zoom: 33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105219.webp" style="zoom: 33%;" />
 
 ```bash
 MAP_NAME=rmuc_2025
@@ -3750,9 +3750,9 @@ roslaunch ogm2pgbm ogm2pgbm.launch map_file:=/root/workspace/map/$MAP_NAME.yaml 
 > 命令行可能会输出一大堆类似 `# QXcbConnection: XCB error: 2 (BadValue)` 的报错, 此现象疑似由Qt框架引起, 所以建议不要拖动弹出的RVIZ窗口, 不过貌似影响不大而且触发具有偶然性, 多运行几次就好了
 
 运行上述命令后会启动RVIZ
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105348-1739778855212-7.png" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105348-1739778855212-7.webp" style="zoom: 25%;" />
 等待3~4分钟, 程序执行完毕后会在终端输出 `done!`
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105744.png" style="zoom:50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214105744.webp" style="zoom:50%;" />
 随后 `Ctrl + C` 终止程序, 程序将自动把 rosbag 保存至 `/root/.ros/ogm2pgbm_sensordata.bag` (容器内部路径)
 
 **将 rosbag 下载到宿主机**
@@ -3839,11 +3839,11 @@ rosbags-convert --src ogm2pgbm_sensordata.bag \
 
 待 rosbag 播放完毕，在 rviz2 界面左侧 `SlamToolBoxPlugin` 中设置好文件名，点击 `Serialize Map` 即可保存 `.posegraph+.data` 地图；点击 `Save Map` 可保存 `.pgm+.yaml` 地图 (保存在 `Downloads` 目录下)
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214170405.png" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214170405.webp" style="zoom: 25%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214170427.png" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Pasted image 20250214170427.webp" style="zoom:33%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217153213246.png" alt="image-20250217153213246" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217153213246.webp" alt="image-20250217153213246" style="zoom: 25%;" />
 
 ### 3.3 cmake
 
@@ -4442,7 +4442,7 @@ ament_package()
 
 语义分割的任务是对输入的图像进行逐像素的分类，标记出像素级别的物体。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.jpg" alt="图像逐像素的分类" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.webp" alt="图像逐像素的分类" style="zoom:33%;" />
 
 如上图，图1中把猫、天空、树、草地进行了逐像素的分类；图2中把牛、天空、树、草地进行了逐像素的分类。
 
@@ -4450,7 +4450,7 @@ ament_package()
 
 目标检测的任务是对输入的图像进行物体检测，标注物体在图像上的位置，以及该位置上物体属于哪个分类。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.jpg" alt="模型位置标注和做出分类" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.webp" alt="模型位置标注和做出分类" style="zoom:33%;" />
 
 如上图，模型把图中的人、狗、马分别进行了位置标注，并且也给出了对应的分类类别。
 
@@ -4476,7 +4476,7 @@ Yolo团队为模型设计了专用数据集格式"YOLO"，要训练yolov8，必�
 
 yolo直接采用txt文件保存模型的labels标签，如下图，每一行都代表着该图像中的一个标签GT
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.png" alt="yolo数据集格式" style="zoom: 50%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.webp" alt="yolo数据集格式" style="zoom: 50%;" />
 
 目前大部分数据集的保存都是以voc格式，如果你拿到了voc格式的数据集，需要进行转换。
 
@@ -4532,7 +4532,7 @@ data_xn
 
 对于不同任务，Yolov8准备了不同的预训练模型，具有不同的输出格式。目标检测是Yolov8的主任务，因此所有模型均可使用。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.png" alt="yolov8预训练模型" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.webp" alt="yolov8预训练模型" style="zoom:33%;" />
 
 下载地址：[Releases · ultralytics/assets · GitHub](https://github.com/ultralytics/assets/releases) 提供了ultralytics库提供的所有预训练模型的下载，此处下载最小的默认模型
 
@@ -4569,7 +4569,7 @@ if __name__ == "__main__":
 
 > 由于Windows下处理数据集需要创建多个workers，因此，需要将接口调用写在__main__下以防止`Freeze_support Error`
 >
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.png" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.webp" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
 
 **然后运行train.py就可以开始训练了**
 
@@ -4591,7 +4591,7 @@ ONNX Runtime提供了跨平台调用模型的统一接口
 
 1. 生成ONNX文件:
    从下面的文件结构开始,通过上面的步骤已经得到了训练过程当中综合准确率最好的模型`best.pt`和模型最后的训练结果`last.pt`
-2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.png" alt="weights权重文件展示图" style="zoom:33%;" />
+2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.webp" alt="weights权重文件展示图" style="zoom:33%;" />
 
 然后是在pycharm控制台打开之前下载了 `ultralytics`的anaconda环境，然后在控制台输入下面的指令
 
@@ -4607,7 +4607,7 @@ yolo export model=runs/detect/train6/weights/best.pt format=onnx  int8=true simp
 >format后面是模型导出的格式 [(yolo官网上模型导出的格式)](https://docs.ultralytics.com/zh/modes/export/#arguments)
 >后面的参数也是官网上的相关介绍
 >
-><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.png" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
+><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.webp" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
 >
 >这里我使用了 int8 simplify dynamic 用来简化模型加快计算速度
 
@@ -5060,10 +5060,10 @@ int main()
 如：
 
 ```markdown
-![5](./Sirius 战队2023视觉组培训20231029/5.jpg)
+![5](./Sirius 战队2023视觉组培训20231029/5.webp)
 ```
 
-![5](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5.jpg)
+![5](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5.webp)
 
 >快捷键:  Ctrl+Shift+I
 
@@ -6143,15 +6143,15 @@ int main()
 
 **分电板**
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.png" alt="image-20240123145741592" style="zoom: 25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.webp" alt="image-20240123145741592" style="zoom: 25%;" />
 
 
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.png" alt="image-20240123145852713" style="zoom:25%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.webp" alt="image-20240123145852713" style="zoom:25%;" />
 
 #### 5.1.3 接线
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.png" alt="image-20240123150219314" style="zoom: 15%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -6163,7 +6163,7 @@ int main()
 
 使用*USB转TTL连接线*连接C板UART2与MiniPC上USB接口，串口引脚顺序按官方C板文档相应定义进行接线：
 
-<img src=".\北京林业大学RoboMaster机甲大师视觉组从入门到精通\image-20250912221435614.png" alt="image-20240123150219314" style="zoom: 65%;" />
+<img src=".\北京林业大学RoboMaster机甲大师视觉组从入门到精通\image-20250912221435614.webp" alt="image-20240123150219314" style="zoom: 65%;" />
 
 **注意**：MiniPC启动时必须连接摄像头，否则可能遇到无法启动的情况；使用完毕后，先使用`poweroff`关闭MiniPC，再下电。
 
@@ -6531,19 +6531,19 @@ sudo ./bin/MiracleVision
 
 1. 进入`base/MiracleVision.cpp`注释掉`#define RELEASE`
 
-![微信图片_20250912224255](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224255.png)
+![微信图片_20250912224255](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224255.webp)
 
 2. 将`switch (serial_.returnReceiveMode())`改为`switch (uart::AUTO_AIM)`
 
-![微信图片_20250912224303](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224303.png)
+![微信图片_20250912224303](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224303.webp)
 
 3. 在`configs/armor/basic_armor_config.xml`中，将`DEBUG_MODE`改为`1`
 
-![微信图片_20250912224154](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224154.png)
+![微信图片_20250912224154](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224154.webp)
 
 4. 可以按需要调整的参数设置EDIT参数，若要调整灰度阈值，则将`GRAY_EDIT`设为1，程序启动后将弹出滑块窗口。
 
-![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.png)
+![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.webp)
 
 #### 6.3.2 串口
 
