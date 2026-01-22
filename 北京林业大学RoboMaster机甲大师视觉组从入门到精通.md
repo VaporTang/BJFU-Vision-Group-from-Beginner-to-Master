@@ -5465,9 +5465,10 @@ int main()
 >```
 
 >效果:
->$$
->f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
->$$
+>
+$$
+f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
+$$
 
 **③文字颜色**
 
