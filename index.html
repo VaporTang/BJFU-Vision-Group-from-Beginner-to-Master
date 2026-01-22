@@ -14,20 +14,22 @@
             font-family: "Microsoft YaHei", sans-serif;
         }
 
-        /* =========== 核心修复：把背景改成深色 =========== */
+        /* ============================================================
+           核心修复区：解决图片被遮挡的问题
+           ============================================================ */
 
-        /* 1. 蒙版层：改为黑色半透明 */
+        /* 1. 蒙版层：设置为深色，层级设为 999 */
         .medium-zoom-overlay {
             background: rgba(0, 0, 0, 0.85) !important;
-            /* 确保蒙版在侧边栏之上 */
-            z-index: 9998 !important;
+            z-index: 999 !important;
         }
 
-        /* 2. 图片层：确保图片在蒙版之上 */
+        /* 2. 放大的图片层：层级必须比蒙版高 (1000) */
+        /* 关键：使用 position: fixed 强制让图片脱离父级容器的束缚 */
         .medium-zoom-image--opened {
-            /* 必须比 overlay 的 z-index 大 */
-            z-index: 9999 !important;
-            /* 注意：这里删除了 opacity: 1 !important，否则会破坏缩放动画导致图片消失 */
+            z-index: 1000 !important;
+            position: fixed !important;
+            /* 强制脱离文档流，避免被父元素遮挡 */
         }
     </style>
 </head>
@@ -45,11 +47,10 @@
             subMaxLevel: 3,
             auto2top: true,
 
-            // 官方缩放插件的配置（可选）
+            // 图片缩放插件配置
             zoom: {
-                maxLevel: 3, // 默认放大倍数
-                offset: 500  // 滚动多少像素自动关闭
-                // 注意：背景颜色不在这里配，由上面的 CSS 控制
+                maxLevel: 3, // 放大倍数
+                offset: 500  // 滚动多少距离关闭
             }
         }
     </script>
