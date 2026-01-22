@@ -36,7 +36,7 @@ $$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:5%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.jpg" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
 
 图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
 
