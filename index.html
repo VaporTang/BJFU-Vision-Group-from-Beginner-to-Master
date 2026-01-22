@@ -9,13 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 
     <style>
         /* 移动端优化 */
         .markdown-section img {
             max-width: 100%;
+        }
+
+        /* 修复 KaTeX 公式可能出现的滚动条问题 */
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
         }
     </style>
 </head>
@@ -32,9 +37,16 @@
             auto2top: true,
             coverpage: false,
 
-            // 核心修复逻辑：在解析前替换 zoom 为 width
-            // 这一步对于 zoom-image 插件同样至关重要！
-            // 它可以修复非标准 zoom 属性导致的坐标计算偏移问题。
+            // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
+            latex: {
+                inlineOpen: '$',
+                inlineClose: '$',
+                blockOpen: '$$',
+                blockClose: '$$',
+                kramed: false, // 禁用 kramed 兼容模式，使用默认 marked
+                customOptions: {} // 这里可以透传 KaTeX 的原生配置
+            },
+
             plugins: [
                 function (hook, vm) {
                     hook.beforeEach(function (html) {
@@ -48,13 +60,12 @@
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-
     <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-    
-    <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
 </body>
 
