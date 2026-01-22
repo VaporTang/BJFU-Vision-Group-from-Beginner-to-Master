@@ -10,15 +10,30 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 
     <style>
-        /* 修复字体和一些基础样式 */
         body {
             font-family: "Microsoft YaHei", sans-serif;
         }
 
-        /* 即使在深色背景下，大图背景也保持白色 (可选) */
+        /* =========== 核心修复区域 Start =========== */
+        /* 问题：点开图片后，图片被网页背景遮挡变成空白 */
+        /* 解决：强制提升 medium-zoom 组件的 CSS 层级 */
+
+        /* 1. 放大时的背景蒙版 */
         .medium-zoom-overlay {
-            background: #fff;
+            z-index: 9998 !important;
+            /* 确保层级很高 */
+            /* 如果你想要半透明黑色背景，把下面这行改成 background: rgba(0,0,0,0.7) !important; */
+            background: #fff !important;
+            /* 这里目前设置的是纯白背景 */
         }
+
+        /* 2. 放大的图片本身 */
+        .medium-zoom-image--opened {
+            /* 图片本身要比蒙版层级更高 */
+            z-index: 9999 !important;
+        }
+
+        /* =========== 核心修复区域 End =========== */
     </style>
 </head>
 
@@ -35,20 +50,19 @@
             subMaxLevel: 3,
             auto2top: true,
 
-            // 【核心修改】这里不再使用 mediumZoom 配置对象
-            // 而是通过 plugins 钩子手动控制，这样最稳定
+            // 继续使用最稳定的手动挂载模式
             plugins: [
                 function (hook) {
-                    // doneEach 钩子：每次路由切换（页面加载）完成后触发
                     hook.doneEach(function () {
-                        // 1. 找到内容区域的所有图片
-                        // 2. 排除掉 emoji 表情图片（如果有的话）
-                        // 3. 手动绑定 mediumZoom
                         if (typeof mediumZoom === 'function') {
+                            // 移除旧的实例，防止重复绑定导致卡顿（可选优化）
+                            mediumZoom('.markdown-section img:not(.emoji)').detach();
+
+                            // 重新绑定
                             mediumZoom('.markdown-section img:not(.emoji)', {
-                                background: '#ffffff', // 放大后的背景色
-                                margin: 24,            // 边距
-                                scrollOffset: 0        // 滚动关闭阈值
+                                background: '#ffffff',
+                                margin: 24,
+                                scrollOffset: 0
                             });
                         }
                     });
