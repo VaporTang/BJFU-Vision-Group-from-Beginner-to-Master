@@ -33,9 +33,9 @@ $$
 
 ### 1.1 分电板
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:35%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:35%;" />
 
 图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
 
@@ -43,7 +43,7 @@ $$
 
 ### 1.2 电池架
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:35%;" />
 
 电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
 
@@ -55,13 +55,13 @@ $$
 
 ### 1.3 DC-DC（24V-19V）变压器
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:35%;" />
 
 黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
 ### 1.4 电池
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:35%;" />
 
 电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
 
@@ -75,7 +75,7 @@ $$
 
 ### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:35%;" />
 
 #### 1.5.1 参数（以 NUC 11 为例）
 
@@ -91,13 +91,13 @@ $$
 
 #### 1.5.2 各种接口/硬件位置
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:35%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:35%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:35%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:35%;" />
 
 ### 1.6 工业相机
 
@@ -111,7 +111,7 @@ $$
 
 #### 1.6.2 接口
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:35%;" />
 
 ### 1.7 激光雷达
 
@@ -166,19 +166,19 @@ $$
 
 #### 1.8.1 USB-Camera
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:35%;" />
 
 #### 1.8.2 RJ45 网线
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:35%;" />
 
 #### 1.8.3 HDMI-HDMI
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:35%;" />
 
 ### 1.9 USB to TTL
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:35%;" />
 
 #### 1.9.1 接口
 
@@ -191,9 +191,9 @@ $$
 
 ### 1.10 手持装甲板调试模块
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:35%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:35%;" />
 
 #### 1.10.1 参数
 
@@ -229,7 +229,7 @@ $$
 
 ### 1.11 外置MiniPC完整装机展示
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:20%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:35%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
