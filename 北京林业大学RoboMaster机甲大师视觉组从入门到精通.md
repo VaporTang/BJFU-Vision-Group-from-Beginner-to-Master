@@ -5527,15 +5527,17 @@ $$
 
 >效果:
 $$
-\require{cancel}\begin{array}{r1}
-\verb|y+\cancel{x}|&y+\cancel{x}\\
-\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
-\verb|y+\bcancel{x}|&y+\bcancel{x}\\
-\verb|y+\xcancel{x}|&y+\xcancel{x}\\
-\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
-\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
+\require{cancel}
+\begin{array}{ll}
+\verb|y+\cancel{x}| & y+\cancel{x} \\
+\verb|y+\cancel{y+x}| & y+\cancel{y+x} \\
+\verb|y+\bcancel{x}| & y+\bcancel{x} \\
+\verb|y+\xcancel{x}| & y+\xcancel{x} \\
+\verb|y+\cancelto{0}{x}| & y+\cancelto{0}{x} \\
+\verb|\frac{1\cancel9}{\cancel95}=\frac15| & \frac{1\cancel9}{\cancel95}=\frac15 \\
 \end{array}
 $$
+
 
 >说明:  使用`\require{enclose}`来允许**整段删除线**的显示，再使用`\enclose{删除线效果}{字符}`来使用各种整段删除线效果。其中，删除线效果有`horizontalstrike`、`verticalstrike`、`updiagonalstrike`和`downdiagonalstrike`,可以叠加使用。
 
@@ -5555,7 +5557,7 @@ $$
 
 >效果:
 $$
-\require{enclose}\begin{array}{r1}
+\require{enclose}\begin{array}{rl}
 \verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
 \verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
 \verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
