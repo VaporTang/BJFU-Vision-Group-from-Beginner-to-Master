@@ -7,83 +7,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
+
     <style>
-        body { font-family: "Microsoft YaHei", sans-serif; }
-
-        /* ============================================================
-           【暴力修复区】
-           既然常规方法无效，我们使用最高优先级的 CSS 强制规则
-           ============================================================ */
-        
-        /* 1. 确保蒙版层级极高，但比图片低 */
-        .medium-zoom-overlay {
-            z-index: 2147483640 !important; /* 接近 INT_MAX 的数值 */
+        /* 这里不再需要写任何 z-index 或 position 的 hack 代码了！
+           只保留基础字体设置即可。
+        */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
         }
 
-        /* 2. 确保图片层级是全宇宙最高，绝对在蒙版之上 */
-        .medium-zoom-image--opened {
-            z-index: 2147483647 !important; /* 浏览器允许的最大 z-index */
-            visibility: visible !important;  /* 强制可见 */
-        }
-
-        /* 3. 解决 Vue 主题可能的 transform 干扰 */
-        /* 有些主题会对 body 加 transform，导致 fixed 定位失效，这里重置它 */
-        body, #app {
-            transform: none !important;
+        /* 稍微优化一下侧边栏宽度，让它看起来更舒服 */
+        .sidebar {
+            width: 280px;
         }
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
-    
+
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '', 
+            repo: '', // 如果有 GitHub 链接可以填这里
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
+
             loadSidebar: false,
-            subMaxLevel: 3, 
+            subMaxLevel: 3,
             auto2top: true,
-            
-            // 注意：删除了 plugins 里的 zoom 配置，改用下面的 executeScript 手动处理
+
+            // 搜索插件配置（顺便加上，很实用）
+            search: {
+                placeholder: '搜索文档...',
+                noData: '未找到结果',
+                depth: 3
+            },
+
+            // 缩放插件配置
+            zoom: {
+                maxLevel: 3,
+                offset: 500
+            }
         }
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-
-    <script>
-        // 手动绑定逻辑：确保在页面切换时正确重载，且设置深色背景
-        (function() {
-            var zoom; // 单例模式，避免重复绑定
-
-            window.$docsify.plugins = [].concat(function(hook) {
-                hook.doneEach(function() {
-                    // 1. 如果之前有实例，先detach，防止内存泄漏或重复绑定
-                    if (zoom) {
-                        zoom.detach();
-                    }
-
-                    // 2. 选择正文中的所有图片
-                    var images = document.querySelectorAll('.markdown-section img:not(.emoji)');
-
-                    // 3. 重新实例化 medium-zoom
-                    // 直接在这里设置 background，不用 CSS hack，这是最稳的方法
-                    zoom = mediumZoom(images, {
-                        background: 'rgba(0, 0, 0, 0.85)', // 深色背景
-                        margin: 24,
-                        scrollOffset: 0 // 禁止滚动关闭，防止误触导致位置计算错误
-                    });
-                });
-            }, window.$docsify.plugins);
-        })();
-    </script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
 </body>
+
 </html>
