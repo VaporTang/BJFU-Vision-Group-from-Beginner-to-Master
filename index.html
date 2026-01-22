@@ -8,61 +8,56 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-
+    
     <style>
-        body {
-            font-family: "Microsoft YaHei", sans-serif;
-        }
+        body { font-family: "Microsoft YaHei", sans-serif; }
 
-        /* =========== 核心修复区域 Start =========== */
-        /* 问题：点开图片后，图片被网页背景遮挡变成空白 */
-        /* 解决：强制提升 medium-zoom 组件的 CSS 层级 */
-
-        /* 1. 放大时的背景蒙版 */
+        /* =========== 核心修复：把背景改成深色 =========== */
+        
+        /* 1. 蒙版层：改为黑色半透明 (rgba 0,0,0,0.85) */
+        /* z-index 设置极高，防止被侧边栏遮挡 */
         .medium-zoom-overlay {
-            z-index: 9998 !important;
-            /* 确保层级很高 */
-            /* 如果你想要半透明黑色背景，把下面这行改成 background: rgba(0,0,0,0.7) !important; */
-            background: #fff !important;
-            /* 这里目前设置的是纯白背景 */
+            background: rgba(0, 0, 0, 0.85) !important; 
+            z-index: 20000 !important; 
         }
 
-        /* 2. 放大的图片本身 */
+        /* 2. 图片层：确保图片在蒙版之上 */
         .medium-zoom-image--opened {
-            /* 图片本身要比蒙版层级更高 */
-            z-index: 9999 !important;
+            z-index: 20001 !important;
+            /* 强制不透明，防止 CSS 干扰 */
+            opacity: 1 !important;
+            visibility: visible !important;
         }
-
-        /* =========== 核心修复区域 End =========== */
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
-
+    
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '',
+            repo: '', 
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-
+            
             loadSidebar: false,
-            subMaxLevel: 3,
+            subMaxLevel: 3, 
             auto2top: true,
 
-            // 继续使用最稳定的手动挂载模式
             plugins: [
-                function (hook) {
-                    hook.doneEach(function () {
+                function(hook) {
+                    hook.doneEach(function() {
+                        // 每次页面加载完成后，手动绑定 medium-zoom
                         if (typeof mediumZoom === 'function') {
-                            // 移除旧的实例，防止重复绑定导致卡顿（可选优化）
-                            mediumZoom('.markdown-section img:not(.emoji)').detach();
-
-                            // 重新绑定
+                            // 1. 先清理旧的绑定（防止重复绑定导致的 Bug）
+                            // mediumZoom('.markdown-section img').detach();
+                            
+                            // 2. 重新绑定正文内的所有图片
                             mediumZoom('.markdown-section img:not(.emoji)', {
-                                background: '#ffffff',
+                                // 这里的 background 会被上面的 CSS !important 覆盖，但为了保险还是写上
+                                background: 'rgba(0, 0, 0, 0.85)', 
                                 margin: 24,
-                                scrollOffset: 0
+                                scrollOffset: 150 // 滚动超过 150px 关闭大图
                             });
                         }
                     });
@@ -78,5 +73,4 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
-
 </html>
