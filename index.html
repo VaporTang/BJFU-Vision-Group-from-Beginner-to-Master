@@ -8,7 +8,13 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"/>
+    <style>
+        /* 修复 medium-zoom 放大后的 z-index 问题，防止被某些元素遮挡 */
+        .medium-zoom-overlay, .medium-zoom-image--opened {
+            z-index: 9999 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,18 +23,42 @@
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            // repo: 'https://github.com/username/repo', // 建议填入你的 GitHub 仓库地址
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
             loadSidebar: false,
             subMaxLevel: 3,
             auto2top: true,
-            // 开启封面页（可选）
             coverpage: false,
-            // 配置 medium-zoom 图片缩放插件
+            
+            // 配置 medium-zoom 插件
             mediumZoom: {
-                selector: 'img:not(.no-zoom)', // 对所有非 no-zoom 类的图片启用
-                background: 'rgba(255, 255, 255, 0.9)' // 放大时的背景颜色
-            }
+                selector: '.markdown-section img', // 明确指定选择器
+                background: 'rgba(255, 255, 255, 0.95)'
+            },
+
+            // 定义一个自定义插件来修复 zoom 属性
+            plugins: [
+                function(hook) {
+                    hook.doneEach(function() {
+                        // 获取所有内容区的图片
+                        var imgs = document.querySelectorAll('.markdown-section img');
+                        imgs.forEach(function(img) {
+                            // 检查是否有行内样式的 zoom
+                            if (img.style.zoom) {
+                                // 将 zoom 的值赋给 width
+                                img.style.width = img.style.zoom;
+                                // 移除非标准的 zoom 属性，避免干扰插件
+                                img.style.zoom = ''; 
+                            }
+                        });
+                        
+                        // 强制刷新 medium-zoom，确保它识别到新的样式
+                        if (window.MediumZoom) {
+                            window.MediumZoom.detach();
+                            window.MediumZoom.attach('.markdown-section img');
+                        }
+                    });
+                }
+            ]
         }
     </script>
 
@@ -41,5 +71,4 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
-
 </html>
