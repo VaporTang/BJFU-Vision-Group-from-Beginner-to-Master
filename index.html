@@ -1,100 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>北林 RoboMaster 视觉组文档</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="从入门到精通">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <!-- 引入官方主题样式 -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+</head>
+
 <body>
     <div id="app">加载中...</div>
 
-    <!-- 1. 先定义配置 -->
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '',
+            repo: '', // 如果你想在右上角显示 GitHub 图标，可以在这里填入 URL，例如 'https://github.com/username/repo'
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
             loadSidebar: false,
             subMaxLevel: 3,
             auto2top: true,
-            // 建议直接在这里初始化插件数组，虽然你在下面也做了兼容
-            plugins: []
         }
     </script>
 
-    <!-- 2. 引入 medium-zoom 库 (因为它被下面的脚本依赖) -->
-    <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-
-    <!-- 3. 定义并注册你的自定义插件 -->
-    <script>
-            (function () {
-                var myZoomPlugin = function (hook, vm) {
-                    hook.doneEach(function () {
-                        var imgs = document.querySelectorAll('main img, .content img');
-                        if (!imgs || imgs.length === 0) return;
-
-                        try {
-                            if (window._docsify_mediumZoomInstance) {
-                                window._docsify_mediumZoomInstance.detach();
-                            }
-                        } catch (e) { }
-
-                        window._docsify_mediumZoomInstance = mediumZoom({
-                            background: 'rgba(0,0,0,0.6)',
-                            margin: 24,
-                            scrollOffset: 40
-                        });
-
-                        imgs.forEach(function (img) {
-                            img.style.cursor = 'zoom-in';
-                            img.onclick = function (ev) {
-                                ev.stopPropagation();
-                                window._docsify_mediumZoomInstance.show(img);
-
-                                // 你的自定义缩放逻辑保持不变...
-                                setTimeout(function () {
-                                    var opened = document.querySelector('.medium-zoom-image--opened, .medium-zoom-image--open');
-                                    if (!opened) return;
-                                    var natW = img.naturalWidth || img.width;
-                                    var natH = img.naturalHeight || img.height;
-                                    var vw = window.innerWidth * 0.9;
-                                    var vh = window.innerHeight * 0.9;
-                                    var maxScale = 2.5;
-                                    var scaleW = vw / natW;
-                                    var scaleH = vh / natH;
-                                    var fitScale = Math.min(scaleW, scaleH);
-
-                                    if (natW > 0 && natH > 0 && fitScale > 1) {
-                                        var finalScale = Math.min(fitScale, maxScale);
-                                        opened.style.transform = 'translate(-50%, -50%) scale(' + finalScale + ')';
-                                        opened.style.transition = 'transform .2s ease';
-                                    } else {
-                                        opened.style.transform = 'translate(-50%, -50%)';
-                                    }
-                                }, 160);
-                            };
-                        });
-
-                        // 保持你的事件监听逻辑不变...
-                        document.addEventListener('click', function (e) {
-                            var overlay = document.querySelector('.medium-zoom-overlay, .medium-zoom-overlay--open');
-                            var opened = document.querySelector('.medium-zoom-image--opened, .medium-zoom-image--open');
-                            if (!opened) return;
-                            if (overlay && overlay === e.target) {
-                                try { window._docsify_mediumZoomInstance.hide(); } catch (e) { }
-                            }
-                            if (opened && (opened === e.target || opened.contains(e.target))) {
-                                try { window._docsify_mediumZoomInstance.hide(); } catch (e) { }
-                            }
-                        }, true);
-
-                        document.addEventListener('keydown', function (e) {
-                            if (e.key === 'Escape' || e.key === 'Esc') {
-                                try { window._docsify_mediumZoomInstance.hide(); } catch (e) { }
-                            }
-                        });
-                    });
-                };
-
-                // 注册插件
-                window.$docsify.plugins = [].concat(window.$docsify.plugins || [], myZoomPlugin);
-            }());
-    </script>
-
-    <!-- 4. 最后引入 Docsify 核心文件，确保它运行时已经能看到上面的插件配置 -->
+    <!-- Docsify 核心脚本 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
+    <!-- 官方图片缩放插件 (Zoom Image) -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
 </body>
+
+</html>
