@@ -2,103 +2,162 @@
 <html lang="zh-cn">
 
 <head>
-    <meta charset="UTF-8">
-    <title>北林 RoboMaster 视觉组文档</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="从入门到精通">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <meta charset="UTF-8">
+  <title>北林 RoboMaster 视觉组文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="从入门到精通">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 
-    <style>
-        body {
-            font-family: "Microsoft YaHei", sans-serif;
-        }
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+    }
 
-        /* overlay 居中并保持 fixed（overlay 本身不是图片） */
-        .medium-zoom-overlay,
-        .medium-zoom-overlay--open {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: fixed !important;
-            inset: 0 !important;
-            z-index: 9999 !important;
-            background: rgba(0, 0, 0, 0.6) !important;
-        }
+    /* overlay 居中并保持 fixed */
+    .medium-zoom-overlay,
+    .medium-zoom-overlay--open {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 9999 !important;
+      background: rgba(0,0,0,0.6) !important;
+    }
 
-        /* 只在“放大打开”状态下才使图片居中（不要把基础类 .medium-zoom-image 包含进来） */
-        .medium-zoom-image--open,
-        .medium-zoom-image--opened {
-            position: fixed !important;
-            left: 50% !important;
-            top: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            max-width: 90vw !important;
-            max-height: 90vh !important;
-            z-index: 10000 !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
-        }
-    </style>
+    /* 只在“放大打开”状态下才使图片居中 */
+    .medium-zoom-image--open,
+    .medium-zoom-image--opened {
+      position: fixed !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      max-width: 90vw !important;
+      max-height: 90vh !important;
+      z-index: 10000 !important;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important;
+      /* transition 保留，以便 medium-zoom 的动画可见 */
+      transition: transform .25s ease !important;
+    }
+
+    /* 鼠标提示可缩放 */
+    main img, .content img {
+      cursor: zoom-in;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="app">加载中...</div>
+  <div id="app">加载中...</div>
 
-    <script>
-        window.$docsify = {
-            name: '北林视觉组教程',
-            repo: '',
-            homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-            loadSidebar: false,
-            subMaxLevel: 3,
-            auto2top: true,
-        }
-    </script>
+  <script>
+    window.$docsify = {
+      name: '北林视觉组教程',
+      repo: '',
+      homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
+      loadSidebar: false,
+      subMaxLevel: 3,
+      auto2top: true,
+    }
+  </script>
 
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 
-    <script>
-            (function () {
-                var myZoomPlugin = function (hook, vm) {
-                    hook.doneEach(function () {
-                        if (!document.querySelector('main img')) return;
+  <!-- 直接引入 medium-zoom -->
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
 
-                        try {
-                            if (window._docsify_mediumZoomInstance) {
-                                window._docsify_mediumZoomInstance.detach();
-                            }
-                        } catch (e) { }
+  <script>
+    (function () {
+      var myZoomPlugin = function (hook, vm) {
+        hook.doneEach(function () {
+          // 找不到图片就不做任何事
+          var imgs = document.querySelectorAll('main img, .content img');
+          if (!imgs || imgs.length === 0) return;
 
-                        window._docsify_mediumZoomInstance = mediumZoom('main img, .content img', {
-                            background: 'rgba(0,0,0,0.6)',
-                            margin: 24,
-                            scrollOffset: 40
-                        });
-                    });
-                };
+          // 销毁之前的实例（防止内存或重复绑定）
+          try {
+            if (window._docsify_mediumZoomInstance) {
+              window._docsify_mediumZoomInstance.detach();
+            }
+          } catch (e) {}
 
-                window.$docsify.plugins = (window.$docsify.plugins || []);
-                window.$docsify.plugins.unshift(myZoomPlugin);
-            }());
-    </script>
+          // 创建没有 selector 的实例（我们用 show() 手动打开）
+          window._docsify_mediumZoomInstance = mediumZoom({
+            background: 'rgba(0,0,0,0.6)',
+            margin: 24,
+            scrollOffset: 40
+          });
 
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+          // 绑定点击：手动调用 show，这样我们可以在打开后再调整 scale（针对小图）
+          imgs.forEach(function (img) {
+            // 确保移除旧的 onclick，避免重复
+            img.style.cursor = 'zoom-in';
+            img.onclick = function (ev) {
+              ev.stopPropagation();
+              // 显示放大图
+              window._docsify_mediumZoomInstance.show(img);
 
-    <script>
-        // 调试用（可移除）：列出页面中含 transform 的元素，帮助定位 ancestor transform 问题
-        console.log('检查带 transform 的元素：',
-            Array.from(document.querySelectorAll('*'))
-                .filter(el => getComputedStyle(el).transform !== 'none')
-                .slice(0, 20)
-                .map(el => ({
-                    tag: el.tagName,
-                    id: el.id,
-                    class: el.className,
-                    transform: getComputedStyle(el).transform
-                }))
-        );
-    </script>
+              // 在打开动画后，尝试根据 natural size 进行适当放大（如果图片本身很小）
+              setTimeout(function () {
+                var opened = document.querySelector('.medium-zoom-image--opened, .medium-zoom-image--open');
+                if (!opened) return;
+
+                var natW = img.naturalWidth || img.width;
+                var natH = img.naturalHeight || img.height;
+                var vw = window.innerWidth * 0.9;
+                var vh = window.innerHeight * 0.9;
+
+                // 如果图片原始尺寸比视窗目标小，我们可以放大到视窗的合适比例，但限制最大放大倍数（例如 2.5）以避免严重像素化
+                var maxScale = 2.5;
+                var scaleW = vw / natW;
+                var scaleH = vh / natH;
+                var fitScale = Math.min(scaleW, scaleH);
+
+                if (natW > 0 && natH > 0 && fitScale > 1) {
+                  var finalScale = Math.min(fitScale, maxScale);
+                  // 原本 medium-zoom 的 transform 是 translate(-50%,-50%)，我们在其上追加 scale
+                  opened.style.transform = 'translate(-50%, -50%) scale(' + finalScale + ')';
+                  opened.style.transition = 'transform .2s ease';
+                } else {
+                  // 恢复默认（不强制 scale）
+                  opened.style.transform = 'translate(-50%, -50%)';
+                }
+              }, 160); // 动画与 DOM 更新后执行
+            };
+          });
+
+          // 显式添加关闭逻辑：点击 overlay 或按 Esc 都关闭
+          // overlay 点击
+          document.addEventListener('click', function (e) {
+            var overlay = document.querySelector('.medium-zoom-overlay, .medium-zoom-overlay--open');
+            var opened = document.querySelector('.medium-zoom-image--opened, .medium-zoom-image--open');
+            if (!opened) return;
+            if (overlay && overlay === e.target) {
+              try { window._docsify_mediumZoomInstance.hide(); } catch (e) {}
+            }
+            // 如果点击在打开的图片上，也关闭（与常规行为一致）
+            if (opened && (opened === e.target || opened.contains(e.target))) {
+              try { window._docsify_mediumZoomInstance.hide(); } catch (e) {}
+            }
+          }, true);
+
+          // Esc 关闭
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+              try { window._docsify_mediumZoomInstance.hide(); } catch (e) {}
+            }
+          });
+        });
+      };
+
+      // 注册插件
+      window.$docsify.plugins = (window.$docsify.plugins || []);
+      window.$docsify.plugins.unshift(myZoomPlugin);
+    }());
+  </script>
+
+  <!-- 注意：不要再额外引入 docsify 官方的 zoom-image 插件，以免与上面手动实例冲突 -->
 </body>
 
 </html>
