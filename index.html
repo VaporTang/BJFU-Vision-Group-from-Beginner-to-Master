@@ -8,47 +8,26 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    
+
     <style>
-        body { font-family: "Microsoft YaHei", sans-serif; }
-
-        /* ============================================================
-           核心修复区：解决图片被遮挡的问题
-           ============================================================ */
-        
-        /* 1. 蒙版层：设置为深色，层级设为 999 */
-        .medium-zoom-overlay {
-            background: rgba(0, 0, 0, 0.85) !important; 
-            z-index: 999 !important; 
-        }
-
-        /* 2. 放大的图片层：层级必须比蒙版高 (1000) */
-        /* 关键：使用 position: fixed 强制让图片脱离父级容器的束缚 */
-        .medium-zoom-image--opened {
-            z-index: 1000 !important;
-            position: fixed !important; /* 强制脱离文档流，避免被父元素遮挡 */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
         }
     </style>
 </head>
 
 <body>
     <div id="app">加载中...</div>
-    
+
     <script>
         window.$docsify = {
             name: '北林视觉组教程',
-            repo: '', 
+            repo: '',
             homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-            
+
             loadSidebar: false,
-            subMaxLevel: 3, 
+            subMaxLevel: 3,
             auto2top: true,
-            
-            // 图片缩放插件配置
-            zoom: {
-                maxLevel: 3, // 放大倍数
-                offset: 500  // 滚动多少距离关闭
-            }
         }
     </script>
 
@@ -59,4 +38,5 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 
 </body>
+
 </html>
