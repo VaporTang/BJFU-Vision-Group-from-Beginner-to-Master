@@ -1972,29 +1972,27 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 ### 2.8 NoMachine
 
-> Contributors: 洪佳
+> Contributors: 洪佳、唐锦梁
 
 #### 2.8.1 基本介绍
 
-**NoMachine**是一款**远程桌面软件**。适用于Linux、windows、[ARM](https://so.csdn.net/so/search?q=ARM&spm=1001.2101.3001.7020)、Android等几乎全系统。常见的远程桌面软件还有向日葵、ToDesk等。选择NoMachine是因为它**支持ARM32位、ARM64位处理器**。
+**NoMachine** 是一款跨平台的远程桌面软件，广泛适用于 Linux、Windows、Android 以及 ARM 架构设备等几乎所有主流操作系统。虽然市面上还有向日葵、ToDesk 等常见的远程工具，但 **NoMachine** 开源极其跨平台性，成为了本项目的首选方案。
 
 #### 2.8.2 安装NoMachine
 
-- 官网下载地址：[NoMachine - Download Free Remote Desktop Access](https://downloads.nomachine.com/)
+- 官网下载地址：[NoMachine - Download Free Remote Desktop Access](https://downloads.nomachine.com/) 
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010159271.webp" alt="image-20240125010159271" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-14-11.webp" alt="image-20240125010159271" style="zoom:33%;" />
 
-点击`for Linux`
+按照系统类型选择下载的安装包
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010301693.webp" alt="image-20240125010301693" style="zoom:33%;" />
+Windows 下载：
 
-使用以下代码查一下你的架构， 我的是x86_64，选择DEB amd64(Ubuntu专门下载的)
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-16-29.webp" alt="image-20240125010301693" style="zoom:33%;" />
 
-```
-uname -a 
-```
+Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010122304.webp" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-20-33.webp" alt="image-20240125010301693" style="zoom:33%;" />
 
 点击download，注意安装目录，下载完双击打开即可，进行安装
 
@@ -2004,11 +2002,70 @@ uname -a
 
 客户端成功打开如上图，第一次进入有官方使用说明，点ok不断继续即可
 
-#### 2.8.3 使用介绍
+#### 2.8.3 网络连接
+
+控制端和被控端需要处在同一个局域网内，可以通过连接同一个 WiFi(如手机热点)或有线连接，**建议被控插入一个 HDMI 欺骗器**
+
+**注意事项：**
+
+处在同一个局域网也可能因为防火墙设置导致无法连接。
+
+分两种情况：
+
+1. Windows 上 WiFi 连接
+   1. 需要设置为 "专用网络"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-58-06.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+2. Windows 上 有线连接（网线）
+
+   1. 因为无法上网，无法手动设置为专用网络，需要自行配置防火墙，进入 "高级安全 Windows Defender 防火墙"
+
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 22-13-13.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+   2. 点击 "入站规则"，选中如下两项，右键选择 "启动规则" 即可，启用该项可解决 `ping` 不通的问题
+
+   3. 两台设备之间有线连接需要手动配置网段
+
+      1. 对于 Windows 设备，打开控制面板，进入 "网络和 Internet"  → "网络和共享中心" → "更改适配器设置"（位于左侧小字） → 选中你的有限网络设备，通常命名为 "以太网 n"，下图所示的 "以太网 2" 即为有线网卡，选中后右键选择属性，双击 "Internet 协议版本 4（TCP/IPv4）" → 选中 "使用下面的 IP 地址" → IP 地址设置为 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同） → 子网掩码设置为 255.255.255.0 →点击 "确定" → 点击 "确定"
+
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-windows.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+      2. 对于 Ubuntu 设备，"设置" → "网络" → "齿轮图标" → "IPv4" → "手动" → "地址" 填入 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同），""子网掩码" 填入 255.255.255.0 → "应用"
+      
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-ubuntu.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+
+
+#### 2.8.4 使用介绍
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010654198.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
-注意：控制端至少应该下载NoMachine的服务端，才能顺利连接
+通常当两个系统处在同一个局域网的情况下，会自动显示局域网内的设备列表
+
+>  注意：控制端至少应该下载NoMachine的服务端，才能顺利连接
+
+#### 2.8.5 显示优化
+
+> 以下操作在 Windows 控制端进行
+
+如果 Windows 的屏幕分辨率较高，需要调整 NoMachine 的缩放设置，右键属性 → "更改高 DPI 设置" → 勾选 "替代高 DPI 缩放行为" → 选中 "应用程序" → 点击"确认"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-36-58.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+按下快捷键 `Ctrl + Alt + 0`，点击 Display，选中 "Resize remote display" 和 "Fullscreen"，再点击 "Change settings"，有线连接建议 "Quality" 直接拖到 `Best quality`，分辨率根据被控端的分辨率动态调整。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-42-19.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+再回到软件的主界面，点击 "Settings"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-43-16.webp" alt="image-20240125010654198" style="zoom:50%;" />
+
+再进入 "Performance"，按照下图配置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-44-33.webp" alt="image-20240125010654198" style="zoom:50%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-45-33.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
 ### 2.9 中文输入法安装(Ubuntu)
 
@@ -6271,7 +6328,7 @@ def resize_images(input_dir, width_threshold=2500, size_threshold_mb=1.5, target
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    supported_formats = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp')
+    supported_formats = ('.jpg', '.jpeg', '.webp', '.bmp', '.tiff', '.webp')
     count = 0
 
     print("-" * 50)
