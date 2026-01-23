@@ -8,7 +8,7 @@ $$
 
 ------------------------------
 
-> Update: 2026/01/23
+> Update: 2026/01/22
 
 （按贡献时间先后顺序排序）
 
@@ -26,995 +26,6 @@ $$
 [TOC]
 
 <div STYLE="page-break-after: always;"></div>
-# 1 基础环境配置
-## 1.1 前言
-**\"工欲善其事，必先利其器。\"**
-
-在深入探索 RoboMaster 复杂的机器人算法之前，拥有一个稳定、高效且易于调试的开发环境是所有工作的基石。初入视觉组，环境配置往往是入门的第一道槛。面对陌生的 Linux 命令行、缺失的驱动以及各种报错，很容易让人在写下第一行代码前就感到挫败。
-
-本章的设计初衷，正是为了总结经验，帮助你完成开发环境的配置。
-
-鉴于视觉组的绝大部分算法代码最终都需运行在 Ubuntu 系统上，本章将详细介绍如何在你的计算机上部署 Ubuntu 环境。针对不同的硬件条件和使用需求，我们提供了三种主流方案供你选择（详细流程请见参见 1.2）：
-
-- **方案A：Ubuntu 双系统（详见 1.2.1）**
-  - **简介：**也就是在电脑上同时安装 Windows 和 Ubuntu 两个独立的操作系统。
-  - **优点：**性能最强，能够完整发挥硬件算力。
-  - **缺点：**无法同时使用 Windows 软件，切换系统需要重启电脑。
-- **方案 B：WSL2 (Windows Subsystem for Linux 2)（详见 1.2.2）**
-  - **简介：**微软在 Windows 10/11 中提供的原生 Linux 运行环境。
-  - **优点：**相比虚拟机性能更好，且能与 Windows 无缝同时使用，文件交互方便。
-  - **缺点：**硬件访问受限（对 GPU、USB 设备、串口的支持尚不完善），且跨文件系统读写性能较差。
-- **方案 C：虚拟机（详见 1.2.3）**
-  - **简介：**使用 VMware 或 VirtualBox 等软件模拟一台虚拟电脑。
-  - **优点：**拥有完整的 Linux 内核，相比 WSL2 对 USB / 串口等的支持相对完善；有快照和回滚功能，系统崩溃可一键复原，试错和分发成本低。
-  - **缺点：**性能损耗较大。若使用的是轻薄本或内存仅有 16GB，可能会感到明显卡顿。同时可能会遇到显示 / 渲染等问题。
-
-## 1.2 操作系统安装
-
-### 1.2.1 Ubuntu 双系统 / 单系统安装
-
-> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
-
-> 安装双系统时，若操作不当可能会导致电脑数据被清除，请按照指引谨慎操作。
-
-####  1.2.1.1 空间预留
-
-纯Ubuntu安装可跳过空间预留步骤
-
-方法一：如果电脑有多的硬盘插槽，可以直接买新的固态硬盘装上电脑直接跳过本步骤，硬盘的安装可以自己搜（过程很简单），怕弄坏可以拿硬盘找官方保修点装
-
-方法二：直接将某个盘下的文件全部移动到另一个盘，如果该盘下装有软件，请先卸载再安装到另一个盘
-
-盘的容量不一定要200G左右，可以比这个大，后面多的空间可以单独再分出来存东西
-
-![image-20230713153049184](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153049184-1699090495506-20.webp)
-
-右键，此电脑->管理
-
-![image-20230713153304347](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153304347-1699090555520-22.webp)
-
-进入存储->磁盘管理，右键删除刚才清理出来的盘
-
-![image-20230713153531600](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153531600-1699090580234-24.webp)
-
-删完后会变成这样
-
-![image-20230713153609066](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153609066-1699090595617-26.webp)
-
-其它方法：例如用 Diskgenius 等工具，方法很多，只要能不丢失原有数据分出空闲分区即可
-
-####  1.2.1.2 系统安装盘
-
-[Ventoy（用于制作安装系统的启动盘）](https://www.ventoy.net/cn/download.html)
-
-插U盘
-
-要求：一个8G以上的协议至少为 **USB3.0** 的U盘（不能用SD卡，后面安装大概率装不上，USB3.0以上协议的特征是USB口是**蓝色**的），且U盘为空（后面需要格式化），如果没有U盘可以用移动硬盘（doge
-
-**解压**下好的Ventoy，打开
-
-![image-20230713152631709](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713152631709-1699090648360-28.webp)
-
-选择你的U盘，点击安装
-
-![image-20230713154300474](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154300474-1699090719320-33.webp)
-
-下载Ubuntu 22.04.5 的安装镜像，可以选择从清华镜像站下载或北林云盘下载（校园网不消耗流量）
-
-[Ubuntu 22.04.5 iso 清华镜像站](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04/ubuntu-22.04.5-desktop-amd64.iso)
-
-[Ubuntu 22.04.5 iso 北林云盘](https://yunpan.bjfu.edu.cn:443/link/F0B97E8905700A4CC8D397EE791219C8)
-
-安装好后会看到电脑里有个叫 Ventoy 的盘，把下好的 Ubuntu 22.04 镜像放进去
-
-![image-20230713154523447](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154523447-1699090731798-35.webp)
-
-*上图示例为 22.04.2，下载链接为 22.04.5，安装 22.04.5 的即可*
-
-####  1.2.1.3 Ubuntu安装
-
-> 参考资料：
->
-> [13] [关于重装电脑碰到的BUG及其修复教程_verification failed:(0x1a)-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/Sco_ohhG/article/details/135394506)
-
-若无法进入 BIOS（不显示按F几进入setup或者boot之类的字样且按对应按键无反应）
-
-若为已有Ubuntu进行重装，进入Ubuntu，终端输入以下指令重启即可进入BIOS更改引导顺序（Boot -> Boot Priority）
-
-```
-sudo systemctl reboot --firmware-setup
-```
-
-若为格式化后的空盘（或新的硬盘无预装系统），显示找不到启动盘且无法进入 BIOS
-
-插入制作的 Ventoy 启动盘后显示：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e9d0256177cdae101e9ed14fd12d2549.webp" alt="img" style="zoom:50%;" />
-
-选择 OK 后选择 Enroll Key
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014657546.webp" alt="image-20250215014657546" style="zoom:50%;" />
-
-回车
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014747223.webp" alt="image-20250215014747223" style="zoom:50%;" />
-
-选择 `.cer` 即可，确认后 reboot 即可进入 ventoy
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014712038.webp" alt="image-20250215014712038" style="zoom:50%;" />
-
-#####  1.2.1.3.1 双系统 Ubuntu 安装
-
-重启电脑，但不要进windows
-
-这里需要自己查询自己的电脑开机时按哪个键更改启动盘，或者进BIOS更改启动顺序
-
-常见的有 `F2` `F9` `F12`
-
-如果键盘上的这些键是小字，功能图标是大字，那在按的的时候要跟 `Fn` 一起按
-
-然后选择带USB的那个启动（假如提示无法通过该盘启动，可能是没关安全启动（Secure Boot），需要到BIOS里面关掉）
-
-进入下图后回车即可
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/992d6035218781a390a1584b98bda98-1699090847110-37.webp" alt="992d6035218781a390a1584b98bda98" style="zoom: 25%;" />
-
-选择第一个然后回车
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1c6ef2bb427842de9e35b6955bd28bc-1699090876871-39.webp" alt="1c6ef2bb427842de9e35b6955bd28bc" style="zoom: 50%;" />
-
-等待进入Ubuntu的安装界面
-
-如果在这一步出现白字刷屏报错，显示Live CD启动失败及无法打开某个block则需要换个U盘做启动盘（一般是因为U盘不是USB3.0或者使用存储卡+读卡器安装）
-
-别的错误自行使用 bing 搜索解决（
-
-进入Ubuntu安装界面，点击Install
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2d540ce7b97ed2c8fa821bc9d056c83-1699103425924-41.webp" alt="2d540ce7b97ed2c8fa821bc9d056c83" style="zoom: 30%;" />
-
-语言选**English**，因为中文下自动生成的中文路径在后面使用过程中容易出问题
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/056956bafba0f412f4c2af4f56106ed-1699103485274-43.webp" alt="056956bafba0f412f4c2af4f56106ed" style="zoom:30%;" />
-
-连接wifi，后面需要联网自动安装驱动（不要使用需要网页登录的wifi，如学校的，这里没法登录）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/67a62d677cec452208b7273afc192df-1699103523013-45.webp" alt="67a62d677cec452208b7273afc192df" style="zoom:30%;" />
-
-把 `Install third-party` 勾上，这个是自动安装驱动
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/50b36f817644504fed935c43d12a4dc-1699103538149-47.webp" alt="50b36f817644504fed935c43d12a4dc" style="zoom:30%;" />
-
-这一步很**重要**，别选错了，选错你的电脑数据就没了
-
-选择 `Something else`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.webp" alt="image-20230713160924192" style="zoom:40%;" />
-
-接着找到前面步骤中预留的空间（显示 `free space` 字样的）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161200118-1699103616156-51.webp" alt="image-20230713161200118" style="zoom:40%;" />
-
-点击 `+` 
-
-先新建 `swap` 分区
-
-空间按 16G = 16384MB 分
-
-选择逻辑分区
-
-下面 `Use as` 选择 `swap area`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713161326158-1699103634546-53.webp" alt="image-20230713161326158" style="zoom:50%;" />
-
-确定后再新建 `boot` 分区
-
-空间分 4G=4096MB
-
-选择逻辑分区
-
-下面 `Use as` 选择 ` Ext4 journaling file system`
-
- `Mount Point` 选择 `/boot`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162017982-1699103844672-55.webp" alt="image-20230713162017982" style="zoom:50%;" />
-
-确定后再新建 `/` 分区
-
-空间分 100G = 102400MB（如空间不足，分配40G左右也可）
-
-选择逻辑分区
-
-下面 `Use as` 选择 ` Ext4 journaling file system`
-
- `Mount Point` 选择 `/`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713162816368.webp" alt="image-20230713162816368" style="zoom:50%;" />
-
-确定后再新建 `/home` 分区
-
-空间按需即可，如果是前面单独分出来的空间，直接把剩下的部分都分到这个分区（推荐最少40G）
-
-选择主分区
-
-下面 `Use as` 选择 ` Ext4 journaling file system`
-
- `Mount Point` 选择 `/home`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163328631-1699104129254-59.webp" alt="image-20230713163328631" style="zoom: 50%;" />
-
-下面的 `Device for boot loader installation` 选择 `/boot` 所在的 `Device`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163419499-1699104140456-61.webp" alt="image-20230713163419499" style="zoom:60%;" />
-
-接着点 `Install Now`
-
-位置选 `Shanghai`，这个是用来确定时区的
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163617658-1699104169521-63.webp" alt="image-20230713163617658" style="zoom:50%;" />
-
-下一步要填写用户名与密码，如果不想每次登录输密码把 `Log in automatically` 选上
-
-等待安装完成即可，可能比较慢，取决于网络环境
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713163727691-1699104185993-65.webp" alt="image-20230713163727691" style="zoom:40%;" />
-
-安装完成后会提示重启，后面还会提示拔U盘，拔掉U盘回车即可
-
-如果没重启，手动开机就行
-
-开机的时候会进去Grub界面，可以通过键盘上下键更改选择（如果没得选择，仅显示grub命令行界面，请参看2.1.4部分）
-
-在 `Ubuntu` 那一行回车进入 `Ubuntu`
-
-在 `Windows Boot Manager` 那一行回车进入 `Windows`
-
-#####  1.2.1.3.2 单系统 Ubuntu 安装
-
-前步骤同 1.2.1.3.1 节中，至选择 `Something else` 步骤
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.webp" alt="image-20230713160924192" style="zoom:40%;" />
-
-但进入后删除目标安装硬盘（例nvme02）中的所有原有分区（除了efi），不要删错删成U盘的或别的硬盘
-
-后续步骤同2.1.3.1节的分盘及往后步骤
-
-#### 1.2.1.4 输入法安装
-
-> 可选
-
-> Contributors: 洪佳、叶睿聪
-
-> 参考资料：
->
-> [8] [ubuntu安装搜狗输入法，图文详解+踩坑解决-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_42257666/article/details/129098009)
->
-> [9] [ubuntu系统安装好搜狗输入法后只能输入英文，无法输入中文的解决方案_ubuntu搜狗输入法无法输入中文-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_39779233/article/details/128086129?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"128086129"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
->
-> [15] [Ubuntu22.04 系统添加中文输入法 - zensi - 博客园 - https://www.cnblogs.com/](https://www.cnblogs.com/zensi/p/17725119.html?_refluxos=a10)
-
-##### 1.2.1.4.1 添加中文语言支持
-
-系统设置—>区域和语言—>管理已安装的语言—>在“语言”tab下—>点击“添加或删除语言”
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.webp" alt="image-20240124183255432" style="zoom:33%;" />
-
-弹出“已安装语言”窗口，勾选中文（简体），点击应用
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.webp" alt="image-20240124183315544" style="zoom:33%;" />
-
-以下两节（2.9.2/2.9.3）二选一即可
-
-##### 1.2.1.4.2 ibus-Pinyin 安装
-
-终端执行命令安装
-
-```
-sudo apt-get install ibus-pinyin
-```
-
-安装完成后，重启
-
-重启前往 `Setting->Keyboard`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.webp" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
-
-点击 `+` 号
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.webp" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
-
-选择 `Chinses`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.webp" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
-
-选择 `Intelligenc Pinyin` 即可
-
-##### 1.2.1.4.3 搜狗输入法安装
-
-###### 1.2.1.4.3.1 输入法系统安装
-
-回到“语言支持”窗口，在键盘输入法系统中，选择`fcitx`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.webp" alt="image-20240124183327528" style="zoom:33%;" />
-
-如果你没有`fcitx`选项，先打开终端手动安装`fcitx`，等安装成功之后再执行上述步骤：
-
-```
-sudo apt-get install fcitx
-```
-
-
-点击“应用到整个系统”，会输入密码进行验证，然后关闭窗口，重启电脑
-
-然后设置`fcitx`为开机自启动
-
-```
-sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
-```
-
-###### 1.2.1.4.3.2 下载安装包
-
-打开终端输入`uname -a` 查看系统架构
-进入[搜狗输入法`linux`下载页面](https://shurufa.sogou.com/linux)，选择适合你ubuntu架构的版本download
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.webp" alt="image-20240124183346251" style="zoom:33%;" />
-
-###### 1.2.1.4.3.3 安装输入法和依赖
-
-①安装输入法
-
-```
-cd 安装包目录
-sudo dpkg -i sogoupinyin_版本号.deb
-```
-
-②安装所需依赖，完成后重启电脑。
-
-```
-sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-```
-
-###### 1.2.1.4.3.4 配置输入法
-
-①查看桌面右上角的键盘图标，看到列表中出现了搜狗，需要配置一下才能使用
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.webp" alt="image-20240124183358842" style="zoom:33%;" />
-
-②点击配置当前输入法，进入输入法配置界面，我的和原作者一样是直接自动添加好了（如果你也是看完3和4点再来尝试），正常来说这里是没有添加搜狗输入法的
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.webp" alt="image-20240124183413892" style="zoom:33%;" />
-
-如果你点配置，出现以下报错，就是缺少图形界面的依赖，需要安装一下`fcitx-config-gtk`
-
-```
-sudo apt install fcitx-config-gtk
-```
-
-③点击+号，然后弹出“添加输入法”的窗口，这里一定要把下面的“仅显示当前语言”取消勾选，然后在下面的搜索框中输入`sogou`，再选择搜狗输入法，点击确认添加进来
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.webp" alt="image-20240124183426547" style="zoom:33%;" />
-
-4)如果在2步是自动添加好的搜狗输入法，选中搜狗输入法点`-`取消掉，然后再执行第3步，不然你永远也调不出来搜狗输入法或者输入中文。
-
-###### 1.2.1.4.3.5 其他
-
-①上面步骤做完后可以使用搜狗输入法但是只能输入英文，这可能是缺少包导致的，你可以去官网重新下载deb安装包进行尝试
-
-也可以尝试一下下载以下两个包
-
-```
-sudo apt-get install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-```
-
-②设置输入法的快捷键，你既可以在系统提供的配置窗口设置，显示高级选项会有更多的设置；
-
-也可以点击搜狗输入法的悬浮窗上的设置按钮，进行直接设置。
-
-
-####  1.2.1.5 常见问题
-
-**① U盘安装时进不去Ubuntu安装界面，卡在黑屏白字页，内容显示某个block error且刷屏**
-
-**触发原因：**U盘问题
-
-**解决方式：**换个U盘，请保证U盘为USB3.0以上（蓝色插头），换了就行
-
-**②Ubuntu安装好后重启卡在Grub命令行界面，找不到选项进入Ubuntu和Windows Boot Manager**
-
-> 参考资料：
->
-> [4] [重装Ubuntu后开机停在Grub命令行的解决办法_ubuntu开机卡在命令行-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/weixin_44481159/article/details/109240338)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231203161811736.webp" alt="image-20231203161811736" style="zoom: 50%;" />
-
-**触发原因：**未知
-
-**解决方式：**
-
-依次输入如下命令
-
-先查看硬盘信息
-
-```
-ls
-```
-
-寻找boot分区
-
-```
-ls (hd0,gptX)/
-```
-
-注意上面的 `hd0,gptX` 为前面查看硬盘分区信息时列出的编号，一个个查即可，如果此时列出的的文件信息包含grub文件夹，那么这个编号对应的就是boot分区
-
-接着是关联grub（以 `hd0,gpt5` 为例）
-
-依次输入这三行命令
-
-```
-set root=(hd0,gpt5)
-set prefix=(hd0,gpt5)/grub
-normal
-```
-
-输完后即可进入grub的引导选择页面，直接进Ubuntu
-
-进入Ubuntu后，打开终端，先更新grub
-
-```
-sudo update-grub
-```
-
-接着下载别人做好的修复工具（记得联网）
-
-```
-sudo add-apt-repository ppa:yannubuntu/boot-repair && sudo apt-get update
-sudo apt-get install -y boot-repair && boot-repair
-```
-
-接着修复工具会自动启动，修复方式选择推荐修复（recommend），期间会要求你复制它显示的一些命令到终端，新开一个终端复制进去执行即可
-
-还有Yes/No的选择页面，都选Yes就行
-
-按工具提示执行完所有步骤后，重启就能够自动进入grub的启动选择页面了
-
-**③ Ubuntu与Windows双系统切换后Windows系统时间异常（通常相差8小时） **
-
-**触发原因：**Linux 默认将主板硬件时钟（RTC）视为 UTC 时间（世界协调时间）。其在显示时间时，会根据设置的时区（如中国 CST +8）自动加上偏移量。Windows 默认将主板硬件时钟视为 Local Time（本地时间）
-
-**冲突过程：**Ubuntu 将 RTC 设置为 UTC 时间（例如 0:00），界面显示为北京时间 8:00。重启进入 Windows，Windows 读取 RTC 为 0:00，直接当作本地时间显示，因此 Windows 显示时间为 0:00（慢了 8 小时）。如果在 Windows 中修正了时间为 8:00，RTC 也会被改为 8:00。重启回 Ubuntu，Ubuntu 读取 RTC 为 8:00（认为是 UTC），再加 8 小时时区，界面显示为 16:00（快了 8 小时）。
-
-**解决方式：**为了解决冲突，我们需要统一两个系统对待硬件时钟的标准。最简单且推荐的方法是修改 Ubuntu 的设置，使其顺应 Windows 的习惯（使用本地时间）。
-
-方式一：修改 Ubuntu 设置（推荐）
-
-进入 Ubuntu 系统。打开终端，输入以下命令并回车：
-
-```
-timedatectl set-local-rtc 1 --adjust-system-clock
-```
-验证设置，终端输入以下命令
-```
-timedatectl
-```
-如果输出中包含 `RTC in local TZ: yes`，说明设置成功
-重启电脑进入 Windows，进入"设置"→"时间和语言"→"日期和时间"→"自动设置时间"，将"自动设置时间"开关从开拨到关，然后再从关拨到开（可能需要等待一段时间）
-
-方式二：修改 Windows 注册表（仅供参考）（如选择方法一操作后无需再进行方法二操作!!!）
-
-改动 Windows 注册表有风险，谨慎操作!!!
-
-此方法在技术上更“正确”，但操作稍微繁琐，并且可能由于操作不当造成一些风险。
-
-进入 Windows 系统，按下 `Win + R`，输入 `regedit` 并回车，打开注册表编辑器
-
-定位到以下路径：`HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation`
-
-在右侧空白处右键，选择 新建 (New) -> DWORD (32-bit) Value
-
-![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/双系统时间错乱修复-方式二-修改Windows注册表截图.webp)
-
-将其命名为 `RealTimeIsUniversal`，双击该项，将其数值数据（Value data）修改为 `1`
-
-重启电脑进入 Ubuntu，确保时间正确。再次回到 Windows，时间应当已自动同步正常
-
-**后话：**虽然更推荐使用方式一来解决双系统时间冲突问题，虽然方式一是解决双系统时间冲突最简单的方法，但在技术原理上，其实是一种"不完美"的妥协。Linux 社区和系统开发者通常强烈建议使用 UTC，这是因为 Local Time 在某些场景（夏令时切换、跨时区旅行、双系统同时尝试调整夏令时）下会导致逻辑错误或系统故障。那既然问题这么多，为什么我还是推荐方式一呢? 因为作为一个中国大陆的居民，中国早已废除夏令时，所以只要不频繁跨时区出差/旅行，使用 Local Time 没有任何感知上的副作用。也推荐对 Windows 注册表有一定了解的用户使用方式二进行操作，从技术的角度上说，方式二更稳健、更规范
-
-**④ Ubuntu缺少无线网卡驱动**
-若安装Ubuntu后，设置中找不到wifi连接，参考以下步骤解决（适用于Intel的无线网卡）
-
-打开终端，输入以下指令确定无线网卡属于intel
-
-```
-lspci -nn
-```
-
-若有显示 `Network controller [0280]: Intel Corporation Device`，说明为Intel无线网卡
-
-先使用USB连接手机网络以便下载环境
-
-USB共享网络打开方式（路径仅供参考，因具体系统而异）：`热点->更多共享设置->USB共享网络`
-
-注意要接好线再打开，否则可能不显示USB共享网络选项
-
-编译环境安装
-
-```
-sudo apt-get install make bison flex git
-```
-
-下载以下包：
-
-```
-git clone https://github.com/intel/backport-iwlwifi.git
-git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-```
-
-进入 `backport-iwlwifi` 下的 `iwlwifi-stack-dev` 文件夹打开终端并编译
-
-```
-sudo make defconfig-iwlwifi-public
-sudo make
-sudo make install
-```
-
-进入 `linux-firmware` 文件夹打开终端复制ucode驱动文件
-
-```
-sudo cp iwlwifi-* /lib/firmware
-```
-
-重启完成安装
-
-### 1.2.2 WSL2
-
-> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
-
-**WSL2支持Win11系统和较新的 Win10（版本 2004 及以上）**
-
-#### 1.2.2.1 默认安装部分
-
-打开Windows Powershell，执行命令
-
-```bat
-wsl --install
-```
-
-提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
-
-![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
-打开Powershell，输入一下命令查看支持的版本
-
-```bat
-wsl --list --online
-```
-
-![image-20231101015843375](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015843375.webp)
-
-输入以下命令设置版本为22.04
-
-```
-wsl --install Ubuntu-22.04 -n
-```
-
-安装完成后，右键Powershell标题栏
-
-![image-20231101210913942](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210913942.webp)
-
-点击属性，选择终端选择卡，将默认终端应用程序改为 **Windows 终端**
-
-![image-20231101210955130](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210955130.webp)
-
-关掉Powershell重新打开**（不要使用管理员模式）**
-
-在最上面的下拉菜单选择Ubuntu 22.04.2打开
-
-![image-20231101020428285](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020428285.webp)
-
-打开后会提示设置用户名和密码，正常设置即可
-
-进入系统后，输入以下命令更新包
-
-```
-sudo apt update && sudo apt upgrade
-```
-
-更新完成后，回到Powershell，输入下列命令查看正在运行的子系统
-
-```
-wsl -l -v
-```
-
-![image-20231101020824525](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020824525.webp)
-#### 1.2.2.2 迁移系统
-
-> 可选，硬盘空间充裕无需迁移
-
-由于WSL2默认将子系统装在系统盘，会占用系统盘空间不便于管理，故需要迁移
-
-首先输入以下命令停止子系统运行（Powershell）
-
-```
-wsl --shutdown
-```
-
-输入以下命令导出系统
-
-```
-wsl --export <NAME> <File>
-```
-
-其中，NAME为上面查看运行的子系统中显示的NAME，注意该命令输入时要去掉`<>` （File同理）
-
-Flie为导出路径，例如：
-
-```
-H:\Ubuntu\Ubuntu.tar
-```
-
-如果NAME为`Ubuntu`，则完整导出命令为
-
-```
-wsl --export Ubuntu H:\Ubuntu\Ubuntu.tar
-```
-
-注意，导出路径的 `.tar` 是必要的，**否则导出失败**
-
-导出完成后，输入以下命令删除原来的子系统
-
-```
-wsl --unregister Ubuntu
-```
-
-此处Ubuntu为你的子系统显示的NAME，以配置时实际为准
-
-接着导入刚才导出的子系统
-
-```
-wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
-```
-
-其中 `Ubuntu` 为你要设置的NAME
-
- `H:\Ubuntu\` 为子系统将要安装的位置
-
-`H:\Ubuntu\ubuntu.tar` 为前面导出的子系统
-
-导入完成即可，重新打开Powershell即可在下拉菜单找到迁移后的子系统（一般图标为🐧）
-
-#### 1.2.2.3 常见问题
-
-- 0x80070422报错
-
-  如下图所示情况
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
-
-  解决方式：
-
-  `win+R` 打开运行，进入服务管理界面
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
-
-  找到`WSL Service`项，将其启动即可
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
-
-  其中启动类型设置为自动
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
-
-  重启命令行即可修复以上问题
-
-### 1.2.3 虚拟机
-
->  Contributors: 唐锦梁
-
-Windows 上常用的虚拟化软件有 VMware 和 VirtualBox，VirtualBox 是一个开源软件，VMware是一个成熟的商业软件，但自 2024 年博通调整策略后，VMware Workstation Pro 已经对个人用户完全免费。
-
-VMware 相比 VirtualBox 通常有更好的 3D 图形和磁盘 I/O 性能，界面相对更现代流畅，故现在更推荐使用 VMware。
-
-VMware 的安装包下载流程相当繁琐，需要注册博通账号等一系列流程，故本文直接提供安装包的北林云盘链接供下载。如想自行前往官网下载，可以访问 [Fusion and Workstation | VMware](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion) 自行探索。
-
-北林云盘链接如下：[虚拟机及镜像](https://yunpan.bjfu.edu.cn:443/link/595B89CD83E3A059E95F21202673007B)
-
-链接内包含 Ubuntu22.04.5 的系统镜像（下图红框所示），和 17.6.4 版本和 25H2 版本的 VMware，VMware任选一个版本即可，17.6.4 版本相对更稳定，25H2 版本对更新的 Intel 的支持更好，但也存在一些渲染相关的 bug，自行决定下载的版本即可。
-
-![](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 13-47-52.png)
-
-下载后双击 VMware 的安装包安装
-
-安装完成后点击创建虚拟机
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 13-53-12.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom: 33%;" />
-
-选择 custom 模式
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-00-54.webp" style="zoom: 50%;" />
-
-点击 Next，再点击 Next，选择之前下载的 Ubuntu 镜像文件的位置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-05-28.webp" style="zoom: 50%;" />
-
-点击 Next，输入用户名和密码，用户名只能全小写字母
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-06-56.webp" style="zoom: 50%;" />
-
-再点击 Next，按需选择虚拟机的存放位置，默认放在 C 盘，可自行选择虚拟机文件的存放位置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-08-57.webp" style="zoom: 50%;" />
-
-建议给个 8 核，4核也可以
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-10-01.webp" style="zoom: 50%;" />
-
-建议 8GB 内存起步
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-10-59.webp" style="zoom: 50%;" />
-
-之后一路 Next，直到这一步，建议至少给 100GB，这里分配 100GB 虚拟机不会立刻占用，而是随着虚拟机的使用过程而不断增大
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-12-17.webp" style="zoom: 50%;" />
-
-接着一路 Next，最后点击 Finish即可
-
-启动虚拟机，首次启动需要安装 Ubuntu 系统
-
-选择 Install Ubuntu，语言选择 **English**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-17-52.webp" style="zoom: 33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-54-20.webp" style="zoom: 33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-55-26.webp" style="zoom: 33%;" />
-
-时区选到上海即可（Shanghai，国际时区中，我国大陆的时区是用 Asia/Shanghai 来标定，而不是北京）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-57-56.webp" style="zoom: 33%;" />
-
-等待安装进度条完成后会提示需要重启虚拟机，点击重启即可
-
-第一次启动虚拟机会显示引导界面，点击右上角 "Skip"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-59-56.webp" style="zoom: 33%;" />
-
-## 1.3 基础开发工具安装
-
-### 1.3.1 VSCode 安装与配置
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-#### 1.3.1.1 安装
-
-##### 1.3.1.1.1 Ubuntu
-
-下载好的 VSCode 的.deb安装包放到桌面
-
-在桌面打开终端，输入以下指令
-
-```bash
-sudo apt install ./<VSCode安装包文件名>.deb
-```
-
-安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
-
-注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
-
-```bash
-sudo apt update && sudo apt upgrade
-```
-
-安装完成后在终端输入以下指令回车执行
-
-```bash
-code
-```
-
-即可打开VSCode
-
-##### 1.3.1.1.2 Windows
-
-下载安装即可
-
-[Visual Studio Code - Code Editing. Redefined - https://code.visualstudio.com/](https://code.visualstudio.com/)
-
-#### 1.3.1.2 语言包配置
-
-打开VScode
-
-点击
-
-![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.webp)
-
-进入插件安装页面
-
-在搜索栏上输入 `Chinese` 安装这个语言包
-
-![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.webp)
-
-#### 1.3.1.3 OpenCV环境配置
-
-安装这四个包即可
-
-![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.webp)
-
-![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.webp)
-
-#### 1.3.1.4 Tensorflow
-
-> 本节内容为 Tensorflow，配置环境可跳过
-
-打开扩展管理
-
-![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.webp)
-
-安装以下扩展包
-
-![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.webp)
-
-![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.webp)
-
-安装完成后，在左侧菜单打开远程资源管理器
-
-![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.webp)
-
-选择你装好环境的WSL
-
-![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.webp)
-
-选择打开文件夹，此时会提示要打开的目录，推荐 `/home/用户名` （用户名为前面设置的username）
-
-![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.webp)
-
-安装这两个扩展，注意是安装在WSL内，即点击这种按钮
-
-![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.webp)
-
-**例程训练**
-
-> 参考资料：
->
-> [2] [人工智能实践：Tensorflow笔记\_北京大学\_中国大学MOOC(慕课) - https://www.icourse163.org/](https://www.icourse163.org/course/PKU-1002536002)
-
-下载如下代码包：
-
-```
-链接：https://pan.baidu.com/s/127QAuHTod9f96L9bLb1dgw 
-提取码：rm24 
-```
-
-将文件在windows下解压后，将整个class5文件夹拖进vscode的资源管理器中，即
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.webp" alt="image-20231102001018674" style="zoom:30%;" />
-
-打开 `class5/CIFAR10_CNN/p46_cifar10_resnet18.py` 
-
-![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.webp)
-
-此时会提示找不到tensorflow库的位置，鼠标移到标黄线处选择快速修复
-
-![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.webp)
-
-选择选择其他解释器
-
-![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.webp)
-
-选择 `Python 3.9.18('tf')`
-
-由于版本的问题，此时代码依然会报错，修改以下代码
-
-```
-import tensorflow as tf
-import os
-import numpy as np
-from matplotlib import pyplot as plt
-from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, MaxPool2D, Dropout, Flatten, Dense
-from tensorflow.keras import Model
-```
-
-为
-
-```
-import tensorflow as tf
-import os
-import numpy as np
-from matplotlib import pyplot as plt
-from tensorflow.python.keras.layers import Conv2D, Activation, MaxPool2D, Dropout, Flatten, Dense
-from tensorflow.python.keras import Model
-from keras.layers import BatchNormalization
-```
-
-点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.webp)
-
-训练模型（第一次跑时会先自动下载训练数据）
-
-![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.webp)
-
-注意，训练完成后需要等待一段时间才会显示图表
-
-跑出该图即可（不一定一样）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.webp" alt="image-20231102004837869" style="zoom: 40%;" />
-
-尝试修改代码中的参数使得 Validation Accuracy 达到0.9以上
-
-### 1.3.2 CMake
-
-> Contributor: 叶睿聪 (dgsyrc@github)、CMake
-
-#### 1.3.2.1 一般安装
-
-> 不推荐本方法，更建议使按照 1.3.2.2 安装更新版本的 CMake
-
-使用以下命令安装即可
-
-```
-sudo apt-get install cmake
-```
-
-#### 1.3.2.2 更新版本
-
-考虑到部分库的编译对cmake的版本要求较高，在 `1.3.2.1` 中提到的方式安装的版本不能满足要求
-
-因此需要下载cmake的新版本源码手动编译安装
-
-链接 ：https://cmake.org/files/
-
-下载对应Linux版本的 `.tar.gz` 压缩包即可
-
-推荐版本范围：3.22~3.28 之间，4.x 版本编译某些仓库后续可能会遇到一些警告
-
-往下翻，找到对应的系统版本对应的 CPU 架构对应的文件，下图中标识的是 Linux 系统 X86 架构的文件
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 15-33-20.webp" alt="image-20231102004837869" style="zoom: 33%;" />
-
-下载后使用以下命令解压（若同一目录下只有一个 `.tar.gz` 格式压缩包，可以不输入完整压缩包名称解压）
-
-```
-tar -xzvf ***.tar.gz
-```
-
-解压完成后，依次执行以下命令安装依赖以及编译安装（要在cmake目录下）
-
-```
-sudo apt-get install g++
-sudo apt-get install libssl-dev
-sudo apt-get install make
-./configure
-make -j8
-sudo make install
-```
-
-检查安装后的版本
-
-```
-cmake --version
-```
-
-举例：
-
-![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.webp)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## 1 硬件
 
@@ -1434,6 +445,161 @@ make -j8
   ```
 
 
+### 2.3 VSCode
+
+> Contributors: 叶睿聪 (dgsyrc@github)
+
+#### 2.3.1 安装
+
+##### 2.3.1.1 Ubuntu
+
+下载好的 VSCode 的.deb安装包放到桌面
+
+在桌面打开终端，输入以下指令
+
+```bash
+sudo apt install ./<VSCode安装包文件名>.deb
+```
+
+安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
+
+注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+安装完成后在终端输入以下指令回车执行
+
+```bash
+code
+```
+
+即可打开VSCode
+
+##### 2.3.1.2 Windows
+
+下载安装即可
+
+[Visual Studio Code - Code Editing. Redefined - https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+#### 2.3.2 语言包配置
+
+打开VScode
+
+点击
+
+![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.webp)
+
+进入插件安装页面
+
+在搜索栏上输入 `Chinese` 安装这个语言包
+
+![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.webp)
+
+#### 2.3.3 OpenCV环境配置
+
+安装这四个包即可
+
+![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.webp)
+
+![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.webp)
+
+#### 2.3.4 Tensorflow
+
+![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.webp)
+
+打开扩展管理
+
+安装以下扩展包
+
+![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.webp)
+
+![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.webp)
+
+安装完成后，在左侧菜单打开远程资源管理器
+
+![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.webp)
+
+选择你装好环境的WSL
+
+![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.webp)
+
+选择打开文件夹，此时会提示要打开的目录，推荐 `/home/用户名` （用户名为前面设置的username）
+
+![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.webp)
+
+安装这两个扩展，注意是安装在WSL内，即点击这种按钮
+
+![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.webp)
+
+**例程训练**
+
+> 参考文献：
+>
+> [2] [人工智能实践：Tensorflow笔记\_北京大学\_中国大学MOOC(慕课) - https://www.icourse163.org/](https://www.icourse163.org/course/PKU-1002536002)
+
+下载如下代码包：
+
+```
+链接：https://pan.baidu.com/s/127QAuHTod9f96L9bLb1dgw 
+提取码：rm24 
+```
+
+将文件在windows下解压后，将整个class5文件夹拖进vscode的资源管理器中，即
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.webp" alt="image-20231102001018674" style="zoom:30%;" />
+
+打开 `class5/CIFAR10_CNN/p46_cifar10_resnet18.py` 
+
+![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.webp)
+
+此时会提示找不到tensorflow库的位置，鼠标移到标黄线处选择快速修复
+
+![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.webp)
+
+选择选择其他解释器
+
+![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.webp)
+
+选择 `Python 3.9.18('tf')`
+
+由于版本的问题，此时代码依然会报错，修改以下代码
+
+```
+import tensorflow as tf
+import os
+import numpy as np
+from matplotlib import pyplot as plt
+from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, MaxPool2D, Dropout, Flatten, Dense
+from tensorflow.keras import Model
+```
+
+为
+
+```
+import tensorflow as tf
+import os
+import numpy as np
+from matplotlib import pyplot as plt
+from tensorflow.python.keras.layers import Conv2D, Activation, MaxPool2D, Dropout, Flatten, Dense
+from tensorflow.python.keras import Model
+from keras.layers import BatchNormalization
+```
+
+点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.webp)
+
+训练模型（第一次跑时会先自动下载训练数据）
+
+![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.webp)
+
+注意，训练完成后需要等待一段时间才会显示图表
+
+跑出该图即可（不一定一样）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.webp" alt="image-20231102004837869" style="zoom: 40%;" />
+
+尝试修改代码中的参数使得 Validation Accuracy 达到0.9以上
 
 ### 2.4 ROS
 
@@ -1750,6 +916,56 @@ map.yaml：地图信息
 
  随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
 
+ ### 2.5 WSL2
+
+> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
+
+**WSL2支持Win11系统和较新的 Win10（版本 2004 及以上）**
+
+#### 2.5.1 默认安装部分
+
+打开Windows Powershell，执行命令
+
+```bat
+wsl --install
+```
+
+提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
+
+![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
+
+
+
+#### 2.5.2 迁移系统
+
+
+
+#### 2.5.3 常见问题
+
+- 0x80070422报错
+
+  如下图所示情况
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
+
+  解决方式：
+
+  `win+R` 打开运行，进入服务管理界面
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
+
+  找到`WSL Service`项，将其启动即可
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
+
+  其中启动类型设置为自动
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
+
+  重启命令行即可修复以上问题
+
 ### 2.6 Tensorflow
 
 > Contributors: 叶睿聪 (dgsyrc@github)
@@ -1758,7 +974,7 @@ map.yaml：地图信息
 >
 > 关于梯子的安装（另附文档）
 
-> 参考资料：
+> 参考文献：
 >
 > [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
 
@@ -2409,8 +1625,185 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-45-33.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
+### 2.9 中文输入法安装(Ubuntu)
+
+> Contributors: 洪佳、叶睿聪
+
+> 参考文献：
+>
+> [8] [ubuntu安装搜狗输入法，图文详解+踩坑解决-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_42257666/article/details/129098009)
+>
+> [9] [ubuntu系统安装好搜狗输入法后只能输入英文，无法输入中文的解决方案_ubuntu搜狗输入法无法输入中文-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_39779233/article/details/128086129?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"128086129"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
+>
+> [15] [Ubuntu22.04 系统添加中文输入法 - zensi - 博客园 - https://www.cnblogs.com/](https://www.cnblogs.com/zensi/p/17725119.html?_refluxos=a10)
+
+#### 2.9.1 添加中文语言支持
+
+系统设置—>区域和语言—>管理已安装的语言—>在“语言”tab下—>点击“添加或删除语言”
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.webp" alt="image-20240124183255432" style="zoom:33%;" />
+
+弹出“已安装语言”窗口，勾选中文（简体），点击应用
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.webp" alt="image-20240124183315544" style="zoom:33%;" />
+
+以下两节（2.9.2/2.9.3）二选一即可
+
+#### 2.9.2 ibus-Pinyin 安装
+
+终端执行命令安装
+
+```
+sudo apt-get install ibus-pinyin
+```
+
+安装完成后，重启
+
+重启前往 `Setting->Keyboard`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.webp" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
+
+点击 `+` 号
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.webp" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
+
+选择 `Chinses`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.webp" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
+
+选择 `Intelligenc Pinyin` 即可
+
+#### 2.9.3 搜狗输入法安装
+
+##### 2.9.3.1 输入法系统安装
+
+回到“语言支持”窗口，在键盘输入法系统中，选择`fcitx`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.webp" alt="image-20240124183327528" style="zoom:33%;" />
+
+如果你没有`fcitx`选项，先打开终端手动安装`fcitx`，等安装成功之后再执行上述步骤：
+
+```
+sudo apt-get install fcitx
+```
 
 
+点击“应用到整个系统”，会输入密码进行验证，然后关闭窗口，重启电脑
+
+然后设置`fcitx`为开机自启动
+
+```
+sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+```
+
+##### 2.9.3.2 下载安装包
+
+打开终端输入`uname -a` 查看系统架构
+进入[搜狗输入法`linux`下载页面](https://shurufa.sogou.com/linux)，选择适合你ubuntu架构的版本download
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.webp" alt="image-20240124183346251" style="zoom:33%;" />
+
+##### 2.9.3.3 安装输入法和依赖
+
+①安装输入法
+
+```
+cd 安装包目录
+sudo dpkg -i sogoupinyin_版本号.deb
+```
+
+②安装所需依赖，完成后重启电脑。
+
+```
+sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+sudo apt install libgsettings-qt1
+```
+
+##### 2.9.3.4 配置输入法
+
+①查看桌面右上角的键盘图标，看到列表中出现了搜狗，需要配置一下才能使用
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.webp" alt="image-20240124183358842" style="zoom:33%;" />
+
+②点击配置当前输入法，进入输入法配置界面，我的和原作者一样是直接自动添加好了（如果你也是看完3和4点再来尝试），正常来说这里是没有添加搜狗输入法的
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.webp" alt="image-20240124183413892" style="zoom:33%;" />
+
+如果你点配置，出现以下报错，就是缺少图形界面的依赖，需要安装一下`fcitx-config-gtk`
+
+```
+sudo apt install fcitx-config-gtk
+```
+
+③点击+号，然后弹出“添加输入法”的窗口，这里一定要把下面的“仅显示当前语言”取消勾选，然后在下面的搜索框中输入`sogou`，再选择搜狗输入法，点击确认添加进来
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.webp" alt="image-20240124183426547" style="zoom:33%;" />
+
+4)如果在2步是自动添加好的搜狗输入法，选中搜狗输入法点`-`取消掉，然后再执行第3步，不然你永远也调不出来搜狗输入法或者输入中文。
+
+##### 2.9.3.5 其他
+
+①上面步骤做完后可以使用搜狗输入法但是只能输入英文，这可能是缺少包导致的，你可以去官网重新下载deb安装包进行尝试
+
+也可以尝试一下下载以下两个包
+
+```
+sudo apt-get install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+sudo apt install libgsettings-qt1
+```
+
+②设置输入法的快捷键，你既可以在系统提供的配置窗口设置，显示高级选项会有更多的设置；
+
+也可以点击搜狗输入法的悬浮窗上的设置按钮，进行直接设置。
+
+### 2.10 cmake
+
+> Contributor: 叶睿聪 (dgsyrc@github)
+
+#### 2.10.1 一般安装
+
+使用以下命令安装即可
+
+```
+sudo apt-get install cmake
+```
+
+#### 2.10.2 更新版本
+
+考虑到部分库的编译对cmake的版本要求较高，在 `2.10.1` 中提到的方式安装的版本不能满足要求
+
+因此需要下载cmake的新版本源码手动编译安装
+
+链接 ：[Download CMake - https://cmake.org/](https://cmake.org/download/)
+
+下载对应Linux版本的 `.tar.gz` 压缩包即可
+
+下载后使用以下命令解压（若同一目录下只有一个 `.tar.gz` 格式压缩包，可以不输入完整压缩包名称解压）
+
+```
+tar -xzvf ***.tar.gz
+```
+
+解压完成后，依次执行以下命令安装依赖以及编译安装（要在cmake目录下）
+
+```
+sudo apt-get install g++
+sudo apt-get install libssl-dev
+sudo apt-get install make
+./configure
+make -j8
+sudo make install
+```
+
+检查安装后的版本
+
+```
+cmake --version
+```
+
+举例：
+
+![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.webp)
 
 ### 2.11 onnxruntime
 
@@ -2802,6 +2195,52 @@ show_predictions(model, test_loader, num_images=10)
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.webp" alt="image-20250204153556588" style="zoom:50%;" />
 
+### 2.13 无线网卡驱动安装（Ubuntu）
+
+若安装Ubuntu后，设置中找不到wifi连接，参考以下步骤解决（适用于Intel的无线网卡）
+
+打开终端，输入以下指令确定无线网卡属于intel
+
+```
+lspci -nn
+```
+
+若有显示 `Network controller [0280]: Intel Corporation Device`，说明为Intel无线网卡
+
+先使用USB连接手机网络以便下载环境
+
+USB共享网络打开方式（路径仅供参考，因具体系统而异）：`热点->更多共享设置->USB共享网络`
+
+注意要接好线再打开，否则可能不显示USB共享网络选项
+
+编译环境安装
+
+```
+sudo apt-get install make bison flex git
+```
+
+下载以下包：
+
+```
+git clone https://github.com/intel/backport-iwlwifi.git
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+```
+
+进入 `backport-iwlwifi` 下的 `iwlwifi-stack-dev` 文件夹打开终端并编译
+
+```
+sudo make defconfig-iwlwifi-public
+sudo make
+sudo make install
+```
+
+进入 `linux-firmware` 文件夹打开终端复制ucode驱动文件
+
+```
+sudo cp iwlwifi-* /lib/firmware
+```
+
+重启完成安装
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -3300,7 +2739,7 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
 > Contributors: 洪佳
 
-> 参考资料：
+> 参考文献：
 >
 > [5] [IMU和里程计融合_轮式里程计和imu融合-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/baimei4833953/article/details/80768762)
 >
@@ -3460,7 +2899,7 @@ Timing
 
 > Contributors: 洪佳
 
-> 参考资料：
+> 参考文献：
 >
 > [10] [ROS机器人学习——麦克纳姆轮运动学解算-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/oXiaoLingTong/article/details/120198677)
 
@@ -3569,7 +3008,7 @@ ROS使用公制 ：
 
 > Contributors: 洪佳
 
-> 参考资料：
+> 参考文献：
 >
 > [11] [ROS从入门到精通系列（五）catkin详解与catkin_make编译-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/hhaowang/article/details/101691986)
 
@@ -3687,7 +3126,7 @@ http://t.csdnimg.cn/o9dce
 
 > Contributors: 洪佳
 
-> 参考资料：
+> 参考文献：
 >
 > [12] [2D激光slam四种算法建图效果对比_slam建图算法-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/m0_73791170/article/details/127339058?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"127339058"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
@@ -3814,7 +3253,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 ##### 3.2.6.1 精修编辑 pgm 地图
 
-> 参考资料：
+> 参考文献：
 >
 > [14] [ROS—PGM地图文件的编辑 | 闫金钢的Blog - https://yanjingang.com/](https://yanjingang.com/blog/?p=8597)
 
@@ -4969,7 +4408,7 @@ script my_session.log
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
 
-> 参考资料：
+> 参考文献：
 >
 > [3] [【Typora 教程】手把手教你如何用Typora撰写笔记](https://www.bilibili.com/video/BV1h84y1Y7nn/?vd_source=436470546f64e53b7d4516956091ffd7)
 
@@ -7311,7 +6750,7 @@ sudo systemctl status autoaim.service
 
 <div STYLE="page-break-after: always;"></div>
 
-## 7 参考资料
+## 7 参考文献
 
 > [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
 >
