@@ -916,56 +916,6 @@ map.yaml：地图信息
 
  随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
 
- ### 2.5 WSL2
-
-> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
-
-**WSL2支持Win11系统和较新的 Win10（版本 2004 及以上）**
-
-#### 2.5.1 默认安装部分
-
-打开Windows Powershell，执行命令
-
-```bat
-wsl --install
-```
-
-提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
-
-![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
-
-
-
-#### 2.5.2 迁移系统
-
-
-
-#### 2.5.3 常见问题
-
-- 0x80070422报错
-
-  如下图所示情况
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
-
-  解决方式：
-
-  `win+R` 打开运行，进入服务管理界面
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
-
-  找到`WSL Service`项，将其启动即可
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
-
-  其中启动类型设置为自动
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
-
-  重启命令行即可修复以上问题
-
 ### 2.6 Tensorflow
 
 > Contributors: 叶睿聪 (dgsyrc@github)
@@ -1777,6 +1727,8 @@ sudo apt-get install cmake
 链接 ：[Download CMake - https://cmake.org/](https://cmake.org/download/)
 
 下载对应Linux版本的 `.tar.gz` 压缩包即可
+
+往下翻翻到
 
 下载后使用以下命令解压（若同一目录下只有一个 `.tar.gz` 格式压缩包，可以不输入完整压缩包名称解压）
 
