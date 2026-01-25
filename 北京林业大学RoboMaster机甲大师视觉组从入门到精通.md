@@ -2359,8 +2359,8 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 1. Windows 上 WiFi 连接
    1. 需要设置为 "专用网络"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-58-06.webp" alt="image-20240125010654198" style="zoom:33%;" />
+   
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-58-06.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
 2. Windows 上 有线连接（网线）
 
