@@ -2414,8 +2414,11 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-45-33.webp" alt="image-20240125010654198" style="zoom:33%;" />
 
+#### 2.8.6 输入优化
 
+可能会遇到输入大小写不同步的问题，可以进入 "设置" → "辅助功能" → "重复键" 设置为关
 
+同时建议登出后点击右下角齿轮，设置为 `Ubuntu on Xorg`，可解决相关问题
 
 ### 2.11 onnxruntime
 
