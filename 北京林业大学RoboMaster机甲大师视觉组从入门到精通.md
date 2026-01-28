@@ -1107,12 +1107,554 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 同时建议登出后点击右下角齿轮，设置为 `Ubuntu on Xorg`，可解决相关问题
 
+### 1.3.4录制终端会话到文件
+**启动录制**
+
+```bash
+script my_session.log
+```
+执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
+
+**停止录制**
+
+当操作完成需要结束录制时，可以使用以下任意一种方法：
+
+- **输入命令：** `exit`
+- **快捷键：** `Ctrl` + `D`
+
+系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
+
+# 2 基础环境配置核心算法环境配置 (The Libraries)
+## 2.1传统视觉环境	
+### 2.1.1OpenCV 安装
+> Contributors: 叶睿聪 (dgsyrc@github)
+
+*方法适用于Ubuntu 20.04/22.04 以及WSL中的Ubuntu 20.04/22.04*
+
+#### 2.2.1.1安装步骤
+
+进入Ubuntu，把U盘里面当时拷进去的三个包复制到桌面
+
+先安装一些环境依赖
+
+在桌面右键打开终端 `Terminal`
+
+依次执行以下指令
+
+```
+sudo apt update
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev
+sudo apt-get install libavformat-dev libswscale-dev
+sudo apt install -y make
+```
+
+`sudo` 指令需要输入前面设置的密码
+
+如果提示[Y/n]，输入 Y 回车即可
+
+如果执行 `sudo apt-get install build-essential` 时遇到
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241125192633780.webp" alt="image-20241125192633780" style="zoom:33%;" />
+
+请先执行以下指令即可解决
+
+```
+sudo apt-get update
+```
+
+将OpenCV 4.5.5源码包解压到桌面，并把OpenCV_Contrib解压到OpenCV 4.5.5所在的文件夹内
+
+即下图：
+
+![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713165504671-1699104265052-67.webp)
+
+在上面这个文件夹内右键打开终端 `Terminal`
+
+输入 `mkdir build` 新建 `build` 文件夹
+
+输入 `cd build` 打开 `build` 文件夹
+
+然后输入以下指令
+
+```
+cmake ..
+```
+
+注意，执行 `cmake ..` 时可能会提示ippicv库/ade库的文件下载失败（务必要向上检查一遍刚才终端的输出信息【黄色字体】，这个报错信息不会在输出信息末尾提示），黄色字体中CMP0148相关错误可忽略，其它详细报错和解决方式见 `2.2.2 常见问题`
+
+若没有报错，继续执行以下指令
+
+```
+sudo make -j8
+sudo make install
+```
+
+其中第一个指令的执行时间较长，这是因为在编译OpenCV库
+
+安装完成后，在终端中打开`opencv-4.5.5/sample/cpp/example_cmake`
+
+新建文件夹 `build`，在终端打开后执行：
+
+```
+cmake ..
+make -j8
+./opencv_example
+```
+
+若出现 `Hello OpenCV` 则说明配置成功
+
+#### 2.2.1.2 常见问题
+
+- 提示ippicv库下载失败
+
+  **报错信息：**
+
+  报错信息类似下一个错误（ade库下载失败）
+
+  **解决方案：**
+
+  提前下好这个包
+
+  备用链接：https://pan.baidu.com/s/1oxF0PY8Jhhr9jZ1f6xqTQg 提取码：rm24 
+
+  此时需要提前准备好这个包并放在桌面: `ippicv_2020_lnx_intel64_20191018_general.tgz`
+
+  重新在opencv-4.5.5文件夹内开启终端（在文件夹内右键选择`Terminal`)
+
+  输入
+
+  ```3
+  gedit ./3rdparty/ippicv/ippicv.cmake
+  ```
+
+  此时会打开文本编辑器
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231104165159479.webp" alt="image-20231104165159479" style="zoom:50%;" />
+
+  前文提到将 `ippicv_2020_lnx_intel64_20191018_general.tgz` 放在了桌面，故将框出的这行改为桌面的目录（原本是一个网址）
+
+  【注意：上图的路径地址仅为示例，放在桌面的路径以下面为准】
+
+  ```
+  file:///home/你的用户名/Desktop/
+  ```
+
+  然后再次执行以下命令即可
+
+  ```
+  cmake ..
+  ```
+
+- 提示ade库下载失败
+
+  **报错信息：**
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-24 23-57-29.webp" alt="Screenshot from 2024-01-24 23-57-29" style="zoom:67%;" />
+
+  **解决方案：**
+
+  提前下载好这个ade包：
+
+  官方链接：https://github.com/opencv/ade/archive/v0.1.1f.zip
+
+  备用链接：https://pan.baidu.com/s/1PUOKD5rw2v2qqG1GuCBqxQ 提取码：rm24
+
+  下好之后放在桌面，注意如果是官方链接下载的需要重新命名这个包为下面这个名字
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-07-56.webp" alt="Screenshot from 2024-01-25 00-07-56" style="zoom: 50%;" />
+
+  打开`opencv-4.5.5/modules/gapi/cmake/DownloadADE.cmake`
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-00-23.webp" alt="Screenshot from 2024-01-25 00-00-23" style="zoom: 50%;" />
+
+  将github那行的链接改为（保留引号）
+
+  ```
+  file:///home/你的用户名/Desktop/
+  ```
+
+  然后再次执行以下命令即可
+
+  ```
+  cmake ..
+  ```
+  
+- opencv_contrib编译失败
+
+  >Contributors: 胡彦祺
+
+  WSL下使用make命令编译发生冲突
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1.webp" style="zoom: 33%;" />
+
+  opencv_crontrib中的插件无法编译，检查$PATH发现存在大量Windows系统下共享的环境变量
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2.webp" style="zoom: 25%;" />
+
+  关闭该功能，修改文件`/etc/wsl.conf`
+  
+  ```bash
+  sudo vim /etc/wsl.conf
+  ```
+  
+  ```ini
+  # 不加载Windows中的PATH内容
+  [interop]
+  appendWindowsPath = false
+  
+  # 不自动挂载Windows系统所有磁盘分区
+  [automount]
+  enabled = false
+  ```
+
+  退出WSL，并重启该容器。*注：退出后必须重启，否则修改不会生效*
+  
+  ```bash
+  wsl --list #查看WSL列表
+  ```
+  
+  ```bash
+  wsl --terminate Ubuntu-18.04 #改为你自己WSL的名字
+  ```
+  
+  重新cmake、make编译即可
+  
+- ippicv库Assertation failed: DL_DESTINATION_DIR
+
+  **报错信息：**
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250121210719167.webp" alt="image-20250121210719167" style="zoom: 50%;" />
+
+  **解决方案：**
+
+  参考前文ippicv库下载失败，在 `ippicv.cmake` 中修改目录的下一行补上（原文件已有，但可能在改目录时删多了）
+
+  ```
+  DESTINATION_DIR "${THE_ROOT}"
+  ```
+
+## 2.2机器人操作系统
+###  2.2.1ROS 安装与配置
+
+
+> Contributors: 刘明楷（milchstrasse565@github）
+
+####  2.2.1.1 创建工作空间
+
+终端输入
+
+`mkdir -p ~/test_ws/src`
+
+一般工作空间名为xxx_ws，ws也可写在前面，看个人习惯
+
+#### 2.2.1.2 创建功能包
+
+进入工作空间的src目录
+
+`cd ~/test_ws/src`
+
+创建功能包
+
+`catkin_create_pkg hello_test std_msgs roscpp rospy`
+
+#### 2.2.1.3创建ros节点程序
+
+进入hello_test包的src目录写helloworld程序：
+
+![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2023-08-14_16-59.webp)
+
+```cpp
+#include "ros/ros.h"
+
+int main(int argc, char *argv[])
+{
+    //执行 ros 节点初始化
+    ros::init(argc,argv,"hello");
+    //创建 ros 节点句柄(非必须)
+    ros::NodeHandle n;
+    //控制台输出 hello world
+    ROS_INFO("hello world!");
+
+    return 0;
+}
+```
+
+进入hello_test功能包目录下的CMakeLists.txt,一般只修改以下两项即可：
+
+`add_executable(${PROJECT_NAME} src/hello.cpp)
+target_link_libraries(${PROJECT_NAME}  ${catkin_LIBRARIES})`
+
+add_executable生成的可执行文件名一般就是包名，即${PROJECT_NAME}，也就是hello_test ，如果有多个节点，则定义为其他名字
+
+然后target_link_libraries，将可执行文件连接到库
+
+最后进入到工作空间目录下编译即可：
+
+`cd ~/test_ws`
+
+ ` catkin_make`
+
+每次编译后，都要配置好环境变量：
+
+`source ~/test_ws/devel/setup.bash`
+
+也可在将这句话加在.bashrc文件中，就不用每次配置环境变量了
+
+然后在终端启动ros：
+
+`roscore`
+
+`rosrun hello_test hello_test `
+
+rosrun后面跟包名+可执行文件名
+
+![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p2.webp)
+
+#### 2.2.1.4 创建发布者
+
+创建新的节点test_pub.cpp：  
+
+```cpp
+/*
+    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
+         实现的关键点:
+         1.发送方
+         2.接收方
+         3.数据(此处为普通文本)
+
+         PS: 二者需要设置相同的话题
+
+
+    消息发布方:
+        循环发布信息:HelloWorld 后缀数字编号
+
+    实现流程:
+        1.包含头文件 
+        2.初始化 ROS 节点:命名(唯一)
+        3.实例化 ROS 句柄
+        4.实例化 发布者 对象
+        5.组织被发布的数据，并编写逻辑发布数据
+
+*/
+// 1.包含头文件 
+#include "ros/ros.h"
+#include "std_msgs/String.h" //普通文本类型的消息
+#include <sstream>
+
+int main(int argc, char  *argv[])
+{   
+    //设置编码
+    setlocale(LC_ALL,"");
+
+    //2.初始化 ROS 节点:命名(唯一)
+    // 参数1和参数2 后期为节点传值会使用
+    // 参数3 是节点名称，是一个标识符，需要保证运行后，在 ROS 网络拓扑中唯一
+    ros::init(argc,argv,"talker");
+    //3.实例化 ROS 句柄
+    ros::NodeHandle nh;//该类封装了 ROS 中的一些常用功能
+
+    //4.实例化 发布者 对象
+    //泛型: 发布的消息类型
+    //参数1: 要发布到的话题
+    //参数2: 队列中最大保存的消息数，超出此阀值时，先进的先销毁(时间早的先销毁)
+    ros::Publisher pub = nh.advertise<std_msgs::String>("chatter",10);
+
+    //5.组织被发布的数据，并编写逻辑发布数据
+    //数据(动态组织)
+    std_msgs::String msg;
+    // msg.data = "你好啊！！！";
+    std::string msg_front = "Hello 你好！"; //消息前缀
+    int count = 0; //消息计数器
+
+    //逻辑(一秒10次)
+    ros::Rate loop_rate(10);
+
+    //节点不死
+    while (ros::ok())
+    {
+        //使用 stringstream 拼接字符串与编号
+        std::stringstream ss;
+        ss << msg_front << count;
+        msg.data = ss.str();
+        //发布消息
+        pub.publish(msg);
+        //加入调试，打印发送的消息
+        ROS_INFO("发送的消息:%s",msg.data.c_str());
+
+        //根据前面制定的发送贫频率自动休眠 休眠时间 = 1/频率；
+        loop_rate.sleep();
+        count++;//循环结束前，让 count 自增
+    }
+    return 0;
+}
+```
+
+发送频率设置为10HZ
+
+#### 2.2.1.5 创建订阅者
+
+创建新的节点test_sub.cpp：  
+
+```cpp
+/*
+    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
+         实现的关键点:
+         1.发送方
+         2.接收方
+         3.数据(此处为普通文本)
+
+
+    消息订阅方:
+        订阅话题并打印接收到的消息
+
+    实现流程:
+        1.包含头文件 
+        2.初始化 ROS 节点:命名(唯一)
+        3.实例化 ROS 句柄
+        4.实例化 订阅者 对象
+        5.处理订阅的消息(回调函数)
+        6.设置循环调用回调函数
+
+*/
+// 1.包含头文件 
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+void doMsg(const std_msgs::String::ConstPtr& msg_p){
+    ROS_INFO("我听见:%s",msg_p->data.c_str());
+    // ROS_INFO("我听见:%s",(*msg_p).data.c_str());
+}
+int main(int argc, char  *argv[])
+{
+    setlocale(LC_ALL,"");//
+    //2.初始化 ROS 节点:命名(唯一)
+    ros::init(argc,argv,"listener");
+    //3.实例化 ROS 句柄
+    ros::NodeHandle nh;
+
+    //4.实例化 订阅者 对象
+    ros::Subscriber sub = nh.subscribe<std_msgs::String>("chatter",10,doMsg);
+    //5.处理订阅的消息(回调函数)
+    ros::Rate loop_rate(5);//频率为５hz
+    while (ros::ok())
+    {
+        ros::spinOnce();
+        loop_rate.sleep(); //配合执行频率，sleep一段时间，然后进入下一个循环。
+    }
+    return 0;
+}
+```
+
+回调函数名为doMsg，传入的参数为常量指针，因为有时候自定义消息类型数据量会比较大，另外注意这里配合spinOnce()实现接收频率的控制，如果是spin()函数，它就不会返回了，也不继续往后执行了，相当于它在自己的函数里面死循环了。
+
+配置cmakelist文件：
+
+在1.3的基础上添加：
+
+```cmake
+add_executable(${PROJECT_NAME} src/hello.cpp)
+add_executable(test_pub
+  src/test_pub.cpp
+)
+add_executable(test_sub
+  src/test_sub.cpp
+)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(test_pub ${catkin_LIBRARIES})
+target_link_libraries(test_sub ${catkin_LIBRARIES})
+```
+
+重新catkin_make编译后，source环境变量后在终端运行发送和接收节点
+
+```
+rosrun hello_test test_pub
+rosrun hello_test test_sub
+```
+
+将分别看到：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p3.webp" alt="helloworld" style="zoom:60%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p4.webp" alt="helloworld" style="zoom:60%;" />
+
+
+#### 2.2.1.6 安装turtlebot3仿真需要其他的功能包 
+
+```
+sudo apt install ros-noetic-gazebo-ros-pkgs 
+sudo apt install ros-noetic-gazebo-ros-control
+sudo apt-get install ros-noetic-rviz
+sudo apt-get install ros-noetic-map-server
+sudo apt install ros-noetic-gmapping
+sudo apt install ros-noetic-navigation
+sudo apt install ros-noetic-move-base
+```
+
+#### 2.2.1.7 安装turtlebot3仿真和导航包
+
+```
+mkdir -p ~/catkin_turtlebot3/src
+cd ~/catkin_turtlebot3/src
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+cd ..
+catkin_make
+```
+
+添加模型申明，用以设定打开后模型的样子
+
+`echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc`
+
+对环境变量进行设置
+
+`echo "source ~/catkin_turtlebot3/devel/setup.bash" >> ~/.bashrc`
+
+#### 2.2.1.8 运行导航仿真例程
+
+以上环境配置成功后，后续2.3和2.4的仿真例程运行可参考(https://blog.csdn.net/weixin_51015707/article/details/121522342)
+
+ 打开新终端，输入命令启动Gazabo，是通过roslaunch命令启动src文件夹中特定节点
+
+`roslaunch turtlebot3_gazebo turtlebot3_world.launch`
+
+打开新终端，启动SLAM进行建图，该命令是在可视化工具rviz中打开并进行SLAM
+
+`roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping`
+
+打开新终端，输入键盘控制的命令 (注意：该键盘控制是依靠按“W A D X”键增加速度，按S停止进行控制)
+
+`roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch`
+
+ 打开新终端，输入命令保存地图
+
+`rosrun map_server map_saver -f ~/map `
+
+地图被保存至主目录中，包含2个文件
+
+```
+map.pgn：地图图片
+map.yaml：地图信息
+```
+
+#### 2.2.1.9 仿真实现自主导航
+
+ 运动Gazabo 
+
+`roslaunch turtlebot3_gazebo turtlebot3_world.launch`
+
+读取地图并运行导航程序
+
+`roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/map.yaml`
+
+点击上方红色箭头按钮：2D Nav Goal
+
+ 随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
 
 
 
 
-
-
+​	
 
 ---
 
@@ -1327,531 +1869,6 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 ## 2 环境配置
 
-### 2.2 OpenCV
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-*方法适用于Ubuntu 20.04/22.04 以及WSL中的Ubuntu 20.04/22.04*
-
-#### 2.2.1 安装步骤
-
-进入Ubuntu，把U盘里面当时拷进去的三个包复制到桌面
-
-先安装一些环境依赖
-
-在桌面右键打开终端 `Terminal`
-
-依次执行以下指令
-
-```
-sudo apt update
-sudo apt-get install build-essential
-sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev
-sudo apt-get install libavformat-dev libswscale-dev
-sudo apt install -y make
-```
-
-`sudo` 指令需要输入前面设置的密码
-
-如果提示[Y/n]，输入 Y 回车即可
-
-如果执行 `sudo apt-get install build-essential` 时遇到
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241125192633780.webp" alt="image-20241125192633780" style="zoom:33%;" />
-
-请先执行以下指令即可解决
-
-```
-sudo apt-get update
-```
-
-将OpenCV 4.5.5源码包解压到桌面，并把OpenCV_Contrib解压到OpenCV 4.5.5所在的文件夹内
-
-即下图：
-
-![image-20230713165504671](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713165504671-1699104265052-67.webp)
-
-在上面这个文件夹内右键打开终端 `Terminal`
-
-输入 `mkdir build` 新建 `build` 文件夹
-
-输入 `cd build` 打开 `build` 文件夹
-
-然后输入以下指令
-
-```
-cmake ..
-```
-
-注意，执行 `cmake ..` 时可能会提示ippicv库/ade库的文件下载失败（务必要向上检查一遍刚才终端的输出信息【黄色字体】，这个报错信息不会在输出信息末尾提示），黄色字体中CMP0148相关错误可忽略，其它详细报错和解决方式见 `2.2.2 常见问题`
-
-若没有报错，继续执行以下指令
-
-```
-sudo make -j8
-sudo make install
-```
-
-其中第一个指令的执行时间较长，这是因为在编译OpenCV库
-
-安装完成后，在终端中打开`opencv-4.5.5/sample/cpp/example_cmake`
-
-新建文件夹 `build`，在终端打开后执行：
-
-```
-cmake ..
-make -j8
-./opencv_example
-```
-
-若出现 `Hello OpenCV` 则说明配置成功
-
-#### 2.2.2 常见问题
-
-- 提示ippicv库下载失败
-
-  **报错信息：**
-
-  报错信息类似下一个错误（ade库下载失败）
-
-  **解决方案：**
-
-  提前下好这个包
-
-  备用链接：https://pan.baidu.com/s/1oxF0PY8Jhhr9jZ1f6xqTQg 提取码：rm24 
-
-  此时需要提前准备好这个包并放在桌面: `ippicv_2020_lnx_intel64_20191018_general.tgz`
-
-  重新在opencv-4.5.5文件夹内开启终端（在文件夹内右键选择`Terminal`)
-
-  输入
-
-  ```3
-  gedit ./3rdparty/ippicv/ippicv.cmake
-  ```
-
-  此时会打开文本编辑器
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231104165159479.webp" alt="image-20231104165159479" style="zoom:50%;" />
-
-  前文提到将 `ippicv_2020_lnx_intel64_20191018_general.tgz` 放在了桌面，故将框出的这行改为桌面的目录（原本是一个网址）
-
-  【注意：上图的路径地址仅为示例，放在桌面的路径以下面为准】
-
-  ```
-  file:///home/你的用户名/Desktop/
-  ```
-
-  然后再次执行以下命令即可
-
-  ```
-  cmake ..
-  ```
-
-- 提示ade库下载失败
-
-  **报错信息：**
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-24 23-57-29.webp" alt="Screenshot from 2024-01-24 23-57-29" style="zoom:67%;" />
-
-  **解决方案：**
-
-  提前下载好这个ade包：
-
-  官方链接：https://github.com/opencv/ade/archive/v0.1.1f.zip
-
-  备用链接：https://pan.baidu.com/s/1PUOKD5rw2v2qqG1GuCBqxQ 提取码：rm24
-
-  下好之后放在桌面，注意如果是官方链接下载的需要重新命名这个包为下面这个名字
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-07-56.webp" alt="Screenshot from 2024-01-25 00-07-56" style="zoom: 50%;" />
-
-  打开`opencv-4.5.5/modules/gapi/cmake/DownloadADE.cmake`
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2024-01-25 00-00-23.webp" alt="Screenshot from 2024-01-25 00-00-23" style="zoom: 50%;" />
-
-  将github那行的链接改为（保留引号）
-
-  ```
-  file:///home/你的用户名/Desktop/
-  ```
-
-  然后再次执行以下命令即可
-
-  ```
-  cmake ..
-  ```
-  
-- opencv_contrib编译失败
-
-  >Contributors: 胡彦祺
-
-  WSL下使用make命令编译发生冲突
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1.webp" style="zoom: 33%;" />
-
-  opencv_crontrib中的插件无法编译，检查$PATH发现存在大量Windows系统下共享的环境变量
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2.webp" style="zoom: 25%;" />
-
-  关闭该功能，修改文件`/etc/wsl.conf`
-  
-  ```bash
-  sudo vim /etc/wsl.conf
-  ```
-  
-  ```ini
-  # 不加载Windows中的PATH内容
-  [interop]
-  appendWindowsPath = false
-  
-  # 不自动挂载Windows系统所有磁盘分区
-  [automount]
-  enabled = false
-  ```
-
-  退出WSL，并重启该容器。*注：退出后必须重启，否则修改不会生效*
-  
-  ```bash
-  wsl --list #查看WSL列表
-  ```
-  
-  ```bash
-  wsl --terminate Ubuntu-18.04 #改为你自己WSL的名字
-  ```
-  
-  重新cmake、make编译即可
-  
-- ippicv库Assertation failed: DL_DESTINATION_DIR
-
-  **报错信息：**
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250121210719167.webp" alt="image-20250121210719167" style="zoom: 50%;" />
-
-  **解决方案：**
-
-  参考前文ippicv库下载失败，在 `ippicv.cmake` 中修改目录的下一行补上（原文件已有，但可能在改目录时删多了）
-
-  ```
-  DESTINATION_DIR "${THE_ROOT}"
-  ```
-
-
-
-### 2.4 ROS
-
-> Contributors: 刘明楷（milchstrasse565@github）
-
-####  2.4.1 创建工作空间
-
-终端输入
-
-`mkdir -p ~/test_ws/src`
-
-一般工作空间名为xxx_ws，ws也可写在前面，看个人习惯
-
-#### 2.4.2 创建功能包
-
-进入工作空间的src目录
-
-`cd ~/test_ws/src`
-
-创建功能包
-
-`catkin_create_pkg hello_test std_msgs roscpp rospy`
-
-#### 2.4.3 创建ros节点程序
-
-进入hello_test包的src目录写helloworld程序：
-
-![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2023-08-14_16-59.webp)
-
-```cpp
-#include "ros/ros.h"
-
-int main(int argc, char *argv[])
-{
-    //执行 ros 节点初始化
-    ros::init(argc,argv,"hello");
-    //创建 ros 节点句柄(非必须)
-    ros::NodeHandle n;
-    //控制台输出 hello world
-    ROS_INFO("hello world!");
-
-    return 0;
-}
-```
-
-进入hello_test功能包目录下的CMakeLists.txt,一般只修改以下两项即可：
-
-`add_executable(${PROJECT_NAME} src/hello.cpp)
-target_link_libraries(${PROJECT_NAME}  ${catkin_LIBRARIES})`
-
-add_executable生成的可执行文件名一般就是包名，即${PROJECT_NAME}，也就是hello_test ，如果有多个节点，则定义为其他名字
-
-然后target_link_libraries，将可执行文件连接到库
-
-最后进入到工作空间目录下编译即可：
-
-`cd ~/test_ws`
-
- ` catkin_make`
-
-每次编译后，都要配置好环境变量：
-
-`source ~/test_ws/devel/setup.bash`
-
-也可在将这句话加在.bashrc文件中，就不用每次配置环境变量了
-
-然后在终端启动ros：
-
-`roscore`
-
-`rosrun hello_test hello_test `
-
-rosrun后面跟包名+可执行文件名
-
-![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p2.webp)
-
-#### 2.4.4 创建发布者
-
-创建新的节点test_pub.cpp：  
-
-```cpp
-/*
-    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
-         实现的关键点:
-         1.发送方
-         2.接收方
-         3.数据(此处为普通文本)
-
-         PS: 二者需要设置相同的话题
-
-
-    消息发布方:
-        循环发布信息:HelloWorld 后缀数字编号
-
-    实现流程:
-        1.包含头文件 
-        2.初始化 ROS 节点:命名(唯一)
-        3.实例化 ROS 句柄
-        4.实例化 发布者 对象
-        5.组织被发布的数据，并编写逻辑发布数据
-
-*/
-// 1.包含头文件 
-#include "ros/ros.h"
-#include "std_msgs/String.h" //普通文本类型的消息
-#include <sstream>
-
-int main(int argc, char  *argv[])
-{   
-    //设置编码
-    setlocale(LC_ALL,"");
-
-    //2.初始化 ROS 节点:命名(唯一)
-    // 参数1和参数2 后期为节点传值会使用
-    // 参数3 是节点名称，是一个标识符，需要保证运行后，在 ROS 网络拓扑中唯一
-    ros::init(argc,argv,"talker");
-    //3.实例化 ROS 句柄
-    ros::NodeHandle nh;//该类封装了 ROS 中的一些常用功能
-
-    //4.实例化 发布者 对象
-    //泛型: 发布的消息类型
-    //参数1: 要发布到的话题
-    //参数2: 队列中最大保存的消息数，超出此阀值时，先进的先销毁(时间早的先销毁)
-    ros::Publisher pub = nh.advertise<std_msgs::String>("chatter",10);
-
-    //5.组织被发布的数据，并编写逻辑发布数据
-    //数据(动态组织)
-    std_msgs::String msg;
-    // msg.data = "你好啊！！！";
-    std::string msg_front = "Hello 你好！"; //消息前缀
-    int count = 0; //消息计数器
-
-    //逻辑(一秒10次)
-    ros::Rate loop_rate(10);
-
-    //节点不死
-    while (ros::ok())
-    {
-        //使用 stringstream 拼接字符串与编号
-        std::stringstream ss;
-        ss << msg_front << count;
-        msg.data = ss.str();
-        //发布消息
-        pub.publish(msg);
-        //加入调试，打印发送的消息
-        ROS_INFO("发送的消息:%s",msg.data.c_str());
-
-        //根据前面制定的发送贫频率自动休眠 休眠时间 = 1/频率；
-        loop_rate.sleep();
-        count++;//循环结束前，让 count 自增
-    }
-    return 0;
-}
-```
-
-发送频率设置为10HZ
-
-#### 2.4.5 创建订阅者
-
-创建新的节点test_sub.cpp：  
-
-```cpp
-/*
-    需求: 实现基本的话题通信，一方发布数据，一方接收数据，
-         实现的关键点:
-         1.发送方
-         2.接收方
-         3.数据(此处为普通文本)
-
-
-    消息订阅方:
-        订阅话题并打印接收到的消息
-
-    实现流程:
-        1.包含头文件 
-        2.初始化 ROS 节点:命名(唯一)
-        3.实例化 ROS 句柄
-        4.实例化 订阅者 对象
-        5.处理订阅的消息(回调函数)
-        6.设置循环调用回调函数
-
-*/
-// 1.包含头文件 
-#include "ros/ros.h"
-#include "std_msgs/String.h"
-
-void doMsg(const std_msgs::String::ConstPtr& msg_p){
-    ROS_INFO("我听见:%s",msg_p->data.c_str());
-    // ROS_INFO("我听见:%s",(*msg_p).data.c_str());
-}
-int main(int argc, char  *argv[])
-{
-    setlocale(LC_ALL,"");//
-    //2.初始化 ROS 节点:命名(唯一)
-    ros::init(argc,argv,"listener");
-    //3.实例化 ROS 句柄
-    ros::NodeHandle nh;
-
-    //4.实例化 订阅者 对象
-    ros::Subscriber sub = nh.subscribe<std_msgs::String>("chatter",10,doMsg);
-    //5.处理订阅的消息(回调函数)
-    ros::Rate loop_rate(5);//频率为５hz
-    while (ros::ok())
-    {
-        ros::spinOnce();
-        loop_rate.sleep(); //配合执行频率，sleep一段时间，然后进入下一个循环。
-    }
-    return 0;
-}
-```
-
-回调函数名为doMsg，传入的参数为常量指针，因为有时候自定义消息类型数据量会比较大，另外注意这里配合spinOnce()实现接收频率的控制，如果是spin()函数，它就不会返回了，也不继续往后执行了，相当于它在自己的函数里面死循环了。
-
-配置cmakelist文件：
-
-在1.3的基础上添加：
-
-```cmake
-add_executable(${PROJECT_NAME} src/hello.cpp)
-add_executable(test_pub
-  src/test_pub.cpp
-)
-add_executable(test_sub
-  src/test_sub.cpp
-)
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
-target_link_libraries(test_pub ${catkin_LIBRARIES})
-target_link_libraries(test_sub ${catkin_LIBRARIES})
-```
-
-重新catkin_make编译后，source环境变量后在终端运行发送和接收节点
-
-```
-rosrun hello_test test_pub
-rosrun hello_test test_sub
-```
-
-将分别看到：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p3.webp" alt="helloworld" style="zoom:60%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p4.webp" alt="helloworld" style="zoom:60%;" />
-
-
-#### 2.4.6 安装turtlebot3仿真需要其他的功能包 
-
-```
-sudo apt install ros-noetic-gazebo-ros-pkgs 
-sudo apt install ros-noetic-gazebo-ros-control
-sudo apt-get install ros-noetic-rviz
-sudo apt-get install ros-noetic-map-server
-sudo apt install ros-noetic-gmapping
-sudo apt install ros-noetic-navigation
-sudo apt install ros-noetic-move-base
-```
-
-#### 2.4.7 安装turtlebot3仿真和导航包
-
-```
-mkdir -p ~/catkin_turtlebot3/src
-cd ~/catkin_turtlebot3/src
-git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-cd ..
-catkin_make
-```
-
-添加模型申明，用以设定打开后模型的样子
-
-`echo "export TURTLEBOT3_MODEL=waffle" >> ~/.bashrc`
-
-对环境变量进行设置
-
-`echo "source ~/catkin_turtlebot3/devel/setup.bash" >> ~/.bashrc`
-
-#### 2.4.8 运行导航仿真例程
-
-以上环境配置成功后，后续2.3和2.4的仿真例程运行可参考(https://blog.csdn.net/weixin_51015707/article/details/121522342)
-
- 打开新终端，输入命令启动Gazabo，是通过roslaunch命令启动src文件夹中特定节点
-
-`roslaunch turtlebot3_gazebo turtlebot3_world.launch`
-
-打开新终端，启动SLAM进行建图，该命令是在可视化工具rviz中打开并进行SLAM
-
-`roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping`
-
-打开新终端，输入键盘控制的命令 (注意：该键盘控制是依靠按“W A D X”键增加速度，按S停止进行控制)
-
-`roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch`
-
- 打开新终端，输入命令保存地图
-
-`rosrun map_server map_saver -f ~/map `
-
-地图被保存至主目录中，包含2个文件
-
-```
-map.pgn：地图图片
-map.yaml：地图信息
-```
-
-#### 2.4.9 仿真实现自主导航
-
- 运动Gazabo 
-
-`roslaunch turtlebot3_gazebo turtlebot3_world.launch`
-
-读取地图并运行导航程序
-
-`roslaunch turtlebot3_navigation turtlebot3_navigation.launch map_file:=$HOME/map.yaml`
-
-点击上方红色箭头按钮：2D Nav Goal
-
- 随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
 
 ### 2.6 Tensorflow
 
@@ -4949,25 +4966,6 @@ cv2.destroyAllWindows()
 
 
 <div STYLE="page-break-after: always;"></div>
-
-### 3.5 调试技巧
-
-#### 3.5.1 录制终端会话到文件
-**启动录制**
-
-```bash
-script my_session.log
-```
-执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
-
-**停止录制**
-
-当操作完成需要结束录制时，可以使用以下任意一种方法：
-
-- **输入命令：** `exit`
-- **快捷键：** `Ctrl` + `D`
-
-系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
 
 ## 4 文档维护
 
