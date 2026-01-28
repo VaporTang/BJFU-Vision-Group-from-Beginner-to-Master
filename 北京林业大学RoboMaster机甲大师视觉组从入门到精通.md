@@ -1650,239 +1650,9 @@ map.yaml：地图信息
 点击上方红色箭头按钮：2D Nav Goal
 
  随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
-
-​    
-
-
-​	
-
----
-
-以下为旧版文档↓
-
-
-## 1 硬件
-
-> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
-
-### 1.1 分电板
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
-
-图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
-
-### 1.2 电池架
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
-
-电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
-
-- 符号 |（竖线）：代表 **开启 (ON)**。
-
-- 符号 O（圆圈）：代表 **关闭 (OFF)**。
-
-> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
-
-### 1.3 DC-DC（24V-19V）变压器
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
-
-黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
-
-### 1.4 电池
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
-
-电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
-
-电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
-
-旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
-
-> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
-
-> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
-
-### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
-
-#### 1.5.1 参数（以 NUC 11 为例）
-
-| 属性                | 参数                 |
-| ------------------- | -------------------- |
-| CPU                 | Intel Core i5-1135G7 |
-| GPU                 | 集显 Intel Xe        |
-| RAM                 | 16G DDR4             |
-| 硬盘                | PCIe4.0 NVMe 512G    |
-| 无线网卡            | 有                   |
-| USB 3.1 接口        | 3个                  |
-| 雷电3接口（Type-C） | 2个                  |
-
-#### 1.5.2 各种接口/硬件位置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
-
-### 1.6 工业相机
-
-#### 1.6.1 参数
-
-制造商：迈德威视（MindVision）
-
-型号：MV-SUA134GC-T
-
-镜头：6mm焦距 F2.0光圈 1/1.8″靶面
-
-#### 1.6.2 接口
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
-
-### 1.7 激光雷达
-
-#### 1.7.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
-
-| 参数                    | 说明                                   |
-| ----------------------- | -------------------------------------- |
-| **激光波长**            | 905 nm                                 |
-| **人眼安全级别¹**       | Class 1 (IEC60825-1:2014) 人眼安全     |
-| **量程 (@ 100 klx)**    | 40 m @ 10% 反射率<br>70 m @ 80% 反射率 |
-| **近处盲区²**           | 0.1 m                                  |
-| **FOV**                 | 水平 360°, 竖直 -7°~52°                |
-| **测距随机误差³ (1σ)**  | ≤ 2 cm ⁴ (@ 10m)<br>≤ 3 cm ⁵ (@ 0.2m)  |
-| **角度随机误差（1σ）**  | < 0.15º                                |
-| **点云输出**            | 200,000 点/秒 (可配置第一回波)         |
-| **点云帧率**            | 10 Hz (典型值)                         |
-| **数据网口**            | 100 BASE-TX 以太网                     |
-| **数据同步方式**        | IEEE 1588-2008 (PTPv2), GPS            |
-| **抗串扰功能**          | 有                                     |
-| **虚警率 (@ 100 klx)⁶** | < 0.01%                                |
-| **IMU**                 | 内置 IMU 型号：ICM40609                |
-| **工作环境温度⁷**       | -20℃ 至 55℃                            |
-| **防护等级**            | IP67                                   |
-| **功率⁸**               | 6.5 W                                  |
-| **供电电压范围**        | 9 ~ 27 V DC                            |
-| **尺寸**                | 65×65×60 mm                            |
-| **重量**                | 265 g                                  |
-
-#### 1.7.2 官方文档与手册
-
-[Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
-
-#### 1.7.3 配置
-
-**硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
-
-**IP 设置：**为确保通讯正常，需将 PC（MiniPC）与雷达置于同一网段。请手动修改 PC 的 IPv4 设置：
-
-- **IP 地址：** 推荐设置为 `192.168.1.50`（或 `192.168.1.x` 网段下的其他空闲地址）。
-
-- **子网掩码：** `255.255.255.0`
-
-> 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
-
-#### 1.7.4 SDK
-
-***placeholder，update later by VaporTang***
-
-***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
-
-### 1.8 各种线缆
-
-#### 1.8.1 USB-Camera
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
-
-#### 1.8.2 RJ45 网线
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
-
-#### 1.8.3 HDMI-HDMI
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
-
-### 1.9 USB to TTL
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
-
-#### 1.9.1 接口
-
-| 接口 | 用法          |
-| ---- | ------------- |
-| VCC  | 5V            |
-| TXD  | 接另一端的RXD |
-| RXD  | 接另一端的TXD |
-| GND  | 接GND（地线） |
-
-### 1.10 手持装甲板调试模块
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
-
-#### 1.10.1 参数
-
-| 颜色 | 状态 |
-| ---- | ---- |
-| 红色 | 红方 |
-| 蓝色 | 蓝方 |
-| 紫色 | 离线 |
-
-#### 1.10.2 拆解
-
-装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
-
-通过逆向分析，每颗LED灯珠型号为SMD3528红蓝双色反极贴片式发光二极管。经比对，目前确认其规格与型号 **XL-3528SURUBC-FJ** 一致。
-
-灯珠详细原理及规格图如下：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
-
-##### 驱动方式：
-
-**注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
-
-每个灯珠内部实际包含两个极性相反、相互独立的LED芯片，分别发出红光和蓝光。因此，在驱动红光和蓝光时，可采用一块 3.7 V 软包电池，通过 5 V USB 充放电管理模块进行电能管理。从充放电管理模块输出 5 V 电压，并分为两路：
-
-- 红光 LED 支路串联 **150 Ω** 限流电阻；
-- 蓝光 LED 支路串联 **100 Ω** 限流电阻。
-
-推荐从充放电管理模块获取 5 V 电源的原因在于，其输出电压较为稳定。然而，也可以考虑直接使用电池作为输出电源。在这种情况下：
-
-- 红光 LED 支路应串联 **110 Ω** 限流电阻；
-- 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
-
-### 1.11 外置MiniPC完整装机展示
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
-
-<div STYLE="page-break-after: always;"></div>
-
-## 2 环境配置
-
-
-### 2.6 Tensorflow
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-> 关于此步的注意事项：请先在windows端自行挂好梯子，否则部分包的下载可能会很慢或者直接失败（也可以尝试更换下载源）
->
-> 关于梯子的安装（另附文档）
-
-> 参考资料：
->
-> [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
-
-#### 2.6.1 Nvidia 驱动
+## 2.3深度学习环境	
+###  2.3.1显卡驱动与 CUDA/cuDNN
+#### 2.3.1.1 Nvidia 驱动
 
 **安装的是宿主机（Win11）的GPU驱动**
 
@@ -1896,7 +1666,7 @@ map.yaml：地图信息
 
 下载安装即可
 
-#### 2.6.2 CUDA Toolkit 安装
+#### 2.3.1.2CUDA Toolkit 安装
 
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
@@ -2000,7 +1770,58 @@ sudo apt-get -y install cuda
 
 --------------------------------
 
-#### 2.6.3 Miniconda 安装
+#### 2.3.1.3 CUDA安装
+
+CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit-archive)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.webp" alt="image-20250204153127184" style="zoom: 33%;" />
+
+安装CUDA
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.webp" alt="image-20250204153150013" style="zoom:50%;" />
+
+选择精简安装，安装完成后打开cmd检查安装情况
+
+```
+nvcc -V
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.webp" alt="image-20250204153206530" style="zoom:50%;" />
+
+#### 2.3.1.4 cuDNN安装
+
+cuDNN官方地址：[cuDNN Archive | NVIDIA Developer](https://developer.nvidia.com/rdp/cudnn-archive)
+
+版本对应CUDA的安装版本
+
+下载后，压缩包中三个文件夹解压到该目录下
+
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.webp" alt="image-20250204153217917" style="zoom:50%;" />
+
+验证cudnn是否安装成功
+
+cmd进入目录（在该目录下资源管理器的目录框中输入cmd回车即可）
+
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.3\extras\demo_suite
+```
+
+输入
+
+```
+deviceQuery.exe
+```
+
+检查安装
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.webp" alt="image-20250204153237425" style="zoom:50%;" />
+
+### 2.3.2Miniconda&Anaconda
+#### 2.3.2.1 Miniconda 安装
 
 分别执行下列命令
 
@@ -2046,7 +1867,61 @@ source ~/.bashrc
 
 ---------------
 
-#### 2.6.4 Conda 环境配置
+#### 2.3.2.2 anaconda
+
+官方地址（最新版）：[Download Now | Anaconda](https://www.anaconda.com/download/success)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.webp" alt="image-20250204153055921" style="zoom:50%;" />
+
+安装完成，开始菜单进入anaconda prompt
+
+创建虚拟环境（建议版本3.9以上）
+
+```
+conda create -n  自己取的环境名字  python=版本号
+```
+
+激活环境
+
+```
+conda activate 环境名字
+```
+
+查看存在环境
+
+```
+conda env list
+```
+
+进入命令提示符cmd
+
+查看CUDA版本
+
+```
+nvidia-smi
+```
+
+![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.webp)
+
+即12.6，安装对应CUDA工具包，版本小于等于上图版本号
+
+### 2.3.3TensorFlow
+
+> Contributors: 叶睿聪 (dgsyrc@github)
+
+> 关于此步的注意事项：请先在windows端自行挂好梯子，否则部分包的下载可能会很慢或者直接失败（也可以尝试更换下载源）
+>
+> 关于梯子的安装（另附文档）
+
+> 参考资料：
+>
+> [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
+
+
+
+
+
+#### 2.3.3.1 Conda 环境配置
 
 分别执行下列命令
 
@@ -2072,7 +1947,7 @@ conda activate tf
 
 -----------------
 
-#### 2.6.5 GPU 配置
+#### 2.3.3.2 GPU 配置
 
 > Contributors: 叶睿聪 (dgsyrc@github)、杜雨蒙
 
@@ -2120,7 +1995,7 @@ pip install nvidia-cudnn-cu11==8.6.0.163
 
 -------------------
 
-#### 2.6.6 环境变量配置
+#### 2.3.3.3 环境变量配置
 
 输入
 
@@ -2144,8 +2019,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64/stubs/:/usr/local/cuda-12.1/li
 
 ----------------------
 
-#### 2.6.7 Tensorflow 安装
-
+#### 2.3.3.4Tensorflow 安装
 如果没有梯子，下的很慢，可以尝试使用豆瓣源，将库名换进来即可
 
 ```
@@ -2174,7 +2048,7 @@ pip install tensorflow==2.12.0
 
 ------------------
 
-#### 2.6.8 验证安装结果
+#### 2.3.3.5 验证安装结果
 
 **CPU 验证**
 
@@ -2202,6 +2076,533 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 重新执行GPU验证，若依然无法解决，请从前面GPU配置开始重做一次
 
 **至此，环境配置完成**
+### 2.3.4Pytorch
+#### 2.3.4.1 安装PyTorch
+
+官方地址：[PyTorch](https://pytorch.org/)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153247322.webp" alt="image-20250204153247322" style="zoom:50%;" />
+
+将pip命令粘贴到anaconda的已配置好的虚拟环境中
+
+安装完成后，输入以下指令检查是否安装成功
+
+```
+pip list
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153300299.webp" alt="image-20250204153300299" style="zoom:50%;" />
+
+打开vscode，进入工作目录
+
+按下 `ctrl+shift+P` ,选择 `Python: Select Interpreter`
+
+选中刚才创建的虚拟环境即可
+
+运行以下代码检验PyTorch安装结果
+
+```python
+import torch
+print(torch.__version__)
+
+x = torch.rand(5, 3)
+
+if torch.cuda.is_available():
+    x = x.to("cuda")
+    print(x)
+else:
+    print("CUDA is not available")
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
+#### 2.3.4.2 测试例：mnist手写数字识别
+
+安装 `matplotlib` 包（在虚拟环境下安装）
+
+```
+pip install matplotlib
+```
+
+代码
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torchvision
+from torchvision import datasets, transforms
+import torch.utils.data as data
+import matplotlib.pyplot as plt
+
+BATCH_SIZE = 128
+
+# 设置设备
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# 数据加载和预处理
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))  # 将像素值归一化为 -1 到 1
+])
+
+# download and load the data
+train_dataset = torchvision.datasets.MNIST(root='./mnist/', train=True, transform=transform, download=True)
+test_dataset = torchvision.datasets.MNIST(root='./mnist/', train=False, transform=transform, download=False)
+
+# encapsulate them into dataloader form
+train_loader = data.DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, drop_last=True)
+test_loader = data.DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, drop_last=True)
+
+# 定义模型
+class MNISTModel(nn.Module):
+    def __init__(self):
+        super(MNISTModel, self).__init__()
+        self.model = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(28 * 28, 128),
+            nn.ReLU(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Linear(64, 10)
+        )
+    
+    def forward(self, x):
+        return self.model(x)
+
+# 实例化模型
+model = MNISTModel().to(device)
+
+# 定义损失函数和优化器
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# 训练模型
+def train_model(model, train_loader, criterion, optimizer, epochs=5):
+    model.train()
+    for epoch in range(epochs):
+        total_loss = 0
+        for images, labels in train_loader:
+            images, labels = images.to(device), labels.to(device)
+            
+            # 前向传播
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+            
+            # 反向传播和优化
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+            total_loss += loss.item()
+        
+        print(f"Epoch [{epoch+1}/{epochs}], Loss: {total_loss / len(train_loader):.4f}")
+
+# 测试模型
+def test_model(model, test_loader):
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for images, labels in test_loader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            _, predicted = torch.max(outputs, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+    
+    print(f"Accuracy: {100 * correct / total:.2f}%")
+
+# 可视化识别结果
+def show_predictions(model, test_loader, num_images=10):
+    model.eval()
+    images_shown = 0
+    plt.figure(figsize=(12, 6))
+
+    with torch.no_grad():
+        for images, labels in test_loader:
+            images, labels = images.to(device), labels.to(device)
+            outputs = model(images)
+            _, predicted = torch.max(outputs, 1)
+            
+            for i in range(images.size(0)):
+                if images_shown >= num_images:
+                    break
+                
+                image = images[i].cpu().numpy().squeeze()  # 转为二维图像
+                label = labels[i].item()
+                pred = predicted[i].item()
+                
+                plt.subplot(2, (num_images + 1) // 2, images_shown + 1)
+                plt.imshow(image, cmap='gray')
+                plt.title(f"True: {label}, Pred: {pred}", 
+                          color="green" if label == pred else "red")
+                plt.axis('off')
+                images_shown += 1
+            
+            if images_shown >= num_images:
+                break
+    
+    plt.tight_layout()
+    plt.show()
+
+
+# 执行训练和测试
+train_model(model, train_loader, criterion, optimizer, epochs=5)
+test_model(model, test_loader)
+
+# 显示部分识别结果
+show_predictions(model, test_loader, num_images=10)
+```
+
+运行以上代码
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153521410.webp" alt="image-20250204153521410" style="zoom:50%;" />
+
+![image-20250204153533872](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153533872.webp)
+
+若mnist数据集下载失败，`shift+右键` MNIST
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153546080.webp" alt="image-20250204153546080" style="zoom:50%;" />
+
+交换mirrors中两个链接的位置，交换后为
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.webp" alt="image-20250204153556588" style="zoom:50%;" />
+
+
+<div STYLE="page-break-after: always;"></div>
+### 2.3.5 onnxruntime用于模型部署推理
+
+> Contributor: 叶睿聪 (dgsyrc@github)
+
+git安装
+
+```
+sudo apt-get install git
+```
+
+下载源码（源码较大，请确保网络通畅，不建议使用梯子，可能会报错）
+
+```
+git clone --recursive https://github.com/Microsoft/onnxruntime
+```
+
+> **报错1**
+>
+> error: RPC failed; curl 16 Error in the HTTP2 framing layer
+>
+> 使用以下指令解决
+>
+> ```
+> git config --global http.postBuffer 5242880000
+> git config --global https.postBuffer 5242880000
+> ```
+
+安装必要环境
+
+```
+sudo apt-get install python-dev-is-python3
+sudo apt-get install python3-numpy-dev
+sudo apt-get install python3-packaging
+sudo apt-get install python3-setuptools
+sudo apt-get install python3-wheel
+```
+
+在 `onnxruntime` 文件夹下编译
+
+```
+sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
+```
+
+此时可能会提示cmake版本过低，请根据 `2.10` 内容升级cmake
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.webp" alt="image-20240222190207012" style="zoom: 67%;" />
+
+升级完成后重新执行上述命令即可成功编译（编译时间较长）
+
+**可以用以下方式节省编译时间**
+
+> 如加--skip_tests参数，或者：
+>
+> 在看到开始编译时（如下图）
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.webp" alt="image-20240222185820853" style="zoom: 50%;" />
+>
+> 按下 `Ctrl+C` 终止编译
+>
+> 在 `onnxruntime/build/Linux/RelWithDebInfo` 目录下使用以下命令（nuc02替换为实际的用户名）
+> 
+> ```
+>sudo cmake --build /home/nuc02/Desktop/onnxruntime/build/Linux/RelWithDebInfo --config RelWithDebInfo -j8
+> ```
+>
+> 注意编译时是否有报错
+>
+> **报错1**
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.webp" alt="image-20240222191128295" style="zoom: 67%;" />
+>
+> 缺少python环境
+>
+> 此时应输入以下指令安装环境
+> 
+> ```
+>sudo apt-get install python-dev-is-python3
+> ```
+>
+> **报错2**
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.webp" alt="image-20240222191704374" style="zoom:67%;" />
+>
+> 缺少 `numpy` 库
+>
+> 输入以下指令安装环境
+> 
+> ```
+>sudo apt-get install python3-numpy-dev
+> ```
+>
+> 安装完成后再重新编译
+>
+> 使用加速编译最后需要回到onnxruntime目录下打开终端重新执行一次原本正常编译的指令检查
+> 
+> ```
+>sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
+> ```
+>
+
+编译完成后
+
+在 `onnxruntime/build/Linux/RelWithDebInfo` 或 `onnxruntime/build/Linux/Release` 下执行以下命令安装（上面加速的步骤可能会导致编译的文件无法转移至 `Release`  )
+
+```
+sudo make install
+```
+
+
+---
+
+
+
+
+## 3.硬件平台认知（Hardware）
+
+> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
+
+### 3.1计算平台
+#### 3.1.1 参数（以 NUC 11 为例）
+
+| 属性                | 参数                 |
+| ------------------- | -------------------- |
+| CPU                 | Intel Core i5-1135G7 |
+| GPU                 | 集显 Intel Xe        |
+| RAM                 | 16G DDR4             |
+| 硬盘                | PCIe4.0 NVMe 512G    |
+| 无线网卡            | 有                   |
+| USB 3.1 接口        | 3个                  |
+| 雷电3接口（Type-C） | 2个                  |
+
+#### 3.1.2 各种接口/硬件位置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
+#### 3.1.3外置MiniPC完整装机展示
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
+
+<div STYLE="page-break-after: always;"></div>
+### 3.2传感器
+#### 3.2.1 工业相机
+
+##### 3.2.1.1 参数
+
+制造商：迈德威视（MindVision）
+
+型号：MV-SUA134GC-T
+
+镜头：6mm焦距 F2.0光圈 1/1.8″靶面
+
+##### 3.2.1.2 接口
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
+#### 3.2.2激光雷达
+##### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
+
+| 参数                    | 说明                                   |
+| ----------------------- | -------------------------------------- |
+| **激光波长**            | 905 nm                                 |
+| **人眼安全级别¹**       | Class 1 (IEC60825-1:2014) 人眼安全     |
+| **量程 (@ 100 klx)**    | 40 m @ 10% 反射率<br>70 m @ 80% 反射率 |
+| **近处盲区²**           | 0.1 m                                  |
+| **FOV**                 | 水平 360°, 竖直 -7°~52°                |
+| **测距随机误差³ (1σ)**  | ≤ 2 cm ⁴ (@ 10m)<br>≤ 3 cm ⁵ (@ 0.2m)  |
+| **角度随机误差（1σ）**  | < 0.15º                                |
+| **点云输出**            | 200,000 点/秒 (可配置第一回波)         |
+| **点云帧率**            | 10 Hz (典型值)                         |
+| **数据网口**            | 100 BASE-TX 以太网                     |
+| **数据同步方式**        | IEEE 1588-2008 (PTPv2), GPS            |
+| **抗串扰功能**          | 有                                     |
+| **虚警率 (@ 100 klx)⁶** | < 0.01%                                |
+| **IMU**                 | 内置 IMU 型号：ICM40609                |
+| **工作环境温度⁷**       | -20℃ 至 55℃                            |
+| **防护等级**            | IP67                                   |
+| **功率⁸**               | 6.5 W                                  |
+| **供电电压范围**        | 9 ~ 27 V DC                            |
+| **尺寸**                | 65×65×60 mm                            |
+| **重量**                | 265 g                                  |
+
+##### 3.2.2.2官方文档与手册
+
+[Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
+
+##### 3.2.2.3 配置
+
+**硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
+
+**IP 设置：**为确保通讯正常，需将 PC（MiniPC）与雷达置于同一网段。请手动修改 PC 的 IPv4 设置：
+
+- **IP 地址：** 推荐设置为 `192.168.1.50`（或 `192.168.1.x` 网段下的其他空闲地址）。
+
+- **子网掩码：** `255.255.255.0`
+
+> 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
+
+##### 3.2.2.4SDK
+
+***placeholder，update later by VaporTang***
+
+***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
+#### 3.2.3 USB-Camera
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
+### 3.3电源与通信
+#### 3.3.1电源与电池管理
+
+##### 3.3.1.1 电池架
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
+
+电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
+
+- 符号 |（竖线）：代表 **开启 (ON)**。
+
+- 符号 O（圆圈）：代表 **关闭 (OFF)**。
+
+> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
+
+---------------
+以下为旧版文档↓	
+### 1.1 分电板
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
+
+图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
+
+
+### 1.3 DC-DC（24V-19V）变压器
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
+
+黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
+
+### 1.4 电池
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
+
+电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
+
+电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
+
+旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
+
+> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
+
+> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
+
+### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
+
+
+
+
+### 1.8 各种线缆
+
+
+
+#### 1.8.2 RJ45 网线
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
+
+#### 1.8.3 HDMI-HDMI
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
+
+### 1.9 USB to TTL
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
+
+#### 1.9.1 接口
+
+| 接口 | 用法          |
+| ---- | ------------- |
+| VCC  | 5V            |
+| TXD  | 接另一端的RXD |
+| RXD  | 接另一端的TXD |
+| GND  | 接GND（地线） |
+
+### 1.10 手持装甲板调试模块
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
+
+#### 1.10.1 参数
+
+| 颜色 | 状态 |
+| ---- | ---- |
+| 红色 | 红方 |
+| 蓝色 | 蓝方 |
+| 紫色 | 离线 |
+
+#### 1.10.2 拆解
+
+装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
+
+通过逆向分析，每颗LED灯珠型号为SMD3528红蓝双色反极贴片式发光二极管。经比对，目前确认其规格与型号 **XL-3528SURUBC-FJ** 一致。
+
+灯珠详细原理及规格图如下：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
+
+##### 驱动方式：
+
+**注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
+
+每个灯珠内部实际包含两个极性相反、相互独立的LED芯片，分别发出红光和蓝光。因此，在驱动红光和蓝光时，可采用一块 3.7 V 软包电池，通过 5 V USB 充放电管理模块进行电能管理。从充放电管理模块输出 5 V 电压，并分为两路：
+
+- 红光 LED 支路串联 **150 Ω** 限流电阻；
+- 蓝光 LED 支路串联 **100 Ω** 限流电阻。
+
+推荐从充放电管理模块获取 5 V 电源的原因在于，其输出电压较为稳定。然而，也可以考虑直接使用电池作为输出电源。在这种情况下：
+
+- 红光 LED 支路应串联 **110 Ω** 限流电阻；
+- 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
+
+
+
+## 2 环境配置
+
+
+
 
 ### 2.7 裁判系统服务器
 
@@ -2431,400 +2832,6 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 - 下载的服务器客户端打开后闪退？
 
 不清楚是官方问题还是自己电脑问题，遇到此问题只能自己多找几个赛季的软件都试试，一般前期只是用于测试功率等简单功能，不一定需要使用最新赛季的服务器软件
-
-
-### 2.11 onnxruntime
-
-> Contributor: 叶睿聪 (dgsyrc@github)
-
-git安装
-
-```
-sudo apt-get install git
-```
-
-下载源码（源码较大，请确保网络通畅，不建议使用梯子，可能会报错）
-
-```
-git clone --recursive https://github.com/Microsoft/onnxruntime
-```
-
-> **报错1**
->
-> error: RPC failed; curl 16 Error in the HTTP2 framing layer
->
-> 使用以下指令解决
->
-> ```
-> git config --global http.postBuffer 5242880000
-> git config --global https.postBuffer 5242880000
-> ```
-
-安装必要环境
-
-```
-sudo apt-get install python-dev-is-python3
-sudo apt-get install python3-numpy-dev
-sudo apt-get install python3-packaging
-sudo apt-get install python3-setuptools
-sudo apt-get install python3-wheel
-```
-
-在 `onnxruntime` 文件夹下编译
-
-```
-sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
-```
-
-此时可能会提示cmake版本过低，请根据 `2.10` 内容升级cmake
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.webp" alt="image-20240222190207012" style="zoom: 67%;" />
-
-升级完成后重新执行上述命令即可成功编译（编译时间较长）
-
-**可以用以下方式节省编译时间**
-
-> 如加--skip_tests参数，或者：
->
-> 在看到开始编译时（如下图）
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.webp" alt="image-20240222185820853" style="zoom: 50%;" />
->
-> 按下 `Ctrl+C` 终止编译
->
-> 在 `onnxruntime/build/Linux/RelWithDebInfo` 目录下使用以下命令（nuc02替换为实际的用户名）
-> 
-> ```
->sudo cmake --build /home/nuc02/Desktop/onnxruntime/build/Linux/RelWithDebInfo --config RelWithDebInfo -j8
-> ```
->
-> 注意编译时是否有报错
->
-> **报错1**
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.webp" alt="image-20240222191128295" style="zoom: 67%;" />
->
-> 缺少python环境
->
-> 此时应输入以下指令安装环境
-> 
-> ```
->sudo apt-get install python-dev-is-python3
-> ```
->
-> **报错2**
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.webp" alt="image-20240222191704374" style="zoom:67%;" />
->
-> 缺少 `numpy` 库
->
-> 输入以下指令安装环境
-> 
-> ```
->sudo apt-get install python3-numpy-dev
-> ```
->
-> 安装完成后再重新编译
->
-> 使用加速编译最后需要回到onnxruntime目录下打开终端重新执行一次原本正常编译的指令检查
-> 
-> ```
->sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
-> ```
->
-
-编译完成后
-
-在 `onnxruntime/build/Linux/RelWithDebInfo` 或 `onnxruntime/build/Linux/Release` 下执行以下命令安装（上面加速的步骤可能会导致编译的文件无法转移至 `Release`  )
-
-```
-sudo make install
-```
-
-### 2.12 pytorch & anaconda
-
-#### 2.12.1 anaconda
-
-官方地址（最新版）：[Download Now | Anaconda](https://www.anaconda.com/download/success)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.webp" alt="image-20250204153055921" style="zoom:50%;" />
-
-安装完成，开始菜单进入anaconda prompt
-
-创建虚拟环境（建议版本3.9以上）
-
-```
-conda create -n  自己取的环境名字  python=版本号
-```
-
-激活环境
-
-```
-conda activate 环境名字
-```
-
-查看存在环境
-
-```
-conda env list
-```
-
-进入命令提示符cmd
-
-查看CUDA版本
-
-```
-nvidia-smi
-```
-
-![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.webp)
-
-即12.6，安装对应CUDA工具包，版本小于等于上图版本号
-
-#### 2.12.2 CUDA安装
-
-CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit-archive)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.webp" alt="image-20250204153127184" style="zoom: 33%;" />
-
-安装CUDA
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.webp" alt="image-20250204153150013" style="zoom:50%;" />
-
-选择精简安装，安装完成后打开cmd检查安装情况
-
-```
-nvcc -V
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.webp" alt="image-20250204153206530" style="zoom:50%;" />
-
-#### 2.12.3 cuDNN安装
-
-cuDNN官方地址：[cuDNN Archive | NVIDIA Developer](https://developer.nvidia.com/rdp/cudnn-archive)
-
-版本对应CUDA的安装版本
-
-下载后，压缩包中三个文件夹解压到该目录下
-
-```
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.webp" alt="image-20250204153217917" style="zoom:50%;" />
-
-验证cudnn是否安装成功
-
-cmd进入目录（在该目录下资源管理器的目录框中输入cmd回车即可）
-
-```
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.3\extras\demo_suite
-```
-
-输入
-
-```
-deviceQuery.exe
-```
-
-检查安装
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.webp" alt="image-20250204153237425" style="zoom:50%;" />
-
-#### 2.12.4 安装PyTorch
-
-官方地址：[PyTorch](https://pytorch.org/)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153247322.webp" alt="image-20250204153247322" style="zoom:50%;" />
-
-将pip命令粘贴到anaconda的已配置好的虚拟环境中
-
-安装完成后，输入以下指令检查是否安装成功
-
-```
-pip list
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153300299.webp" alt="image-20250204153300299" style="zoom:50%;" />
-
-打开vscode，进入工作目录
-
-按下 `ctrl+shift+P` ,选择 `Python: Select Interpreter`
-
-选中刚才创建的虚拟环境即可
-
-运行以下代码检验PyTorch安装结果
-
-```python
-import torch
-print(torch.__version__)
-
-x = torch.rand(5, 3)
-
-if torch.cuda.is_available():
-    x = x.to("cuda")
-    print(x)
-else:
-    print("CUDA is not available")
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
-
-#### 2.12.5 测试例：mnist手写数字识别
-
-安装 `matplotlib` 包（在虚拟环境下安装）
-
-```
-pip install matplotlib
-```
-
-代码
-
-```python
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import torchvision
-from torchvision import datasets, transforms
-import torch.utils.data as data
-import matplotlib.pyplot as plt
-
-BATCH_SIZE = 128
-
-# 设置设备
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-# 数据加载和预处理
-transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize((0.5,), (0.5,))  # 将像素值归一化为 -1 到 1
-])
-
-# download and load the data
-train_dataset = torchvision.datasets.MNIST(root='./mnist/', train=True, transform=transform, download=True)
-test_dataset = torchvision.datasets.MNIST(root='./mnist/', train=False, transform=transform, download=False)
-
-# encapsulate them into dataloader form
-train_loader = data.DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, drop_last=True)
-test_loader = data.DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, drop_last=True)
-
-# 定义模型
-class MNISTModel(nn.Module):
-    def __init__(self):
-        super(MNISTModel, self).__init__()
-        self.model = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(28 * 28, 128),
-            nn.ReLU(),
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Linear(64, 10)
-        )
-    
-    def forward(self, x):
-        return self.model(x)
-
-# 实例化模型
-model = MNISTModel().to(device)
-
-# 定义损失函数和优化器
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-
-# 训练模型
-def train_model(model, train_loader, criterion, optimizer, epochs=5):
-    model.train()
-    for epoch in range(epochs):
-        total_loss = 0
-        for images, labels in train_loader:
-            images, labels = images.to(device), labels.to(device)
-            
-            # 前向传播
-            outputs = model(images)
-            loss = criterion(outputs, labels)
-            
-            # 反向传播和优化
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            
-            total_loss += loss.item()
-        
-        print(f"Epoch [{epoch+1}/{epochs}], Loss: {total_loss / len(train_loader):.4f}")
-
-# 测试模型
-def test_model(model, test_loader):
-    model.eval()
-    correct = 0
-    total = 0
-    with torch.no_grad():
-        for images, labels in test_loader:
-            images, labels = images.to(device), labels.to(device)
-            outputs = model(images)
-            _, predicted = torch.max(outputs, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
-    
-    print(f"Accuracy: {100 * correct / total:.2f}%")
-
-# 可视化识别结果
-def show_predictions(model, test_loader, num_images=10):
-    model.eval()
-    images_shown = 0
-    plt.figure(figsize=(12, 6))
-
-    with torch.no_grad():
-        for images, labels in test_loader:
-            images, labels = images.to(device), labels.to(device)
-            outputs = model(images)
-            _, predicted = torch.max(outputs, 1)
-            
-            for i in range(images.size(0)):
-                if images_shown >= num_images:
-                    break
-                
-                image = images[i].cpu().numpy().squeeze()  # 转为二维图像
-                label = labels[i].item()
-                pred = predicted[i].item()
-                
-                plt.subplot(2, (num_images + 1) // 2, images_shown + 1)
-                plt.imshow(image, cmap='gray')
-                plt.title(f"True: {label}, Pred: {pred}", 
-                          color="green" if label == pred else "red")
-                plt.axis('off')
-                images_shown += 1
-            
-            if images_shown >= num_images:
-                break
-    
-    plt.tight_layout()
-    plt.show()
-
-
-# 执行训练和测试
-train_model(model, train_loader, criterion, optimizer, epochs=5)
-test_model(model, test_loader)
-
-# 显示部分识别结果
-show_predictions(model, test_loader, num_images=10)
-```
-
-运行以上代码
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153521410.webp" alt="image-20250204153521410" style="zoom:50%;" />
-
-![image-20250204153533872](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153533872.webp)
-
-若mnist数据集下载失败，`shift+右键` MNIST
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153546080.webp" alt="image-20250204153546080" style="zoom:50%;" />
-
-交换mirrors中两个链接的位置，交换后为
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.webp" alt="image-20250204153556588" style="zoom:50%;" />
-
-
-<div STYLE="page-break-after: always;"></div>
 
 ## 3 视觉知识
 
