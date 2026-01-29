@@ -2410,12 +2410,15 @@ sudo make install
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
+
 #### 3.1.3外置MiniPC完整装机展示
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
 
 <div STYLE="page-break-after: always;"></div>
+
 ### 3.2传感器
+
 #### 3.2.1 工业相机
 
 ##### 3.2.1.1 参数
