@@ -2384,15 +2384,12 @@ sudo make install
 
 
 
-# 3.硬件平台认知（Hardware）
+## 3.硬件平台认知（Hardware）
 
 > Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
-## 3.1计算平台
-### 3.1.1 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
-#### 3.1.1.1 参数（以 NUC 11 为例）
+### 3.1计算平台
+#### 3.1.1 参数（以 NUC 11 为例）
 
 | 属性                | 参数                 |
 | ------------------- | -------------------- |
@@ -2404,7 +2401,7 @@ sudo make install
 | USB 3.1 接口        | 3个                  |
 | 雷电3接口（Type-C） | 2个                  |
 
-#### 3.1.1.2 各种接口/硬件位置
+#### 3.1.2 各种接口/硬件位置
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
 
@@ -2413,16 +2410,18 @@ sudo make install
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
-### 3.1.2外置MiniPC完整装机展示
+
+#### 3.1.3外置MiniPC完整装机展示
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
 
 <div STYLE="page-break-after: always;"></div>
-## 3.2传感器
 
-### 3.2.1 工业相机
+### 3.2传感器
 
-#### 3.2.1.1 参数
+#### 3.2.1 工业相机
+
+##### 3.2.1.1 参数
 
 制造商：迈德威视（MindVision）
 
@@ -2430,12 +2429,11 @@ sudo make install
 
 镜头：6mm焦距 F2.0光圈 1/1.8″靶面
 
-#### 3.2.1.2 接口
+##### 3.2.1.2 接口
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
-### 3.2.2激光雷达
-
-#### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
+#### 3.2.2激光雷达
+##### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
 
 | 参数                    | 说明                                   |
 | ----------------------- | -------------------------------------- |
@@ -2460,11 +2458,11 @@ sudo make install
 | **尺寸**                | 65×65×60 mm                            |
 | **重量**                | 265 g                                  |
 
-#### 3.2.2.2官方文档与手册
+##### 3.2.2.2官方文档与手册
 
 [Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
 
-#### 3.2.2.3 配置
+##### 3.2.2.3 配置
 
 **硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
 
@@ -2476,19 +2474,18 @@ sudo make install
 
 > 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
 
-#### 3.2.2.4SDK
+##### 3.2.2.4SDK
 
 ***placeholder，update later by VaporTang***
 
 ***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
-### 3.2.3 USB-Camera
+#### 3.2.3 USB-Camera
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
-## 3.3电源与通信
+### 3.3电源与通信
+#### 3.3.1电源与电池管理
 
-### 3.3.1电源与电池管理
-
-#### 3.3.1.1 电池架
+##### 3.3.1.1 电池架
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
 
@@ -2498,9 +2495,28 @@ sudo make install
 
 - 符号 O（圆圈）：代表 **关闭 (OFF)**。
 
-> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。 
+> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
 
-#### 3.3.1.2 电池
+---------------
+以下为旧版文档↓	
+### 1.1 分电板
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
+
+图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
+
+
+### 1.3 DC-DC（24V-19V）变压器
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
+
+黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
+
+### 1.4 电池
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
 
@@ -2514,34 +2530,30 @@ sudo make install
 
 > 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
 
----------------
+### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
-### 3.3.2 分电板与变压器
-
-#### 3.3.2.1分电板
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
-
-图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
 
 
-#### 3.3.2.2 DC-DC（24V-19V）变压器
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
 
-黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
+### 1.8 各种线缆
 
-### 3.3.3USB转TTL与线缆
 
-#### 3.3.3.1 USB to TTL
+
+#### 1.8.2 RJ45 网线
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
+
+#### 1.8.3 HDMI-HDMI
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
+
+### 1.9 USB to TTL
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
 
-##### 3.3.3.1.1 接口
+#### 1.9.1 接口
 
 | 接口 | 用法          |
 | ---- | ------------- |
@@ -2550,25 +2562,13 @@ sudo make install
 | RXD  | 接另一端的TXD |
 | GND  | 接GND（地线） |
 
-#### 3.3.3.2 各种线缆
-
-##### 3.3.3.2.1 RJ45 网线
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
-
-##### 3.3.2.2.2 HDMI-HDMI
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
-
-## 3.4 调试工具
-
-### 3.4.1手持装甲板调试模块
+### 1.10 手持装甲板调试模块
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
 
-#### 3.4.1.1 参数
+#### 1.10.1 参数
 
 | 颜色 | 状态 |
 | ---- | ---- |
@@ -2576,7 +2576,7 @@ sudo make install
 | 蓝色 | 蓝方 |
 | 紫色 | 离线 |
 
-#### 3.4.1.2 拆解
+#### 1.10.2 拆解
 
 装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
 
@@ -2586,7 +2586,7 @@ sudo make install
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
 
-#### 驱动方式：
+##### 驱动方式：
 
 **注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
 
@@ -2599,26 +2599,33 @@ sudo make install
 
 - 红光 LED 支路应串联 **110 Ω** 限流电阻；
 - 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
-- 
-### 3.4.2 裁判系统服务器
+
+
+
+## 2 环境配置
+
+
+
+
+### 2.7 裁判系统服务器
 
 > Contributors: 邱万理
 
-#### 3.4.2.1 前期准备
+#### 2.7.1 前期准备
 
 硬件：路由器（以小米路由器为例）、网线
 
 软件：mysql(实际使用感觉非必要）、RoboMaster_Server(很多版本会闪退，自己多换几个赛季的试试，这里以2020年版本为例)
 
-#### 3.4.2.2 配置路由器
+#### 2.7.2 配置路由器
 
-##### 3.4.2.2.1 连接方式
+##### 2.7.2.1 连接方式
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.webp" alt="image-20240121233742010" style="zoom: 25%;" />
 
 注意网线和电脑连接时接2号的LAN口，而不是接3号的WAN口
 
-##### 3.4.2.2.2 开始配置
+##### 2.7.2.2 开始配置
 
 首先安装上述连接方式连接，Wifi连上Xiaomi并打开小米路由器设置网页http://miwifi.com/
 
@@ -2672,9 +2679,9 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.webp" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
 
-#### 3.4.2.3 软件安装
+#### 2.7.3 软件安装
 
-##### 3.4.2.3.1 MySQL
+##### 2.7.3.1 MySQL
 
 ①进入官网下载MySQL，版本可以选择低一些，mysql-8.0.31-win64.zip
 
@@ -2769,7 +2776,7 @@ net start mysql
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.webp" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
 
-##### 3.4.2.3.2 大疆官方服务器
+##### 2.7.3.2 大疆官方服务器
 
 前往RoboMaster官网下载服务器客户端(RoboMaster产品->裁判系统->软件产品）
 
@@ -2793,7 +2800,7 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.webp" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
 
-#### 3.4.2.4 完整流程
+#### 2.7.4 完整流程
 
 当以上3步都能大致实现之后，可以开始使用我们的服务器
 
@@ -2811,7 +2818,7 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 连接成功后可以通过主页面左上角感叹号是否消失判断
 
-#### 3.2.3.5 可能遇到的问题
+#### 2.7.5 可能遇到的问题
 
 - 主控右上角显示连接上Wifi，但是左上角感叹号仍存在？
 
@@ -2829,16 +2836,15 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 不清楚是官方问题还是自己电脑问题，遇到此问题只能自己多找几个赛季的软件都试试，一般前期只是用于测试功率等简单功能，不一定需要使用最新赛季的服务器软件
 
-# 4 视觉算法与理论 (The Theory)
+## 3 视觉知识
 
-## 4.1 OpenCV
+### 3.1 OpenCV
 
 OpenCV环境配置：见2.2 OpenCV
 
 VSCode插件配置：见2.3.3 OpenCV环境配置
-### 4.1.1 CMake 配置与 VSCode 运行：如何编译 OpenCV 项目
 
-#### 4.1.1.1 cmake配置
+#### 3.1.1 cmake配置
 
 查看cmake版本
 
@@ -2881,7 +2887,7 @@ set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 ```
 
-#### 4.1.1.2 VSCode配置
+#### 3.1.2 VSCode配置
 
 新建一个项目文件夹**（不要中文！写任何代码都不要在任何中文路径下编译，文件名也不要使用中文）**
 
@@ -2943,9 +2949,9 @@ make -j8
 
 若无报错，则配置完成
 
-### 4.1.2图像与视频处理基础：Mat 操作、颜色模型转换等核心 API
+#### 3.1.3 基础功能
 
-#### 4.1.2.1 图像的读写
+##### 3.1.3.1 图像的读写
 
 **imread()和imwrite()**
 
@@ -2969,7 +2975,7 @@ imread()参数的功能
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117124316116.webp" alt="image-20241117124316116" style="zoom:33%;" />
 
-#### 4.1.2.2 图像的展示
+##### 3.1.3.2 图像的展示
 
 **imshow()**
 
@@ -3006,7 +3012,7 @@ namedWindow("窗口名字", 窗口类型); // 窗口类型值缺省为1
 resizeWindow("窗口名字", Size(cols, rows)); // cols控制横向大小，即列数，rows控制纵向大小，即行数，单位均为像素，值只能是正整数
 ```
 
-#### 4.1.2.3 视频的读取
+##### 3.1.3.3 视频的读取
 
 **VideoCapture**
 
@@ -3106,7 +3112,7 @@ while (true)
 
 保存的文件在终端当前打开的目录，不是可执行文件所在目录
 
-#### 4.1.2.4 Mat的初始化与数据类型
+##### 3.1.3.4 Mat的初始化与数据类型
 
 Mat类型本质是个矩阵
 
@@ -3156,7 +3162,7 @@ Scalar()定义颜色，可以理解为一个向量，有几个通道向量就有
 
 其中，三通道彩色图像中，OpenCV的存储顺序是BGR而不是RGB，例如 `Scalar(20,40,60)` 中20为蓝色通道分量，40为绿色通道分量，60为红色通道分量
 
-#### 4.1.2.5 Mat的赋值
+##### 3.1.3.5 Mat的赋值
 
 构造时的赋值参考前面的初始化，通过Scalar()可以给每个元素赋相同初值
 
@@ -3200,7 +3206,7 @@ for (int i = 0; i < img2.cols; i++)
 
 读取同理
 
-#### 4.1.2.6Mt的运算
+##### 3.1.3.5 Mat的运算
 
 Mat支持加减乘除四则运算，加法减法都是矩阵对应元素相加减
 
@@ -3228,7 +3234,7 @@ m = a.dot(b); // a,b均为Mat矩阵，大小相同，m为一个数
 
 矩阵除法不论是除常数还是除矩阵均为被除矩阵对应位置元素除除数（若为常数，则除常数，为矩阵则除对应位置的元素值）
 
-#### 4.1.2.7 Mat的属性
+##### 3.1.3.6 Mat的属性
 
 参考下表
 
@@ -3243,7 +3249,7 @@ int j = img.rows;
 int ch = img.channels();
 ```
 
-#### 4.1.2.8颜色模型转换
+##### 3.1.3.7 颜色模型转换
 
 转换Mat的颜色模型使用cvtColor()函数
 
@@ -3260,8 +3266,6 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117133535765.webp" alt="image-20241117133535765" style="zoom:33%;" />
 
 从左到右从上到下分别是BGR、GRAY、YUV、HSV、Lab
-
-========
 
 #### 3.1.4 常见错误
 
@@ -3287,355 +3291,13 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
   **原因：** fps, frameSize 参数错误（一般表现为0）
 
-  **解决方案：** fps与frameSize手动设置即可，不使用 `cv::videoCapture` 的成员函数读取。
-## 4.2 深度学习理论
+  **解决方案：** fps与frameSize手动设置即可，不使用 `cv::videoCapture` 的成员函数读取
 
-### 4.2.1YOLOv8
+### 3.2 ROS与导航
 
-> Contributor: 程英杰
+#### 3.2.1 实操学习
 
-#### 4.2.1.1目标检测与语义分割的区别
-
-##### 4.2.1.1.1语义分割的目标
-
-语义分割的任务是对输入的图像进行逐像素的分类，标记出像素级别的物体。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.webp" alt="图像逐像素的分类" style="zoom:33%;" />
-
-如上图，图1中把猫、天空、树、草地进行了逐像素的分类；图2中把牛、天空、树、草地进行了逐像素的分类。
-
-##### 4.2.1.1.2 目标检测的目标
-
-目标检测的任务是对输入的图像进行物体检测，标注物体在图像上的位置，以及该位置上物体属于哪个分类。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.webp" alt="模型位置标注和做出分类" style="zoom:33%;" />
-
-如上图，模型把图中的人、狗、马分别进行了位置标注，并且也给出了对应的分类类别。
-
-##### 4.2.1.1.3小结
-
-蕴含信息都包含分类信息和位置信息。
-
-但是语义分割所标记的物体是像素级别的颗粒度的，而目标检测标记的物体是其外切框。
-
-#### 4.2.1.2训练
-
-##### 4.2.1.2.1 安装
-
-Pytorch环境安装省略
-
-```bash
-pip install ultralytics
-```
-
-##### 4.2.1.2.2 准备数据集
-
-Yolo团队为模型设计了专用数据集格式"YOLO"，要训练yolov8，必须确认数据集为yolo格式。
-
-yolo直接采用txt文件保存模型的labels标签，如下图，每一行都代表着该图像中的一个标签GT
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.webp" alt="yolo数据集格式" style="zoom: 50%;" />
-
-目前大部分数据集的保存都是以voc格式，如果你拿到了voc格式的数据集，需要进行转换。
-
-相关链接：[https://blog.csdn.net/kuabiku/article/details/132088402]()
-
-本次使用西南大学 已标注数据集链接： https://pan.baidu.com/s/1oMtdgmBN5xQZTbv2bSLtog?pwd=z3gc
-
-该数据集的标签数据已经是yolo格式
-
-**处理数据集并调整配置文件**
-
-模型训练配置文件(config.yaml)示例：
-
-```yaml
-path: data_xn # dataset root dir
-train: images/train # ./data_xn/images/train
-val: images/test # ./data_xn/images/test
-test: # test images (optional)
-
-# Classes
-names:
-  0: person
-  1: bicycle
-  2: car
-# ...
-```
-
-其中  `path`  是数据集相对于`config.yaml`所在目录的路径，也可以填写绝对路径
-
-`train`和`val`分别是训练集和评估集，该字段中的路径将会与`path`中的路径相拼接
-
-`names`是模型分类数据的信息，从`0`开始，分类数量应不小于训练数据中所标注的类别标签的数量。`西南大学 已标注数据集`的最大类别为35，因此`names`中的分类应该从`0`-`34`.
-
-`西南大学 已标注数据集`数据集文件夹`data_xn`的存放格式应该更改为：
-
-```bash
-data_xn
-    ├─images
-    │  ├─test
-    │  └─train
-    ├─labels
-    │  ├─test
-    │  └─train
-```
-
-其中，`images`下每个子目录中直接存放了图片；`labels`下每个子目录中存放了对应的标注数据(txt文件)
-
-> *训练前，ultralytics会自动读取这写文件夹下的每张图片和标注，并生成* **缓存** *以便于下次训练直接复用。因此如果对数据集进行了改动，再次训练时应将缓存文件* `data_xn/labels/train.cache`和`data_xn/labels/test.cache` *删去以应用更改*
-
-##### 4.2.1.2.3训练
-
-**准备预训练模型**
-
-对于不同任务，Yolov8准备了不同的预训练模型，具有不同的输出格式。目标检测是Yolov8的主任务，因此所有模型均可使用。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.webp" alt="yolov8预训练模型" style="zoom:33%;" />
-
-下载地址：[Releases · ultralytics/assets · GitHub](https://github.com/ultralytics/assets/releases) 提供了ultralytics库提供的所有预训练模型的下载，此处下载最小的默认模型
-
-下载命令：
-
-```bash
-wget https://github.com/ultralytics/assets/releases/download/v8.1.0/yolov8n.pt
-```
-
-**编写训练代码**
-
-在项目根目录创建`datasets`，并将准备好的数据集`data_xn`剪切进去。
-
-将下载好的预训练模型文件`yolov8n.pt`放入项目根目录
-
-在项目根目录创建`train.py`:
-
-```python
-from ultralytics import YOLO
-if __name__ == "__main__":
-
-    # 加载预训练数据集
-    model = YOLO('yolov8n.pt')
-    
-    # 按照配置文件的定义开始训练，训练3个epochs
-    results = model.train(data='config.yaml', epochs=3,lr0=1E-2)
-
-    # model.val()
-    # train方法在训练完成后自动对模型进行评估， 因此不需要调用 model.val()
-
-    #导出模型为ONNX格式
-    model.export(format='onnx', dynamic=True)
-```
-
-> 由于Windows下处理数据集需要创建多个workers，因此，需要将接口调用写在__main__下以防止`Freeze_support Error`
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.webp" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
-
-**然后运行train.py就可以开始训练了**
-
-**查看训练结果**
-
-训练结果保存在项目根目录`runs`文件夹下，`runs/detect`存放了`目标检测`任务的训练模型和评估结果
-
-关于评估指标的解释，见：[https://blog.csdn.net/java1314777/article/details/134154676]()
-
-模型(权重)文件存放在相应模型文件夹中的`weights`文件夹
-
-#### 4.2.1.3 使用ONNX调用
-
-[生成ONNX文件参考资料](https://docs.ultralytics.com/modes/export/)
-
-ONNX Runtime提供了跨平台调用模型的统一接口
-
-生成并使用ONNX文件的步骤如下:
-
-1. 生成ONNX文件:
-   从下面的文件结构开始,通过上面的步骤已经得到了训练过程当中综合准确率最好的模型`best.pt`和模型最后的训练结果`last.pt`
-2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.webp" alt="weights权重文件展示图" style="zoom:33%;" />
-
-然后是在pycharm控制台打开之前下载了 `ultralytics`的anaconda环境，然后在控制台输入下面的指令
-
-~~~bash
-yolo export model=runs/detect/train6/weights/best.pt format=onnx  int8=true simplify=true dynamic=true
-~~~
-
-在`best.pt`所在的文件夹当中得到了`best.onnx`。
-
->参数解释
->前两个命令 yolo export 指的是使用yolo的相关命令 做导出任务
->model后面跟的参数是训练得到的模型文件路径
->format后面是模型导出的格式 [(yolo官网上模型导出的格式)](https://docs.ultralytics.com/zh/modes/export/#arguments)
->后面的参数也是官网上的相关介绍
->
-><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.webp" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
->
->这里我使用了 int8 simplify dynamic 用来简化模型加快计算速度
-
-
-当然根据官网也可以使用python将模型文件导出 下面是相关的代码
-
-~~~python
-from ultralytics import YOLO
-# Load a model
-model = YOLO('runs/detect/train6/weights/best.pt')  # load a custom trained model
-# Export the model
-model.export(format='onnx', int8=True, dynamic=True, simplify=True)
-~~~
-
-
-2. 编写python调用ONNX文件
-   [调用ONNX文件参考资料](https://zhuanlan.zhihu.com/p/670622368)
-
-首先先import这些库文件
-
-~~~python 
-import onnxruntime as ort
-import cv2
-import numpy as np
-~~~
-
-然后加载ONNX文件
-
-~~~python
-import onnxruntime as ort
-session = ort.InferenceSession("yolov8m-seg.onnx", providers=["CPUExecutionProvider"]) # 使用CPU加载计算模型
-~~~
-
-后续的代码和相关的解释都在注释当中写的比较详细,这里就直接贴代码了
-
-~~~python
-# %%
-import onnxruntime as ort
-import cv2
-import numpy as np
-
-# 这个函数是将图片数据转换为模型输入格式 (预处理函数)
-def prepare_input(bgr_image, width, height):
-    image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)  # 将图片从BGR格式转换为RGB格式
-    # cv2.imshow(bgr_image)
-    image = cv2.resize(image, (width, height)).astype(np.float32) # 将图片resize到模型输入尺寸640x640
-    image = image / 255.0  #归一化
-    image = np.transpose(image, (2, 0, 1)) # 将图像数据的通道顺序由HWC调整为CHW
-    input_tensor = np.expand_dims(image, axis=0) # 扩展数据维度，将数据的维度调整为NCHW
-    #axis=0表示在第0维增加一个维度
-    #经过预处理后，输入数据input_tensor的维度变为[1, 3, 640, 640]，与模型的输入尺寸一致。
-    return input_tensor
-# 计算两个方框之间的IOU值的大小 计算方式是 两个方框交集面积/并集面积
-# 参考资料 http://t.csdnimg.cn/zTN73
-def iou(rec_1,rec_2):
-        '''
-        rec_1:左上角(rec_1[0],rec_1[1])    右下角：(rec_1[2],rec_1[3])
-        rec_2:左上角(rec_2[0],rec_2[1])    右下角：(rec_2[2],rec_2[3])
-        （rec_1）
-        1--------1
-        1   1----1------1
-        1---1----1      1
-            1           1
-            1-----------1 （rec_2）
-        '''
-        s_rec1=(rec_1[2]-rec_1[0])*(rec_1[3]-rec_1[1])   #第一个bbox面积 = 长×宽
-        s_rec2=(rec_2[2]-rec_2[0])*(rec_2[3]-rec_2[1])   #第二个bbox面积 = 长×宽
-        sum_s=s_rec1+s_rec2                              #总面积
-        left=max(rec_1[0],rec_2[0])                      #交集左上角顶点横坐标
-        right=min(rec_1[2],rec_2[2])                     #交集右下角顶点横坐标
-        bottom=max(rec_1[1],rec_2[1])                    #交集左上角顶点纵坐标
-        top=min(rec_1[3],rec_2[3])                       #交集右下角顶点纵坐标
-        if left >= right or top <= bottom:               #不存在交集的情况
-            return 0
-        else:
-            inter=(right-left)*(top-bottom)              #求交集面积
-            iou=(inter/(sum_s-inter))*1.0                #计算IOU
-            return iou
-session = ort.InferenceSession(
-     "D:\\ProgramFiles\\ultralytics-main\\runs\\detect\\train6\\weights\\best.onnx", # 模型文件路径 
-     providers=["CPUExecutionProvider"])  # 模型路径 还有使用CPU计算
-video = cv2.VideoCapture("D:\\opencv_image\\video_zhuangjiaban.mp4") # 读取视频文件
-# %%
-# 1. 把OpenCV读取的BGR格式的图片转换为RGB格式；
-# 2. 把图片resize到模型输入尺寸640x640；
-# 3. 对像素值除以255做归一化操作；
-# 4. 把图像数据的通道顺序由HWC调整为CHW；
-# 5. 扩展数据维度，将数据的维度调整为NCHW。
-while True:
-    model_width = 640
-    model_height = 640
-    ret, image = video.read()
-    if(ret==False):
-       continue      
-    image_height, image_width, _ = image.shape
-    input_tensor = prepare_input(image, model_width, model_height)
-    outputs = session.run(None, {session.get_inputs()[0].name: input_tensor})
-    # %%
-    #squeeze函数是用于删除shape中为1的维度，对output0做transpose操作是为了方便后续操作
-    # print(outputs[0].shape)
-    output0 = np.squeeze(outputs[0]).transpose()
-    # print("outputs[0].shape shape:", outputs[0].shape)
-    # print("output0 shape:", output0.shape)
-    # %%
-    boxes = output0
-    # print(boxes.shape) # 输出结果是 (8400,40)
-    # 这里的boxes是一个二维数组，第一维是目标框的数量，第二维是目标框的属性，包括目标框的坐标和类别概率等信息。
-    # 咱们细说第二维的属性：前4个元素是目标框的坐标信息，分别是目标框的中心坐标(x,y)和宽高(w,h)，后36个元素是目标框的类别概率信息，每个类别的概率占4个元素。
-    # 所以[8400,40] 就代表着 8400个目标框，每个目标框有40个属性
-    # boxes shape: (8400, 84)
-    # masks shape: (8400, 32)
-    # %%
-    objects = []
-    for row in boxes:
-        prob = row[4:40].max()
-        if prob < 0.2:
-            continue
-        class_id = row[4:40].argmax()
-        label = class_id
-        xc, yc, w, h = row[:4]
-        # // 把x1, y1, x2, y2的坐标恢复到原始图像坐标
-        x1 = (xc - w / 2) / model_width * image_width
-        y1 = (yc - h / 2) / model_height * image_height
-        x2 = (xc + w / 2) / model_width * image_width
-        y2 = (yc + h / 2) / model_height * image_height
-        # // 获取实例分割mask
-        # mask = get_mask(row[84:25684], (x1, y1, x2, y2), image_width, image_height)
-        # // 从mask中提取轮廓
-        # polygon = get_polygon(mask, x1, y1)
-        objects.append([x1, y1, x2, y2, label, prob])
-    # %%
-    objects.sort(key=lambda x: x[5], reverse=True)
-    # %%
-    # objects.sort(key=lambda x: x[5], reverse=True)
-    # // NMS
-    results = []
-    while len(objects) > 0:
-        print(objects[0])
-        results.append(objects[0]) # 我们想要与第一个框进行比较 所以不能让第一个框和自己作比较
-        # 如果 iou过大(超过了0.5)的话 就删除这个object 保留iou小的object
-        objects = [object for object in objects if iou([object[0],object[1],object[2],object[3]], 
-                                                    [objects[0][0],objects[0][1],objects[0][2],objects[0][3]]) < 0.5]
-        # 这里就是将 objects中和第一个object的iou大于0.5的object删除掉
-    # %%
-    # 定义矩形的左上角和右下角坐标
-    # 设置矩形颜色为红色（BGR格式）
-    color = (0, 0, 255)
-    thickness = 1 # 若想要填充矩形则将此值改为-1或者大于等于0的数字
-    # 在图像上绘制矩形
-    for result in results:
-        print(result)
-        start_point = (int(result[0]), int(result[1]))
-        end_point = (int(result[2]), int(result[3]))
-        cv2.rectangle(image, start_point, end_point, color, thickness)
-    cv2.imshow('window name',image)
-    if cv2.waitKey(10) & 0xFF == ord('q'):
-            break
-cv2.destroyAllWindows()
-~~~
-
-
-<div STYLE="page-break-after: always;"></div>
-
-
-
-## 4.3ROS与导航（SLAM）
-
-### 4.3.1 ROS 实操与通信
-
-> Contributor: 刘明楷（milchstrasse565@github）
+> Contributors: 刘明楷（milchstrasse565@github）
 
 - 屏蔽导航包里的速度发布语句
 
@@ -3665,129 +3327,9 @@ cv2.destroyAllWindows()
   - rosbag数据记录、回放
   
 
-### 4.3.2Catkin 编译系统详解：深入理解 ROS 编译流程。
+#### 3.2.2 IMU与里程计融合
 
-> Contributor: 洪佳
-
-> 参考资料：
->
-> [11] [ROS从入门到精通系列（五）catkin详解与catkin_make编译-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/hhaowang/article/details/101691986)
-
-一定要搞明白`make/makefile/catkin_make/cmake/Cmakelist`的关系,本质是链接文件去生成可执行文件
-
-系统学习大家还是要自己学，主要给大家提供思路，学习大纲还有遇到的一些问题的解决方法，少走弯路
-
-#### 4.3.2.1catkin编译系统
-
-对于源代码包，我们只有编译才能在系统上运行。而Linux下的编译器有``gcc、g++``，随着源文件的增加，直接用``gcc/g++``命令的方式显得效率低下，人们开始用`Makefile`来进行编译。然而随着工程体量的增大，`Makefile`也不能满足需求，于是便出现了`Cmake`工具。`CMake`是对make工具的生成器，是更高层的工具，它简化了编译构建过程，能够管理大型项目，具有良好的扩展性。对于ROS这样大体量的平台来说，就采用的是`CMake`，并且ROS对`CMake`进行了扩展，于是便有了Catkin编译系统。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.webp" alt="image-20240129164912808" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.webp" alt="image-20240129164930341" style="zoom:33%;" />
-
-其实早期是`rosbuild`，目前还支持使用，但是`ros`的核心软件包都已经被转换为Catkin
-
-#### 4.3.2.2catkin_make 结构和特点
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.webp" alt="image-20240129165146937" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.webp" alt="image-20240129165635113" style="zoom:33%;" />
-
-#### 4.3.4.3catkin_make编译流程
-
-- 建立工作空间
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.webp" alt="image-20240129165753173" style="zoom:50%;" />
-
-- 编译
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.webp" alt="image-20240129165829990" style="zoom:50%;" />
-
-source用来配置环境，不然`roslaunch`找不到对应的包
-
-#### 4.3.4.4catkin_make文件系统
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.webp" alt="img" style="zoom: 33%;" />
-
-#### 4.3.4.5 package
-
-package也是ROS源代码存放的地方，任何ROS的代码无论是C++还是Python都要放到package中，这样才能正常的编译和运行。
-
-一个package可以编译出来多个目标文件（ROS可执行程序、动态静态库、头文件等等）。
-
-**package结构**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.webp" alt="img" style="zoom:33%;" />
-
-**package指令**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.webp" alt="img" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.webp" alt="image-20240129171704680" style="zoom:33%;" />
-
-#### 4.3.4.6 常见问题
-
-点进源代码包后，把`build/devel`两个包删了，在当前路径下进入终端
-
-```
-catkin_make
-```
-
-如果没有error，记得source配置环境，编译成功‘
-
-以下是一些问题现象和解决方案
-
-**问题①**
-
-```
-CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package): Could not find a package configuration file provided by "catkin_virtualenv" with any of the following names:
-
-    catkin_virtualenvConfig.cmake
-    catkin_virtualenv-config.cmake
-  Invoking "make cmake_check_build_system" failed
-```
-
-这是由于缺少包导致的
-
-**解决方案：**
-
-在终端输入：
-
-```
-sudo apt-get install ros-noetic-catkin-virtualenv
-```
-
-注意：
-
-1.error里面”_”下划线在解决代码里面用“-”分割符号
-
-2.Ubuntu20.04是noetic        Ubuntu18.04是melodic
-
-3.有可能缺少好几个包，catkin_make多编译几次再下载几次包
-
-**问题②**
-
-在下载的时候
-
-```
-E:无法定位到软件包
-```
-
-原因很多，网络连接问题、`ros`软件源、apt源过期等问题
-
-**解决方案：**
-
-查一遍list,这个很麻烦需要耐心，我没试过谨慎试
-
-换源镜像
-
-http://t.csdnimg.cn/o9dce
-
-### 4.3.3运动学与传感器融合
-
-#### 4.3.3.1 IMU与里程计融合
-
-> Contributor: 洪佳
+> Contributors: 洪佳
 
 > 参考资料：
 >
@@ -3797,11 +3339,11 @@ http://t.csdnimg.cn/o9dce
 >
 > [7] [一文了解IMU原理、误差模型、标定、惯性传感器选型以及IMU产品调研(含IMU、AHRS、VRU和INS区别)_imu寄存器值计算重力-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/QLeelq/article/details/112985306?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"112985306"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
-##### 4.3.3.1.1 概述
+##### 3.2.2.1 概述
 
 实际使用小车的过程中，光有麦轮的里程计计算是不够的，因为实际使用过程中经常会出现轮子打滑和数据出现累计误差的情况，所以我们可以从使用IMU和里程计融合的角度来对系统“升级”。
 
-##### 4.3.3.1.2 IMU
+##### 3.2.2.2 IMU
 
 **简述**
 
@@ -3817,7 +3359,7 @@ IMU 一般指6轴传感器，内部包含了3轴陀螺仪和3轴加速度计，3
 
 [一文了解IMU原理、误差模型、标定、惯性传感器选型以及IMU产品调研(含IMU、AHRS、VRU和INS区别)_imu寄存器值计算重力-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/QLeelq/article/details/112985306?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"112985306"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
-##### 4.3.3.1.3 IMU数据获取
+##### 3.2.2.3 IMU数据获取
 
 **数据接口**
 
@@ -3831,7 +3373,7 @@ ROS提供的相关包`imu_tools`进行滤波
 
 可以看到`complementary_filter_gain_node`会订阅该`topic`，即该`topic`作为输入滤波得到最终数据(发布`/imu/data` `topic` 类型同样为`sensor_msgs/Imu`)
 
-##### 4.3.3.1.4 融合方法
+##### 3.2.2.4 融合方法
 
 **直接融合**
 
@@ -3945,7 +3487,7 @@ Timing
 - 该滤波器目前设计用于我们在 PR2 机器人上使用的三个传感器信号（车轮里程计、`imu` 和 `vo`）。我们计划使这个包更加通用：未来的版本将能够监听“n”个传感器源，所有源都发布（[`nav_msgs/`里程计](http://docs.ros.org/en/api/nav_msgs/html/msg/Odometry.html)）消息。每个源都将在里程计消息中设置 3D 姿势的协方差，以指定它实际测量的 3D 姿势的哪一部分。
 - 我们想将速度添加到扩展卡尔曼滤波器的状态中。
 
-#### 4.3.3.2 麦轮底盘运动学解算
+#### 3.2.3 麦轮底盘运动学解算
 
 > Contributors: 洪佳
 
@@ -3953,7 +3495,7 @@ Timing
 >
 > [10] [ROS机器人学习——麦克纳姆轮运动学解算-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/oXiaoLingTong/article/details/120198677)
 
-##### 4.3.3.2.1 麦轮概述
+##### 3.2.3.1 麦轮概述
 
 RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通轮子无异，可安装于平行轴上，但是麦克纳姆轮可以实现全向移动，即前后运动、水平移动、绕中心自转。正因为以上优点，许多工业上的全向移动平台都会应用这种轮子。缺点也有，就是不耐磨，需要定期更换。
 
@@ -3961,7 +3503,7 @@ RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126010416033.webp" alt="image-20240126010416033" style="zoom:33%;" />
 
-##### 4.3.3.2.2 麦轮安装
+##### 3.2.3.2 麦轮安装
 
 同轴安装，分为左旋和右旋两种
 
@@ -3976,7 +3518,7 @@ RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通
 - O-正方形：四个轮子位于正方形的四个顶点，平移和旋转都没有任何问题。
 - O-长方形：轮子转动可以产生 yaw 轴转动力矩，而且转动力矩的力臂也比较长。是最常见的安装方式。
 
-##### 4.3.3.2.3 运动学模型
+##### 3.2.3.3 运动学模型
 
 **基础知识**
 
@@ -4050,14 +3592,131 @@ ROS使用公制 ：
 
 转换为底盘坐标系下对时间求积分即为里程计变化量
 
-##### 4.3.3.2.4 代码实现
+##### 3.2.3.4 代码实现
 
 代码参考：http://t.csdnimg.cn/ldXqr
 
+#### 3.2.4 catkin_make编译
 
-### 4.3.4 SLAM四种算法建图对比
+> Contributors: 洪佳
 
-> Contributor: 洪佳
+> 参考资料：
+>
+> [11] [ROS从入门到精通系列（五）catkin详解与catkin_make编译-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/hhaowang/article/details/101691986)
+
+一定要搞明白`make/makefile/catkin_make/cmake/Cmakelist`的关系,本质是链接文件去生成可执行文件
+
+系统学习大家还是要自己学，主要给大家提供思路，学习大纲还有遇到的一些问题的解决方法，少走弯路
+
+##### 3.2.4.1 catkin编译系统
+
+对于源代码包，我们只有编译才能在系统上运行。而Linux下的编译器有``gcc、g++``，随着源文件的增加，直接用``gcc/g++``命令的方式显得效率低下，人们开始用`Makefile`来进行编译。然而随着工程体量的增大，`Makefile`也不能满足需求，于是便出现了`Cmake`工具。`CMake`是对make工具的生成器，是更高层的工具，它简化了编译构建过程，能够管理大型项目，具有良好的扩展性。对于ROS这样大体量的平台来说，就采用的是`CMake`，并且ROS对`CMake`进行了扩展，于是便有了Catkin编译系统。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.webp" alt="image-20240129164912808" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.webp" alt="image-20240129164930341" style="zoom:33%;" />
+
+其实早期是`rosbuild`，目前还支持使用，但是`ros`的核心软件包都已经被转换为Catkin
+
+##### 3.2.4.2 catkin_make 结构和特点
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.webp" alt="image-20240129165146937" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.webp" alt="image-20240129165635113" style="zoom:33%;" />
+
+##### 3.2.4.3 catkin_make编译流程
+
+- 建立工作空间
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.webp" alt="image-20240129165753173" style="zoom:50%;" />
+
+- 编译
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.webp" alt="image-20240129165829990" style="zoom:50%;" />
+
+source用来配置环境，不然`roslaunch`找不到对应的包
+
+##### 3.2.4.4 catkin_make文件系统
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.webp" alt="img" style="zoom: 33%;" />
+
+##### 3.2.4.5 package
+
+package也是ROS源代码存放的地方，任何ROS的代码无论是C++还是Python都要放到package中，这样才能正常的编译和运行。
+
+一个package可以编译出来多个目标文件（ROS可执行程序、动态静态库、头文件等等）。
+
+**package结构**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.webp" alt="img" style="zoom:33%;" />
+
+**package指令**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.webp" alt="img" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.webp" alt="image-20240129171704680" style="zoom:33%;" />
+
+##### 3.2.4.6 常见问题
+
+点进源代码包后，把`build/devel`两个包删了，在当前路径下进入终端
+
+```
+catkin_make
+```
+
+如果没有error，记得source配置环境，编译成功‘
+
+以下是一些问题现象和解决方案
+
+**问题①**
+
+```
+CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package): Could not find a package configuration file provided by "catkin_virtualenv" with any of the following names:
+
+    catkin_virtualenvConfig.cmake
+    catkin_virtualenv-config.cmake
+  Invoking "make cmake_check_build_system" failed
+```
+
+这是由于缺少包导致的
+
+**解决方案：**
+
+在终端输入：
+
+```
+sudo apt-get install ros-noetic-catkin-virtualenv
+```
+
+注意：
+
+1.error里面”_”下划线在解决代码里面用“-”分割符号
+
+2.Ubuntu20.04是noetic        Ubuntu18.04是melodic
+
+3.有可能缺少好几个包，catkin_make多编译几次再下载几次包
+
+**问题②**
+
+在下载的时候
+
+```
+E:无法定位到软件包
+```
+
+原因很多，网络连接问题、`ros`软件源、apt源过期等问题
+
+**解决方案：**
+
+查一遍list,这个很麻烦需要耐心，我没试过谨慎试
+
+换源镜像
+
+http://t.csdnimg.cn/o9dce
+
+#### 3.2.5 SLAM四种算法建图对比
+
+> Contributors: 洪佳
 
 > 参考资料：
 >
@@ -4065,7 +3724,7 @@ ROS使用公制 ：
 
 SLAM——同步定位与建图（Simultaneous Localization and Mapping，SLAM）是在上世纪80年代被提出的，起初发展的算法皆采用激光雷达作为定位与建图的工具，随着稀疏性问题的解决，相机也被引入SLAM领域，如今SLAM技术在向多传感器融合的方向发展，激光雷达、深度相机、IMU惯导等正成为SLAM技术的常见解决方案。
 
-#### 4.3.4.1 Gmapping
+##### 3.2.5.1 Gmapping
 
 一种用于建立**二维地图的概率算法**，它基于激光雷达数据和机器人的运动信息，通过**蒙特卡洛方法**进行粒子滤波定位和地图构建。
 
@@ -4144,7 +3803,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 代价地图的生成过程可以参考此文章：https://blog.csdn.net/qq_35635374/article/details/120874817（到了导航部分再细说），总而言之就是对之前建好的静态层地图和雷达运行探测到的障碍层地图按照膨胀规则进行膨胀和合并，生成数值在[0,254]之间的代价地图，导航时按照地图方格中的数值进行路径规划
 
-#### 4.3.4.2 Hector
+##### 3.2.5.2 Hector
 
 `Hector`算法框架是基于高斯牛顿
 （Hector 在机器人快速转向时很容易发生错误匹配，建出的地图发生错位，原因主要是优化算法容易陷入局部最小值）
@@ -4155,7 +3814,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172707169.webp" alt="image-20240127172707169" style="zoom: 50%;" />
 
-#### 4.3.4.3 Karto
+##### 3.2.5.3 Karto
 
 `Karto`算法框架是基于图优化
 
@@ -4165,7 +3824,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172725405.webp" alt="image-20240127172725405" style="zoom:50%;" />
 
-#### 4.3.4.4 Cartographer
+##### 3.2.5.4 Cartographer
 
 `Cartographer`算法框架是基于图优化cartographer在不同环境下，调整参数和传感器配置，就能工作
 大部分数据集，cartographer表现更优。ActiveSubmaps2D类中的submaps_列表实际最多只两个submap，一个认为是old_map，另一个认为是new_map，类似于滑窗操作。
@@ -4180,11 +3839,11 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 ![image-20240127172736432](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172736432.webp)
 
-### 4.3.5 地图处理工具：gm 转 posegraph 及 rosbag 处理
+#### 3.2.6 pgm 转 posegraph
 
-> Contributor: 唐锦梁
+> Contributors: 唐锦梁
 
-#### 4.3.5.1 精修编辑 pgm 地图
+##### 3.2.6.1 精修编辑 pgm 地图
 
 > 参考资料：
 >
@@ -4196,7 +3855,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217152911916.webp" alt="image-20250217152911916" style="zoom: 25%;" />
 
-#### 4.3.5.2 使用 Ogm2Pgbm 获取带有点云和位姿的 rosbag
+##### 3.2.6.2 使用 Ogm2Pgbm 获取带有点云和位姿的 rosbag
 
 安装过程如下
 
@@ -4325,7 +3984,7 @@ roslaunch ogm2pgbm ogm2pgbm.launch map_file:=/root/workspace/map/$MAP_NAME.yaml 
    docker cp $CONTAINER_ID:$CONTAINER_PATH $DST_PATH
    ```
 
-#### 4.3.5.3 将 .bag 转换为 .db3
+##### 3.2.6.3 将 .bag 转换为 .db3
 
 > 以下操作均在宿主机中进行
 
@@ -4346,7 +4005,7 @@ rosbags-convert --src ogm2pgbm_sensordata.bag \
   --exclude-topic /rosout /robot/map /rosout_agg
 ```
 
-#### 4.3.5.4 播放 rosbag 并制图
+##### 3.2.6.4 播放 rosbag 并制图
 
 > 以下操作均在宿主机中进行
 
@@ -4392,13 +4051,13 @@ rosbags-convert --src ogm2pgbm_sensordata.bag \
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217153213246.webp" alt="image-20250217153213246" style="zoom: 25%;" />
 
-### 4.3.6 cmake进阶
+### 3.3 cmake
 
 cmake主要是用来方便管理c++工程文件，链接所需要的库依赖，再编译生成可执行文件
 
 控制从源码到可执行文件的整个构建流程，包括编译、链接、测试等步骤。它还支持分布式编译，加速大项目的编译速度。
 
-#### 4.3.6.1 常见问题
+#### 3.3.1 常见问题
 
 1.`target_compile_definitions` 的宏定义内容在VSCode编辑器中中无法识别
 
@@ -4418,7 +4077,7 @@ cmake主要是用来方便管理c++工程文件，链接所需要的库依赖，
 }
 ```
 
-#### 4.3.6.2 直接编译C++工程文件
+#### 3.3.2 直接编译C++工程文件
 
 * example：
 
@@ -4452,9 +4111,9 @@ fmt::fmt
 
 * 把所有的cpp、hpp文件都放在当前目录下，直接生成一个可执行文件main即可
 
-#### 4.3.6.3 ROS1平台上编译
+#### 3.3.3 ROS1平台上编译
 
-##### 4.3.6.3.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用
+##### 3.3.3.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用
 
 * add_definitions(-Wall -Werror -Wno-enum-compare)  
 
@@ -4676,7 +4335,7 @@ endif ()```
 </package>
 ```
 
-##### 4.3.6.3.2 ROS1上生成自定义消息类型
+##### 3.3.3.2 ROS1上生成自定义消息类型
 
 * 在package.xml添加两项：
 
@@ -4707,9 +4366,9 @@ catkin_package(
 
 ```
 
-#### 4.3.6.4 ROS2 平台上编译
+#### 3.3.4 ROS2 平台上编译
 
-##### 4.3.6.4.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用（对比ROS1，大同小异）
+##### 3.3.4.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用（对比ROS1，大同小异）
 
 * example：
 
@@ -4900,7 +4559,7 @@ ament_package()
 </package>
 ```
 
-##### 4.3.6.4.2 在ROS2中如果要生成自定义消息类型
+##### 3.3.4.3 在ROS2中如果要生成自定义消息类型
 
 * example
 
@@ -4978,10 +4637,347 @@ ament_package()
   </export>
 </package>
 ```
-以下为旧版文档↓	
+
+### 3.4 yolov8
+
+> Contributors: 程英杰
+
+#### 3.4.1 目标检测与语义分割的区别
+
+##### 3.4.1.1 语义分割的目标
+
+语义分割的任务是对输入的图像进行逐像素的分类，标记出像素级别的物体。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.webp" alt="图像逐像素的分类" style="zoom:33%;" />
+
+如上图，图1中把猫、天空、树、草地进行了逐像素的分类；图2中把牛、天空、树、草地进行了逐像素的分类。
+
+##### 3.4.1.2 目标检测的目标
+
+目标检测的任务是对输入的图像进行物体检测，标注物体在图像上的位置，以及该位置上物体属于哪个分类。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.webp" alt="模型位置标注和做出分类" style="zoom:33%;" />
+
+如上图，模型把图中的人、狗、马分别进行了位置标注，并且也给出了对应的分类类别。
+
+##### 3.4.1.3 小结
+
+蕴含信息都包含分类信息和位置信息。
+
+但是语义分割所标记的物体是像素级别的颗粒度的，而目标检测标记的物体是其外切框。
+
+#### 3.4.2 训练
+
+##### 3.4.2.1 安装
+
+Pytorch环境安装省略
+
+```bash
+pip install ultralytics
+```
+
+##### 3.4.2.2 准备数据集
+
+Yolo团队为模型设计了专用数据集格式"YOLO"，要训练yolov8，必须确认数据集为yolo格式。
+
+yolo直接采用txt文件保存模型的labels标签，如下图，每一行都代表着该图像中的一个标签GT
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.webp" alt="yolo数据集格式" style="zoom: 50%;" />
+
+目前大部分数据集的保存都是以voc格式，如果你拿到了voc格式的数据集，需要进行转换。
+
+相关链接：[https://blog.csdn.net/kuabiku/article/details/132088402]()
+
+本次使用西南大学 已标注数据集链接： https://pan.baidu.com/s/1oMtdgmBN5xQZTbv2bSLtog?pwd=z3gc
+
+该数据集的标签数据已经是yolo格式
+
+**处理数据集并调整配置文件**
+
+模型训练配置文件(config.yaml)示例：
+
+```yaml
+path: data_xn # dataset root dir
+train: images/train # ./data_xn/images/train
+val: images/test # ./data_xn/images/test
+test: # test images (optional)
+
+# Classes
+names:
+  0: person
+  1: bicycle
+  2: car
+# ...
+```
+
+其中  `path`  是数据集相对于`config.yaml`所在目录的路径，也可以填写绝对路径
+
+`train`和`val`分别是训练集和评估集，该字段中的路径将会与`path`中的路径相拼接
+
+`names`是模型分类数据的信息，从`0`开始，分类数量应不小于训练数据中所标注的类别标签的数量。`西南大学 已标注数据集`的最大类别为35，因此`names`中的分类应该从`0`-`34`.
+
+`西南大学 已标注数据集`数据集文件夹`data_xn`的存放格式应该更改为：
+
+```bash
+data_xn
+    ├─images
+    │  ├─test
+    │  └─train
+    ├─labels
+    │  ├─test
+    │  └─train
+```
+
+其中，`images`下每个子目录中直接存放了图片；`labels`下每个子目录中存放了对应的标注数据(txt文件)
+
+> *训练前，ultralytics会自动读取这写文件夹下的每张图片和标注，并生成* **缓存** *以便于下次训练直接复用。因此如果对数据集进行了改动，再次训练时应将缓存文件* `data_xn/labels/train.cache`和`data_xn/labels/test.cache` *删去以应用更改*
+
+##### 3.4.2.3 训练
+
+**准备预训练模型**
+
+对于不同任务，Yolov8准备了不同的预训练模型，具有不同的输出格式。目标检测是Yolov8的主任务，因此所有模型均可使用。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.webp" alt="yolov8预训练模型" style="zoom:33%;" />
+
+下载地址：[Releases · ultralytics/assets · GitHub](https://github.com/ultralytics/assets/releases) 提供了ultralytics库提供的所有预训练模型的下载，此处下载最小的默认模型
+
+下载命令：
+
+```bash
+wget https://github.com/ultralytics/assets/releases/download/v8.1.0/yolov8n.pt
+```
+
+**编写训练代码**
+
+在项目根目录创建`datasets`，并将准备好的数据集`data_xn`剪切进去。
+
+将下载好的预训练模型文件`yolov8n.pt`放入项目根目录
+
+在项目根目录创建`train.py`:
+
+```python
+from ultralytics import YOLO
+if __name__ == "__main__":
+
+    # 加载预训练数据集
+    model = YOLO('yolov8n.pt')
+    
+    # 按照配置文件的定义开始训练，训练3个epochs
+    results = model.train(data='config.yaml', epochs=3,lr0=1E-2)
+
+    # model.val()
+    # train方法在训练完成后自动对模型进行评估， 因此不需要调用 model.val()
+
+    #导出模型为ONNX格式
+    model.export(format='onnx', dynamic=True)
+```
+
+> 由于Windows下处理数据集需要创建多个workers，因此，需要将接口调用写在__main__下以防止`Freeze_support Error`
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.webp" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
+
+**然后运行train.py就可以开始训练了**
+
+**查看训练结果**
+
+训练结果保存在项目根目录`runs`文件夹下，`runs/detect`存放了`目标检测`任务的训练模型和评估结果
+
+关于评估指标的解释，见：[https://blog.csdn.net/java1314777/article/details/134154676]()
+
+模型(权重)文件存放在相应模型文件夹中的`weights`文件夹
+
+#### 3.4.3 使用ONNX调用
+
+[生成ONNX文件参考资料](https://docs.ultralytics.com/modes/export/)
+
+ONNX Runtime提供了跨平台调用模型的统一接口
+
+生成并使用ONNX文件的步骤如下:
+
+1. 生成ONNX文件:
+   从下面的文件结构开始,通过上面的步骤已经得到了训练过程当中综合准确率最好的模型`best.pt`和模型最后的训练结果`last.pt`
+2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.webp" alt="weights权重文件展示图" style="zoom:33%;" />
+
+然后是在pycharm控制台打开之前下载了 `ultralytics`的anaconda环境，然后在控制台输入下面的指令
+
+~~~bash
+yolo export model=runs/detect/train6/weights/best.pt format=onnx  int8=true simplify=true dynamic=true
+~~~
+
+在`best.pt`所在的文件夹当中得到了`best.onnx`。
+
+>参数解释
+>前两个命令 yolo export 指的是使用yolo的相关命令 做导出任务
+>model后面跟的参数是训练得到的模型文件路径
+>format后面是模型导出的格式 [(yolo官网上模型导出的格式)](https://docs.ultralytics.com/zh/modes/export/#arguments)
+>后面的参数也是官网上的相关介绍
+>
+><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.webp" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
+>
+>这里我使用了 int8 simplify dynamic 用来简化模型加快计算速度
 
 
-# 6.文档维护
+当然根据官网也可以使用python将模型文件导出 下面是相关的代码
+
+~~~python
+from ultralytics import YOLO
+# Load a model
+model = YOLO('runs/detect/train6/weights/best.pt')  # load a custom trained model
+# Export the model
+model.export(format='onnx', int8=True, dynamic=True, simplify=True)
+~~~
+
+
+2. 编写python调用ONNX文件
+   [调用ONNX文件参考资料](https://zhuanlan.zhihu.com/p/670622368)
+
+首先先import这些库文件
+
+~~~python 
+import onnxruntime as ort
+import cv2
+import numpy as np
+~~~
+
+然后加载ONNX文件
+
+~~~python
+import onnxruntime as ort
+session = ort.InferenceSession("yolov8m-seg.onnx", providers=["CPUExecutionProvider"]) # 使用CPU加载计算模型
+~~~
+
+后续的代码和相关的解释都在注释当中写的比较详细,这里就直接贴代码了
+
+~~~python
+# %%
+import onnxruntime as ort
+import cv2
+import numpy as np
+
+# 这个函数是将图片数据转换为模型输入格式 (预处理函数)
+def prepare_input(bgr_image, width, height):
+    image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)  # 将图片从BGR格式转换为RGB格式
+    # cv2.imshow(bgr_image)
+    image = cv2.resize(image, (width, height)).astype(np.float32) # 将图片resize到模型输入尺寸640x640
+    image = image / 255.0  #归一化
+    image = np.transpose(image, (2, 0, 1)) # 将图像数据的通道顺序由HWC调整为CHW
+    input_tensor = np.expand_dims(image, axis=0) # 扩展数据维度，将数据的维度调整为NCHW
+    #axis=0表示在第0维增加一个维度
+    #经过预处理后，输入数据input_tensor的维度变为[1, 3, 640, 640]，与模型的输入尺寸一致。
+    return input_tensor
+# 计算两个方框之间的IOU值的大小 计算方式是 两个方框交集面积/并集面积
+# 参考资料 http://t.csdnimg.cn/zTN73
+def iou(rec_1,rec_2):
+        '''
+        rec_1:左上角(rec_1[0],rec_1[1])    右下角：(rec_1[2],rec_1[3])
+        rec_2:左上角(rec_2[0],rec_2[1])    右下角：(rec_2[2],rec_2[3])
+        （rec_1）
+        1--------1
+        1   1----1------1
+        1---1----1      1
+            1           1
+            1-----------1 （rec_2）
+        '''
+        s_rec1=(rec_1[2]-rec_1[0])*(rec_1[3]-rec_1[1])   #第一个bbox面积 = 长×宽
+        s_rec2=(rec_2[2]-rec_2[0])*(rec_2[3]-rec_2[1])   #第二个bbox面积 = 长×宽
+        sum_s=s_rec1+s_rec2                              #总面积
+        left=max(rec_1[0],rec_2[0])                      #交集左上角顶点横坐标
+        right=min(rec_1[2],rec_2[2])                     #交集右下角顶点横坐标
+        bottom=max(rec_1[1],rec_2[1])                    #交集左上角顶点纵坐标
+        top=min(rec_1[3],rec_2[3])                       #交集右下角顶点纵坐标
+        if left >= right or top <= bottom:               #不存在交集的情况
+            return 0
+        else:
+            inter=(right-left)*(top-bottom)              #求交集面积
+            iou=(inter/(sum_s-inter))*1.0                #计算IOU
+            return iou
+session = ort.InferenceSession(
+     "D:\\ProgramFiles\\ultralytics-main\\runs\\detect\\train6\\weights\\best.onnx", # 模型文件路径 
+     providers=["CPUExecutionProvider"])  # 模型路径 还有使用CPU计算
+video = cv2.VideoCapture("D:\\opencv_image\\video_zhuangjiaban.mp4") # 读取视频文件
+# %%
+# 1. 把OpenCV读取的BGR格式的图片转换为RGB格式；
+# 2. 把图片resize到模型输入尺寸640x640；
+# 3. 对像素值除以255做归一化操作；
+# 4. 把图像数据的通道顺序由HWC调整为CHW；
+# 5. 扩展数据维度，将数据的维度调整为NCHW。
+while True:
+    model_width = 640
+    model_height = 640
+    ret, image = video.read()
+    if(ret==False):
+       continue      
+    image_height, image_width, _ = image.shape
+    input_tensor = prepare_input(image, model_width, model_height)
+    outputs = session.run(None, {session.get_inputs()[0].name: input_tensor})
+    # %%
+    #squeeze函数是用于删除shape中为1的维度，对output0做transpose操作是为了方便后续操作
+    # print(outputs[0].shape)
+    output0 = np.squeeze(outputs[0]).transpose()
+    # print("outputs[0].shape shape:", outputs[0].shape)
+    # print("output0 shape:", output0.shape)
+    # %%
+    boxes = output0
+    # print(boxes.shape) # 输出结果是 (8400,40)
+    # 这里的boxes是一个二维数组，第一维是目标框的数量，第二维是目标框的属性，包括目标框的坐标和类别概率等信息。
+    # 咱们细说第二维的属性：前4个元素是目标框的坐标信息，分别是目标框的中心坐标(x,y)和宽高(w,h)，后36个元素是目标框的类别概率信息，每个类别的概率占4个元素。
+    # 所以[8400,40] 就代表着 8400个目标框，每个目标框有40个属性
+    # boxes shape: (8400, 84)
+    # masks shape: (8400, 32)
+    # %%
+    objects = []
+    for row in boxes:
+        prob = row[4:40].max()
+        if prob < 0.2:
+            continue
+        class_id = row[4:40].argmax()
+        label = class_id
+        xc, yc, w, h = row[:4]
+        # // 把x1, y1, x2, y2的坐标恢复到原始图像坐标
+        x1 = (xc - w / 2) / model_width * image_width
+        y1 = (yc - h / 2) / model_height * image_height
+        x2 = (xc + w / 2) / model_width * image_width
+        y2 = (yc + h / 2) / model_height * image_height
+        # // 获取实例分割mask
+        # mask = get_mask(row[84:25684], (x1, y1, x2, y2), image_width, image_height)
+        # // 从mask中提取轮廓
+        # polygon = get_polygon(mask, x1, y1)
+        objects.append([x1, y1, x2, y2, label, prob])
+    # %%
+    objects.sort(key=lambda x: x[5], reverse=True)
+    # %%
+    # objects.sort(key=lambda x: x[5], reverse=True)
+    # // NMS
+    results = []
+    while len(objects) > 0:
+        print(objects[0])
+        results.append(objects[0]) # 我们想要与第一个框进行比较 所以不能让第一个框和自己作比较
+        # 如果 iou过大(超过了0.5)的话 就删除这个object 保留iou小的object
+        objects = [object for object in objects if iou([object[0],object[1],object[2],object[3]], 
+                                                    [objects[0][0],objects[0][1],objects[0][2],objects[0][3]]) < 0.5]
+        # 这里就是将 objects中和第一个object的iou大于0.5的object删除掉
+    # %%
+    # 定义矩形的左上角和右下角坐标
+    # 设置矩形颜色为红色（BGR格式）
+    color = (0, 0, 255)
+    thickness = 1 # 若想要填充矩形则将此值改为-1或者大于等于0的数字
+    # 在图像上绘制矩形
+    for result in results:
+        print(result)
+        start_point = (int(result[0]), int(result[1]))
+        end_point = (int(result[2]), int(result[3]))
+        cv2.rectangle(image, start_point, end_point, color, thickness)
+    cv2.imshow('window name',image)
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+cv2.destroyAllWindows()
+~~~
+
+
+<div STYLE="page-break-after: always;"></div>
+
+## 4 文档维护
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
 
