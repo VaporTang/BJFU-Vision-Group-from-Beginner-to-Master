@@ -5578,7 +5578,7 @@ sudo systemctl status autoaim.service
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
 
 <div STYLE="page-break-after: always;"></div>
-以下为旧版文档→
+以下为旧版文档→ 
 
 ## 6. 文档维护
 
