@@ -4977,7 +4977,611 @@ cv2.destroyAllWindows()
 
 <div STYLE="page-break-after: always;"></div>
 
-## 4 文档维护
+# 5.实战项目与兵种开发 (The Project)
+
+## 5.0 前置要求
+
+确保MiniPC在车上，并正确连接**电源线**、**摄像头**、**C板串口**（若需要整车测试）。
+
+使用*USB转TTL连接线*连接C板UART2与MiniPC上USB接口，串口引脚顺序按官方C板文档相应定义进行接线：
+
+<img src=".\北京林业大学RoboMaster机甲大师视觉组从入门到精通\image-20250912221435614.webp" alt="image-20240123150219314" style="zoom: 65%;" />
+
+**注意**：MiniPC启动时必须连接摄像头，否则可能遇到无法启动的情况；使用完毕后，先使用`poweroff`关闭MiniPC，再下电。
+
+## 5.1  视觉工程部署
+
+### 5.1.1 部署与编译
+
+#### 5.1.1.1源代码仓库
+
+源代码仓库：[dgsyrc/MiracleVision: A robot vision project for RoboMaster - https://github.com/](https://github.com/dgsyrc/MiracleVision)
+
+### 5.1.2 必要环境依赖
+
+OpenCV（安装参考 `2.2` 内容）
+
+[fmt]([fmtlib/fmt: A modern formatting library - https://github.com/](https://github.com/fmtlib/fmt))
+
+[mindvision 工业相机 SDK](https://pan.baidu.com/s/1CHb8mEZtElr9zUweLXUcmA) 提取码 rm24
+
+onnxruntime（安装参考 `2.11` 内容）
+
+### 5.1.3 安装
+
+先按照  `2.2` 内容安装好OpenCV 4.5.5
+
+以及按照 `2.11` 内容安装好onnxruntime
+
+使用下列命令下载项目源码
+
+```
+git clone https://github.com/dgsyrc/MiracleVision.git
+```
+
+接着在 `MiracleVision/3rdparty` 下执行下列命令下载 `fmt` 库源码
+
+```
+git clone https://github.com/fmtlib/fmt.git
+```
+
+将下载好的工业相机SDK解压，在SDK文件夹下使用以下命令安装
+
+```
+sudo bash ./install.sh
+```
+
+在项目文件夹 `MiracleVision` 下新建文件夹 `build` 
+
+可使用以下命令（在 `MiracleVision` 下使用）
+
+```
+mkdir build
+```
+
+执行下列命令编译源码
+
+```
+cmake ..
+make -j4
+```
+
+其中 `-j4` 参数可选填，加了更快，但不建议大于4（NUC 11为4核8线程，线程过高可能导致死机或编译报错）
+
+执行完成后，在 `build` 文件夹下执行以下命令运行
+
+```
+sudo ./bin/MiracleVision
+```
+
+### 5.1.2 配置文件详解
+
+#### 5.1.2.1 angle_solve
+
+`angle_solve_config.xml`
+
+```xml
+<?xml version="1.0"?>
+<opencv_storage>
+<ARMOR_HEIGHT>8.3</ARMOR_HEIGHT>
+<ARMOR_LENGHT>10.6</ARMOR_LENGHT>
+<PIC_ARMOR_HEIGHT>1024</PIC_ARMOR_HEIGHT>
+<PIC_ARMOR_LENGHT>1280</PIC_ARMOR_LENGHT>
+<PIC_DISTANCE>980</PIC_DISTANCE>
+<ARMOR_DISTANCE>8.0</ARMOR_DISTANCE>
+<SPEED_ARG>0.90</SPEED_ARG>
+</opencv_storage>
+```
+
+| 项               | 含义                 | 类型  | 单位 |
+| ---------------- | -------------------- | ----- | ---- |
+| ARMOR_HEIGHT     | 装甲板宽度           | float | cm   |
+| ARMOR_LENGHT     | 装甲板长度           | float | cm   |
+| PIC_ARMOR_HEIGHT | 装甲板宽度           | float | px   |
+| PIC_ARMOR_LENGHT | 装甲板长度           | float | px   |
+| PIC_DISTANCE     | 标定时装甲板图像距离 | float | px   |
+| ARMOR_DISTANCE   | 标定时装甲板实际距离 | float | cm   |
+| SPEED_ARG        | 子弹速度系数         | float | -    |
+
+#### 5.1.2.2 armor
+
+`basic_armor_config.xml`
+
+```xml
+<?xml version="1.0"?>
+<opencv_storage>
+<!--
+  DEBUG_MODE - display all windows
+  - 1 Enable
+  - 0 Disable
+-->
+<DEBUG_MODE>0</DEBUG_MODE>
+<!--
+  WINDOW_SCALE - windows size
+  - 0 Small
+  - 1 Medium
+  - 2 Big
+-->
+<WINDOW_SCALE>0</WINDOW_SCALE>
+<!--
+  GRAY_EDIT - 是否调整灰度图参数
+  - 1 Enable
+  - 0 Disable
+-->
+<GRAY_EDIT>0</GRAY_EDIT>
+<!--
+  COLOR_EDIT - 是否调整颜色参数
+  - 1 Enable
+  - 0 Disable
+-->
+<COLOR_EDIT>0</COLOR_EDIT>
+<!--
+  METHOD - 图像预处理方式
+  - 1 HSV
+  - 0 BGR
+-->
+<METHOD>0</METHOD>
+<!--
+  RED_ARMOR_GRAY_TH   - 红色灰度参数 
+  RED_ARMOR_COLOR_TH  - BGR 红色参数
+  BLUE_ARMOR_GRAY_TH  - 蓝色灰度参数
+  BLUE_ARMOR_COLOR_TH - GBR 蓝色参数
+  GREEN_ARMOR_COLOR_TH- 绿色参数
+  WHILE_ARMOR_COLOR_TH- 白色参数
+-->
+<RED_ARMOR_GRAY_TH>32</RED_ARMOR_GRAY_TH>
+<RED_ARMOR_COLOR_TH>132</RED_ARMOR_COLOR_TH>
+<BLUE_ARMOR_GRAY_TH>33</BLUE_ARMOR_GRAY_TH>
+<BLUE_ARMOR_COLOR_TH>140</BLUE_ARMOR_COLOR_TH>
+<GREEN_ARMOR_COLOR_TH>10</GREEN_ARMOR_COLOR_TH>
+<WHILE_ARMOR_COLOR_TH>240</WHILE_ARMOR_COLOR_TH>
+<!--
+  - HSV 红色参数
+-->
+<H_RED_MIN>0</H_RED_MIN>
+<H_RED_MAX>255</H_RED_MAX>
+<S_RED_MIN>140</S_RED_MIN>
+<S_RED_MAX>255</S_RED_MAX>
+<V_RED_MIN>37</V_RED_MIN>
+<V_RED_MAX>255</V_RED_MAX>
+<!--
+  - HSV 蓝色参数
+-->
+<H_BLUE_MIN>90</H_BLUE_MIN>
+<H_BLUE_MAX>160</H_BLUE_MAX>
+<S_BLUE_MIN>130</S_BLUE_MIN>
+<S_BLUE_MAX>255</S_BLUE_MAX>
+<V_BLUE_MIN>30</V_BLUE_MIN>
+<V_BLUE_MAX>255</V_BLUE_MAX>
+<!--
+  - Red BGR threshold
+-->
+<B_RED_MIN>10</B_RED_MIN>
+<B_RED_MAX>100</B_RED_MAX>
+<G_RED_MIN>10</G_RED_MIN>
+<G_RED_MAX>100</G_RED_MAX>
+<R_RED_MIN>100</R_RED_MIN>
+<R_RED_MAX>200</R_RED_MAX>
+<!--
+  - Blue BGR threshold
+-->
+<B_BLUE_MIN>70</B_BLUE_MIN>
+<B_BLUE_MAX>230</B_BLUE_MAX>
+<G_BLUE_MIN>10</G_BLUE_MIN>
+<G_BLUE_MAX>160</G_BLUE_MAX>
+<R_BLUE_MIN>0</R_BLUE_MIN>
+<R_BLUE_MAX>50</R_BLUE_MAX>
+<!--
+  LIGHT_EDTI - 是否调整灯条形态参数
+  - 1 Enable
+  - 0 Disable
+-->
+<LIGHT_EDTI>0</LIGHT_EDTI>
+<!--
+  LIGHT_DRAW - 是否绘制灯条
+  - 1 Enable
+  - 0 Disable
+-->
+<LIGHT_DRAW>1</LIGHT_DRAW>
+<!--
+  LIGHT_RATIO_W_H_MIN - 灯条高宽比最小值
+  LIGHT_RATIO_W_H_MAX - 灯条高宽比最大值
+-->
+<LIGHT_RATIO_W_H_MIN>10</LIGHT_RATIO_W_H_MIN>
+<LIGHT_RATIO_W_H_MAX>150</LIGHT_RATIO_W_H_MAX>
+
+<!--
+  LIGHT_ANGLE_MIN - 灯条角度最小值
+  LIGHT_ANGLE_MAX - 灯条角度最大值
+  -90~90
+-->
+<LIGHT_ANGLE_MIN>-30</LIGHT_ANGLE_MIN>
+<LIGHT_ANGLE_MAX>30</LIGHT_ANGLE_MAX>
+<!--
+  LIGHT_PERIMETER_MIN - 灯条周长最小值
+  LIGHT_PERIMETER_MAX - 灯条周长最大值
+-->
+<LIGHT_PERIMETER_MIN>16</LIGHT_PERIMETER_MIN>
+<LIGHT_PERIMETER_MAX>1000</LIGHT_PERIMETER_MAX>
+<!--
+  ARMOR_FORECAST - 是否调整预测模型
+  - 1 Enable
+  - 0 Disable
+-->
+<ARMOR_FORECAST>1</ARMOR_FORECAST>
+<!--
+  ARMOR_EDIT - 是否调整装甲板参数
+  - 1 Enable
+  - 0 Disable
+-->
+<ARMOR_EDIT>0</ARMOR_EDIT>
+<!--
+  ARMOR_DRAW - 是否绘制装甲板
+  - 1 Enable
+  - 0 Disable
+-->
+<ARMOR_DRAW>1</ARMOR_DRAW>
+<!--
+  ARMOR_HEIGHT_RATIO_MIN - 装甲板左右灯条高度比最小值
+  ARMOR_HEIGHT_RATIO_MAX - 装甲板左右灯条高度比最大值
+-->
+<ARMOR_HEIGHT_RATIO_MIN>5</ARMOR_HEIGHT_RATIO_MIN>
+<ARMOR_HEIGHT_RATIO_MAX>15</ARMOR_HEIGHT_RATIO_MAX>
+<!--
+  ARMOR_WIDTH_RATIO_MIN - 装甲板左右灯条宽度比最小值
+  ARMOR_WIDTH_RATIO_MAX - 装甲板左右灯条宽度比最大值
+-->
+<ARMOR_WIDTH_RATIO_MIN>5</ARMOR_WIDTH_RATIO_MIN>
+<ARMOR_WIDTH_RATIO_MAX>15</ARMOR_WIDTH_RATIO_MAX>
+<!--
+  ARMOR_Y_DIFFERENT - 左右灯条y的差值不超过灯条平均高度的倍数
+-->
+<ARMOR_Y_DIFFERENT>10</ARMOR_Y_DIFFERENT>
+<!--
+  ARMOR_HEIGHT_DIFFERENT - 左右灯条高度差值不超过灯条平均高度的倍数
+-->
+<ARMOR_HEIGHT_DIFFERENT>10</ARMOR_HEIGHT_DIFFERENT>
+<!--
+  ARMOR_ANGLE_DIFFERENT - 左右灯条角度差
+-->
+<ARMOR_ANGLE_DIFFERENT>200</ARMOR_ANGLE_DIFFERENT>
+<!--
+  ARMOR_SMALL_ASPECT_MIN - 装甲板最小宽高比
+  ARMOR_TYPE_TH          - 大小装甲板分界宽高比
+  ARMOR_BIG_ASPECT_MAX   - 装甲板最大宽高比
+-->
+<ARMOR_SMALL_ASPECT_MIN>11</ARMOR_SMALL_ASPECT_MIN>
+<ARMOR_TYPE_TH>22</ARMOR_TYPE_TH>
+<ARMOR_BIG_ASPECT_MAX>35</ARMOR_BIG_ASPECT_MAX>
+</opencv_storage>
+```
+
+| 项                     | 含义                                     | 类型 | 值/单位                        |
+| ---------------------- | ---------------------------------------- | ---- | ------------------------------ |
+| DEBUG_MODE             | 调试模式（显示图形窗口）                 | bool | Disable (0), Enable (1)        |
+| WINDOW_SCALE           | 窗口大小                                 | int  | Small (0), Medium (1), Big (2) |
+| GRAY_EDIT              | 调整灰度图参数（显示参数滑动条）         | bool | Disable (0), Enable (1)        |
+| COLOR_EDIT             | 调整颜色参数（显示参数滑动条）           | bool | Disable (0), Enable (1)        |
+| METHOD                 | 图像预处理方式                           | bool | BGR (0), HSV (1)               |
+| RED_ARMOR_GRAY_TH      | 红色灰度参数                             | int  | 0~255                          |
+| RED_ARMOR_COLOR_TH     | BGR 红色参数                             | int  | 0~255                          |
+| BLUE_ARMOR_GRAY_TH     | 蓝色灰度参数                             | int  | 0~255                          |
+| BLUE_ARMOR_COLOR_TH    | BGR 蓝色参数                             | int  | 0~255                          |
+| GREEN_ARMOR_COLOR_TH   | BGR 绿色参数                             | int  | 0~255                          |
+| WHITE_ARMOR_COLOR_TH   | 白色参数                                 | int  | 0~255                          |
+| H_RED_MIN              | HSV 红色识别参数（H 通道最小值）         | int  | 0~255                          |
+| H_RED_MAX              | HSV 红色识别参数（H 通道最大值）         | int  | 0~255                          |
+| S_RED_MIN              | HSV 红色识别参数（S 通道最小值）         | int  | 0~255                          |
+| S_RED_MAX              | HSV 红色识别参数（S 通道最大值）         | int  | 0~255                          |
+| V_RED_MIN              | HSV 红色识别参数（V 通道最小值）         | int  | 0~255                          |
+| V_RED_MAX              | HSV 红色识别参数（V 通道最大值）         | int  | 0~255                          |
+| H_BLUE_MIN             | HSV 蓝色识别参数（H 通道最小值）         | int  | 0~255                          |
+| H_BLUE_MAX             | HSV 蓝色识别参数（H 通道最大值）         | int  | 0~255                          |
+| S_BLUE_MIN             | HSV 蓝色识别参数（S 通道最小值）         | int  | 0~255                          |
+| S_BLUE_MAX             | HSV 蓝色识别参数（S 通道最大值）         | int  | 0~255                          |
+| V_BLUE_MIN             | HSV 蓝色识别参数（V 通道最小值）         | int  | 0~255                          |
+| V_BLUE_MAX             | HSV 蓝色识别参数（V 通道最大值）         | int  | 0~255                          |
+| B_RED_MIN              | 红色灯条 ROI 区域 B 通道均值最小值       | int  | 0~255                          |
+| B_RED_MAX              | 红色灯条 ROI 区域 B 通道均值最大值       | int  | 0~255                          |
+| G_RED_MIN              | 红色灯条 ROI 区域 G 通道均值最小值       | int  | 0~255                          |
+| G_RED_MAX              | 红色灯条 ROI 区域 G 通道均值最大值       | int  | 0~255                          |
+| R_RED_MIN              | 红色灯条 ROI 区域 R 通道均值最小值       | int  | 0~255                          |
+| R_RED_MAX              | 红色灯条 ROI 区域 R 通道均值最大值       | int  | 0~255                          |
+| B_BLUE_MIN             | 蓝色灯条 ROI 区域 B 通道均值最小值       | int  | 0~255                          |
+| B_BLUE_MAX             | 蓝色灯条 ROI 区域 B 通道均值最大值       | int  | 0~255                          |
+| G_BLUE_MIN             | 蓝色灯条 ROI 区域 G 通道均值最小值       | int  | 0~255                          |
+| G_BLUE_MAX             | 蓝色灯条 ROI 区域 G 通道均值最大值       | int  | 0~255                          |
+| R_BLUE_MIN             | 蓝色灯条 ROI 区域 R 通道均值最小值       | int  | 0~255                          |
+| R_BLUE_MAX             | 蓝色灯条 ROI 区域 R 通道均值最大值       | int  | 0~255                          |
+| LIGHT_EDTI             | 调整灯条形态参数（显示参数滑动条）       | bool | Disable (0), Enable (1)        |
+| LIGHT_DRAW             | 绘制灯条                                 | bool | Disable (0), Enable (1)        |
+| LIGHT_RATIO_W_H_MIN    | 灯条高宽比最小值                         | int  | 0.1                            |
+| LIGHT_RATIO_W_H_MAX    | 灯条高宽比最大值                         | int  | 0.1                            |
+| LIGHT_ANGLE_MIN        | 灯条角度最小值                           | int  | -90°~90°                       |
+| LIGHT_ANGLE_MAX        | 灯条角度最大值                           | int  | -90°~90°                       |
+| LIGHT_PERIMETER_MIN    | 灯条周长最小值                           | int  | px                             |
+| LIGHT_PERIMETER_MAX    | 灯条周长最大值                           | int  | px                             |
+| ARMOR_FORECAST         | 调整预测模型（显示参数滑动条）           | bool | Disable (0), Enable (1)        |
+| ARMOR_EDIT             | 调整装甲板参数（显示参数滑动条）         | bool | Disable (0), Enable (1)        |
+| ARMOR_DRAW             | 绘制装甲板                               | bool | Disable (0), Enable (1)        |
+| ARMOR_HEIGHT_RATIO_MIN | 装甲板左右灯条高度比最小值               | int  | 0.1                            |
+| ARMOR_HEIGHT_RATIO_MAX | 装甲板左右灯条高度比最大值               | int  | 0.1                            |
+| ARMOR_WIDTH_RATIO_MIN  | 装甲板左右灯条宽度比最小值               | int  | 0.1                            |
+| ARMOR_WIDTH_RATIO_MAX  | 装甲板左右灯条宽度比最大值               | int  | 0.1                            |
+| ARMOR_Y_DIFFERENT      | 左右灯条y的差值不超过灯条平均高度的倍数  | int  | 0.1                            |
+| ARMOR_HEIGHT_DIFFERENT | 左右灯条高度差值不超过灯条平均高度的倍数 | int  | 0.1                            |
+| ARMOR_ANGLE_DIFFERENT  | 左右灯条角度差                           | int  | 0.1°                           |
+| ARMOR_SMALL_ASPECT_MIN | 装甲板最小宽高比                         | int  | 0.1                            |
+| ARMOR_TYPE_TH          | 大小装甲板分界宽高比                     | int  | 0.1                            |
+| ARMOR_BIG_ASPECT_MAX   | 装甲板最大宽高比                         | int  | 0.1                            |
+
+#### 5.2.2.3 serial
+
+`uart_serial_config.xml`
+
+```xml
+<?xml version="1.0"?>
+<opencv_storage>
+<!-- PREFERRED_DEVICE - set preferred serial device path -->
+<PREFERRED_DEVICE>/dev/ttyUSB0</PREFERRED_DEVICE>
+<!-- 
+  SET_BAUDRATE - default baudrate for serial
+  - 1  B115200
+  - 10 B921600
+ -->
+<SET_BAUDRATE>1</SET_BAUDRATE>
+<!-- 
+  SHOW_SERIAL_INFORMATION - wheather print serial inforation
+  - 0 Disable
+  - 1 Enable
+ -->
+<SHOW_SERIAL_INFORMATION>1</SHOW_SERIAL_INFORMATION>
+</opencv_storage>
+```
+
+| 项                      | 含义               | 类型   | 值                        |
+| ----------------------- | ------------------ | ------ | ------------------------- |
+| PREFERRED_DEVICE        | 默认串口           | string | /dev/{device_name}        |
+| SET_BAUDRATE            | 波特率             | int    | B115200 (1), B921600 (10) |
+| SHOW_SERIAL_INFORMATION | 控制台串口信息输出 | bool   | Disable (0), Enable (1)   |
+
+### 5.1.3 调试与自启动
+
+打开调试模式，启动自瞄程序
+
+#### 5.1.3.1调试
+
+##### 5.1.3.1.1 阈值
+
+对代码进行以下修改，使之实时显示摄像头效果。
+
+1. 进入`base/MiracleVision.cpp`注释掉`#define RELEASE`
+
+![微信图片_20250912224255](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224255.webp)
+
+2. 将`switch (serial_.returnReceiveMode())`改为`switch (uart::AUTO_AIM)`
+
+![微信图片_20250912224303](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224303.webp)
+
+3. 在`configs/armor/basic_armor_config.xml`中，将`DEBUG_MODE`改为`1`
+
+![微信图片_20250912224154](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224154.webp)
+
+4. 可以按需要调整的参数设置EDIT参数，若要调整灰度阈值，则将`GRAY_EDIT`设为1，程序启动后将弹出滑块窗口。
+
+![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.webp)
+
+##### 5.1.3.1.2 串口
+
+查看控制台是否有 `[rec_info]` 串口解码信息输出，检查获取的各个参数是否正常
+
+例如：yaw，pitch，color，bullet_velocity 等
+
+云台运动 yaw/pitch 值要变化
+
+发射弹丸弹速变化
+
+颜色与我方装甲板颜色相同
+
+无信息输出则串口掉线，重新插拔，重启程序
+
+无法解决则更换串口模块 【注意：模块的芯片应为 `CP2102` （串口名称 `/dev/USB01` ）或模块使用STLink-V2.1（串口名称 `/dev/ACM01` ）】
+
+##### 5.1.3.1.3 装甲板跟随
+
+使用手持装甲板模块测试识别是否正常（远近，左右）
+
+**注意：装甲板灯条应尽量与地面垂直，有条件可直接使用其它车辆作为目标进行测试**
+
+装甲板未被框选的以下可能：
+
+- 串口掉线，检查是否有串口输出信息
+- 获取的颜色错误，找电控的查读裁判系统的代码是否出错
+- 相机光圈过小/过大，尝试调整工业相机光圈
+- 目标装甲板角度过大
+- 目标装甲板颜色错误，离线模式（紫色）或为我方颜色
+
+识别装甲板但云台不动：
+
+- 串口掉线，重新插拔串口并重启程序
+- 相机卡顿，在 UI 以及控制台可见卡顿现象，插拔相机以及重启程序，若不能解决，尝试更换相机在minipc的插入接口（换C口/反面USB口）【一般是相机供电不足引起】
+- 电控方面接收问题，找电控开调试查
+
+##### 5.1.3.1.4 弹道补偿调整
+
+确认跟随正常后，开始调整弹速系数，改变装甲板远近/左右（固定靶），机器人开火
+
+多次尝试均命中即可
+
+弹道过高：`config/angle_solve/angle_solve_config.xml` 中将 `SPEED_ARG` 改大
+
+弹道过低：`config/angle_solve/angle_solve_config.xml` 中将 `SPEED_ARG` 改小
+
+修改幅度不要超过 `0.2`，多次调试确定最佳参数
+
+#### 5.1.3.2 自启动
+
+##### 5.1.3.2.1 配置脚本
+
+放在目录 `MiracleVision/` 下，命名为 `start.sh`
+
+**需要修改路径的用户名**
+
+```
+#!/bin/bash
+cd /home/username/Desktop/MiracleVision/build
+./bin/MiracleVision
+
+exit 0
+```
+
+##### 5.1.3.2.2 配置服务
+
+打开目录 `/etc/systemd/system/`
+
+输入以下指令新建服务
+
+```
+sudo gedit autoaim.service
+```
+
+在 `autoaim.service` 中输入以下配置
+
+**需要修改路径的用户名**
+
+```
+[Unit]
+Description=AUTO AIM Service
+After=network.target
+
+[Service]
+ExecStart=/home/username/Desktop/MiracleVision/start.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+ 输入以下命令启动
+
+```
+sudo systemctl daemon-reload
+sudo systemctl start autoaim.service
+sudo systemctl enable autoaim.service
+```
+
+用以下指令查看运行状态
+
+```
+sudo systemctl status autoaim.service
+```
+
+### 5.1.4 串口协议
+
+#### 5.1.4.1 接收数据
+
+
+| 数据位 | 内容                      | 解释                                                                                          |
+| :----- | :------------------------ | :-------------------------------------------------------------------------------------------- |
+| 0      | 头帧                      | ‘S’ (0x53)                                                                                    |
+| 1      | 颜色                      | ALL (0), RED (1), BLUE (2)                                                                    |
+| 2      | 模式                      | 0~9 (见表格后注释)                                                                            |
+| 3      | 机器人 ID                 | 英雄 HERO (0), 无人机 UAV (1), 工程机器人 ENGINEERING (2), 步兵 INFANTRY (3), 哨兵 SENTRY (4) |
+| 4      | yaw轴陀螺仪低八位         | 二进制数 (换算见注释)，单位：角度                                                             |
+| 5      | yaw轴陀螺仪数据高八位     | 二进制数 (换算见注释)，单位：角度                                                             |
+| 6      | pitch轴陀螺仪低八位       | 二进制数 (换算见注释)，单位：角度                                                             |
+| 7      | pitch轴陀螺仪数据高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 8      | yaw轴陀螺仪加速度低八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 9      | yaw轴陀螺仪加速度高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
+| 10     | pitch轴陀螺仪加速度低八位 | 二进制数 (换算见注释)，单位：角度                                                             |
+| 11     | pitch轴陀螺仪加速度高八位 | 二进制数 (换算见注释)，单位：角度                                                             |
+| 12     | 子弹速度                  | 二进制数 (换算见注释)，单位：m/s                                                              |
+| 13     | 尾帧                      | ‘E’ (0x45)                                                                                    |
+
+**模式**
+
+| 参数 | 枚举类型标识符           | 模式                     |
+| ---- | ------------------------ | ------------------------ |
+| 0    | DEFAULT_MODE             | 默认模式（基础自瞄模式） |
+| 1    | AUTO_AIM                 | 基础自瞄模式             |
+| 2    | ENERGY_BUFF              | 能量机关模式             |
+| 3    | SENTINEL_AUTONOMOUS_MODE | 哨兵模式                 |
+| 4    | CAMERA_CALIBRATION       | 相机标定模式             |
+
+**二进制数换算**
+
+| 完整数据总位数 | 接收换算                                                   |
+| -------------- | ---------------------------------------------------------- |
+| 16             | 合并高低八位接收为short (int16_t)类型转换为float类型后/100 |
+| 8              | 接收为unsigned char (u_int8_t)类型转换为float类型/10       |
+
+#### 5.1.4.2 发送数据
+
+
+| 数据位 | 内容                                  | 解释                                                             |
+| :----- | :------------------------------------ | :--------------------------------------------------------------- |
+| 0      | 头帧                                  | ‘S’ (0x53)                                                       |
+| 1      | 装甲板数量 / 是否识别到能量机关装甲板 | 识别到的机器人装甲板数量 / 能量机关：未发现目标 (0) 发现目标 (1) |
+| 2      | 开火命令                              | 不开火(0) 开火 (1)                                               |
+| 3      | yaw 轴增加量低八位                    | 二进制数 (换算见注释)，单位：角度                                |
+| 4      | yaw 轴增加量低高八位                  | 二进制数 (换算见注释)，单位：角度                                |
+| 5      | pitch 轴增加量低低八位                | 二进制数 (换算见注释)，单位：角度                                |
+| 6      | pitch 轴增加量低高八位                | 二进制数 (换算见注释)，单位：角度                                |
+| 7      | 预测坐标x低八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 8      | 预测坐标x高八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 9      | 预测坐标y低八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 10     | 预测坐标y高八位                       | 二进制数 (换算见注释)，单位：像素                                |
+| 11     | 深度低八位                            | 二进制数 (换算见注释)                                            |
+| 12     | 深度高八位                            | 二进制数 (换算见注释)                                            |
+| 13     | CRC 校验位                            | CRC8                                                             |
+| 14     | 尾帧                                  | ‘E’ (0x45)                                                       |
+
+**二进制数换算**
+
+| 完整数据总位数       | 发送换算                                                |
+| -------------------- | ------------------------------------------------------- |
+| 16 (raw & pitch)     | 原始数据*100去尾转换为short (int16_t)类型再拆分高低八位 |
+| 16 (预测坐标 & 深度) | 直接拆分高低8位即可                                     |
+| 8                    | 原始数据*10去尾转换为unsigned char (u_int8_t)类型       |
+
+<div STYLE="page-break-after: always;"></div>
+
+## 5.2 特定兵种开发
+
+### 5.2.1 哨兵
+
+> Contributor: 洪佳
+
+#### 5.2.1.1 装置和线
+
+| 设备             | 输入   | 其他   |
+| ---------------- | ------ | ------ |
+| 分电板           | CAN线  | 其他线 |
+| 4个全向轮        | 信号线 | 电源线 |
+| 拨弹电机         | 信号线 | 电源线 |
+| 2个摩擦轮        | 信号线 | 电源线 |
+| 荧光弹丸充能装置 | /      | 电源线 |
+| YAW轴电机        | 信号线 | 电源线 |
+| PITCH轴电机      | 信号线 | 电源线 |
+
+#### 5.2.1.2 对应实物和示意模型
+
+**分电板**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.webp" alt="image-20240123145741592" style="zoom: 25%;" />
+
+
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.webp" alt="image-20240123145852713" style="zoom:25%;" />
+
+#### 5.2.1.3 接线
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
+
+<div STYLE="page-break-after: always;"></div>
+以下为旧版文档→
+
+## 6. 文档维护
+
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
 
@@ -6725,603 +7329,10 @@ if __name__ == "__main__":
     main()
 ```
 
-## 5 各兵种相关文档
-
-### 5.1 哨兵
-
-> Contributors: 洪佳
-
-#### 5.1.1 装置和线
-
-| 设备             | 输入   | 其他   |
-| ---------------- | ------ | ------ |
-| 分电板           | CAN线  | 其他线 |
-| 4个全向轮        | 信号线 | 电源线 |
-| 拨弹电机         | 信号线 | 电源线 |
-| 2个摩擦轮        | 信号线 | 电源线 |
-| 荧光弹丸充能装置 | /      | 电源线 |
-| YAW轴电机        | 信号线 | 电源线 |
-| PITCH轴电机      | 信号线 | 电源线 |
-
-#### 5.1.2 对应实物和示意模型
-
-**分电板**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.webp" alt="image-20240123145741592" style="zoom: 25%;" />
-
-
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.webp" alt="image-20240123145852713" style="zoom:25%;" />
-
-#### 5.1.3 接线
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
-
-<div STYLE="page-break-after: always;"></div>
 
 ## 6 视觉开发文档(MiracleVision)
 
-### 6.0 前置要求
 
-确保MiniPC在车上，并正确连接**电源线**、**摄像头**、**C板串口**（若需要整车测试）。
-
-使用*USB转TTL连接线*连接C板UART2与MiniPC上USB接口，串口引脚顺序按官方C板文档相应定义进行接线：
-
-<img src=".\北京林业大学RoboMaster机甲大师视觉组从入门到精通\image-20250912221435614.webp" alt="image-20240123150219314" style="zoom: 65%;" />
-
-**注意**：MiniPC启动时必须连接摄像头，否则可能遇到无法启动的情况；使用完毕后，先使用`poweroff`关闭MiniPC，再下电。
-
-### 6.1  部署
-
-#### 6.1.1 源代码仓库
-
-源代码仓库：[dgsyrc/MiracleVision: A robot vision project for RoboMaster - https://github.com/](https://github.com/dgsyrc/MiracleVision)
-
-#### 6.1.2 必要环境依赖
-
-OpenCV（安装参考 `2.2` 内容）
-
-[fmt]([fmtlib/fmt: A modern formatting library - https://github.com/](https://github.com/fmtlib/fmt))
-
-[mindvision 工业相机 SDK](https://pan.baidu.com/s/1CHb8mEZtElr9zUweLXUcmA) 提取码 rm24
-
-onnxruntime（安装参考 `2.11` 内容）
-
-#### 6.1.3 安装
-
-先按照  `2.2` 内容安装好OpenCV 4.5.5
-
-以及按照 `2.11` 内容安装好onnxruntime
-
-使用下列命令下载项目源码
-
-```
-git clone https://github.com/dgsyrc/MiracleVision.git
-```
-
-接着在 `MiracleVision/3rdparty` 下执行下列命令下载 `fmt` 库源码
-
-```
-git clone https://github.com/fmtlib/fmt.git
-```
-
-将下载好的工业相机SDK解压，在SDK文件夹下使用以下命令安装
-
-```
-sudo bash ./install.sh
-```
-
-在项目文件夹 `MiracleVision` 下新建文件夹 `build` 
-
-可使用以下命令（在 `MiracleVision` 下使用）
-
-```
-mkdir build
-```
-
-执行下列命令编译源码
-
-```
-cmake ..
-make -j4
-```
-
-其中 `-j4` 参数可选填，加了更快，但不建议大于4（NUC 11为4核8线程，线程过高可能导致死机或编译报错）
-
-执行完成后，在 `build` 文件夹下执行以下命令运行
-
-```
-sudo ./bin/MiracleVision
-```
-
-### 6.2 配置文件
-
-#### 6.2.1 angle_solve
-
-`angle_solve_config.xml`
-
-```xml
-<?xml version="1.0"?>
-<opencv_storage>
-<ARMOR_HEIGHT>8.3</ARMOR_HEIGHT>
-<ARMOR_LENGHT>10.6</ARMOR_LENGHT>
-<PIC_ARMOR_HEIGHT>1024</PIC_ARMOR_HEIGHT>
-<PIC_ARMOR_LENGHT>1280</PIC_ARMOR_LENGHT>
-<PIC_DISTANCE>980</PIC_DISTANCE>
-<ARMOR_DISTANCE>8.0</ARMOR_DISTANCE>
-<SPEED_ARG>0.90</SPEED_ARG>
-</opencv_storage>
-```
-
-| 项               | 含义                 | 类型  | 单位 |
-| ---------------- | -------------------- | ----- | ---- |
-| ARMOR_HEIGHT     | 装甲板宽度           | float | cm   |
-| ARMOR_LENGHT     | 装甲板长度           | float | cm   |
-| PIC_ARMOR_HEIGHT | 装甲板宽度           | float | px   |
-| PIC_ARMOR_LENGHT | 装甲板长度           | float | px   |
-| PIC_DISTANCE     | 标定时装甲板图像距离 | float | px   |
-| ARMOR_DISTANCE   | 标定时装甲板实际距离 | float | cm   |
-| SPEED_ARG        | 子弹速度系数         | float | -    |
-
-#### 6.2.2 armor
-
-`basic_armor_config.xml`
-
-```xml
-<?xml version="1.0"?>
-<opencv_storage>
-<!--
-  DEBUG_MODE - display all windows
-  - 1 Enable
-  - 0 Disable
--->
-<DEBUG_MODE>0</DEBUG_MODE>
-<!--
-  WINDOW_SCALE - windows size
-  - 0 Small
-  - 1 Medium
-  - 2 Big
--->
-<WINDOW_SCALE>0</WINDOW_SCALE>
-<!--
-  GRAY_EDIT - 是否调整灰度图参数
-  - 1 Enable
-  - 0 Disable
--->
-<GRAY_EDIT>0</GRAY_EDIT>
-<!--
-  COLOR_EDIT - 是否调整颜色参数
-  - 1 Enable
-  - 0 Disable
--->
-<COLOR_EDIT>0</COLOR_EDIT>
-<!--
-  METHOD - 图像预处理方式
-  - 1 HSV
-  - 0 BGR
--->
-<METHOD>0</METHOD>
-<!--
-  RED_ARMOR_GRAY_TH   - 红色灰度参数 
-  RED_ARMOR_COLOR_TH  - BGR 红色参数
-  BLUE_ARMOR_GRAY_TH  - 蓝色灰度参数
-  BLUE_ARMOR_COLOR_TH - GBR 蓝色参数
-  GREEN_ARMOR_COLOR_TH- 绿色参数
-  WHILE_ARMOR_COLOR_TH- 白色参数
--->
-<RED_ARMOR_GRAY_TH>32</RED_ARMOR_GRAY_TH>
-<RED_ARMOR_COLOR_TH>132</RED_ARMOR_COLOR_TH>
-<BLUE_ARMOR_GRAY_TH>33</BLUE_ARMOR_GRAY_TH>
-<BLUE_ARMOR_COLOR_TH>140</BLUE_ARMOR_COLOR_TH>
-<GREEN_ARMOR_COLOR_TH>10</GREEN_ARMOR_COLOR_TH>
-<WHILE_ARMOR_COLOR_TH>240</WHILE_ARMOR_COLOR_TH>
-<!--
-  - HSV 红色参数
--->
-<H_RED_MIN>0</H_RED_MIN>
-<H_RED_MAX>255</H_RED_MAX>
-<S_RED_MIN>140</S_RED_MIN>
-<S_RED_MAX>255</S_RED_MAX>
-<V_RED_MIN>37</V_RED_MIN>
-<V_RED_MAX>255</V_RED_MAX>
-<!--
-  - HSV 蓝色参数
--->
-<H_BLUE_MIN>90</H_BLUE_MIN>
-<H_BLUE_MAX>160</H_BLUE_MAX>
-<S_BLUE_MIN>130</S_BLUE_MIN>
-<S_BLUE_MAX>255</S_BLUE_MAX>
-<V_BLUE_MIN>30</V_BLUE_MIN>
-<V_BLUE_MAX>255</V_BLUE_MAX>
-<!--
-  - Red BGR threshold
--->
-<B_RED_MIN>10</B_RED_MIN>
-<B_RED_MAX>100</B_RED_MAX>
-<G_RED_MIN>10</G_RED_MIN>
-<G_RED_MAX>100</G_RED_MAX>
-<R_RED_MIN>100</R_RED_MIN>
-<R_RED_MAX>200</R_RED_MAX>
-<!--
-  - Blue BGR threshold
--->
-<B_BLUE_MIN>70</B_BLUE_MIN>
-<B_BLUE_MAX>230</B_BLUE_MAX>
-<G_BLUE_MIN>10</G_BLUE_MIN>
-<G_BLUE_MAX>160</G_BLUE_MAX>
-<R_BLUE_MIN>0</R_BLUE_MIN>
-<R_BLUE_MAX>50</R_BLUE_MAX>
-<!--
-  LIGHT_EDTI - 是否调整灯条形态参数
-  - 1 Enable
-  - 0 Disable
--->
-<LIGHT_EDTI>0</LIGHT_EDTI>
-<!--
-  LIGHT_DRAW - 是否绘制灯条
-  - 1 Enable
-  - 0 Disable
--->
-<LIGHT_DRAW>1</LIGHT_DRAW>
-<!--
-  LIGHT_RATIO_W_H_MIN - 灯条高宽比最小值
-  LIGHT_RATIO_W_H_MAX - 灯条高宽比最大值
--->
-<LIGHT_RATIO_W_H_MIN>10</LIGHT_RATIO_W_H_MIN>
-<LIGHT_RATIO_W_H_MAX>150</LIGHT_RATIO_W_H_MAX>
-
-<!--
-  LIGHT_ANGLE_MIN - 灯条角度最小值
-  LIGHT_ANGLE_MAX - 灯条角度最大值
-  -90~90
--->
-<LIGHT_ANGLE_MIN>-30</LIGHT_ANGLE_MIN>
-<LIGHT_ANGLE_MAX>30</LIGHT_ANGLE_MAX>
-<!--
-  LIGHT_PERIMETER_MIN - 灯条周长最小值
-  LIGHT_PERIMETER_MAX - 灯条周长最大值
--->
-<LIGHT_PERIMETER_MIN>16</LIGHT_PERIMETER_MIN>
-<LIGHT_PERIMETER_MAX>1000</LIGHT_PERIMETER_MAX>
-<!--
-  ARMOR_FORECAST - 是否调整预测模型
-  - 1 Enable
-  - 0 Disable
--->
-<ARMOR_FORECAST>1</ARMOR_FORECAST>
-<!--
-  ARMOR_EDIT - 是否调整装甲板参数
-  - 1 Enable
-  - 0 Disable
--->
-<ARMOR_EDIT>0</ARMOR_EDIT>
-<!--
-  ARMOR_DRAW - 是否绘制装甲板
-  - 1 Enable
-  - 0 Disable
--->
-<ARMOR_DRAW>1</ARMOR_DRAW>
-<!--
-  ARMOR_HEIGHT_RATIO_MIN - 装甲板左右灯条高度比最小值
-  ARMOR_HEIGHT_RATIO_MAX - 装甲板左右灯条高度比最大值
--->
-<ARMOR_HEIGHT_RATIO_MIN>5</ARMOR_HEIGHT_RATIO_MIN>
-<ARMOR_HEIGHT_RATIO_MAX>15</ARMOR_HEIGHT_RATIO_MAX>
-<!--
-  ARMOR_WIDTH_RATIO_MIN - 装甲板左右灯条宽度比最小值
-  ARMOR_WIDTH_RATIO_MAX - 装甲板左右灯条宽度比最大值
--->
-<ARMOR_WIDTH_RATIO_MIN>5</ARMOR_WIDTH_RATIO_MIN>
-<ARMOR_WIDTH_RATIO_MAX>15</ARMOR_WIDTH_RATIO_MAX>
-<!--
-  ARMOR_Y_DIFFERENT - 左右灯条y的差值不超过灯条平均高度的倍数
--->
-<ARMOR_Y_DIFFERENT>10</ARMOR_Y_DIFFERENT>
-<!--
-  ARMOR_HEIGHT_DIFFERENT - 左右灯条高度差值不超过灯条平均高度的倍数
--->
-<ARMOR_HEIGHT_DIFFERENT>10</ARMOR_HEIGHT_DIFFERENT>
-<!--
-  ARMOR_ANGLE_DIFFERENT - 左右灯条角度差
--->
-<ARMOR_ANGLE_DIFFERENT>200</ARMOR_ANGLE_DIFFERENT>
-<!--
-  ARMOR_SMALL_ASPECT_MIN - 装甲板最小宽高比
-  ARMOR_TYPE_TH          - 大小装甲板分界宽高比
-  ARMOR_BIG_ASPECT_MAX   - 装甲板最大宽高比
--->
-<ARMOR_SMALL_ASPECT_MIN>11</ARMOR_SMALL_ASPECT_MIN>
-<ARMOR_TYPE_TH>22</ARMOR_TYPE_TH>
-<ARMOR_BIG_ASPECT_MAX>35</ARMOR_BIG_ASPECT_MAX>
-</opencv_storage>
-```
-
-| 项                     | 含义                                     | 类型 | 值/单位                        |
-| ---------------------- | ---------------------------------------- | ---- | ------------------------------ |
-| DEBUG_MODE             | 调试模式（显示图形窗口）                 | bool | Disable (0), Enable (1)        |
-| WINDOW_SCALE           | 窗口大小                                 | int  | Small (0), Medium (1), Big (2) |
-| GRAY_EDIT              | 调整灰度图参数（显示参数滑动条）         | bool | Disable (0), Enable (1)        |
-| COLOR_EDIT             | 调整颜色参数（显示参数滑动条）           | bool | Disable (0), Enable (1)        |
-| METHOD                 | 图像预处理方式                           | bool | BGR (0), HSV (1)               |
-| RED_ARMOR_GRAY_TH      | 红色灰度参数                             | int  | 0~255                          |
-| RED_ARMOR_COLOR_TH     | BGR 红色参数                             | int  | 0~255                          |
-| BLUE_ARMOR_GRAY_TH     | 蓝色灰度参数                             | int  | 0~255                          |
-| BLUE_ARMOR_COLOR_TH    | BGR 蓝色参数                             | int  | 0~255                          |
-| GREEN_ARMOR_COLOR_TH   | BGR 绿色参数                             | int  | 0~255                          |
-| WHITE_ARMOR_COLOR_TH   | 白色参数                                 | int  | 0~255                          |
-| H_RED_MIN              | HSV 红色识别参数（H 通道最小值）         | int  | 0~255                          |
-| H_RED_MAX              | HSV 红色识别参数（H 通道最大值）         | int  | 0~255                          |
-| S_RED_MIN              | HSV 红色识别参数（S 通道最小值）         | int  | 0~255                          |
-| S_RED_MAX              | HSV 红色识别参数（S 通道最大值）         | int  | 0~255                          |
-| V_RED_MIN              | HSV 红色识别参数（V 通道最小值）         | int  | 0~255                          |
-| V_RED_MAX              | HSV 红色识别参数（V 通道最大值）         | int  | 0~255                          |
-| H_BLUE_MIN             | HSV 蓝色识别参数（H 通道最小值）         | int  | 0~255                          |
-| H_BLUE_MAX             | HSV 蓝色识别参数（H 通道最大值）         | int  | 0~255                          |
-| S_BLUE_MIN             | HSV 蓝色识别参数（S 通道最小值）         | int  | 0~255                          |
-| S_BLUE_MAX             | HSV 蓝色识别参数（S 通道最大值）         | int  | 0~255                          |
-| V_BLUE_MIN             | HSV 蓝色识别参数（V 通道最小值）         | int  | 0~255                          |
-| V_BLUE_MAX             | HSV 蓝色识别参数（V 通道最大值）         | int  | 0~255                          |
-| B_RED_MIN              | 红色灯条 ROI 区域 B 通道均值最小值       | int  | 0~255                          |
-| B_RED_MAX              | 红色灯条 ROI 区域 B 通道均值最大值       | int  | 0~255                          |
-| G_RED_MIN              | 红色灯条 ROI 区域 G 通道均值最小值       | int  | 0~255                          |
-| G_RED_MAX              | 红色灯条 ROI 区域 G 通道均值最大值       | int  | 0~255                          |
-| R_RED_MIN              | 红色灯条 ROI 区域 R 通道均值最小值       | int  | 0~255                          |
-| R_RED_MAX              | 红色灯条 ROI 区域 R 通道均值最大值       | int  | 0~255                          |
-| B_BLUE_MIN             | 蓝色灯条 ROI 区域 B 通道均值最小值       | int  | 0~255                          |
-| B_BLUE_MAX             | 蓝色灯条 ROI 区域 B 通道均值最大值       | int  | 0~255                          |
-| G_BLUE_MIN             | 蓝色灯条 ROI 区域 G 通道均值最小值       | int  | 0~255                          |
-| G_BLUE_MAX             | 蓝色灯条 ROI 区域 G 通道均值最大值       | int  | 0~255                          |
-| R_BLUE_MIN             | 蓝色灯条 ROI 区域 R 通道均值最小值       | int  | 0~255                          |
-| R_BLUE_MAX             | 蓝色灯条 ROI 区域 R 通道均值最大值       | int  | 0~255                          |
-| LIGHT_EDTI             | 调整灯条形态参数（显示参数滑动条）       | bool | Disable (0), Enable (1)        |
-| LIGHT_DRAW             | 绘制灯条                                 | bool | Disable (0), Enable (1)        |
-| LIGHT_RATIO_W_H_MIN    | 灯条高宽比最小值                         | int  | 0.1                            |
-| LIGHT_RATIO_W_H_MAX    | 灯条高宽比最大值                         | int  | 0.1                            |
-| LIGHT_ANGLE_MIN        | 灯条角度最小值                           | int  | -90°~90°                       |
-| LIGHT_ANGLE_MAX        | 灯条角度最大值                           | int  | -90°~90°                       |
-| LIGHT_PERIMETER_MIN    | 灯条周长最小值                           | int  | px                             |
-| LIGHT_PERIMETER_MAX    | 灯条周长最大值                           | int  | px                             |
-| ARMOR_FORECAST         | 调整预测模型（显示参数滑动条）           | bool | Disable (0), Enable (1)        |
-| ARMOR_EDIT             | 调整装甲板参数（显示参数滑动条）         | bool | Disable (0), Enable (1)        |
-| ARMOR_DRAW             | 绘制装甲板                               | bool | Disable (0), Enable (1)        |
-| ARMOR_HEIGHT_RATIO_MIN | 装甲板左右灯条高度比最小值               | int  | 0.1                            |
-| ARMOR_HEIGHT_RATIO_MAX | 装甲板左右灯条高度比最大值               | int  | 0.1                            |
-| ARMOR_WIDTH_RATIO_MIN  | 装甲板左右灯条宽度比最小值               | int  | 0.1                            |
-| ARMOR_WIDTH_RATIO_MAX  | 装甲板左右灯条宽度比最大值               | int  | 0.1                            |
-| ARMOR_Y_DIFFERENT      | 左右灯条y的差值不超过灯条平均高度的倍数  | int  | 0.1                            |
-| ARMOR_HEIGHT_DIFFERENT | 左右灯条高度差值不超过灯条平均高度的倍数 | int  | 0.1                            |
-| ARMOR_ANGLE_DIFFERENT  | 左右灯条角度差                           | int  | 0.1°                           |
-| ARMOR_SMALL_ASPECT_MIN | 装甲板最小宽高比                         | int  | 0.1                            |
-| ARMOR_TYPE_TH          | 大小装甲板分界宽高比                     | int  | 0.1                            |
-| ARMOR_BIG_ASPECT_MAX   | 装甲板最大宽高比                         | int  | 0.1                            |
-
-#### 6.2.3 serial
-
-`uart_serial_config.xml`
-
-```xml
-<?xml version="1.0"?>
-<opencv_storage>
-<!-- PREFERRED_DEVICE - set preferred serial device path -->
-<PREFERRED_DEVICE>/dev/ttyUSB0</PREFERRED_DEVICE>
-<!-- 
-  SET_BAUDRATE - default baudrate for serial
-  - 1  B115200
-  - 10 B921600
- -->
-<SET_BAUDRATE>1</SET_BAUDRATE>
-<!-- 
-  SHOW_SERIAL_INFORMATION - wheather print serial inforation
-  - 0 Disable
-  - 1 Enable
- -->
-<SHOW_SERIAL_INFORMATION>1</SHOW_SERIAL_INFORMATION>
-</opencv_storage>
-```
-
-| 项                      | 含义               | 类型   | 值                        |
-| ----------------------- | ------------------ | ------ | ------------------------- |
-| PREFERRED_DEVICE        | 默认串口           | string | /dev/{device_name}        |
-| SET_BAUDRATE            | 波特率             | int    | B115200 (1), B921600 (10) |
-| SHOW_SERIAL_INFORMATION | 控制台串口信息输出 | bool   | Disable (0), Enable (1)   |
-
-### 6.3 调试
-
-打开调试模式，启动自瞄程序
-
-#### 6.3.1 阈值
-
-对代码进行以下修改，使之实时显示摄像头效果。
-
-1. 进入`base/MiracleVision.cpp`注释掉`#define RELEASE`
-
-![微信图片_20250912224255](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224255.webp)
-
-2. 将`switch (serial_.returnReceiveMode())`改为`switch (uart::AUTO_AIM)`
-
-![微信图片_20250912224303](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224303.webp)
-
-3. 在`configs/armor/basic_armor_config.xml`中，将`DEBUG_MODE`改为`1`
-
-![微信图片_20250912224154](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224154.webp)
-
-4. 可以按需要调整的参数设置EDIT参数，若要调整灰度阈值，则将`GRAY_EDIT`设为1，程序启动后将弹出滑块窗口。
-
-![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.webp)
-
-#### 6.3.2 串口
-
-查看控制台是否有 `[rec_info]` 串口解码信息输出，检查获取的各个参数是否正常
-
-例如：yaw，pitch，color，bullet_velocity 等
-
-云台运动 yaw/pitch 值要变化
-
-发射弹丸弹速变化
-
-颜色与我方装甲板颜色相同
-
-无信息输出则串口掉线，重新插拔，重启程序
-
-无法解决则更换串口模块 【注意：模块的芯片应为 `CP2102` （串口名称 `/dev/USB01` ）或模块使用STLink-V2.1（串口名称 `/dev/ACM01` ）】
-
-#### 6.3.3 装甲板跟随
-
-使用手持装甲板模块测试识别是否正常（远近，左右）
-
-**注意：装甲板灯条应尽量与地面垂直，有条件可直接使用其它车辆作为目标进行测试**
-
-装甲板未被框选的以下可能：
-
-- 串口掉线，检查是否有串口输出信息
-- 获取的颜色错误，找电控的查读裁判系统的代码是否出错
-- 相机光圈过小/过大，尝试调整工业相机光圈
-- 目标装甲板角度过大
-- 目标装甲板颜色错误，离线模式（紫色）或为我方颜色
-
-识别装甲板但云台不动：
-
-- 串口掉线，重新插拔串口并重启程序
-- 相机卡顿，在 UI 以及控制台可见卡顿现象，插拔相机以及重启程序，若不能解决，尝试更换相机在minipc的插入接口（换C口/反面USB口）【一般是相机供电不足引起】
-- 电控方面接收问题，找电控开调试查
-
-#### 6.3.4 弹道补偿调整
-
-确认跟随正常后，开始调整弹速系数，改变装甲板远近/左右（固定靶），机器人开火
-
-多次尝试均命中即可
-
-弹道过高：`config/angle_solve/angle_solve_config.xml` 中将 `SPEED_ARG` 改大
-
-弹道过低：`config/angle_solve/angle_solve_config.xml` 中将 `SPEED_ARG` 改小
-
-修改幅度不要超过 `0.2`，多次调试确定最佳参数
-
-### 6.4 自启动
-
-#### 6.4.1 配置脚本
-
-放在目录 `MiracleVision/` 下，命名为 `start.sh`
-
-**需要修改路径的用户名**
-
-```
-#!/bin/bash
-cd /home/username/Desktop/MiracleVision/build
-./bin/MiracleVision
-
-exit 0
-```
-
-#### 6.4.2 配置服务
-
-打开目录 `/etc/systemd/system/`
-
-输入以下指令新建服务
-
-```
-sudo gedit autoaim.service
-```
-
-在 `autoaim.service` 中输入以下配置
-
-**需要修改路径的用户名**
-
-```
-[Unit]
-Description=AUTO AIM Service
-After=network.target
-
-[Service]
-ExecStart=/home/username/Desktop/MiracleVision/start.sh
-
-[Install]
-WantedBy=multi-user.target
-```
-
- 输入以下命令启动
-
-```
-sudo systemctl daemon-reload
-sudo systemctl start autoaim.service
-sudo systemctl enable autoaim.service
-```
-
-用以下指令查看运行状态
-
-```
-sudo systemctl status autoaim.service
-```
-
-### 6.5 串口协议
-
-#### 6.5.1 接收数据
-
-
-| 数据位 | 内容                      | 解释                                                                                          |
-| :----- | :------------------------ | :-------------------------------------------------------------------------------------------- |
-| 0      | 头帧                      | ‘S’ (0x53)                                                                                    |
-| 1      | 颜色                      | ALL (0), RED (1), BLUE (2)                                                                    |
-| 2      | 模式                      | 0~9 (见表格后注释)                                                                            |
-| 3      | 机器人 ID                 | 英雄 HERO (0), 无人机 UAV (1), 工程机器人 ENGINEERING (2), 步兵 INFANTRY (3), 哨兵 SENTRY (4) |
-| 4      | yaw轴陀螺仪低八位         | 二进制数 (换算见注释)，单位：角度                                                             |
-| 5      | yaw轴陀螺仪数据高八位     | 二进制数 (换算见注释)，单位：角度                                                             |
-| 6      | pitch轴陀螺仪低八位       | 二进制数 (换算见注释)，单位：角度                                                             |
-| 7      | pitch轴陀螺仪数据高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
-| 8      | yaw轴陀螺仪加速度低八位   | 二进制数 (换算见注释)，单位：角度                                                             |
-| 9      | yaw轴陀螺仪加速度高八位   | 二进制数 (换算见注释)，单位：角度                                                             |
-| 10     | pitch轴陀螺仪加速度低八位 | 二进制数 (换算见注释)，单位：角度                                                             |
-| 11     | pitch轴陀螺仪加速度高八位 | 二进制数 (换算见注释)，单位：角度                                                             |
-| 12     | 子弹速度                  | 二进制数 (换算见注释)，单位：m/s                                                              |
-| 13     | 尾帧                      | ‘E’ (0x45)                                                                                    |
-
-**模式**
-
-| 参数 | 枚举类型标识符           | 模式                     |
-| ---- | ------------------------ | ------------------------ |
-| 0    | DEFAULT_MODE             | 默认模式（基础自瞄模式） |
-| 1    | AUTO_AIM                 | 基础自瞄模式             |
-| 2    | ENERGY_BUFF              | 能量机关模式             |
-| 3    | SENTINEL_AUTONOMOUS_MODE | 哨兵模式                 |
-| 4    | CAMERA_CALIBRATION       | 相机标定模式             |
-
-**二进制数换算**
-
-| 完整数据总位数 | 接收换算                                                   |
-| -------------- | ---------------------------------------------------------- |
-| 16             | 合并高低八位接收为short (int16_t)类型转换为float类型后/100 |
-| 8              | 接收为unsigned char (u_int8_t)类型转换为float类型/10       |
-
-#### 6.5.2 发送数据
-
-
-| 数据位 | 内容                                  | 解释                                                             |
-| :----- | :------------------------------------ | :--------------------------------------------------------------- |
-| 0      | 头帧                                  | ‘S’ (0x53)                                                       |
-| 1      | 装甲板数量 / 是否识别到能量机关装甲板 | 识别到的机器人装甲板数量 / 能量机关：未发现目标 (0) 发现目标 (1) |
-| 2      | 开火命令                              | 不开火(0) 开火 (1)                                               |
-| 3      | yaw 轴增加量低八位                    | 二进制数 (换算见注释)，单位：角度                                |
-| 4      | yaw 轴增加量低高八位                  | 二进制数 (换算见注释)，单位：角度                                |
-| 5      | pitch 轴增加量低低八位                | 二进制数 (换算见注释)，单位：角度                                |
-| 6      | pitch 轴增加量低高八位                | 二进制数 (换算见注释)，单位：角度                                |
-| 7      | 预测坐标x低八位                       | 二进制数 (换算见注释)，单位：像素                                |
-| 8      | 预测坐标x高八位                       | 二进制数 (换算见注释)，单位：像素                                |
-| 9      | 预测坐标y低八位                       | 二进制数 (换算见注释)，单位：像素                                |
-| 10     | 预测坐标y高八位                       | 二进制数 (换算见注释)，单位：像素                                |
-| 11     | 深度低八位                            | 二进制数 (换算见注释)                                            |
-| 12     | 深度高八位                            | 二进制数 (换算见注释)                                            |
-| 13     | CRC 校验位                            | CRC8                                                             |
-| 14     | 尾帧                                  | ‘E’ (0x45)                                                       |
-
-**二进制数换算**
-
-| 完整数据总位数       | 发送换算                                                |
-| -------------------- | ------------------------------------------------------- |
-| 16 (raw & pitch)     | 原始数据*100去尾转换为short (int16_t)类型再拆分高低八位 |
-| 16 (预测坐标 & 深度) | 直接拆分高低8位即可                                     |
-| 8                    | 原始数据*10去尾转换为unsigned char (u_int8_t)类型       |
-
-<div STYLE="page-break-after: always;"></div>
 
 ## 7 参考资料
 
