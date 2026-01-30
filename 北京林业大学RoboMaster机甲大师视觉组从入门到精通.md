@@ -1133,8 +1133,6 @@ script my_session.log
 
 #### 2.1.1.1安装步骤
 
-进入Ubuntu，把U盘里面当时拷进去的三个包复制到桌面
-
 先安装一些环境依赖
 
 在桌面右键打开终端 `Terminal`
@@ -1163,7 +1161,13 @@ sudo apt install -y make
 sudo apt-get update
 ```
 
-将OpenCV 4.5.5源码包解压到桌面，并把OpenCV_Contrib解压到OpenCV 4.5.5所在的文件夹内
+下载 OpenCV 4.5.5 的源码和 OpenCV_Contrib 4.5.5 的源码至桌面
+
+[OpenCV 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv/releases)
+
+[OpenCV_Contrib 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv_contrib/tags)
+
+将 OpenCV 4.5.5 源码包解压到桌面，并把 OpenCV_Contrib 解压到 OpenCV 4.5.5 所在的文件夹内
 
 即下图：
 
@@ -3268,6 +3272,32 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
 从左到右从上到下分别是BGR、GRAY、YUV、HSV、Lab
 
+#### 4.1.2.8 常见错误
+
+- 路径正确，视频无法读取且无法保存录制的视频
+
+  **原因：**ffmpeg未安装
+
+  **解决方案：** 检查以下依赖是否安装
+
+  ```
+  sudo apt-get install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+  ```
+
+  安装完成后重新编译安装 OpenCV 即可
+
+  注意在执行 `cmake ..` 后终端的输出信息，如 `ffmpeg` 部分提示为 `YES` 即可继续编译安装
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322134426787.webp" alt="image-20240322134426787" style="zoom: 33%;" />
+
+- 视频可读取，但相机录制视频无法保存
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322135316813.webp" alt="image-20240322135316813" style="zoom:33%;" />
+
+  **原因：** fps, frameSize 参数错误（一般表现为0）
+
+  **解决方案：** fps与frameSize手动设置即可，不使用 `cv::videoCapture` 的成员函数读取
+
 ## 4.2 深度学习理论
 
 ### 4.2.1 yolov8
@@ -3608,32 +3638,6 @@ cv2.destroyAllWindows()
 
 
 <div STYLE="page-break-after: always;"></div>
-
-#### 4.2.1.4 常见错误
-
-- 路径正确，视频无法读取且无法保存录制的视频
-
-  **原因：**ffmpeg未安装
-
-  **解决方案：** 检查以下依赖是否安装
-
-  ```
-  sudo apt-get install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-  ```
-
-  安装完成后重新编译安装opencv即可
-
-  注意在执行 `cmake ..` 后终端的输出信息，如 `ffmpeg` 部分提示为 `YES` 即可继续编译安装
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322134426787.webp" alt="image-20240322134426787" style="zoom: 33%;" />
-
-- 视频可读取，但相机录制视频无法保存
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240322135316813.webp" alt="image-20240322135316813" style="zoom:33%;" />
-
-  **原因：** fps, frameSize 参数错误（一般表现为0）
-
-  **解决方案：** fps与frameSize手动设置即可，不使用 `cv::videoCapture` 的成员函数读取
 
 ## 4.3ROS与导航（SLAM）
 
