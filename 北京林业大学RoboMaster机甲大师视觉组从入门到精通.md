@@ -8,7 +8,7 @@ $$
 
 ------------------------------
 
-> Update: 2026/01/28
+> Update: 2026/01/30
 
 （按贡献时间先后顺序排序）
 
@@ -27,219 +27,40 @@ $$
 
 <div STYLE="page-break-after: always;"></div>
 
-## 1 硬件
+# 1 基础环境配置
+
+## 1.1 前言
+
+**\"工欲善其事，必先利其器。\"**
+
+在深入探索 RoboMaster 复杂的机器人算法之前，拥有一个稳定、高效且易于调试的开发环境是所有工作的基石。初入视觉组，环境配置往往是入门的第一道槛。面对陌生的 Linux 命令行、缺失的驱动以及各种报错，很容易让人在写下第一行代码前就感到挫败。
+
+本章的设计初衷，正是为了总结经验，帮助你完成开发环境的配置。
+
+鉴于视觉组的绝大部分算法代码最终都需运行在 Ubuntu 系统上，本章将详细介绍如何在你的计算机上部署 Ubuntu 环境。针对不同的硬件条件和使用需求，我们提供了三种主流方案供你选择（详细流程请见参见 1.2）：
+
+- **方案A：Ubuntu 双系统（详见 1.2.1）**
+  - **简介：**也就是在电脑上同时安装 Windows 和 Ubuntu 两个独立的操作系统。
+  - **优点：**性能最强，能够完整发挥硬件算力。
+  - **缺点：**无法同时使用 Windows 软件，切换系统需要重启电脑。
+- **方案 B：WSL2 (Windows Subsystem for Linux 2)（详见 1.2.2）**
+  - **简介：**微软在 Windows 10/11 中提供的原生 Linux 运行环境。
+  - **优点：**相比虚拟机性能更好，且能与 Windows 无缝同时使用，文件交互方便。
+  - **缺点：**硬件访问受限（对 GPU、USB 设备、串口的支持尚不完善），且跨文件系统读写性能较差。
+- **方案 C：虚拟机（详见 1.2.3）**
+  - **简介：**使用 VMware 或 VirtualBox 等软件模拟一台虚拟电脑。
+  - **优点：**拥有完整的 Linux 内核，相比 WSL2 对 USB / 串口等的支持相对完善；有快照和回滚功能，系统崩溃可一键复原，试错和分发成本低。
+  - **缺点：**性能损耗较大。若使用的是轻薄本或内存仅有 16GB，可能会感到明显卡顿。同时可能会遇到显示 / 渲染等问题。
+
+## 1.2 操作系统安装
+
+### 1.2.1 Ubuntu 双系统 / 单系统安装
 
 > Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
-### 1.1 分电板
+> 安装双系统时，若操作不当可能会导致电脑数据被清除，请按照指引谨慎操作。
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
-
-图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
-
-图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
-
-### 1.2 电池架
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
-
-电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
-
-- 符号 |（竖线）：代表 **开启 (ON)**。
-
-- 符号 O（圆圈）：代表 **关闭 (OFF)**。
-
-> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
-
-### 1.3 DC-DC（24V-19V）变压器
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
-
-黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
-
-### 1.4 电池
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
-
-电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
-
-电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
-
-旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
-
-> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
-
-> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
-
-### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
-
-#### 1.5.1 参数（以 NUC 11 为例）
-
-| 属性                | 参数                 |
-| ------------------- | -------------------- |
-| CPU                 | Intel Core i5-1135G7 |
-| GPU                 | 集显 Intel Xe        |
-| RAM                 | 16G DDR4             |
-| 硬盘                | PCIe4.0 NVMe 512G    |
-| 无线网卡            | 有                   |
-| USB 3.1 接口        | 3个                  |
-| 雷电3接口（Type-C） | 2个                  |
-
-#### 1.5.2 各种接口/硬件位置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
-
-### 1.6 工业相机
-
-#### 1.6.1 参数
-
-制造商：迈德威视（MindVision）
-
-型号：MV-SUA134GC-T
-
-镜头：6mm焦距 F2.0光圈 1/1.8″靶面
-
-#### 1.6.2 接口
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
-
-### 1.7 激光雷达
-
-#### 1.7.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
-
-| 参数                    | 说明                                   |
-| ----------------------- | -------------------------------------- |
-| **激光波长**            | 905 nm                                 |
-| **人眼安全级别¹**       | Class 1 (IEC60825-1:2014) 人眼安全     |
-| **量程 (@ 100 klx)**    | 40 m @ 10% 反射率<br>70 m @ 80% 反射率 |
-| **近处盲区²**           | 0.1 m                                  |
-| **FOV**                 | 水平 360°, 竖直 -7°~52°                |
-| **测距随机误差³ (1σ)**  | ≤ 2 cm ⁴ (@ 10m)<br>≤ 3 cm ⁵ (@ 0.2m)  |
-| **角度随机误差（1σ）**  | < 0.15º                                |
-| **点云输出**            | 200,000 点/秒 (可配置第一回波)         |
-| **点云帧率**            | 10 Hz (典型值)                         |
-| **数据网口**            | 100 BASE-TX 以太网                     |
-| **数据同步方式**        | IEEE 1588-2008 (PTPv2), GPS            |
-| **抗串扰功能**          | 有                                     |
-| **虚警率 (@ 100 klx)⁶** | < 0.01%                                |
-| **IMU**                 | 内置 IMU 型号：ICM40609                |
-| **工作环境温度⁷**       | -20℃ 至 55℃                            |
-| **防护等级**            | IP67                                   |
-| **功率⁸**               | 6.5 W                                  |
-| **供电电压范围**        | 9 ~ 27 V DC                            |
-| **尺寸**                | 65×65×60 mm                            |
-| **重量**                | 265 g                                  |
-
-#### 1.7.2 官方文档与手册
-
-[Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
-
-#### 1.7.3 配置
-
-**硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
-
-**IP 设置：**为确保通讯正常，需将 PC（MiniPC）与雷达置于同一网段。请手动修改 PC 的 IPv4 设置：
-
-- **IP 地址：** 推荐设置为 `192.168.1.50`（或 `192.168.1.x` 网段下的其他空闲地址）。
-
-- **子网掩码：** `255.255.255.0`
-
-> 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
-
-#### 1.7.4 SDK
-
-***placeholder，update later by VaporTang***
-
-***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
-
-### 1.8 各种线缆
-
-#### 1.8.1 USB-Camera
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
-
-#### 1.8.2 RJ45 网线
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
-
-#### 1.8.3 HDMI-HDMI
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
-
-### 1.9 USB to TTL
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
-
-#### 1.9.1 接口
-
-| 接口 | 用法          |
-| ---- | ------------- |
-| VCC  | 5V            |
-| TXD  | 接另一端的RXD |
-| RXD  | 接另一端的TXD |
-| GND  | 接GND（地线） |
-
-### 1.10 手持装甲板调试模块
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
-
-#### 1.10.1 参数
-
-| 颜色 | 状态 |
-| ---- | ---- |
-| 红色 | 红方 |
-| 蓝色 | 蓝方 |
-| 紫色 | 离线 |
-
-#### 1.10.2 拆解
-
-装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
-
-通过逆向分析，每颗LED灯珠型号为SMD3528红蓝双色反极贴片式发光二极管。经比对，目前确认其规格与型号 **XL-3528SURUBC-FJ** 一致。
-
-灯珠详细原理及规格图如下：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
-
-##### 驱动方式：
-
-**注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
-
-每个灯珠内部实际包含两个极性相反、相互独立的LED芯片，分别发出红光和蓝光。因此，在驱动红光和蓝光时，可采用一块 3.7 V 软包电池，通过 5 V USB 充放电管理模块进行电能管理。从充放电管理模块输出 5 V 电压，并分为两路：
-
-- 红光 LED 支路串联 **150 Ω** 限流电阻；
-- 蓝光 LED 支路串联 **100 Ω** 限流电阻。
-
-推荐从充放电管理模块获取 5 V 电源的原因在于，其输出电压较为稳定。然而，也可以考虑直接使用电池作为输出电源。在这种情况下：
-
-- 红光 LED 支路应串联 **110 Ω** 限流电阻；
-- 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
-
-### 1.11 外置MiniPC完整装机展示
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
-
-<div STYLE="page-break-after: always;"></div>
-
-## 2 环境配置
-
-### 2.1 双系统安装&纯Ubuntu安装
-
-> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
-
-#### 2.1.1 空间预留
+####  1.2.1.1 空间预留
 
 纯Ubuntu安装可跳过空间预留步骤
 
@@ -263,17 +84,17 @@ $$
 
 ![image-20230713153609066](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713153609066-1699090595617-26.webp)
 
-其它方法：例如用Diskgenius等工具的方法这里就不细讲，方法很多，只要能不丢失原有数据分出空闲分区即可
+其它方法：例如用 Diskgenius 等工具，方法很多，只要能不丢失原有数据分出空闲分区即可
 
-#### 2.1.2 系统安装盘
+####  1.2.1.2 系统安装盘
 
 [Ventoy（用于制作安装系统的启动盘）](https://www.ventoy.net/cn/download.html)
 
 插U盘
 
-要求：一个8G以上的协议至少为**USB3.0**的U盘（不能用SD卡，后面安装大概率装不上，USB3.0以上协议的特征是USB口是**蓝色**的），且U盘为空（后面需要格式化），如果没有U盘可以用移动硬盘（doge
+要求：一个8G以上的协议至少为 **USB3.0** 的U盘（不能用SD卡，后面安装大概率装不上，USB3.0以上协议的特征是USB口是**蓝色**的），且U盘为空（后面需要格式化），如果没有U盘可以用移动硬盘（doge
 
-解压下好的Ventoy，打开
+**解压**下好的Ventoy，打开
 
 ![image-20230713152631709](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713152631709-1699090648360-28.webp)
 
@@ -281,54 +102,39 @@ $$
 
 ![image-20230713154300474](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154300474-1699090719320-33.webp)
 
-下载Ubuntu 22.04
+下载Ubuntu 22.04.5 的安装镜像，可以选择从清华镜像站下载或北林云盘下载（校园网不消耗流量）
 
-[【原链接失效，更新为22.04.5】Ubuntu 22.04 的安装镜像文件（清华开源镜像站）](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04/ubuntu-22.04.5-desktop-amd64.iso)
+[Ubuntu 22.04.5 iso 清华镜像站](https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04/ubuntu-22.04.5-desktop-amd64.iso)
+
+[Ubuntu 22.04.5 iso 北林云盘](https://yunpan.bjfu.edu.cn:443/link/F0B97E8905700A4CC8D397EE791219C8)
 
 安装好后会看到电脑里有个叫 Ventoy 的盘，把下好的 Ubuntu 22.04 镜像放进去
 
 ![image-20230713154523447](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713154523447-1699090731798-35.webp)
 
-*图片例为22.04.2，下载链接更新为22.04.5，安装22.04.5的即可*
+*上图示例为 22.04.2，下载链接为 22.04.5，安装 22.04.5 的即可*
 
-接着下载这四个东西，都放进U盘
+####  1.2.1.3 Ubuntu安装
 
-[VScode的Linux安装包](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64)
-
-如果只是安装Ubuntu，下面三个请忽略（用来配置OpenCV的）
-
-[OpenCV 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv/releases)
-
-[OpenCV_Contrib 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv_contrib/tags)
-
-**ippicv包**
-
-```
-链接：https://pan.baidu.com/s/1u3-AbMBMqXeElnz76bHivw 
-提取码：rm24 
-```
-
-#### 2.1.3 Ubuntu安装
-
-> 参考文献：
+> 参考资料：
 >
 > [13] [关于重装电脑碰到的BUG及其修复教程_verification failed:(0x1a)-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/Sco_ohhG/article/details/135394506)
 
-若无法进入bios（不显示按F几进入setup或者boot之类的字样且按对应按键无反应）
+若无法进入 BIOS（不显示按F几进入setup或者boot之类的字样且按对应按键无反应）
 
-若为已有Ubuntu进行重装，进入Ubuntu，终端输入以下指令重启即可进入BIOS更改引导顺序（Boot->Boot Priority）
+若为已有Ubuntu进行重装，进入Ubuntu，终端输入以下指令重启即可进入BIOS更改引导顺序（Boot -> Boot Priority）
 
 ```
 sudo systemctl reboot --firmware-setup
 ```
 
-若为格式化后的空盘（或新的硬盘无预装系统），显示找不到启动盘且无法进入BIOS
+若为格式化后的空盘（或新的硬盘无预装系统），显示找不到启动盘且无法进入 BIOS
 
-插入制作的Ventoy启动盘后显示：
+插入制作的 Ventoy 启动盘后显示：
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e9d0256177cdae101e9ed14fd12d2549.webp" alt="img" style="zoom:50%;" />
 
-选择OK后选择Enroll Key
+选择 OK 后选择 Enroll Key
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014657546.webp" alt="image-20250215014657546" style="zoom:50%;" />
 
@@ -336,11 +142,11 @@ sudo systemctl reboot --firmware-setup
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014747223.webp" alt="image-20250215014747223" style="zoom:50%;" />
 
-选择.cer即可，确认后reboot即可进入ventoy
+选择 `.cer` 即可，确认后 reboot 即可进入 ventoy
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250215014712038.webp" alt="image-20250215014712038" style="zoom:50%;" />
 
-##### 2.1.3.1 双系统下Ubuntu安装
+#####  1.2.1.3.1 双系统 Ubuntu 安装
 
 重启电脑，但不要进windows
 
@@ -350,7 +156,7 @@ sudo systemctl reboot --firmware-setup
 
 如果键盘上的这些键是小字，功能图标是大字，那在按的的时候要跟 `Fn` 一起按
 
-然后选择带USB的那个启动（假如提示无法通过该盘启动，可能是没关安全启动，需要到BIOS里面关掉）
+然后选择带USB的那个启动（假如提示无法通过该盘启动，可能是没关安全启动（Secure Boot），需要到BIOS里面关掉）
 
 进入下图后回车即可
 
@@ -364,7 +170,7 @@ sudo systemctl reboot --firmware-setup
 
 如果在这一步出现白字刷屏报错，显示Live CD启动失败及无法打开某个block则需要换个U盘做启动盘（一般是因为U盘不是USB3.0或者使用存储卡+读卡器安装）
 
-别的错误baidu解决（
+别的错误自行使用 bing 搜索解决（
 
 进入Ubuntu安装界面，点击Install
 
@@ -466,9 +272,9 @@ sudo systemctl reboot --firmware-setup
 
 在 `Windows Boot Manager` 那一行回车进入 `Windows`
 
-##### 2.1.3.2 纯Ubuntu安装
+#####  1.2.1.3.2 单系统 Ubuntu 安装
 
-同2.1.3.1节中 选择 `Something else` 步骤
+前步骤同 1.2.1.3.1 节中，至选择 `Something else` 步骤
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713160924192-1699103582809-49.webp" alt="image-20230713160924192" style="zoom:40%;" />
 
@@ -476,7 +282,141 @@ sudo systemctl reboot --firmware-setup
 
 后续步骤同2.1.3.1节的分盘及往后步骤
 
-#### 2.1.4 常见问题
+#### 1.2.1.4 输入法安装
+
+> 可选
+
+> Contributors: 洪佳、叶睿聪
+
+> 参考资料：
+>
+> [8] [ubuntu安装搜狗输入法，图文详解+踩坑解决-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_42257666/article/details/129098009)
+>
+> [9] [ubuntu系统安装好搜狗输入法后只能输入英文，无法输入中文的解决方案_ubuntu搜狗输入法无法输入中文-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_39779233/article/details/128086129?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"128086129"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
+>
+> [15] [Ubuntu22.04 系统添加中文输入法 - zensi - 博客园 - https://www.cnblogs.com/](https://www.cnblogs.com/zensi/p/17725119.html?_refluxos=a10)
+
+##### 1.2.1.4.1 添加中文语言支持
+
+系统设置—>区域和语言—>管理已安装的语言—>在“语言”tab下—>点击“添加或删除语言”
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.webp" alt="image-20240124183255432" style="zoom:33%;" />
+
+弹出“已安装语言”窗口，勾选中文（简体），点击应用
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.webp" alt="image-20240124183315544" style="zoom:33%;" />
+
+以下两节（2.9.2/2.9.3）二选一即可
+
+##### 1.2.1.4.2 ibus-Pinyin 安装
+
+终端执行命令安装
+
+```
+sudo apt-get install ibus-pinyin
+```
+
+安装完成后，重启
+
+重启前往 `Setting->Keyboard`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.webp" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
+
+点击 `+` 号
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.webp" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
+
+选择 `Chinses`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.webp" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
+
+选择 `Intelligenc Pinyin` 即可
+
+##### 1.2.1.4.3 搜狗输入法安装
+
+###### 1.2.1.4.3.1 输入法系统安装
+
+回到“语言支持”窗口，在键盘输入法系统中，选择`fcitx`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.webp" alt="image-20240124183327528" style="zoom:33%;" />
+
+如果你没有`fcitx`选项，先打开终端手动安装`fcitx`，等安装成功之后再执行上述步骤：
+
+```
+sudo apt-get install fcitx
+```
+
+
+点击“应用到整个系统”，会输入密码进行验证，然后关闭窗口，重启电脑
+
+然后设置`fcitx`为开机自启动
+
+```
+sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
+```
+
+###### 1.2.1.4.3.2 下载安装包
+
+打开终端输入`uname -a` 查看系统架构
+进入[搜狗输入法`linux`下载页面](https://shurufa.sogou.com/linux)，选择适合你ubuntu架构的版本download
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.webp" alt="image-20240124183346251" style="zoom:33%;" />
+
+###### 1.2.1.4.3.3 安装输入法和依赖
+
+①安装输入法
+
+```
+cd 安装包目录
+sudo dpkg -i sogoupinyin_版本号.deb
+```
+
+②安装所需依赖，完成后重启电脑。
+
+```
+sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+sudo apt install libgsettings-qt1
+```
+
+###### 1.2.1.4.3.4 配置输入法
+
+①查看桌面右上角的键盘图标，看到列表中出现了搜狗，需要配置一下才能使用
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.webp" alt="image-20240124183358842" style="zoom:33%;" />
+
+②点击配置当前输入法，进入输入法配置界面，我的和原作者一样是直接自动添加好了（如果你也是看完3和4点再来尝试），正常来说这里是没有添加搜狗输入法的
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.webp" alt="image-20240124183413892" style="zoom:33%;" />
+
+如果你点配置，出现以下报错，就是缺少图形界面的依赖，需要安装一下`fcitx-config-gtk`
+
+```
+sudo apt install fcitx-config-gtk
+```
+
+③点击+号，然后弹出“添加输入法”的窗口，这里一定要把下面的“仅显示当前语言”取消勾选，然后在下面的搜索框中输入`sogou`，再选择搜狗输入法，点击确认添加进来
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.webp" alt="image-20240124183426547" style="zoom:33%;" />
+
+4)如果在2步是自动添加好的搜狗输入法，选中搜狗输入法点`-`取消掉，然后再执行第3步，不然你永远也调不出来搜狗输入法或者输入中文。
+
+###### 1.2.1.4.3.5 其他
+
+①上面步骤做完后可以使用搜狗输入法但是只能输入英文，这可能是缺少包导致的，你可以去官网重新下载deb安装包进行尝试
+
+也可以尝试一下下载以下两个包
+
+```
+sudo apt-get install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
+sudo apt install libgsettings-qt1
+```
+
+②设置输入法的快捷键，你既可以在系统提供的配置窗口设置，显示高级选项会有更多的设置；
+
+也可以点击搜狗输入法的悬浮窗上的设置按钮，进行直接设置。
+
+
+####  1.2.1.5 常见问题
 
 **① U盘安装时进不去Ubuntu安装界面，卡在黑屏白字页，内容显示某个block error且刷屏**
 
@@ -486,7 +426,7 @@ sudo systemctl reboot --firmware-setup
 
 **②Ubuntu安装好后重启卡在Grub命令行界面，找不到选项进入Ubuntu和Windows Boot Manager**
 
-> 参考文献：
+> 参考资料：
 >
 > [4] [重装Ubuntu后开机停在Grub命令行的解决办法_ubuntu开机卡在命令行-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/weixin_44481159/article/details/109240338)
 
@@ -585,15 +525,613 @@ timedatectl
 
 **后话：**虽然更推荐使用方式一来解决双系统时间冲突问题，虽然方式一是解决双系统时间冲突最简单的方法，但在技术原理上，其实是一种"不完美"的妥协。Linux 社区和系统开发者通常强烈建议使用 UTC，这是因为 Local Time 在某些场景（夏令时切换、跨时区旅行、双系统同时尝试调整夏令时）下会导致逻辑错误或系统故障。那既然问题这么多，为什么我还是推荐方式一呢? 因为作为一个中国大陆的居民，中国早已废除夏令时，所以只要不频繁跨时区出差/旅行，使用 Local Time 没有任何感知上的副作用。也推荐对 Windows 注册表有一定了解的用户使用方式二进行操作，从技术的角度上说，方式二更稳健、更规范
 
-### 2.2 OpenCV
+**④ Ubuntu缺少无线网卡驱动**
+若安装Ubuntu后，设置中找不到wifi连接，参考以下步骤解决（适用于Intel的无线网卡）
 
+打开终端，输入以下指令确定无线网卡属于intel
+
+```
+lspci -nn
+```
+
+若有显示 `Network controller [0280]: Intel Corporation Device`，说明为Intel无线网卡
+
+先使用USB连接手机网络以便下载环境
+
+USB共享网络打开方式（路径仅供参考，因具体系统而异）：`热点->更多共享设置->USB共享网络`
+
+注意要接好线再打开，否则可能不显示USB共享网络选项
+
+编译环境安装
+
+```
+sudo apt-get install make bison flex git
+```
+
+下载以下包：
+
+```
+git clone https://github.com/intel/backport-iwlwifi.git
+git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+```
+
+进入 `backport-iwlwifi` 下的 `iwlwifi-stack-dev` 文件夹打开终端并编译
+
+```
+sudo make defconfig-iwlwifi-public
+sudo make
+sudo make install
+```
+
+进入 `linux-firmware` 文件夹打开终端复制ucode驱动文件
+
+```
+sudo cp iwlwifi-* /lib/firmware
+```
+
+重启完成安装
+
+### 1.2.2 WSL2
+
+> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
+
+**WSL2支持Win11系统和较新的 Win10（版本 2004 及以上）**
+
+#### 1.2.2.1 默认安装部分
+
+打开Windows Powershell，执行命令
+
+```bat
+wsl --install
+```
+
+提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
+
+![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
+打开Powershell，输入一下命令查看支持的版本
+
+```bat
+wsl --list --online
+```
+
+![image-20231101015843375](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015843375.webp)
+
+输入以下命令设置版本为22.04
+
+```
+wsl --install Ubuntu-22.04 -n
+```
+
+安装完成后，右键Powershell标题栏
+
+![image-20231101210913942](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210913942.webp)
+
+点击属性，选择终端选择卡，将默认终端应用程序改为 **Windows 终端**
+
+![image-20231101210955130](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210955130.webp)
+
+关掉Powershell重新打开**（不要使用管理员模式）**
+
+在最上面的下拉菜单选择Ubuntu 22.04.2打开
+
+![image-20231101020428285](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020428285.webp)
+
+打开后会提示设置用户名和密码，正常设置即可
+
+进入系统后，输入以下命令更新包
+
+```
+sudo apt update && sudo apt upgrade
+```
+
+更新完成后，回到Powershell，输入下列命令查看正在运行的子系统
+
+```
+wsl -l -v
+```
+
+![image-20231101020824525](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020824525.webp)
+#### 1.2.2.2 迁移系统
+
+> 可选，硬盘空间充裕无需迁移
+
+由于WSL2默认将子系统装在系统盘，会占用系统盘空间不便于管理，故需要迁移
+
+首先输入以下命令停止子系统运行（Powershell）
+
+```
+wsl --shutdown
+```
+
+输入以下命令导出系统
+
+```
+wsl --export <NAME> <File>
+```
+
+其中，NAME为上面查看运行的子系统中显示的NAME，注意该命令输入时要去掉`<>` （File同理）
+
+Flie为导出路径，例如：
+
+```
+H:\Ubuntu\Ubuntu.tar
+```
+
+如果NAME为`Ubuntu`，则完整导出命令为
+
+```
+wsl --export Ubuntu H:\Ubuntu\Ubuntu.tar
+```
+
+注意，导出路径的 `.tar` 是必要的，**否则导出失败**
+
+导出完成后，输入以下命令删除原来的子系统
+
+```
+wsl --unregister Ubuntu
+```
+
+此处Ubuntu为你的子系统显示的NAME，以配置时实际为准
+
+接着导入刚才导出的子系统
+
+```
+wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
+```
+
+其中 `Ubuntu` 为你要设置的NAME
+
+ `H:\Ubuntu\` 为子系统将要安装的位置
+
+`H:\Ubuntu\ubuntu.tar` 为前面导出的子系统
+
+导入完成即可，重新打开Powershell即可在下拉菜单找到迁移后的子系统（一般图标为🐧）
+
+#### 1.2.2.3 常见问题
+
+- 0x80070422报错
+
+  如下图所示情况
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
+
+  解决方式：
+
+  `win+R` 打开运行，进入服务管理界面
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
+
+  找到`WSL Service`项，将其启动即可
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
+
+  其中启动类型设置为自动
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
+
+  重启命令行即可修复以上问题
+
+### 1.2.3 虚拟机
+
+>  Contributors: 唐锦梁
+
+Windows 上常用的虚拟化软件有 VMware 和 VirtualBox，VirtualBox 是一个开源软件，VMware是一个成熟的商业软件，但自 2024 年博通调整策略后，VMware Workstation Pro 已经对个人用户完全免费。
+
+VMware 相比 VirtualBox 通常有更好的 3D 图形和磁盘 I/O 性能，界面相对更现代流畅，故现在更推荐使用 VMware。
+
+VMware 的安装包下载流程相当繁琐，需要注册博通账号等一系列流程，故本文直接提供安装包的北林云盘链接供下载。如想自行前往官网下载，可以访问 [Fusion and Workstation | VMware](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion) 自行探索。
+
+北林云盘链接如下：[虚拟机及镜像](https://yunpan.bjfu.edu.cn:443/link/595B89CD83E3A059E95F21202673007B)
+
+链接内包含 Ubuntu22.04.5 的系统镜像（下图红框所示），和 17.6.4 版本和 25H2 版本的 VMware，VMware任选一个版本即可，17.6.4 版本相对更稳定，25H2 版本对更新的 Intel 的支持更好，但也存在一些渲染相关的 bug，自行决定下载的版本即可。
+
+![2026-01-23 13-47-52](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23%2013-47-52.webp)
+
+下载后双击 VMware 的安装包安装
+
+安装完成后点击创建虚拟机
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 13-53-12.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom: 33%;" />
+
+选择 custom 模式
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-00-54.webp" style="zoom: 50%;" />
+
+点击 Next，再点击 Next，选择之前下载的 Ubuntu 镜像文件的位置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-05-28.webp" style="zoom: 50%;" />
+
+点击 Next，输入用户名和密码，用户名只能全小写字母
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-06-56.webp" style="zoom: 50%;" />
+
+再点击 Next，按需选择虚拟机的存放位置，默认放在 C 盘，可自行选择虚拟机文件的存放位置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-08-57.webp" style="zoom: 50%;" />
+
+建议给个 8 核，4核也可以
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-10-01.webp" style="zoom: 50%;" />
+
+建议 8GB 内存起步
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-10-59.webp" style="zoom: 50%;" />
+
+之后一路 Next，直到这一步，建议至少给 100GB，这里分配 100GB 虚拟机不会立刻占用，而是随着虚拟机的使用过程而不断增大
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-12-17.webp" style="zoom: 50%;" />
+
+接着一路 Next，最后点击 Finish即可
+
+启动虚拟机，首次启动需要安装 Ubuntu 系统
+
+选择 Install Ubuntu，语言选择 **English**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-17-52.webp" style="zoom: 33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-54-20.webp" style="zoom: 33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-55-26.webp" style="zoom: 33%;" />
+
+时区选到上海即可（Shanghai，国际时区中，我国大陆的时区是用 Asia/Shanghai 来标定，而不是北京）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-57-56.webp" style="zoom: 33%;" />
+
+等待安装进度条完成后会提示需要重启虚拟机，点击重启即可
+
+第一次启动虚拟机会显示引导界面，点击右上角 "Skip"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 14-59-56.webp" style="zoom: 33%;" />
+
+## 1.3 基础开发工具安装
+
+### 1.3.1 VSCode 安装与配置
+
+> Contributors: 叶睿聪 (dgsyrc@github)
+
+#### 1.3.1.1 安装
+
+##### 1.3.1.1.1 Ubuntu
+
+下载好的 VSCode 的.deb安装包放到桌面
+
+在桌面打开终端，输入以下指令
+
+```bash
+sudo apt install ./<VSCode安装包文件名>.deb
+```
+
+安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
+
+注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+
+安装完成后在终端输入以下指令回车执行
+
+```bash
+code
+```
+
+即可打开VSCode
+
+##### 1.3.1.1.2 Windows
+
+下载安装即可
+
+[Visual Studio Code - Code Editing. Redefined - https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+#### 1.3.1.2 语言包配置
+
+打开VScode
+
+点击
+
+![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.webp)
+
+进入插件安装页面
+
+在搜索栏上输入 `Chinese` 安装这个语言包
+
+![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.webp)
+
+#### 1.3.1.3 OpenCV环境配置
+
+安装这四个包即可
+
+![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.webp)
+
+![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.webp)
+
+#### 1.3.1.4 Tensorflow
+
+> 本节内容为 Tensorflow，配置环境可跳过
+
+打开扩展管理
+
+![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.webp)
+
+安装以下扩展包
+
+![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.webp)
+
+![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.webp)
+
+安装完成后，在左侧菜单打开远程资源管理器
+
+![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.webp)
+
+选择你装好环境的WSL
+
+![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.webp)
+
+选择打开文件夹，此时会提示要打开的目录，推荐 `/home/用户名` （用户名为前面设置的username）
+
+![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.webp)
+
+安装这两个扩展，注意是安装在WSL内，即点击这种按钮
+
+![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.webp)
+
+**例程训练**
+
+> 参考资料：
+>
+> [2] [人工智能实践：Tensorflow笔记\_北京大学\_中国大学MOOC(慕课) - https://www.icourse163.org/](https://www.icourse163.org/course/PKU-1002536002)
+
+下载如下代码包：
+
+```
+链接：https://pan.baidu.com/s/127QAuHTod9f96L9bLb1dgw 
+提取码：rm24 
+```
+
+将文件在windows下解压后，将整个class5文件夹拖进vscode的资源管理器中，即
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.webp" alt="image-20231102001018674" style="zoom:30%;" />
+
+打开 `class5/CIFAR10_CNN/p46_cifar10_resnet18.py` 
+
+![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.webp)
+
+此时会提示找不到tensorflow库的位置，鼠标移到标黄线处选择快速修复
+
+![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.webp)
+
+选择选择其他解释器
+
+![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.webp)
+
+选择 `Python 3.9.18('tf')`
+
+由于版本的问题，此时代码依然会报错，修改以下代码
+
+```
+import tensorflow as tf
+import os
+import numpy as np
+from matplotlib import pyplot as plt
+from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, MaxPool2D, Dropout, Flatten, Dense
+from tensorflow.keras import Model
+```
+
+为
+
+```
+import tensorflow as tf
+import os
+import numpy as np
+from matplotlib import pyplot as plt
+from tensorflow.python.keras.layers import Conv2D, Activation, MaxPool2D, Dropout, Flatten, Dense
+from tensorflow.python.keras import Model
+from keras.layers import BatchNormalization
+```
+
+点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.webp)
+
+训练模型（第一次跑时会先自动下载训练数据）
+
+![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.webp)
+
+注意，训练完成后需要等待一段时间才会显示图表
+
+跑出该图即可（不一定一样）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.webp" alt="image-20231102004837869" style="zoom: 40%;" />
+
+尝试修改代码中的参数使得 Validation Accuracy 达到0.9以上
+
+### 1.3.2 CMake
+
+> Contributor: 叶睿聪 (dgsyrc@github)、CMake
+
+#### 1.3.2.1 一般安装
+
+> 不推荐本方法，更建议使按照 1.3.2.2 安装更新版本的 CMake
+
+使用以下命令安装即可
+
+```
+sudo apt-get install cmake
+```
+
+#### 1.3.2.2 更新版本
+
+考虑到部分库的编译对cmake的版本要求较高，在 `1.3.2.1` 中提到的方式安装的版本不能满足要求
+
+因此需要下载cmake的新版本源码手动编译安装
+
+链接 ：https://cmake.org/files/
+
+下载对应Linux版本的 `.tar.gz` 压缩包即可
+
+推荐版本范围：3.22~3.28 之间，4.x 版本编译某些仓库后续可能会遇到一些警告
+
+往下翻，找到对应的系统版本对应的 CPU 架构对应的文件，下图中标识的是 Linux 系统 X86 架构的文件
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 15-33-20.webp" alt="image-20231102004837869" style="zoom: 33%;" />
+
+下载后使用以下命令解压（若同一目录下只有一个 `.tar.gz` 格式压缩包，可以不输入完整压缩包名称解压）
+
+```
+tar -xzvf ***.tar.gz
+```
+
+解压完成后，依次执行以下命令安装依赖以及编译安装（要在cmake目录下）
+
+```
+sudo apt-get install g++
+sudo apt-get install libssl-dev
+sudo apt-get install make
+./configure
+make -j8
+sudo make install
+```
+
+检查安装后的版本
+
+```
+cmake --version
+```
+
+举例：
+
+![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.webp)
+
+### 1.3.3 NoMachine
+
+> Contributors: 洪佳、唐锦梁
+
+#### 1.3.3.1 基本介绍
+
+**NoMachine** 是一款跨平台的远程桌面软件，广泛适用于 Linux、Windows、Android 以及 ARM 架构设备等几乎所有主流操作系统。虽然市面上还有向日葵、ToDesk 等常见的远程工具，但 **NoMachine** 开源极其跨平台性，成为了本项目的首选方案。
+
+#### 1.3.3.2 安装NoMachine
+
+- 官网下载地址：[NoMachine - Download Free Remote Desktop Access](https://downloads.nomachine.com/) 
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-14-11.webp" alt="image-20240125010159271" style="zoom:33%;" />
+
+按照系统类型选择下载的安装包
+
+Windows 下载：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-16-29.webp" alt="image-20240125010301693" style="zoom:33%;" />
+
+Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-20-33.webp" alt="image-20240125010301693" style="zoom:33%;" />
+
+点击download，注意安装目录，下载完双击打开即可，进行安装
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010552041.webp" alt="image-20240125010552041" style="zoom:33%;" />
+
+安装完成后有服务端和客户端，打开客户端
+
+客户端成功打开如上图，第一次进入有官方使用说明，点ok不断继续即可
+
+#### 1.3.3.3 网络连接
+
+控制端和被控端需要处在同一个局域网内，可以通过连接同一个 WiFi(如手机热点)或有线连接，**建议被控插入一个 HDMI 欺骗器**
+
+**注意事项：**
+
+处在同一个局域网也可能因为防火墙设置导致无法连接。
+
+分两种情况：
+
+1. Windows 上 WiFi 连接
+   1. 需要设置为 "专用网络"
+   
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-58-06.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+2. Windows 上 有线连接（网线）
+
+   1. 因为无法上网，无法手动设置为专用网络，需要自行配置防火墙，进入 "高级安全 Windows Defender 防火墙"
+
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 22-13-13.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+   2. 点击 "入站规则"，选中如下两项，右键选择 "启动规则" 即可，启用该项可解决 `ping` 不通的问题
+
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 22-17-14.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+   3. 两台设备之间有线连接需要手动配置网段
+
+      1. 对于 Windows 设备，打开控制面板，进入 "网络和 Internet"  → "网络和共享中心" → "更改适配器设置"（位于左侧小字） → 选中你的有限网络设备，通常命名为 "以太网 n"，下图所示的 "以太网 2" 即为有线网卡，选中后右键选择属性，双击 "Internet 协议版本 4（TCP/IPv4）" → 选中 "使用下面的 IP 地址" → IP 地址设置为 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同） → 子网掩码设置为 255.255.255.0 →点击 "确定" → 点击 "确定"
+
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-windows.webp" alt="image-20240125010654198" style="zoom:33%;" />
+   
+      2. 对于 Ubuntu 设备，"设置" → "网络" → "齿轮图标" → "IPv4" → "手动" → "地址" 填入 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同），""子网掩码" 填入 255.255.255.0 → "应用"
+   
+      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-ubuntu.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+
+
+#### 1.3.3.4 使用介绍
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010654198.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+通常当两个系统处在同一个局域网的情况下，会自动显示局域网内的设备列表
+
+>  注意：控制端至少应该下载NoMachine的服务端，才能顺利连接
+
+#### 1.3.3.5 显示优化
+
+> 以下操作在 Windows 控制端进行
+
+如果 Windows 的屏幕分辨率较高，需要调整 NoMachine 的缩放设置，右键属性 → "更改高 DPI 设置" → 勾选 "替代高 DPI 缩放行为" → 选中 "应用程序" → 点击"确认"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-36-58.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+按下快捷键 `Ctrl + Alt + 0`，点击 Display，选中 "Resize remote display" 和 "Fullscreen"，再点击 "Change settings"，有线连接建议 "Quality" 直接拖到 `Best quality`，分辨率根据被控端的分辨率动态调整。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-42-19.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+再回到软件的主界面，点击 "Settings"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-43-16.webp" alt="image-20240125010654198" style="zoom:50%;" />
+
+再进入 "Performance"，按照下图配置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-44-33.webp" alt="image-20240125010654198" style="zoom:50%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-45-33.webp" alt="image-20240125010654198" style="zoom:33%;" />
+
+#### 1.3.3.6 输入优化
+
+可能会遇到输入大小写不同步的问题，可以进入 "设置" → "辅助功能" → "重复键" 设置为关
+
+同时建议登出后点击右下角齿轮，设置为 `Ubuntu on Xorg`，可解决相关问题
+
+### 1.3.4录制终端会话到文件
+**启动录制**
+
+```bash
+script my_session.log
+```
+执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
+
+**停止录制**
+
+当操作完成需要结束录制时，可以使用以下任意一种方法：
+
+- **输入命令：** `exit`
+- **快捷键：** `Ctrl` + `D`
+
+系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
+
+# 2 核心算法环境配置
+## 2.1传统视觉环境	
+### 2.1.1OpenCV 安装
 > Contributors: 叶睿聪 (dgsyrc@github)
 
 *方法适用于Ubuntu 20.04/22.04 以及WSL中的Ubuntu 20.04/22.04*
 
-#### 2.2.1 安装步骤
-
-进入Ubuntu，把U盘里面当时拷进去的三个包复制到桌面
+#### 2.1.1.1安装步骤
 
 先安装一些环境依赖
 
@@ -623,7 +1161,13 @@ sudo apt install -y make
 sudo apt-get update
 ```
 
-将OpenCV 4.5.5源码包解压到桌面，并把OpenCV_Contrib解压到OpenCV 4.5.5所在的文件夹内
+下载 OpenCV 4.5.5 的源码和 OpenCV_Contrib 4.5.5 的源码至桌面
+
+[OpenCV 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv/releases)
+
+[OpenCV_Contrib 4.5.5 的源码（Source Code）](https://github.com/opencv/opencv_contrib/tags)
+
+将 OpenCV 4.5.5 源码包解压到桌面，并把 OpenCV_Contrib 解压到 OpenCV 4.5.5 所在的文件夹内
 
 即下图：
 
@@ -664,7 +1208,7 @@ make -j8
 
 若出现 `Hello OpenCV` 则说明配置成功
 
-#### 2.2.2 常见问题
+#### 2.1.1.2 常见问题
 
 - 提示ippicv库下载失败
 
@@ -794,168 +1338,13 @@ make -j8
   DESTINATION_DIR "${THE_ROOT}"
   ```
 
+## 2.2机器人操作系统
+###  2.2.1ROS 安装与配置
 
-### 2.3 VSCode
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-#### 2.3.1 安装
-
-##### 2.3.1.1 Ubuntu
-
-下载好的 VSCode 的.deb安装包放到桌面
-
-在桌面打开终端，输入以下指令
-
-```bash
-sudo apt install ./<VSCode安装包文件名>.deb
-```
-
-安装包名字可以右键安装包重命名 `Rename`  , `Ctrl + C` 复制，在终端中 `Ctrl + Shift + V` 粘贴
-
-注：通过上述 `apt` 命令安装好 VSCode 的 `.deb` 包后，通常会自动将微软的官方源添加到你的系统中，这意味着，后续如果VSCode有更新，你不需要再傻傻的去微软的官网下 VSCode 的安装包，而是运行下面的系统更新命令即可自动更新 VSCode
-
-```bash
-sudo apt update && sudo apt upgrade
-```
-
-安装完成后在终端输入以下指令回车执行
-
-```bash
-code
-```
-
-即可打开VSCode
-
-##### 2.3.1.2 Windows
-
-下载安装即可
-
-[Visual Studio Code - Code Editing. Redefined - https://code.visualstudio.com/](https://code.visualstudio.com/)
-
-#### 2.3.2 语言包配置
-
-打开VScode
-
-点击
-
-![image-20230713170625032](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170625032.webp)
-
-进入插件安装页面
-
-在搜索栏上输入 `Chinese` 安装这个语言包
-
-![image-20230713170734097](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170734097.webp)
-
-#### 2.3.3 OpenCV环境配置
-
-安装这四个包即可
-
-![image-20230713170802080](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170802080.webp)
-
-![image-20230713170825135](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20230713170825135.webp)
-
-#### 2.3.4 Tensorflow
-
-![image-20231101235220694](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235220694.webp)
-
-打开扩展管理
-
-安装以下扩展包
-
-![image-20231101235254880](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235254880.webp)
-
-![image-20231101235308585](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235308585.webp)
-
-安装完成后，在左侧菜单打开远程资源管理器
-
-![image-20231101235415760](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235415760.webp)
-
-选择你装好环境的WSL
-
-![image-20231101235751368](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101235751368.webp)
-
-选择打开文件夹，此时会提示要打开的目录，推荐 `/home/用户名` （用户名为前面设置的username）
-
-![image-20231102000102727](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000102727.webp)
-
-安装这两个扩展，注意是安装在WSL内，即点击这种按钮
-
-![image-20231102000417948](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102000417948.webp)
-
-**例程训练**
-
-> 参考文献：
->
-> [2] [人工智能实践：Tensorflow笔记\_北京大学\_中国大学MOOC(慕课) - https://www.icourse163.org/](https://www.icourse163.org/course/PKU-1002536002)
-
-下载如下代码包：
-
-```
-链接：https://pan.baidu.com/s/127QAuHTod9f96L9bLb1dgw 
-提取码：rm24 
-```
-
-将文件在windows下解压后，将整个class5文件夹拖进vscode的资源管理器中，即
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001018674.webp" alt="image-20231102001018674" style="zoom:30%;" />
-
-打开 `class5/CIFAR10_CNN/p46_cifar10_resnet18.py` 
-
-![image-20231102001124426](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001124426.webp)
-
-此时会提示找不到tensorflow库的位置，鼠标移到标黄线处选择快速修复
-
-![image-20231102001920637](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001920637.webp)
-
-选择选择其他解释器
-
-![image-20231102002019857](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102002019857.webp)
-
-选择 `Python 3.9.18('tf')`
-
-由于版本的问题，此时代码依然会报错，修改以下代码
-
-```
-import tensorflow as tf
-import os
-import numpy as np
-from matplotlib import pyplot as plt
-from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, MaxPool2D, Dropout, Flatten, Dense
-from tensorflow.keras import Model
-```
-
-为
-
-```
-import tensorflow as tf
-import os
-import numpy as np
-from matplotlib import pyplot as plt
-from tensorflow.python.keras.layers import Conv2D, Activation, MaxPool2D, Dropout, Flatten, Dense
-from tensorflow.python.keras import Model
-from keras.layers import BatchNormalization
-```
-
-点击VSCode右上角的运行按钮![image-20231102003925399](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102003925399.webp)
-
-训练模型（第一次跑时会先自动下载训练数据）
-
-![image-20231102001255781](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102001255781.webp)
-
-注意，训练完成后需要等待一段时间才会显示图表
-
-跑出该图即可（不一定一样）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231102004837869.webp" alt="image-20231102004837869" style="zoom: 40%;" />
-
-尝试修改代码中的参数使得 Validation Accuracy 达到0.9以上
-
-### 2.4 ROS
 
 > Contributors: 刘明楷（milchstrasse565@github）
 
-####  2.4.1 创建工作空间
+####  2.2.1.1 创建工作空间
 
 终端输入
 
@@ -963,7 +1352,7 @@ from keras.layers import BatchNormalization
 
 一般工作空间名为xxx_ws，ws也可写在前面，看个人习惯
 
-#### 2.4.2 创建功能包
+#### 2.2.1.2 创建功能包
 
 进入工作空间的src目录
 
@@ -973,7 +1362,7 @@ from keras.layers import BatchNormalization
 
 `catkin_create_pkg hello_test std_msgs roscpp rospy`
 
-#### 2.4.3 创建ros节点程序
+#### 2.2.1.3创建ros节点程序
 
 进入hello_test包的src目录写helloworld程序：
 
@@ -1026,7 +1415,7 @@ rosrun后面跟包名+可执行文件名
 
 ![helloworld](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p2.webp)
 
-#### 2.4.4 创建发布者
+#### 2.2.1.4 创建发布者
 
 创建新的节点test_pub.cpp：  
 
@@ -1107,7 +1496,7 @@ int main(int argc, char  *argv[])
 
 发送频率设置为10HZ
 
-#### 2.4.5 创建订阅者
+#### 2.2.1.5 创建订阅者
 
 创建新的节点test_sub.cpp：  
 
@@ -1194,7 +1583,7 @@ rosrun hello_test test_sub
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/p4.webp" alt="helloworld" style="zoom:60%;" />
 
 
-#### 2.4.6 安装turtlebot3仿真需要其他的功能包 
+#### 2.2.1.6 安装turtlebot3仿真需要其他的功能包 
 
 ```
 sudo apt install ros-noetic-gazebo-ros-pkgs 
@@ -1206,7 +1595,7 @@ sudo apt install ros-noetic-navigation
 sudo apt install ros-noetic-move-base
 ```
 
-#### 2.4.7 安装turtlebot3仿真和导航包
+#### 2.2.1.7 安装turtlebot3仿真和导航包
 
 ```
 mkdir -p ~/catkin_turtlebot3/src
@@ -1225,7 +1614,7 @@ catkin_make
 
 `echo "source ~/catkin_turtlebot3/devel/setup.bash" >> ~/.bashrc`
 
-#### 2.4.8 运行导航仿真例程
+#### 2.2.1.8 运行导航仿真例程
 
 以上环境配置成功后，后续2.3和2.4的仿真例程运行可参考(https://blog.csdn.net/weixin_51015707/article/details/121522342)
 
@@ -1252,7 +1641,7 @@ map.pgn：地图图片
 map.yaml：地图信息
 ```
 
-#### 2.4.9 仿真实现自主导航
+#### 2.2.1.9 仿真实现自主导航
 
  运动Gazabo 
 
@@ -1265,162 +1654,9 @@ map.yaml：地图信息
 点击上方红色箭头按钮：2D Nav Goal
 
  随后在地图上任意地点点击设定导航目标位置，小车便开始自主规划移动
-
- ### 2.5 WSL2
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-**注意，WSL2仅支持Win11系统和较新的 Win10（版本 2004 及以上）**
-
-#### 2.5.1 默认安装部分
-
-打开Windows Powershell，执行命令
-
-```
-wsl --install
-```
-
-提示安装完成后重启电脑（若提示失败，检查控制面板/程序和功能/启用或关闭Windows功能是否如下图配置）
-
-![image-20231101015646685](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015646685.webp)
-
-打开Powershell，输入一下命令查看支持的版本
-
-```
-wsl --list --online
-```
-
-![image-20231101015843375](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101015843375.webp)
-
-输入以下命令设置版本为22.04
-
-```
-wsl --install Ubuntu-22.04 -n
-```
-
-安装完成后，右键Powershell标题栏
-
-![image-20231101210913942](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210913942.webp)
-
-点击属性，选择终端选择卡，将默认终端应用程序改为 **Windows 终端**
-
-![image-20231101210955130](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101210955130.webp)
-
-关掉Powershell重新打开**（不要使用管理员模式）**
-
-在最上面的下拉菜单选择Ubuntu 22.04.2打开
-
-![image-20231101020428285](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020428285.webp)
-
-打开后会提示设置用户名和密码，正常设置即可
-
-进入系统后，输入以下命令更新包
-
-```
-sudo apt update && sudo apt upgrade
-```
-
-更新完成后，回到Powershell，输入下列命令查看正在运行的子系统
-
-```
-wsl -l -v
-```
-
-![image-20231101020824525](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20231101020824525.webp)
-
-#### 2.5.2 迁移系统
-
-由于WSL2默认将子系统装在系统盘，会占用系统盘空间不便于管理，故需要迁移
-
-首先输入以下命令停止子系统运行（Powershell）
-
-```
-wsl --shutdown
-```
-
-输入以下命令导出系统
-
-```
-wsl --export <NAME> <File>
-```
-
-其中，NAME为上面查看运行的子系统中显示的NAME，注意该命令输入时要去掉`<>` （File同理）
-
-Flie为导出路径，例如：
-
-```
-H:\Ubuntu\Ubuntu.tar
-```
-
-如果NAME为`Ubuntu`，则完整导出命令为
-
-```
-wsl --export Ubuntu H:\Ubuntu\Ubuntu.tar
-```
-
-注意，导出路径的 `.tar` 是必要的，**否则导出失败**
-
-导出完成后，输入以下命令删除原来的子系统
-
-```
-wsl --unregister Ubuntu
-```
-
-此处Ubuntu为你的子系统显示的NAME，以配置时实际为准
-
-接着导入刚才导出的子系统
-
-```
-wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
-```
-
-其中 `Ubuntu` 为你要设置的NAME
-
- `H:\Ubuntu\` 为子系统将要安装的位置
-
-`H:\Ubuntu\ubuntu.tar` 为前面导出的子系统
-
-导入完成即可，重新打开Powershell即可在下拉菜单找到迁移后的子系统（一般图标为🐧）
-
-#### 2.5.3 常见问题
-
-- 0x80070422报错
-
-  如下图所示情况
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235506269.webp" alt="image-20240122235506269" style="zoom:67%;" />
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/61953d47e124f7eb9207043c8191e24.webp" alt="61953d47e124f7eb9207043c8191e24" style="zoom:67%;" />
-
-  解决方式：
-
-  `win+R` 打开运行，进入服务管理界面
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235656272.webp" alt="image-20240122235656272" style="zoom:67%;" />
-
-  找到`WSL Service`项，将其启动即可
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235746522.webp" alt="image-20240122235746522" style="zoom:50%;" />
-
-  其中启动类型设置为自动
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240122235801991.webp" alt="image-20240122235801991" style="zoom:50%;" />
-
-  重启命令行即可修复以上问题
-
-### 2.6 Tensorflow
-
-> Contributors: 叶睿聪 (dgsyrc@github)
-
-> 关于此步的注意事项：请先在windows端自行挂好梯子，否则部分包的下载可能会很慢或者直接失败（也可以尝试更换下载源）
->
-> 关于梯子的安装（另附文档）
-
-> 参考文献：
->
-> [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
-
-#### 2.6.1 Nvidia 驱动
+## 2.3深度学习环境	
+###  2.3.1显卡驱动与 CUDA/cuDNN
+#### 2.3.1.1 Nvidia 驱动
 
 **安装的是宿主机（Win11）的GPU驱动**
 
@@ -1434,7 +1670,7 @@ wsl --import Ubuntu H:\Ubuntu\ H:\Ubuntu\ubuntu.tar --version 2
 
 下载安装即可
 
-#### 2.6.2 CUDA Toolkit 安装
+#### 2.3.1.2CUDA Toolkit 安装
 
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
@@ -1538,7 +1774,58 @@ sudo apt-get -y install cuda
 
 --------------------------------
 
-#### 2.6.3 Miniconda 安装
+#### 2.3.1.3 CUDA安装
+
+CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit-archive)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.webp" alt="image-20250204153127184" style="zoom: 33%;" />
+
+安装CUDA
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.webp" alt="image-20250204153150013" style="zoom:50%;" />
+
+选择精简安装，安装完成后打开cmd检查安装情况
+
+```
+nvcc -V
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.webp" alt="image-20250204153206530" style="zoom:50%;" />
+
+#### 2.3.1.4 cuDNN安装
+
+cuDNN官方地址：[cuDNN Archive | NVIDIA Developer](https://developer.nvidia.com/rdp/cudnn-archive)
+
+版本对应CUDA的安装版本
+
+下载后，压缩包中三个文件夹解压到该目录下
+
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
+```
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.webp" alt="image-20250204153217917" style="zoom:50%;" />
+
+验证cudnn是否安装成功
+
+cmd进入目录（在该目录下资源管理器的目录框中输入cmd回车即可）
+
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.3\extras\demo_suite
+```
+
+输入
+
+```
+deviceQuery.exe
+```
+
+检查安装
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.webp" alt="image-20250204153237425" style="zoom:50%;" />
+
+### 2.3.2Miniconda&Anaconda
+#### 2.3.2.1 Miniconda 安装
 
 分别执行下列命令
 
@@ -1584,7 +1871,61 @@ source ~/.bashrc
 
 ---------------
 
-#### 2.6.4 Conda 环境配置
+#### 2.3.2.2 anaconda
+
+官方地址（最新版）：[Download Now | Anaconda](https://www.anaconda.com/download/success)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.webp" alt="image-20250204153055921" style="zoom:50%;" />
+
+安装完成，开始菜单进入anaconda prompt
+
+创建虚拟环境（建议版本3.9以上）
+
+```
+conda create -n  自己取的环境名字  python=版本号
+```
+
+激活环境
+
+```
+conda activate 环境名字
+```
+
+查看存在环境
+
+```
+conda env list
+```
+
+进入命令提示符cmd
+
+查看CUDA版本
+
+```
+nvidia-smi
+```
+
+![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.webp)
+
+即12.6，安装对应CUDA工具包，版本小于等于上图版本号
+
+### 2.3.3TensorFlow
+
+> Contributors: 叶睿聪 (dgsyrc@github)
+
+> 关于此步的注意事项：请先在windows端自行挂好梯子，否则部分包的下载可能会很慢或者直接失败（也可以尝试更换下载源）
+>
+> 关于梯子的安装（另附文档）
+
+> 参考资料：
+>
+> [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
+
+
+
+
+
+#### 2.3.3.1 Conda 环境配置
 
 分别执行下列命令
 
@@ -1610,7 +1951,7 @@ conda activate tf
 
 -----------------
 
-#### 2.6.5 GPU 配置
+#### 2.3.3.2 GPU 配置
 
 > Contributors: 叶睿聪 (dgsyrc@github)、杜雨蒙
 
@@ -1658,7 +1999,7 @@ pip install nvidia-cudnn-cu11==8.6.0.163
 
 -------------------
 
-#### 2.6.6 环境变量配置
+#### 2.3.3.3 环境变量配置
 
 输入
 
@@ -1682,8 +2023,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64/stubs/:/usr/local/cuda-12.1/li
 
 ----------------------
 
-#### 2.6.7 Tensorflow 安装
-
+#### 2.3.3.4Tensorflow 安装
 如果没有梯子，下的很慢，可以尝试使用豆瓣源，将库名换进来即可
 
 ```
@@ -1712,7 +2052,7 @@ pip install tensorflow==2.12.0
 
 ------------------
 
-#### 2.6.8 验证安装结果
+#### 2.3.3.5 验证安装结果
 
 **CPU 验证**
 
@@ -1740,712 +2080,8 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
 重新执行GPU验证，若依然无法解决，请从前面GPU配置开始重做一次
 
 **至此，环境配置完成**
-
-### 2.7 裁判系统服务器
-
-> Contributors: 邱万理
-
-#### 2.7.1 前期准备
-
-硬件：路由器（以小米路由器为例）、网线
-
-软件：mysql(实际使用感觉非必要）、RoboMaster_Server(很多版本会闪退，自己多换几个赛季的试试，这里以2020年版本为例)
-
-#### 2.7.2 配置路由器
-
-##### 2.7.2.1 连接方式
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.webp" alt="image-20240121233742010" style="zoom: 25%;" />
-
-注意网线和电脑连接时接2号的LAN口，而不是接3号的WAN口
-
-##### 2.7.2.2 开始配置
-
-首先安装上述连接方式连接，Wifi连上Xiaomi并打开小米路由器设置网页http://miwifi.com/
-
-第一次进入会提示设置密码，设置为12345678
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.webp" alt="1280X1280" style="zoom: 33%;" />
-
-进入后到常用设置的WIFI设置中
-
-SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母加数字
-
-加密方式设置为WPA2，所以可以设置为强加密
-
-密码必须设置为12345678
-
-其余可以使用默认设置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).webp" alt="1280X1280 (1)" style="zoom: 33%;" />
-
-进入常用设置的局域网设置中
-
-将局域网IP地址设置为192.168.1.１
-
-开启DHCP服务，并且设置开始IP为2(因为作为服务器主机的电脑将要设置为192.168.1.2,所以需要确保可以使用此IP)，结束IP则无严格要求
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).webp" alt="1280X1280 (2)" style="zoom: 33%;" />
-
-进入高级设置中的DHCP静态IP分配
-
-添加绑定的设备，设备为作为服务器主机的电脑，IP设置为192.168.1.2
-
-(如果配置不成功可以尝试拔掉网线重新连接)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/3338de21-5add-4c64-9ff1-999e05808fe2.webp" alt="3338de21-5add-4c64-9ff1-999e05808fe2" style="zoom: 33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/9df7eb37-1132-4aca-9c85-59224fb7aff7.webp" alt="9df7eb37-1132-4aca-9c85-59224fb7aff7" style="zoom: 33%;" />
-
-如果还未成功，设置－＞网络和Internet－＞高级网络设置－＞更改适配器选项
-
-进入WLAN的属性中，点击Internet协议版本４(TCP／IPv4)，打开其属性
-
-改为使用下面的IP地址，并且设置IP地址为192.168.1.2，设置子网掩码为255.255.255.0
-
-（注意关闭防火墙）
-
-确定后关机重启
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944.webp" alt="5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944" style="zoom: 33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d92ede77-0048-4ced-9dd9-6e4cda0100cb.webp" alt="d92ede77-0048-4ced-9dd9-6e4cda0100cb" style="zoom: 33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.webp" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
-
-#### 2.7.3 软件安装
-
-##### 2.7.3.1 MySQL
-
-①进入官网下载MySQL，版本可以选择低一些，mysql-8.0.31-win64.zip
-
-https://dev.mysql.com/downloads/mysql/
-
-②解压缩zip文件，放置在一个简短并且没有中文的文件路径下（如放在`D:\mysql-8.0.31-winx64`)
-
-然后配置一下环境变量(不清楚在哪里自己在设置中搜索环境变量）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8b8a6f13-5ea5-4c86-82a0-9aa06042969b.webp" alt="8b8a6f13-5ea5-4c86-82a0-9aa06042969b" style="zoom:33%;" />
-
-系统属性界面右下角的环境变量中，在系统变量找到`Path`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d62674cc-d8f4-4162-8eba-e4f5387e6952.webp" alt="d62674cc-d8f4-4162-8eba-e4f5387e6952" style="zoom:33%;" />
-
-点击编辑，新建一个环境变量名称为刚刚安装的路径再加上`/bin`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ea802741-5189-4b5e-987c-7cbb7f54c150.webp" alt="ea802741-5189-4b5e-987c-7cbb7f54c150" style="zoom:33%;" />
-
-③在刚刚的bin文件的同一位置新建一个`data`文件夹和一个`mysql.ini`文件
-
-![5ba868a2-8e93-4690-898e-6b2b0ec24a51](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5ba868a2-8e93-4690-898e-6b2b0ec24a51.webp)
-
-`mysql.ini`文件先创建一个`.txt`文件，加入以下内容后再修改后缀名变更为`.ini`文件
-
-其中第12行和第15行请自行修改为自己安装的实际位置
-
-```ini
-[mysql]
-
-# 设置mysql客户端默认字符集
-default-character-set=utf8 
-
-[mysqld]
-
-#设置3306端口
-port = 3306 
-
-# 设置mysql的安装目录
-basedir=F:\mysql\mysql-5.7.24-winx64\mysql-5.7.24-winx64
-
-# 设置mysql数据库的数据的存放目录
-datadir=F:\mysql\mysql-5.7.24-winx64\mysql-5.7.24-winx64\data
-
-# 允许最大连接数
-max_connections=200
-
-# 服务端使用的字符集默认为8比特编码的latin1字符集
-character-set-server=utf8
-
-# 创建新表时将使用的默认存储引擎
-default-storage-engine=INNODB
-```
-
-④打开cmd(Win+R）
-
-首先安装mysql，执行以下命令行
-
-```
-mysqld install
-```
-
-安装成功后启动mysql服务
-
-```
-net start mysql
-```
-
-服务器启动后，需要输入密码登录（第一次登录没有密码，直接回车即可）
-
-```
-mysqladmin -u root -p password
-```
-
-修改密码，u后面为用户名（一般都设置为root）,password建议设置为123456或者12345678,忘记密码没有找回方式
-
-```
-mysqladmin -u root -p password
-```
-
-⑤设置中搜索服务
-
-找到MySQL，设置其为手动启动，避免每次开机自启
-
-后续启动可以cmd输入
-
-```
-net start mysql
-```
-
-或者再次打开服务界面，右键点击启动也可
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.webp" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
-
-##### 2.7.3.2 大疆官方服务器
-
-前往RoboMaster官网下载服务器客户端(RoboMaster产品->裁判系统->软件产品）
-
-各赛季的版本不一定都出来了，并且有些版本的会闪退，自己根据电脑情况多尝试几个版本即可，这里使用的是2020年的服务器客户端
-
-https://www.robomaster.com/zh-CN/products/components/detail/2518
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0e5d6040-a014-4b9c-9e91-c7eb86a37b42.webp" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2ff831b2-b26c-4607-88e7-0e59d7789b9b.webp" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1e4ce0be-abaf-4f0e-8df7-9b74f38bee76.webp" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:33%;" />
-
-2020赛季的服务器RoboMaster Server里面文件如下图，打开RMServerStart.exe文件，直接点击最下面的StartAll，进入后Play能够打开以下界面即可。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2befb81e-b765-4d33-8ed4-525afc8437be.webp" alt="2befb81e-b765-4d33-8ed4-525afc8437be" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/c343c74f-d9b2-489b-b209-b0ec09972dbc.webp" alt="c343c74f-d9b2-489b-b209-b0ec09972dbc" style="zoom: 50%;" />
-
-最终效果图
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.webp" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
-
-#### 2.7.4 完整流程
-
-当以上3步都能大致实现之后，可以开始使用我们的服务器
-
-①首先连接将路由器与电脑连接，电脑Wifi选择Xiaomi(后面字母和数字为用户自己编号，各不相同就不列举)
-
-并且将电脑的IP地址设置为192.168.1.2,子网掩码设置为255.255.255.0(这一步如果静态DHCP分配设置成功不一定需要，如果配置失败请尝试自己手动修改配置）
-
-②打开MySQL服务
-
-③启动RoboMaster Server软件
-
-④机器人主控模块中点击Wifi设置，扫描
-
-扫描到路由器的Wifi后，长按确定（连接并且记忆该Wifi）
-
-连接成功后可以通过主页面左上角感叹号是否消失判断
-
-#### 2.7.5 可能遇到的问题
-
-- 主控右上角显示连接上Wifi，但是左上角感叹号仍存在？
-
-仅仅是连接上了路由器的Wifi，但是主机并未正确设置为要求的192.168.1.2
-
-目前找到的许多教程中都是在网络设置中设置IP地址和子网掩码来实现，但是实际使用发现并没有设置为预想的IP。
-
-这时请尝试在MiWifi路由器设置网页中，在高级设置中的DHCP静态IP分配里重新为作为服务器主机的电脑分配IP：192.168.1.2
-
-- 路由器不能正常打开配置页面？
-
-电脑注意是使用LAN口，而不是使用WAN口（如果不确定，请都试一遍）
-
-- 下载的服务器客户端打开后闪退？
-
-不清楚是官方问题还是自己电脑问题，遇到此问题只能自己多找几个赛季的软件都试试，一般前期只是用于测试功率等简单功能，不一定需要使用最新赛季的服务器软件
-
-### 2.8 NoMachine
-
-> Contributors: 洪佳、唐锦梁
-
-#### 2.8.1 基本介绍
-
-**NoMachine** 是一款跨平台的远程桌面软件，广泛适用于 Linux、Windows、Android 以及 ARM 架构设备等几乎所有主流操作系统。虽然市面上还有向日葵、ToDesk 等常见的远程工具，但 **NoMachine** 开源极其跨平台性，成为了本项目的首选方案。
-
-#### 2.8.2 安装NoMachine
-
-- 官网下载地址：[NoMachine - Download Free Remote Desktop Access](https://downloads.nomachine.com/) 
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-14-11.webp" alt="image-20240125010159271" style="zoom:33%;" />
-
-按照系统类型选择下载的安装包
-
-Windows 下载：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-16-29.webp" alt="image-20240125010301693" style="zoom:33%;" />
-
-Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-20-33.webp" alt="image-20240125010301693" style="zoom:33%;" />
-
-点击download，注意安装目录，下载完双击打开即可，进行安装
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010552041.webp" alt="image-20240125010552041" style="zoom:33%;" />
-
-安装完成后有服务端和客户端，打开客户端
-
-客户端成功打开如上图，第一次进入有官方使用说明，点ok不断继续即可
-
-#### 2.8.3 网络连接
-
-控制端和被控端需要处在同一个局域网内，可以通过连接同一个 WiFi(如手机热点)或有线连接，**建议被控插入一个 HDMI 欺骗器**
-
-**注意事项：**
-
-处在同一个局域网也可能因为防火墙设置导致无法连接。
-
-分两种情况：
-
-1. Windows 上 WiFi 连接
-   1. 需要设置为 "专用网络"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 21-58-06.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-2. Windows 上 有线连接（网线）
-
-   1. 因为无法上网，无法手动设置为专用网络，需要自行配置防火墙，进入 "高级安全 Windows Defender 防火墙"
-
-      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 22-13-13.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-   2. 点击 "入站规则"，选中如下两项，右键选择 "启动规则" 即可，启用该项可解决 `ping` 不通的问题
-
-   3. 两台设备之间有线连接需要手动配置网段
-
-      1. 对于 Windows 设备，打开控制面板，进入 "网络和 Internet"  → "网络和共享中心" → "更改适配器设置"（位于左侧小字） → 选中你的有限网络设备，通常命名为 "以太网 n"，下图所示的 "以太网 2" 即为有线网卡，选中后右键选择属性，双击 "Internet 协议版本 4（TCP/IPv4）" → 选中 "使用下面的 IP 地址" → IP 地址设置为 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同） → 子网掩码设置为 255.255.255.0 →点击 "确定" → 点击 "确定"
-
-      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-windows.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-      2. 对于 Ubuntu 设备，"设置" → "网络" → "齿轮图标" → "IPv4" → "手动" → "地址" 填入 192.168.1.x（x是指一个 1-255之间的任意整数，推荐在 50~200 之间选择，注意两台电脑的 IP 地址不能完全相同），""子网掩码" 填入 255.255.255.0 → "应用"
-      
-      <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/nomachine-修改ipv4-ubuntu.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-
-
-#### 2.8.4 使用介绍
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240125010654198.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-通常当两个系统处在同一个局域网的情况下，会自动显示局域网内的设备列表
-
->  注意：控制端至少应该下载NoMachine的服务端，才能顺利连接
-
-#### 2.8.5 显示优化
-
-> 以下操作在 Windows 控制端进行
-
-如果 Windows 的屏幕分辨率较高，需要调整 NoMachine 的缩放设置，右键属性 → "更改高 DPI 设置" → 勾选 "替代高 DPI 缩放行为" → 选中 "应用程序" → 点击"确认"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-36-58.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-按下快捷键 `Ctrl + Alt + 0`，点击 Display，选中 "Resize remote display" 和 "Fullscreen"，再点击 "Change settings"，有线连接建议 "Quality" 直接拖到 `Best quality`，分辨率根据被控端的分辨率动态调整。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-42-19.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-再回到软件的主界面，点击 "Settings"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-43-16.webp" alt="image-20240125010654198" style="zoom:50%;" />
-
-再进入 "Performance"，按照下图配置
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-44-33.webp" alt="image-20240125010654198" style="zoom:50%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-23 00-45-33.webp" alt="image-20240125010654198" style="zoom:33%;" />
-
-### 2.9 中文输入法安装(Ubuntu)
-
-> Contributors: 洪佳、叶睿聪
-
-> 参考文献：
->
-> [8] [ubuntu安装搜狗输入法，图文详解+踩坑解决-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_42257666/article/details/129098009)
->
-> [9] [ubuntu系统安装好搜狗输入法后只能输入英文，无法输入中文的解决方案_ubuntu搜狗输入法无法输入中文-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_39779233/article/details/128086129?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"128086129"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
->
-> [15] [Ubuntu22.04 系统添加中文输入法 - zensi - 博客园 - https://www.cnblogs.com/](https://www.cnblogs.com/zensi/p/17725119.html?_refluxos=a10)
-
-#### 2.9.1 添加中文语言支持
-
-系统设置—>区域和语言—>管理已安装的语言—>在“语言”tab下—>点击“添加或删除语言”
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183255432.webp" alt="image-20240124183255432" style="zoom:33%;" />
-
-弹出“已安装语言”窗口，勾选中文（简体），点击应用
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183315544.webp" alt="image-20240124183315544" style="zoom:33%;" />
-
-以下两节（2.9.2/2.9.3）二选一即可
-
-#### 2.9.2 ibus-Pinyin 安装
-
-终端执行命令安装
-
-```
-sudo apt-get install ibus-pinyin
-```
-
-安装完成后，重启
-
-重启前往 `Setting->Keyboard`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-52-35.webp" alt="Screenshot from 2025-03-03 19-52-35" style="zoom:50%;" />
-
-点击 `+` 号
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-19.webp" alt="Screenshot from 2025-03-03 19-53-19" style="zoom:50%;" />
-
-选择 `Chinses`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Screenshot from 2025-03-03 19-53-35.webp" alt="Screenshot from 2025-03-03 19-53-35" style="zoom: 80%;" />
-
-选择 `Intelligenc Pinyin` 即可
-
-#### 2.9.3 搜狗输入法安装
-
-##### 2.9.3.1 输入法系统安装
-
-回到“语言支持”窗口，在键盘输入法系统中，选择`fcitx`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183327528.webp" alt="image-20240124183327528" style="zoom:33%;" />
-
-如果你没有`fcitx`选项，先打开终端手动安装`fcitx`，等安装成功之后再执行上述步骤：
-
-```
-sudo apt-get install fcitx
-```
-
-
-点击“应用到整个系统”，会输入密码进行验证，然后关闭窗口，重启电脑
-
-然后设置`fcitx`为开机自启动
-
-```
-sudo cp /usr/share/applications/fcitx.desktop /etc/xdg/autostart/
-```
-
-##### 2.9.3.2 下载安装包
-
-打开终端输入`uname -a` 查看系统架构
-进入[搜狗输入法`linux`下载页面](https://shurufa.sogou.com/linux)，选择适合你ubuntu架构的版本download
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183346251.webp" alt="image-20240124183346251" style="zoom:33%;" />
-
-##### 2.9.3.3 安装输入法和依赖
-
-①安装输入法
-
-```
-cd 安装包目录
-sudo dpkg -i sogoupinyin_版本号.deb
-```
-
-②安装所需依赖，完成后重启电脑。
-
-```
-sudo apt install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-```
-
-##### 2.9.3.4 配置输入法
-
-①查看桌面右上角的键盘图标，看到列表中出现了搜狗，需要配置一下才能使用
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183358842.webp" alt="image-20240124183358842" style="zoom:33%;" />
-
-②点击配置当前输入法，进入输入法配置界面，我的和原作者一样是直接自动添加好了（如果你也是看完3和4点再来尝试），正常来说这里是没有添加搜狗输入法的
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183413892.webp" alt="image-20240124183413892" style="zoom:33%;" />
-
-如果你点配置，出现以下报错，就是缺少图形界面的依赖，需要安装一下`fcitx-config-gtk`
-
-```
-sudo apt install fcitx-config-gtk
-```
-
-③点击+号，然后弹出“添加输入法”的窗口，这里一定要把下面的“仅显示当前语言”取消勾选，然后在下面的搜索框中输入`sogou`，再选择搜狗输入法，点击确认添加进来
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240124183426547.webp" alt="image-20240124183426547" style="zoom:33%;" />
-
-4)如果在2步是自动添加好的搜狗输入法，选中搜狗输入法点`-`取消掉，然后再执行第3步，不然你永远也调不出来搜狗输入法或者输入中文。
-
-##### 2.9.3.5 其他
-
-①上面步骤做完后可以使用搜狗输入法但是只能输入英文，这可能是缺少包导致的，你可以去官网重新下载deb安装包进行尝试
-
-也可以尝试一下下载以下两个包
-
-```
-sudo apt-get install libqt5qml5 libqt5quick5 libqt5quickwidgets5 qml-module-qtquick2
-sudo apt install libgsettings-qt1
-```
-
-②设置输入法的快捷键，你既可以在系统提供的配置窗口设置，显示高级选项会有更多的设置；
-
-也可以点击搜狗输入法的悬浮窗上的设置按钮，进行直接设置。
-
-### 2.10 cmake
-
-> Contributor: 叶睿聪 (dgsyrc@github)
-
-#### 2.10.1 一般安装
-
-使用以下命令安装即可
-
-```
-sudo apt-get install cmake
-```
-
-#### 2.10.2 更新版本
-
-考虑到部分库的编译对cmake的版本要求较高，在 `2.10.1` 中提到的方式安装的版本不能满足要求
-
-因此需要下载cmake的新版本源码手动编译安装
-
-链接 ：[Download CMake - https://cmake.org/](https://cmake.org/download/)
-
-下载对应Linux版本的 `.tar.gz` 压缩包即可
-
-下载后使用以下命令解压（若同一目录下只有一个 `.tar.gz` 格式压缩包，可以不输入完整压缩包名称解压）
-
-```
-tar -xzvf ***.tar.gz
-```
-
-解压完成后，依次执行以下命令安装依赖以及编译安装（要在cmake目录下）
-
-```
-sudo apt-get install g++
-sudo apt-get install libssl-dev
-sudo apt-get install make
-./configure
-make -j8
-sudo make install
-```
-
-检查安装后的版本
-
-```
-cmake --version
-```
-
-举例：
-
-![image-20240221203222526](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240221203222526.webp)
-
-### 2.11 onnxruntime
-
-> Contributor: 叶睿聪 (dgsyrc@github)
-
-git安装
-
-```
-sudo apt-get install git
-```
-
-下载源码（源码较大，请确保网络通畅，不建议使用梯子，可能会报错）
-
-```
-git clone --recursive https://github.com/Microsoft/onnxruntime
-```
-
-> **报错1**
->
-> error: RPC failed; curl 16 Error in the HTTP2 framing layer
->
-> 使用以下指令解决
->
-> ```
-> git config --global http.postBuffer 5242880000
-> git config --global https.postBuffer 5242880000
-> ```
-
-安装必要环境
-
-```
-sudo apt-get install python-dev-is-python3
-sudo apt-get install python3-numpy-dev
-sudo apt-get install python3-packaging
-sudo apt-get install python3-setuptools
-sudo apt-get install python3-wheel
-```
-
-在 `onnxruntime` 文件夹下编译
-
-```
-sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
-```
-
-此时可能会提示cmake版本过低，请根据 `2.10` 内容升级cmake
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.webp" alt="image-20240222190207012" style="zoom: 67%;" />
-
-升级完成后重新执行上述命令即可成功编译（编译时间较长）
-
-**可以用以下方式节省编译时间**
-
-> 如加--skip_tests参数，或者：
->
-> 在看到开始编译时（如下图）
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.webp" alt="image-20240222185820853" style="zoom: 50%;" />
->
-> 按下 `Ctrl+C` 终止编译
->
-> 在 `onnxruntime/build/Linux/RelWithDebInfo` 目录下使用以下命令（nuc02替换为实际的用户名）
-> 
-> ```
->sudo cmake --build /home/nuc02/Desktop/onnxruntime/build/Linux/RelWithDebInfo --config RelWithDebInfo -j8
-> ```
->
-> 注意编译时是否有报错
->
-> **报错1**
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.webp" alt="image-20240222191128295" style="zoom: 67%;" />
->
-> 缺少python环境
->
-> 此时应输入以下指令安装环境
-> 
-> ```
->sudo apt-get install python-dev-is-python3
-> ```
->
-> **报错2**
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.webp" alt="image-20240222191704374" style="zoom:67%;" />
->
-> 缺少 `numpy` 库
->
-> 输入以下指令安装环境
-> 
-> ```
->sudo apt-get install python3-numpy-dev
-> ```
->
-> 安装完成后再重新编译
->
-> 使用加速编译最后需要回到onnxruntime目录下打开终端重新执行一次原本正常编译的指令检查
-> 
-> ```
->sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
-> ```
->
-
-编译完成后
-
-在 `onnxruntime/build/Linux/RelWithDebInfo` 或 `onnxruntime/build/Linux/Release` 下执行以下命令安装（上面加速的步骤可能会导致编译的文件无法转移至 `Release`  )
-
-```
-sudo make install
-```
-
-### 2.12 pytorch & anaconda
-
-#### 2.12.1 anaconda
-
-官方地址（最新版）：[Download Now | Anaconda](https://www.anaconda.com/download/success)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153055921.webp" alt="image-20250204153055921" style="zoom:50%;" />
-
-安装完成，开始菜单进入anaconda prompt
-
-创建虚拟环境（建议版本3.9以上）
-
-```
-conda create -n  自己取的环境名字  python=版本号
-```
-
-激活环境
-
-```
-conda activate 环境名字
-```
-
-查看存在环境
-
-```
-conda env list
-```
-
-进入命令提示符cmd
-
-查看CUDA版本
-
-```
-nvidia-smi
-```
-
-![image-20250204153112021](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153112021.webp)
-
-即12.6，安装对应CUDA工具包，版本小于等于上图版本号
-
-#### 2.12.2 CUDA安装
-
-CUDA官方地址：[CUDA Toolkit Archive | NVIDIA Developer](https://developer.nvidia.com/cuda-toolkit-archive)
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153127184.webp" alt="image-20250204153127184" style="zoom: 33%;" />
-
-安装CUDA
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153150013.webp" alt="image-20250204153150013" style="zoom:50%;" />
-
-选择精简安装，安装完成后打开cmd检查安装情况
-
-```
-nvcc -V
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153206530.webp" alt="image-20250204153206530" style="zoom:50%;" />
-
-#### 2.12.3 cuDNN安装
-
-cuDNN官方地址：[cuDNN Archive | NVIDIA Developer](https://developer.nvidia.com/rdp/cudnn-archive)
-
-版本对应CUDA的安装版本
-
-下载后，压缩包中三个文件夹解压到该目录下
-
-```
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6
-```
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153217917.webp" alt="image-20250204153217917" style="zoom:50%;" />
-
-验证cudnn是否安装成功
-
-cmd进入目录（在该目录下资源管理器的目录框中输入cmd回车即可）
-
-```
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.3\extras\demo_suite
-```
-
-输入
-
-```
-deviceQuery.exe
-```
-
-检查安装
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153237425.webp" alt="image-20250204153237425" style="zoom:50%;" />
-
-#### 2.12.4 安装PyTorch
+### 2.3.4Pytorch
+#### 2.3.4.1 安装PyTorch
 
 官方地址：[PyTorch](https://pytorch.org/)
 
@@ -2483,8 +2119,7 @@ else:
 ```
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
-
-#### 2.12.5 测试例：mnist手写数字识别
+#### 2.3.4.2 测试例：mnist手写数字识别
 
 安装 `matplotlib` 包（在虚拟环境下安装）
 
@@ -2637,64 +2272,584 @@ show_predictions(model, test_loader, num_images=10)
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153556588.webp" alt="image-20250204153556588" style="zoom:50%;" />
 
-### 2.13 无线网卡驱动安装（Ubuntu）
 
-若安装Ubuntu后，设置中找不到wifi连接，参考以下步骤解决（适用于Intel的无线网卡）
+<div STYLE="page-break-after: always;"></div>
+### 2.3.5 onnxruntime
 
-打开终端，输入以下指令确定无线网卡属于intel
+> Contributor: 叶睿聪 (dgsyrc@github)
 
-```
-lspci -nn
-```
-
-若有显示 `Network controller [0280]: Intel Corporation Device`，说明为Intel无线网卡
-
-先使用USB连接手机网络以便下载环境
-
-USB共享网络打开方式（路径仅供参考，因具体系统而异）：`热点->更多共享设置->USB共享网络`
-
-注意要接好线再打开，否则可能不显示USB共享网络选项
-
-编译环境安装
+git安装
 
 ```
-sudo apt-get install make bison flex git
+sudo apt-get install git
 ```
 
-下载以下包：
+下载源码（源码较大，请确保网络通畅，不建议使用梯子，可能会报错）
 
 ```
-git clone https://github.com/intel/backport-iwlwifi.git
-git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+git clone --recursive https://github.com/Microsoft/onnxruntime
 ```
 
-进入 `backport-iwlwifi` 下的 `iwlwifi-stack-dev` 文件夹打开终端并编译
+> **报错1**
+>
+> error: RPC failed; curl 16 Error in the HTTP2 framing layer
+>
+> 使用以下指令解决
+>
+> ```
+> git config --global http.postBuffer 5242880000
+> git config --global https.postBuffer 5242880000
+> ```
+
+安装必要环境
 
 ```
-sudo make defconfig-iwlwifi-public
-sudo make
+sudo apt-get install python-dev-is-python3
+sudo apt-get install python3-numpy-dev
+sudo apt-get install python3-packaging
+sudo apt-get install python3-setuptools
+sudo apt-get install python3-wheel
+```
+
+在 `onnxruntime` 文件夹下编译
+
+```
+sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
+```
+
+此时可能会提示cmake版本过低，请根据 `2.10` 内容升级cmake
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222190207012.webp" alt="image-20240222190207012" style="zoom: 67%;" />
+
+升级完成后重新执行上述命令即可成功编译（编译时间较长）
+
+**可以用以下方式节省编译时间**
+
+> 如加--skip_tests参数，或者：
+>
+> 在看到开始编译时（如下图）
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222185820853.webp" alt="image-20240222185820853" style="zoom: 50%;" />
+>
+> 按下 `Ctrl+C` 终止编译
+>
+> 在 `onnxruntime/build/Linux/RelWithDebInfo` 目录下使用以下命令（nuc02替换为实际的用户名）
+> 
+> ```
+>sudo cmake --build /home/nuc02/Desktop/onnxruntime/build/Linux/RelWithDebInfo --config RelWithDebInfo -j8
+> ```
+>
+> 注意编译时是否有报错
+>
+> **报错1**
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191128295.webp" alt="image-20240222191128295" style="zoom: 67%;" />
+>
+> 缺少python环境
+>
+> 此时应输入以下指令安装环境
+> 
+> ```
+>sudo apt-get install python-dev-is-python3
+> ```
+>
+> **报错2**
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240222191704374.webp" alt="image-20240222191704374" style="zoom:67%;" />
+>
+> 缺少 `numpy` 库
+>
+> 输入以下指令安装环境
+> 
+> ```
+>sudo apt-get install python3-numpy-dev
+> ```
+>
+> 安装完成后再重新编译
+>
+> 使用加速编译最后需要回到onnxruntime目录下打开终端重新执行一次原本正常编译的指令检查
+> 
+> ```
+>sudo ./build.sh --config RelWithDebInfo --build_shared_lib --parallel --allow_running_as_root
+> ```
+>
+
+编译完成后
+
+在 `onnxruntime/build/Linux/RelWithDebInfo` 或 `onnxruntime/build/Linux/Release` 下执行以下命令安装（上面加速的步骤可能会导致编译的文件无法转移至 `Release`  )
+
+```
 sudo make install
 ```
 
-进入 `linux-firmware` 文件夹打开终端复制ucode驱动文件
 
-```
-sudo cp iwlwifi-* /lib/firmware
-```
+---
 
-重启完成安装
+
+
+
+# 3.硬件
+
+> Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
+
+## 3.1计算平台
+
+### 3.1.1 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
+
+#### 3.1.1.1 参数（以 NUC 11 为例）
+
+| 属性                | 参数                 |
+| ------------------- | -------------------- |
+| CPU                 | Intel Core i5-1135G7 |
+| GPU                 | 集显 Intel Xe        |
+| RAM                 | 16G DDR4             |
+| 硬盘                | PCIe4.0 NVMe 512G    |
+| 无线网卡            | 有                   |
+| USB 3.1 接口        | 3个                  |
+| 雷电3接口（Type-C） | 2个                  |
+
+### 3.1.2 各种接口/硬件位置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8cb5270681e05c9287e16a10d7f0e2a.webp" alt="8cb5270681e05c9287e16a10d7f0e2a" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/e782867fa49bf6f60d4899e76ac426f.webp" alt="e782867fa49bf6f60d4899e76ac426f" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
+
+### 3.1.3外置MiniPC完整装机展示
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
-## 3 视觉知识
+## 3.2传感器
 
-### 3.1 OpenCV
+### 3.2.1 工业相机
 
-OpenCV环境配置：见2.2 OpenCV
+#### 3.2.1.1 参数
 
-VSCode插件配置：见2.3.3 OpenCV环境配置
+制造商：迈德威视（MindVision）
 
-#### 3.1.1 cmake配置
+型号：MV-SUA134GC-T
+
+镜头：6mm焦距 F2.0光圈 1/1.8″靶面
+
+#### 3.2.1.2 接口
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
+### 3.2.2激光雷达
+
+#### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
+
+| 参数                    | 说明                                   |
+| ----------------------- | -------------------------------------- |
+| **激光波长**            | 905 nm                                 |
+| **人眼安全级别¹**       | Class 1 (IEC60825-1:2014) 人眼安全     |
+| **量程 (@ 100 klx)**    | 40 m @ 10% 反射率<br>70 m @ 80% 反射率 |
+| **近处盲区²**           | 0.1 m                                  |
+| **FOV**                 | 水平 360°, 竖直 -7°~52°                |
+| **测距随机误差³ (1σ)**  | ≤ 2 cm ⁴ (@ 10m)<br>≤ 3 cm ⁵ (@ 0.2m)  |
+| **角度随机误差（1σ）**  | < 0.15º                                |
+| **点云输出**            | 200,000 点/秒 (可配置第一回波)         |
+| **点云帧率**            | 10 Hz (典型值)                         |
+| **数据网口**            | 100 BASE-TX 以太网                     |
+| **数据同步方式**        | IEEE 1588-2008 (PTPv2), GPS            |
+| **抗串扰功能**          | 有                                     |
+| **虚警率 (@ 100 klx)⁶** | < 0.01%                                |
+| **IMU**                 | 内置 IMU 型号：ICM40609                |
+| **工作环境温度⁷**       | -20℃ 至 55℃                            |
+| **防护等级**            | IP67                                   |
+| **功率⁸**               | 6.5 W                                  |
+| **供电电压范围**        | 9 ~ 27 V DC                            |
+| **尺寸**                | 65×65×60 mm                            |
+| **重量**                | 265 g                                  |
+
+#### 3.2.2.2官方文档与手册
+
+[Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
+
+#### 3.2.2.3 配置
+
+**硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
+
+**IP 设置：**为确保通讯正常，需将 PC（MiniPC）与雷达置于同一网段。请手动修改 PC 的 IPv4 设置：
+
+- **IP 地址：** 推荐设置为 `192.168.1.50`（或 `192.168.1.x` 网段下的其他空闲地址）。
+
+- **子网掩码：** `255.255.255.0`
+
+> 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
+
+#### 3.2.2.4SDK
+
+***placeholder，update later by VaporTang***
+
+***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
+
+### 3.2.3 USB-Camera
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
+
+## 3.3电源与通信
+
+### 3.3.1电源与电池管理
+
+#### 3.3.1.1 电池架
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
+
+电源接口采用黄色 **XT60 公头**，用于连接分电板侧的 XT60 母座。分电板侧面设有船型开关，开关状态取决于按下的一侧：
+
+- 符号 |（竖线）：代表 **开启 (ON)**。
+
+- 符号 O（圆圈）：代表 **关闭 (OFF)**。
+
+> **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
+
+#### 3.3.1.2 电池
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
+
+电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
+
+电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
+
+旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
+
+> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
+
+> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
+
+### 3.3.2 分电板与变压器
+
+#### 3.3.2.1 分电板
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/IMG_20251217_003506.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
+
+图一所示分电板：黄色接头为XT60母头，分电板上有四个XT30公头，四个2Pin母头（白色方形），一个8Pin母头
+
+图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
+
+
+#### 3.3.2.2 DC-DC（24V-19V）变压器
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
+
+黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
+
+### 3.3.3 USB转TTL与线缆
+
+#### 3.3.3.1 USB-Camera
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
+
+#### 3.3.3.2 RJ45 网线
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
+
+#### 3.3.3.3 HDMI-HDMI
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
+
+#### 3.3.3.4 USB to TTL
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
+
+##### 3.3.3.4.1 接口
+
+| 接口 | 用法          |
+| ---- | ------------- |
+| VCC  | 5V            |
+| TXD  | 接另一端的RXD |
+| RXD  | 接另一端的TXD |
+| GND  | 接GND（地线） |
+
+## 3.4 调试工具
+
+### 3.4.1 手持装甲板调试模块
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
+
+#### 3.4.1.1 参数
+
+| 颜色 | 状态 |
+| ---- | ---- |
+| 红色 | 红方 |
+| 蓝色 | 蓝方 |
+| 紫色 | 离线 |
+
+#### 3.4.1.2 拆解
+
+装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
+
+通过逆向分析，每颗LED灯珠型号为SMD3528红蓝双色反极贴片式发光二极管。经比对，目前确认其规格与型号 **XL-3528SURUBC-FJ** 一致。
+
+灯珠详细原理及规格图如下：
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2025-12-17 10.25.57.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:40%;" />
+
+##### 驱动方式：
+
+**注意：绝对禁止直接将 LED 接在恒压电源上而不加电阻，这会导致 LED 烧毁**
+
+每个灯珠内部实际包含两个极性相反、相互独立的LED芯片，分别发出红光和蓝光。因此，在驱动红光和蓝光时，可采用一块 3.7 V 软包电池，通过 5 V USB 充放电管理模块进行电能管理。从充放电管理模块输出 5 V 电压，并分为两路：
+
+- 红光 LED 支路串联 **150 Ω** 限流电阻；
+- 蓝光 LED 支路串联 **100 Ω** 限流电阻。
+
+推荐从充放电管理模块获取 5 V 电源的原因在于，其输出电压较为稳定。然而，也可以考虑直接使用电池作为输出电源。在这种情况下：
+
+- 红光 LED 支路应串联 **110 Ω** 限流电阻；
+- 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
+
+### 3.4.2 裁判系统服务器
+
+> Contributor: 邱万理
+
+#### 3.4.2.1 前期准备
+
+硬件：路由器（以小米路由器为例）、网线
+
+软件：mysql(实际使用感觉非必要）、RoboMaster_Server(很多版本会闪退，自己多换几个赛季的试试，这里以2020年版本为例)
+
+#### 3.4.2.2. 配置路由器
+
+##### 3.4.2.2.1 连接方式
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.webp" alt="image-20240121233742010" style="zoom: 25%;" />
+
+注意网线和电脑连接时接2号的LAN口，而不是接3号的WAN口
+
+##### 3.4.2.2.2 开始配置
+
+首先安装上述连接方式连接，Wifi连上Xiaomi并打开小米路由器设置网页http://miwifi.com/
+
+第一次进入会提示设置密码，设置为12345678
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280.webp" alt="1280X1280" style="zoom: 33%;" />
+
+进入后到常用设置的WIFI设置中
+
+SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母加数字
+
+加密方式设置为WPA2，所以可以设置为强加密
+
+密码必须设置为12345678
+
+其余可以使用默认设置
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (1).webp" alt="1280X1280 (1)" style="zoom: 33%;" />
+
+进入常用设置的局域网设置中
+
+将局域网IP地址设置为192.168.1.１
+
+开启DHCP服务，并且设置开始IP为2(因为作为服务器主机的电脑将要设置为192.168.1.2,所以需要确保可以使用此IP)，结束IP则无严格要求
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1280X1280 (2).webp" alt="1280X1280 (2)" style="zoom: 33%;" />
+
+进入高级设置中的DHCP静态IP分配
+
+添加绑定的设备，设备为作为服务器主机的电脑，IP设置为192.168.1.2
+
+(如果配置不成功可以尝试拔掉网线重新连接)
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/3338de21-5add-4c64-9ff1-999e05808fe2.webp" alt="3338de21-5add-4c64-9ff1-999e05808fe2" style="zoom: 33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/9df7eb37-1132-4aca-9c85-59224fb7aff7.webp" alt="9df7eb37-1132-4aca-9c85-59224fb7aff7" style="zoom: 33%;" />
+
+如果还未成功，设置－＞网络和Internet－＞高级网络设置－＞更改适配器选项
+
+进入WLAN的属性中，点击Internet协议版本４(TCP／IPv4)，打开其属性
+
+改为使用下面的IP地址，并且设置IP地址为192.168.1.2，设置子网掩码为255.255.255.0
+
+（注意关闭防火墙）
+
+确定后关机重启
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944.webp" alt="5a1f7495-3cd0-4e8c-b2b9-1ed5fa52c944" style="zoom: 33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d92ede77-0048-4ced-9dd9-6e4cda0100cb.webp" alt="d92ede77-0048-4ced-9dd9-6e4cda0100cb" style="zoom: 33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.webp" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
+
+#### 3.4.2.3 软件安装
+
+##### 3.4.2.3.1 MySQL
+
+①进入官网下载MySQL，版本可以选择低一些，mysql-8.0.31-win64.zip
+
+https://dev.mysql.com/downloads/mysql/
+
+②解压缩zip文件，放置在一个简短并且没有中文的文件路径下（如放在`D:\mysql-8.0.31-winx64`)
+
+然后配置一下环境变量(不清楚在哪里自己在设置中搜索环境变量）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/8b8a6f13-5ea5-4c86-82a0-9aa06042969b.webp" alt="8b8a6f13-5ea5-4c86-82a0-9aa06042969b" style="zoom:33%;" />
+
+系统属性界面右下角的环境变量中，在系统变量找到`Path`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/d62674cc-d8f4-4162-8eba-e4f5387e6952.webp" alt="d62674cc-d8f4-4162-8eba-e4f5387e6952" style="zoom:33%;" />
+
+点击编辑，新建一个环境变量名称为刚刚安装的路径再加上`/bin`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ea802741-5189-4b5e-987c-7cbb7f54c150.webp" alt="ea802741-5189-4b5e-987c-7cbb7f54c150" style="zoom:33%;" />
+
+③在刚刚的bin文件的同一位置新建一个`data`文件夹和一个`mysql.ini`文件
+
+![5ba868a2-8e93-4690-898e-6b2b0ec24a51](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5ba868a2-8e93-4690-898e-6b2b0ec24a51.webp)
+
+`mysql.ini`文件先创建一个`.txt`文件，加入以下内容后再修改后缀名变更为`.ini`文件
+
+其中第12行和第15行请自行修改为自己安装的实际位置
+
+```ini
+[mysql]
+
+# 设置mysql客户端默认字符集
+default-character-set=utf8 
+
+[mysqld]
+
+#设置3306端口
+port = 3306 
+
+# 设置mysql的安装目录
+basedir=F:\mysql\mysql-5.7.24-winx64\mysql-5.7.24-winx64
+
+# 设置mysql数据库的数据的存放目录
+datadir=F:\mysql\mysql-5.7.24-winx64\mysql-5.7.24-winx64\data
+
+# 允许最大连接数
+max_connections=200
+
+# 服务端使用的字符集默认为8比特编码的latin1字符集
+character-set-server=utf8
+
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+```
+
+④打开cmd(Win+R）
+
+首先安装mysql，执行以下命令行
+
+```
+mysqld install
+```
+
+安装成功后启动mysql服务
+
+```
+net start mysql
+```
+
+服务器启动后，需要输入密码登录（第一次登录没有密码，直接回车即可）
+
+```
+mysqladmin -u root -p password
+```
+
+修改密码，u后面为用户名（一般都设置为root）,password建议设置为123456或者12345678,忘记密码没有找回方式
+
+```
+mysqladmin -u root -p password
+```
+
+⑤设置中搜索服务
+
+找到MySQL，设置其为手动启动，避免每次开机自启
+
+后续启动可以cmd输入
+
+```
+net start mysql
+```
+
+或者再次打开服务界面，右键点击启动也可
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.webp" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
+
+##### 3.4.2.3.2 大疆官方服务器
+
+前往RoboMaster官网下载服务器客户端(RoboMaster产品->裁判系统->软件产品）
+
+各赛季的版本不一定都出来了，并且有些版本的会闪退，自己根据电脑情况多尝试几个版本即可，这里使用的是2020年的服务器客户端
+
+https://www.robomaster.com/zh-CN/products/components/detail/2518
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0e5d6040-a014-4b9c-9e91-c7eb86a37b42.webp" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2ff831b2-b26c-4607-88e7-0e59d7789b9b.webp" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1e4ce0be-abaf-4f0e-8df7-9b74f38bee76.webp" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:33%;" />
+
+2020赛季的服务器RoboMaster Server里面文件如下图，打开RMServerStart.exe文件，直接点击最下面的StartAll，进入后Play能够打开以下界面即可。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2befb81e-b765-4d33-8ed4-525afc8437be.webp" alt="2befb81e-b765-4d33-8ed4-525afc8437be" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/c343c74f-d9b2-489b-b209-b0ec09972dbc.webp" alt="c343c74f-d9b2-489b-b209-b0ec09972dbc" style="zoom: 50%;" />
+
+最终效果图
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.webp" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
+
+#### 3.4.2.4 完整流程
+
+当以上3步都能大致实现之后，可以开始使用我们的服务器
+
+①首先连接将路由器与电脑连接，电脑Wifi选择Xiaomi(后面字母和数字为用户自己编号，各不相同就不列举)
+
+并且将电脑的IP地址设置为192.168.1.2,子网掩码设置为255.255.255.0(这一步如果静态DHCP分配设置成功不一定需要，如果配置失败请尝试自己手动修改配置）
+
+②打开MySQL服务
+
+③启动RoboMaster Server软件
+
+④机器人主控模块中点击Wifi设置，扫描
+
+扫描到路由器的Wifi后，长按确定（连接并且记忆该Wifi）
+
+连接成功后可以通过主页面左上角感叹号是否消失判断
+
+#### 3.4.2.5 可能遇到的问题
+
+- 主控右上角显示连接上Wifi，但是左上角感叹号仍存在？
+
+仅仅是连接上了路由器的Wifi，但是主机并未正确设置为要求的192.168.1.2
+
+目前找到的许多教程中都是在网络设置中设置IP地址和子网掩码来实现，但是实际使用发现并没有设置为预想的IP。
+
+这时请尝试在MiWifi路由器设置网页中，在高级设置中的DHCP静态IP分配里重新为作为服务器主机的电脑分配IP：192.168.1.2
+
+- 路由器不能正常打开配置页面？
+
+电脑注意是使用LAN口，而不是使用WAN口（如果不确定，请都试一遍）
+
+- 下载的服务器客户端打开后闪退？
+
+不清楚是官方问题还是自己电脑问题，遇到此问题只能自己多找几个赛季的软件都试试，一般前期只是用于测试功率等简单功能，不一定需要使用最新赛季的服务器软件
+
+# 4 视觉知识
+
+## 4.1 OpenCV 开发基础
+
+OpenCV环境配置：见2.1 OpenCV
+
+VSCode插件配置：见1.3.1 OpenCV环境配置
+
+### 4.1.1 CMake 配置与 VSCode 运行
+
+#### 4.1.1.1 cmake配置
 
 查看cmake版本
 
@@ -2737,7 +2892,7 @@ set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 ```
 
-#### 3.1.2 VSCode配置
+#### 4.1.1.2 VSCode配置
 
 新建一个项目文件夹**（不要中文！写任何代码都不要在任何中文路径下编译，文件名也不要使用中文）**
 
@@ -2799,9 +2954,9 @@ make -j8
 
 若无报错，则配置完成
 
-#### 3.1.3 基础功能
+### 4.1.2  图像与视频处理基础
 
-##### 3.1.3.1 图像的读写
+#### 4.1.2.1 图像的读写
 
 **imread()和imwrite()**
 
@@ -2825,7 +2980,7 @@ imread()参数的功能
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20241117124316116.webp" alt="image-20241117124316116" style="zoom:33%;" />
 
-##### 3.1.3.2 图像的展示
+#### 4.1.2.2 图像的展示
 
 **imshow()**
 
@@ -2862,7 +3017,7 @@ namedWindow("窗口名字", 窗口类型); // 窗口类型值缺省为1
 resizeWindow("窗口名字", Size(cols, rows)); // cols控制横向大小，即列数，rows控制纵向大小，即行数，单位均为像素，值只能是正整数
 ```
 
-##### 3.1.3.3 视频的读取
+#### 4.1.2.3 视频的读取
 
 **VideoCapture**
 
@@ -2962,7 +3117,7 @@ while (true)
 
 保存的文件在终端当前打开的目录，不是可执行文件所在目录
 
-##### 3.1.3.4 Mat的初始化与数据类型
+#### 4.1.2.3 Mat的初始化与数据类型
 
 Mat类型本质是个矩阵
 
@@ -3012,7 +3167,7 @@ Scalar()定义颜色，可以理解为一个向量，有几个通道向量就有
 
 其中，三通道彩色图像中，OpenCV的存储顺序是BGR而不是RGB，例如 `Scalar(20,40,60)` 中20为蓝色通道分量，40为绿色通道分量，60为红色通道分量
 
-##### 3.1.3.5 Mat的赋值
+#### 4.1.2.4 Mat的赋值
 
 构造时的赋值参考前面的初始化，通过Scalar()可以给每个元素赋相同初值
 
@@ -3056,7 +3211,7 @@ for (int i = 0; i < img2.cols; i++)
 
 读取同理
 
-##### 3.1.3.5 Mat的运算
+#### 4.1.2.5 Mat的运算
 
 Mat支持加减乘除四则运算，加法减法都是矩阵对应元素相加减
 
@@ -3084,7 +3239,7 @@ m = a.dot(b); // a,b均为Mat矩阵，大小相同，m为一个数
 
 矩阵除法不论是除常数还是除矩阵均为被除矩阵对应位置元素除除数（若为常数，则除常数，为矩阵则除对应位置的元素值）
 
-##### 3.1.3.6 Mat的属性
+#### 4.1.2.6 Mat的属性
 
 参考下表
 
@@ -3099,7 +3254,7 @@ int j = img.rows;
 int ch = img.channels();
 ```
 
-##### 3.1.3.7 颜色模型转换
+#### 4.1.2.7 颜色模型转换
 
 转换Mat的颜色模型使用cvtColor()函数
 
@@ -3117,7 +3272,7 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
 从左到右从上到下分别是BGR、GRAY、YUV、HSV、Lab
 
-#### 3.1.4 常见错误
+#### 4.1.2.8 常见错误
 
 - 路径正确，视频无法读取且无法保存录制的视频
 
@@ -3129,7 +3284,7 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
   sudo apt-get install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
   ```
 
-  安装完成后重新编译安装opencv即可
+  安装完成后重新编译安装 OpenCV 即可
 
   注意在执行 `cmake ..` 后终端的输出信息，如 `ffmpeg` 部分提示为 `YES` 即可继续编译安装
 
@@ -3143,11 +3298,354 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
   **解决方案：** fps与frameSize手动设置即可，不使用 `cv::videoCapture` 的成员函数读取
 
-### 3.2 ROS与导航
+## 4.2 深度学习理论
 
-#### 3.2.1 实操学习
+### 4.2.1 yolov8
 
-> Contributors: 刘明楷（milchstrasse565@github）
+> Contributor: 程英杰
+
+#### 4.2.1.1 目标检测与语义分割的区别
+
+##### 4.2.1.1.1 语义分割的目标
+
+语义分割的任务是对输入的图像进行逐像素的分类，标记出像素级别的物体。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.webp" alt="图像逐像素的分类" style="zoom:33%;" />
+
+如上图，图1中把猫、天空、树、草地进行了逐像素的分类；图2中把牛、天空、树、草地进行了逐像素的分类。
+
+##### 4.2.1.1.2 目标检测的目标
+
+目标检测的任务是对输入的图像进行物体检测，标注物体在图像上的位置，以及该位置上物体属于哪个分类。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.webp" alt="模型位置标注和做出分类" style="zoom:33%;" />
+
+如上图，模型把图中的人、狗、马分别进行了位置标注，并且也给出了对应的分类类别。
+
+##### 4.2.1.2.3 小结
+
+蕴含信息都包含分类信息和位置信息。
+
+但是语义分割所标记的物体是像素级别的颗粒度的，而目标检测标记的物体是其外切框。
+
+#### 4.2.1.2 训练
+
+##### 4.2.1.2.1 安装
+
+Pytorch环境安装省略
+
+```bash
+pip install ultralytics
+```
+
+##### 4.2.1.2.2 准备数据集
+
+Yolo团队为模型设计了专用数据集格式"YOLO"，要训练yolov8，必须确认数据集为yolo格式。
+
+yolo直接采用txt文件保存模型的labels标签，如下图，每一行都代表着该图像中的一个标签GT
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.webp" alt="yolo数据集格式" style="zoom: 50%;" />
+
+目前大部分数据集的保存都是以voc格式，如果你拿到了voc格式的数据集，需要进行转换。
+
+相关链接：[https://blog.csdn.net/kuabiku/article/details/132088402]()
+
+本次使用西南大学 已标注数据集链接： https://pan.baidu.com/s/1oMtdgmBN5xQZTbv2bSLtog?pwd=z3gc
+
+该数据集的标签数据已经是yolo格式
+
+**处理数据集并调整配置文件**
+
+模型训练配置文件(config.yaml)示例：
+
+```yaml
+path: data_xn # dataset root dir
+train: images/train # ./data_xn/images/train
+val: images/test # ./data_xn/images/test
+test: # test images (optional)
+
+# Classes
+names:
+  0: person
+  1: bicycle
+  2: car
+# ...
+```
+
+其中  `path`  是数据集相对于`config.yaml`所在目录的路径，也可以填写绝对路径
+
+`train`和`val`分别是训练集和评估集，该字段中的路径将会与`path`中的路径相拼接
+
+`names`是模型分类数据的信息，从`0`开始，分类数量应不小于训练数据中所标注的类别标签的数量。`西南大学 已标注数据集`的最大类别为35，因此`names`中的分类应该从`0`-`34`.
+
+`西南大学 已标注数据集`数据集文件夹`data_xn`的存放格式应该更改为：
+
+```bash
+data_xn
+    ├─images
+    │  ├─test
+    │  └─train
+    ├─labels
+    │  ├─test
+    │  └─train
+```
+
+其中，`images`下每个子目录中直接存放了图片；`labels`下每个子目录中存放了对应的标注数据(txt文件)
+
+> *训练前，ultralytics会自动读取这写文件夹下的每张图片和标注，并生成* **缓存** *以便于下次训练直接复用。因此如果对数据集进行了改动，再次训练时应将缓存文件* `data_xn/labels/train.cache`和`data_xn/labels/test.cache` *删去以应用更改*
+
+##### 4.2.1.2.3 训练
+
+**准备预训练模型**
+
+对于不同任务，Yolov8准备了不同的预训练模型，具有不同的输出格式。目标检测是Yolov8的主任务，因此所有模型均可使用。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.webp" alt="yolov8预训练模型" style="zoom:33%;" />
+
+下载地址：[Releases · ultralytics/assets · GitHub](https://github.com/ultralytics/assets/releases) 提供了ultralytics库提供的所有预训练模型的下载，此处下载最小的默认模型
+
+下载命令：
+
+```bash
+wget https://github.com/ultralytics/assets/releases/download/v8.1.0/yolov8n.pt
+```
+
+**编写训练代码**
+
+在项目根目录创建`datasets`，并将准备好的数据集`data_xn`剪切进去。
+
+将下载好的预训练模型文件`yolov8n.pt`放入项目根目录
+
+在项目根目录创建`train.py`:
+
+```python
+from ultralytics import YOLO
+if __name__ == "__main__":
+
+    # 加载预训练数据集
+    model = YOLO('yolov8n.pt')
+    
+    # 按照配置文件的定义开始训练，训练3个epochs
+    results = model.train(data='config.yaml', epochs=3,lr0=1E-2)
+
+    # model.val()
+    # train方法在训练完成后自动对模型进行评估， 因此不需要调用 model.val()
+
+    #导出模型为ONNX格式
+    model.export(format='onnx', dynamic=True)
+```
+
+> 由于Windows下处理数据集需要创建多个workers，因此，需要将接口调用写在__main__下以防止`Freeze_support Error`
+>
+> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.webp" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
+
+**然后运行train.py就可以开始训练了**
+
+**查看训练结果**
+
+训练结果保存在项目根目录`runs`文件夹下，`runs/detect`存放了`目标检测`任务的训练模型和评估结果
+
+关于评估指标的解释，见：[https://blog.csdn.net/java1314777/article/details/134154676]()
+
+模型(权重)文件存放在相应模型文件夹中的`weights`文件夹
+
+#### 4.2.1.3 使用ONNX调用
+
+[生成ONNX文件参考资料](https://docs.ultralytics.com/modes/export/)
+
+ONNX Runtime提供了跨平台调用模型的统一接口
+
+生成并使用ONNX文件的步骤如下:
+
+1. 生成ONNX文件:
+   从下面的文件结构开始,通过上面的步骤已经得到了训练过程当中综合准确率最好的模型`best.pt`和模型最后的训练结果`last.pt`
+2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.webp" alt="weights权重文件展示图" style="zoom:33%;" />
+
+然后是在pycharm控制台打开之前下载了 `ultralytics`的anaconda环境，然后在控制台输入下面的指令
+
+~~~bash
+yolo export model=runs/detect/train6/weights/best.pt format=onnx  int8=true simplify=true dynamic=true
+~~~
+
+在`best.pt`所在的文件夹当中得到了`best.onnx`。
+
+>参数解释
+>前两个命令 yolo export 指的是使用yolo的相关命令 做导出任务
+>model后面跟的参数是训练得到的模型文件路径
+>format后面是模型导出的格式 [(yolo官网上模型导出的格式)](https://docs.ultralytics.com/zh/modes/export/#arguments)
+>后面的参数也是官网上的相关介绍
+>
+><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.webp" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
+>
+>这里我使用了 int8 simplify dynamic 用来简化模型加快计算速度
+
+
+当然根据官网也可以使用python将模型文件导出 下面是相关的代码
+
+~~~python
+from ultralytics import YOLO
+# Load a model
+model = YOLO('runs/detect/train6/weights/best.pt')  # load a custom trained model
+# Export the model
+model.export(format='onnx', int8=True, dynamic=True, simplify=True)
+~~~
+
+
+2. 编写python调用ONNX文件
+   [调用ONNX文件参考资料](https://zhuanlan.zhihu.com/p/670622368)
+
+首先先import这些库文件
+
+~~~python 
+import onnxruntime as ort
+import cv2
+import numpy as np
+~~~
+
+然后加载ONNX文件
+
+~~~python
+import onnxruntime as ort
+session = ort.InferenceSession("yolov8m-seg.onnx", providers=["CPUExecutionProvider"]) # 使用CPU加载计算模型
+~~~
+
+后续的代码和相关的解释都在注释当中写的比较详细,这里就直接贴代码了
+
+~~~python
+# %%
+import onnxruntime as ort
+import cv2
+import numpy as np
+
+# 这个函数是将图片数据转换为模型输入格式 (预处理函数)
+def prepare_input(bgr_image, width, height):
+    image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)  # 将图片从BGR格式转换为RGB格式
+    # cv2.imshow(bgr_image)
+    image = cv2.resize(image, (width, height)).astype(np.float32) # 将图片resize到模型输入尺寸640x640
+    image = image / 255.0  #归一化
+    image = np.transpose(image, (2, 0, 1)) # 将图像数据的通道顺序由HWC调整为CHW
+    input_tensor = np.expand_dims(image, axis=0) # 扩展数据维度，将数据的维度调整为NCHW
+    #axis=0表示在第0维增加一个维度
+    #经过预处理后，输入数据input_tensor的维度变为[1, 3, 640, 640]，与模型的输入尺寸一致。
+    return input_tensor
+# 计算两个方框之间的IOU值的大小 计算方式是 两个方框交集面积/并集面积
+# 参考资料 http://t.csdnimg.cn/zTN73
+def iou(rec_1,rec_2):
+        '''
+        rec_1:左上角(rec_1[0],rec_1[1])    右下角：(rec_1[2],rec_1[3])
+        rec_2:左上角(rec_2[0],rec_2[1])    右下角：(rec_2[2],rec_2[3])
+        （rec_1）
+        1--------1
+        1   1----1------1
+        1---1----1      1
+            1           1
+            1-----------1 （rec_2）
+        '''
+        s_rec1=(rec_1[2]-rec_1[0])*(rec_1[3]-rec_1[1])   #第一个bbox面积 = 长×宽
+        s_rec2=(rec_2[2]-rec_2[0])*(rec_2[3]-rec_2[1])   #第二个bbox面积 = 长×宽
+        sum_s=s_rec1+s_rec2                              #总面积
+        left=max(rec_1[0],rec_2[0])                      #交集左上角顶点横坐标
+        right=min(rec_1[2],rec_2[2])                     #交集右下角顶点横坐标
+        bottom=max(rec_1[1],rec_2[1])                    #交集左上角顶点纵坐标
+        top=min(rec_1[3],rec_2[3])                       #交集右下角顶点纵坐标
+        if left >= right or top <= bottom:               #不存在交集的情况
+            return 0
+        else:
+            inter=(right-left)*(top-bottom)              #求交集面积
+            iou=(inter/(sum_s-inter))*1.0                #计算IOU
+            return iou
+session = ort.InferenceSession(
+     "D:\\ProgramFiles\\ultralytics-main\\runs\\detect\\train6\\weights\\best.onnx", # 模型文件路径 
+     providers=["CPUExecutionProvider"])  # 模型路径 还有使用CPU计算
+video = cv2.VideoCapture("D:\\opencv_image\\video_zhuangjiaban.mp4") # 读取视频文件
+# %%
+# 1. 把OpenCV读取的BGR格式的图片转换为RGB格式；
+# 2. 把图片resize到模型输入尺寸640x640；
+# 3. 对像素值除以255做归一化操作；
+# 4. 把图像数据的通道顺序由HWC调整为CHW；
+# 5. 扩展数据维度，将数据的维度调整为NCHW。
+while True:
+    model_width = 640
+    model_height = 640
+    ret, image = video.read()
+    if(ret==False):
+       continue      
+    image_height, image_width, _ = image.shape
+    input_tensor = prepare_input(image, model_width, model_height)
+    outputs = session.run(None, {session.get_inputs()[0].name: input_tensor})
+    # %%
+    #squeeze函数是用于删除shape中为1的维度，对output0做transpose操作是为了方便后续操作
+    # print(outputs[0].shape)
+    output0 = np.squeeze(outputs[0]).transpose()
+    # print("outputs[0].shape shape:", outputs[0].shape)
+    # print("output0 shape:", output0.shape)
+    # %%
+    boxes = output0
+    # print(boxes.shape) # 输出结果是 (8400,40)
+    # 这里的boxes是一个二维数组，第一维是目标框的数量，第二维是目标框的属性，包括目标框的坐标和类别概率等信息。
+    # 咱们细说第二维的属性：前4个元素是目标框的坐标信息，分别是目标框的中心坐标(x,y)和宽高(w,h)，后36个元素是目标框的类别概率信息，每个类别的概率占4个元素。
+    # 所以[8400,40] 就代表着 8400个目标框，每个目标框有40个属性
+    # boxes shape: (8400, 84)
+    # masks shape: (8400, 32)
+    # %%
+    objects = []
+    for row in boxes:
+        prob = row[4:40].max()
+        if prob < 0.2:
+            continue
+        class_id = row[4:40].argmax()
+        label = class_id
+        xc, yc, w, h = row[:4]
+        # // 把x1, y1, x2, y2的坐标恢复到原始图像坐标
+        x1 = (xc - w / 2) / model_width * image_width
+        y1 = (yc - h / 2) / model_height * image_height
+        x2 = (xc + w / 2) / model_width * image_width
+        y2 = (yc + h / 2) / model_height * image_height
+        # // 获取实例分割mask
+        # mask = get_mask(row[84:25684], (x1, y1, x2, y2), image_width, image_height)
+        # // 从mask中提取轮廓
+        # polygon = get_polygon(mask, x1, y1)
+        objects.append([x1, y1, x2, y2, label, prob])
+    # %%
+    objects.sort(key=lambda x: x[5], reverse=True)
+    # %%
+    # objects.sort(key=lambda x: x[5], reverse=True)
+    # // NMS
+    results = []
+    while len(objects) > 0:
+        print(objects[0])
+        results.append(objects[0]) # 我们想要与第一个框进行比较 所以不能让第一个框和自己作比较
+        # 如果 iou过大(超过了0.5)的话 就删除这个object 保留iou小的object
+        objects = [object for object in objects if iou([object[0],object[1],object[2],object[3]], 
+                                                    [objects[0][0],objects[0][1],objects[0][2],objects[0][3]]) < 0.5]
+        # 这里就是将 objects中和第一个object的iou大于0.5的object删除掉
+    # %%
+    # 定义矩形的左上角和右下角坐标
+    # 设置矩形颜色为红色（BGR格式）
+    color = (0, 0, 255)
+    thickness = 1 # 若想要填充矩形则将此值改为-1或者大于等于0的数字
+    # 在图像上绘制矩形
+    for result in results:
+        print(result)
+        start_point = (int(result[0]), int(result[1]))
+        end_point = (int(result[2]), int(result[3]))
+        cv2.rectangle(image, start_point, end_point, color, thickness)
+    cv2.imshow('window name',image)
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+cv2.destroyAllWindows()
+~~~
+
+
+<div STYLE="page-break-after: always;"></div>
+
+## 4.3ROS与导航（SLAM）
+
+### 4.3.1 ROS与导航
+
+#### 4.3.1.1 实操学习
+
+> Contributor: 刘明楷（milchstrasse565@github）
 
 - 屏蔽导航包里的速度发布语句
 
@@ -3177,11 +3675,241 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
   - rosbag数据记录、回放
   
 
-#### 3.2.2 IMU与里程计融合
 
-> Contributors: 洪佳
+### 4.3.2Catkin 编译系统详解
 
-> 参考文献：
+> Contributor: 洪佳
+
+> 参考资料：
+>
+> [11] [ROS从入门到精通系列（五）catkin详解与catkin_make编译-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/hhaowang/article/details/101691986)
+
+一定要搞明白`make/makefile/catkin_make/cmake/Cmakelist`的关系,本质是链接文件去生成可执行文件
+
+系统学习大家还是要自己学，主要给大家提供思路，学习大纲还有遇到的一些问题的解决方法，少走弯路
+
+#### 4.3.2.1 catkin编译系统
+
+对于源代码包，我们只有编译才能在系统上运行。而Linux下的编译器有``gcc、g++``，随着源文件的增加，直接用``gcc/g++``命令的方式显得效率低下，人们开始用`Makefile`来进行编译。然而随着工程体量的增大，`Makefile`也不能满足需求，于是便出现了`Cmake`工具。`CMake`是对make工具的生成器，是更高层的工具，它简化了编译构建过程，能够管理大型项目，具有良好的扩展性。对于ROS这样大体量的平台来说，就采用的是`CMake`，并且ROS对`CMake`进行了扩展，于是便有了Catkin编译系统。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.webp" alt="image-20240129164912808" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.webp" alt="image-20240129164930341" style="zoom:33%;" />
+
+其实早期是`rosbuild`，目前还支持使用，但是`ros`的核心软件包都已经被转换为Catkin
+
+#### 4.3.2.2 catkin_make 结构和特点
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.webp" alt="image-20240129165146937" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.webp" alt="image-20240129165635113" style="zoom:33%;" />
+
+#### 4.3.2.3 catkin_make编译流程
+
+- 建立工作空间
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.webp" alt="image-20240129165753173" style="zoom:50%;" />
+
+- 编译
+
+  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.webp" alt="image-20240129165829990" style="zoom:50%;" />
+
+source用来配置环境，不然`roslaunch`找不到对应的包
+
+#### 4.3.2.4 catkin_make文件系统
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.webp" alt="img" style="zoom: 33%;" />
+
+#### 4.3.2.5 package
+
+package也是ROS源代码存放的地方，任何ROS的代码无论是C++还是Python都要放到package中，这样才能正常的编译和运行。
+
+一个package可以编译出来多个目标文件（ROS可执行程序、动态静态库、头文件等等）。
+
+**package结构**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.webp" alt="img" style="zoom:33%;" />
+
+**package指令**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.webp" alt="img" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.webp" alt="image-20240129171704680" style="zoom:33%;" />
+
+#### 4.3.2.6 常见问题
+
+点进源代码包后，把`build/devel`两个包删了，在当前路径下进入终端
+
+```
+catkin_make
+```
+
+如果没有error，记得source配置环境，编译成功‘
+
+以下是一些问题现象和解决方案
+
+**问题①**
+
+```
+CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package): Could not find a package configuration file provided by "catkin_virtualenv" with any of the following names:
+
+    catkin_virtualenvConfig.cmake
+    catkin_virtualenv-config.cmake
+  Invoking "make cmake_check_build_system" failed
+```
+
+这是由于缺少包导致的
+
+**解决方案：**
+
+在终端输入：
+
+```
+sudo apt-get install ros-noetic-catkin-virtualenv
+```
+
+注意：
+
+1.error里面”_”下划线在解决代码里面用“-”分割符号
+
+2.Ubuntu20.04是noetic        Ubuntu18.04是melodic
+
+3.有可能缺少好几个包，catkin_make多编译几次再下载几次包
+
+**问题②**
+
+在下载的时候
+
+```
+E:无法定位到软件包
+```
+
+原因很多，网络连接问题、`ros`软件源、apt源过期等问题
+
+**解决方案：**
+
+查一遍list,这个很麻烦需要耐心，我没试过谨慎试
+
+换源镜像
+
+http://t.csdnimg.cn/o9dce
+
+### 4.3.3 运动学与传感器融合
+
+#### 4.3.3.1 麦轮底盘运动学解算
+
+> Contributor: 洪佳
+
+> 参考资料：
+>
+> [10] [ROS机器人学习——麦克纳姆轮运动学解算-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/oXiaoLingTong/article/details/120198677)
+
+##### 4.3.3.1.1 麦轮概述
+
+RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通轮子无异，可安装于平行轴上，但是麦克纳姆轮可以实现全向移动，即前后运动、水平移动、绕中心自转。正因为以上优点，许多工业上的全向移动平台都会应用这种轮子。缺点也有，就是不耐磨，需要定期更换。
+
+（全向轮与麦克纳姆轮的共同点在于他们都由两大部分组成：轮毂和辊子（roller）。轮毂是整个轮子的主体支架，辊子则是安装在轮毂上的鼓状物。全向轮的轮毂轴与辊子转轴相互垂直，而麦克纳姆轮的轮毂轴与辊子转轴呈 45° 角。理论上，这个夹角可以是任意值，根据不同的夹角可以制作出不同的轮子，但最常用的还是这两种。）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126010416033.webp" alt="image-20240126010416033" style="zoom:33%;" />
+
+##### 4.3.3.1.2 麦轮安装
+
+同轴安装，分为左旋和右旋两种
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015014818.webp" alt="image-20240126015014818" style="zoom:33%;" />
+
+安装方式如下图，分别为：**X-正方形（X-square）、X-长方形（X-rectangle）、O-正方形（O-square）、O-长方形（O-rectangle）**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015110765.webp" alt="image-20240126015110765" style="zoom:33%;" />
+
+- X-正方形：轮子转动产生的力矩会经过同一个点，所以 yaw 轴无法主动旋转，也无法主动保持 yaw 轴的角度。
+- X-长方形：轮子转动可以产生 yaw 轴转动力矩，但转动力矩的力臂一般会比较短。
+- O-正方形：四个轮子位于正方形的四个顶点，平移和旋转都没有任何问题。
+- O-长方形：轮子转动可以产生 yaw 轴转动力矩，而且转动力矩的力臂也比较长。是最常见的安装方式。
+
+##### 4.3.3.1.3 运动学模型
+
+**基础知识**
+
+坐标系统
+
+使用右手定义,对于ROS机器人，如果以它为坐标系的原点，那么
+
+|  轴   | 方位  |
+| :---: | :---: |
+|  x轴  | 前方  |
+|  y轴  | 左方  |
+|  z轴  | 上方  |
+
+旋转运动
+
+使用右手定义：
+
+围绕 z轴正旋转 是 逆时针旋转
+
+测量单位
+
+ROS使用公制 ：
+
+线速度：m/s
+
+角速度：rad/s
+
+底盘运动学解算
+
+以下以**O-长方型**安装方式进行解算
+
+- 底盘中心
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013124388.webp" alt="image-20240126013124388" style="zoom:33%;" />
+
+- 麦轮轴心（取右上角麦轮即一号轮子分析）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013249796.webp" alt="image-20240126013249796" style="zoom:33%;" />
+
+
+
+逆运动学解算
+
+逆运动学模型（inverse kinematic model）得到的公式可以根据底盘的运动状态解算出四个轮子的速度
+
+①轮子轴心速度
+
+![image-20240126013514833](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013514833.webp)
+
+②辊子方向的速度分量v1∥
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013654586.webp" alt="image-20240126013654586" style="zoom:33%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013846204.webp" alt="image-20240126013846204" style="zoom: 67%;" />
+
+③轮子转速
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014229717.webp" alt="image-20240126014229717" style="zoom:33%;" />
+
+![image-20240126014243401](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014243401.webp)
+
+④整合得出底盘四个轮子转速，即底盘运动学模型
+
+![image-20240126014625107](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014625107.webp)
+
+
+
+正运动学解算
+
+正运动学模型（forward kinematic model）让我们可以通过四个轮子的速度，计算出底盘的运动状态。可以直接根据逆运动学模型中的三个方程解出来。
+
+转换为底盘坐标系下对时间求积分即为里程计变化量
+
+##### 4.3.3.1.4 代码实现
+
+代码参考：http://t.csdnimg.cn/ldXqr
+
+#### 4.3.3.2 IMU与里程计融合
+
+> Contributor: 洪佳
+
+> 参考资料：
 >
 > [5] [IMU和里程计融合_轮式里程计和imu融合-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/baimei4833953/article/details/80768762)
 >
@@ -3189,11 +3917,9 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 >
 > [7] [一文了解IMU原理、误差模型、标定、惯性传感器选型以及IMU产品调研(含IMU、AHRS、VRU和INS区别)_imu寄存器值计算重力-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/QLeelq/article/details/112985306?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"112985306"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
-##### 3.2.2.1 概述
+##### 4.3.3.2.1 概述
 
-实际使用小车的过程中，光有麦轮的里程计计算是不够的，因为实际使用过程中经常会出现轮子打滑和数据出现累计误差的情况，所以我们可以从使用IMU和里程计融合的角度来对系统“升级”。
-
-##### 3.2.2.2 IMU
+实际使用小车的过程中，光有麦轮的里程计计算是不够的，因为实际使用过程中经常会出现轮子打滑和数据出现累计误差的情况，所以我们可以从使用IMU和里程计融合的角度来对系统“升级4.3.1.2.1 IMU
 
 **简述**
 
@@ -3209,7 +3935,7 @@ IMU 一般指6轴传感器，内部包含了3轴陀螺仪和3轴加速度计，3
 
 [一文了解IMU原理、误差模型、标定、惯性传感器选型以及IMU产品调研(含IMU、AHRS、VRU和INS区别)_imu寄存器值计算重力-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/QLeelq/article/details/112985306?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"112985306"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
-##### 3.2.2.3 IMU数据获取
+##### 4.2.3.2.2 IMU数据获取
 
 **数据接口**
 
@@ -3223,7 +3949,7 @@ ROS提供的相关包`imu_tools`进行滤波
 
 可以看到`complementary_filter_gain_node`会订阅该`topic`，即该`topic`作为输入滤波得到最终数据(发布`/imu/data` `topic` 类型同样为`sensor_msgs/Imu`)
 
-##### 3.2.2.4 融合方法
+##### 4.2.3.2.3 融合方法
 
 **直接融合**
 
@@ -3337,244 +4063,18 @@ Timing
 - 该滤波器目前设计用于我们在 PR2 机器人上使用的三个传感器信号（车轮里程计、`imu` 和 `vo`）。我们计划使这个包更加通用：未来的版本将能够监听“n”个传感器源，所有源都发布（[`nav_msgs/`里程计](http://docs.ros.org/en/api/nav_msgs/html/msg/Odometry.html)）消息。每个源都将在里程计消息中设置 3D 姿势的协方差，以指定它实际测量的 3D 姿势的哪一部分。
 - 我们想将速度添加到扩展卡尔曼滤波器的状态中。
 
-#### 3.2.3 麦轮底盘运动学解算
 
-> Contributors: 洪佳
+### 4.3.4 SLAM四种算法建图对比
 
-> 参考文献：
->
-> [10] [ROS机器人学习——麦克纳姆轮运动学解算-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/oXiaoLingTong/article/details/120198677)
+> Contributor: 洪佳
 
-##### 3.2.3.1 麦轮概述
-
-RM战车所用的轮子均为麦克纳姆轮，这种轮子安装方式与普通轮子无异，可安装于平行轴上，但是麦克纳姆轮可以实现全向移动，即前后运动、水平移动、绕中心自转。正因为以上优点，许多工业上的全向移动平台都会应用这种轮子。缺点也有，就是不耐磨，需要定期更换。
-
-（全向轮与麦克纳姆轮的共同点在于他们都由两大部分组成：轮毂和辊子（roller）。轮毂是整个轮子的主体支架，辊子则是安装在轮毂上的鼓状物。全向轮的轮毂轴与辊子转轴相互垂直，而麦克纳姆轮的轮毂轴与辊子转轴呈 45° 角。理论上，这个夹角可以是任意值，根据不同的夹角可以制作出不同的轮子，但最常用的还是这两种。）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126010416033.webp" alt="image-20240126010416033" style="zoom:33%;" />
-
-##### 3.2.3.2 麦轮安装
-
-同轴安装，分为左旋和右旋两种
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015014818.webp" alt="image-20240126015014818" style="zoom:33%;" />
-
-安装方式如下图，分别为：**X-正方形（X-square）、X-长方形（X-rectangle）、O-正方形（O-square）、O-长方形（O-rectangle）**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126015110765.webp" alt="image-20240126015110765" style="zoom:33%;" />
-
-- X-正方形：轮子转动产生的力矩会经过同一个点，所以 yaw 轴无法主动旋转，也无法主动保持 yaw 轴的角度。
-- X-长方形：轮子转动可以产生 yaw 轴转动力矩，但转动力矩的力臂一般会比较短。
-- O-正方形：四个轮子位于正方形的四个顶点，平移和旋转都没有任何问题。
-- O-长方形：轮子转动可以产生 yaw 轴转动力矩，而且转动力矩的力臂也比较长。是最常见的安装方式。
-
-##### 3.2.3.3 运动学模型
-
-**基础知识**
-
-坐标系统
-
-使用右手定义,对于ROS机器人，如果以它为坐标系的原点，那么
-
-|  轴   | 方位  |
-| :---: | :---: |
-|  x轴  | 前方  |
-|  y轴  | 左方  |
-|  z轴  | 上方  |
-
-旋转运动
-
-使用右手定义：
-
-围绕 z轴正旋转 是 逆时针旋转
-
-测量单位
-
-ROS使用公制 ：
-
-线速度：m/s
-
-角速度：rad/s
-
-底盘运动学解算
-
-以下以**O-长方型**安装方式进行解算
-
-- 底盘中心
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013124388.webp" alt="image-20240126013124388" style="zoom:33%;" />
-
-- 麦轮轴心（取右上角麦轮即一号轮子分析）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013249796.webp" alt="image-20240126013249796" style="zoom:33%;" />
-
-
-
-逆运动学解算
-
-逆运动学模型（inverse kinematic model）得到的公式可以根据底盘的运动状态解算出四个轮子的速度
-
-①轮子轴心速度
-
-![image-20240126013514833](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013514833.webp)
-
-②辊子方向的速度分量v1∥
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013654586.webp" alt="image-20240126013654586" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126013846204.webp" alt="image-20240126013846204" style="zoom: 67%;" />
-
-③轮子转速
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014229717.webp" alt="image-20240126014229717" style="zoom:33%;" />
-
-![image-20240126014243401](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014243401.webp)
-
-④整合得出底盘四个轮子转速，即底盘运动学模型
-
-![image-20240126014625107](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240126014625107.webp)
-
-
-
-正运动学解算
-
-正运动学模型（forward kinematic model）让我们可以通过四个轮子的速度，计算出底盘的运动状态。可以直接根据逆运动学模型中的三个方程解出来。
-
-转换为底盘坐标系下对时间求积分即为里程计变化量
-
-##### 3.2.3.4 代码实现
-
-代码参考：http://t.csdnimg.cn/ldXqr
-
-#### 3.2.4 catkin_make编译
-
-> Contributors: 洪佳
-
-> 参考文献：
->
-> [11] [ROS从入门到精通系列（五）catkin详解与catkin_make编译-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/hhaowang/article/details/101691986)
-
-一定要搞明白`make/makefile/catkin_make/cmake/Cmakelist`的关系,本质是链接文件去生成可执行文件
-
-系统学习大家还是要自己学，主要给大家提供思路，学习大纲还有遇到的一些问题的解决方法，少走弯路
-
-##### 3.2.4.1 catkin编译系统
-
-对于源代码包，我们只有编译才能在系统上运行。而Linux下的编译器有``gcc、g++``，随着源文件的增加，直接用``gcc/g++``命令的方式显得效率低下，人们开始用`Makefile`来进行编译。然而随着工程体量的增大，`Makefile`也不能满足需求，于是便出现了`Cmake`工具。`CMake`是对make工具的生成器，是更高层的工具，它简化了编译构建过程，能够管理大型项目，具有良好的扩展性。对于ROS这样大体量的平台来说，就采用的是`CMake`，并且ROS对`CMake`进行了扩展，于是便有了Catkin编译系统。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164912808.webp" alt="image-20240129164912808" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129164930341.webp" alt="image-20240129164930341" style="zoom:33%;" />
-
-其实早期是`rosbuild`，目前还支持使用，但是`ros`的核心软件包都已经被转换为Catkin
-
-##### 3.2.4.2 catkin_make 结构和特点
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165146937.webp" alt="image-20240129165146937" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165635113.webp" alt="image-20240129165635113" style="zoom:33%;" />
-
-##### 3.2.4.3 catkin_make编译流程
-
-- 建立工作空间
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165753173.webp" alt="image-20240129165753173" style="zoom:50%;" />
-
-- 编译
-
-  <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129165829990.webp" alt="image-20240129165829990" style="zoom:50%;" />
-
-source用来配置环境，不然`roslaunch`找不到对应的包
-
-##### 3.2.4.4 catkin_make文件系统
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70.webp" alt="img" style="zoom: 33%;" />
-
-##### 3.2.4.5 package
-
-package也是ROS源代码存放的地方，任何ROS的代码无论是C++还是Python都要放到package中，这样才能正常的编译和运行。
-
-一个package可以编译出来多个目标文件（ROS可执行程序、动态静态库、头文件等等）。
-
-**package结构**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519610932-6.webp" alt="img" style="zoom:33%;" />
-
-**package指令**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hoYW93YW5n,size_16,color_FFFFFF,t_70-1706519738476-12.webp" alt="img" style="zoom:33%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240129171704680.webp" alt="image-20240129171704680" style="zoom:33%;" />
-
-##### 3.2.4.6 常见问题
-
-点进源代码包后，把`build/devel`两个包删了，在当前路径下进入终端
-
-```
-catkin_make
-```
-
-如果没有error，记得source配置环境，编译成功‘
-
-以下是一些问题现象和解决方案
-
-**问题①**
-
-```
-CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package): Could not find a package configuration file provided by "catkin_virtualenv" with any of the following names:
-
-    catkin_virtualenvConfig.cmake
-    catkin_virtualenv-config.cmake
-  Invoking "make cmake_check_build_system" failed
-```
-
-这是由于缺少包导致的
-
-**解决方案：**
-
-在终端输入：
-
-```
-sudo apt-get install ros-noetic-catkin-virtualenv
-```
-
-注意：
-
-1.error里面”_”下划线在解决代码里面用“-”分割符号
-
-2.Ubuntu20.04是noetic        Ubuntu18.04是melodic
-
-3.有可能缺少好几个包，catkin_make多编译几次再下载几次包
-
-**问题②**
-
-在下载的时候
-
-```
-E:无法定位到软件包
-```
-
-原因很多，网络连接问题、`ros`软件源、apt源过期等问题
-
-**解决方案：**
-
-查一遍list,这个很麻烦需要耐心，我没试过谨慎试
-
-换源镜像
-
-http://t.csdnimg.cn/o9dce
-
-#### 3.2.5 SLAM四种算法建图对比
-
-> Contributors: 洪佳
-
-> 参考文献：
+> 参考资料：
 >
 > [12] [2D激光slam四种算法建图效果对比_slam建图算法-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/m0_73791170/article/details/127339058?csdn_share_tail={"type"%3A"blog"%2C"rType"%3A"article"%2C"rId"%3A"127339058"%2C"source"%3A"Hong_J_0826"}&fromshare=blogdetail)
 
 SLAM——同步定位与建图（Simultaneous Localization and Mapping，SLAM）是在上世纪80年代被提出的，起初发展的算法皆采用激光雷达作为定位与建图的工具，随着稀疏性问题的解决，相机也被引入SLAM领域，如今SLAM技术在向多传感器融合的方向发展，激光雷达、深度相机、IMU惯导等正成为SLAM技术的常见解决方案。
 
-##### 3.2.5.1 Gmapping
+####  4.3.4.1 Gmapping
 
 一种用于建立**二维地图的概率算法**，它基于激光雷达数据和机器人的运动信息，通过**蒙特卡洛方法**进行粒子滤波定位和地图构建。
 
@@ -3653,7 +4153,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 代价地图的生成过程可以参考此文章：https://blog.csdn.net/qq_35635374/article/details/120874817（到了导航部分再细说），总而言之就是对之前建好的静态层地图和雷达运行探测到的障碍层地图按照膨胀规则进行膨胀和合并，生成数值在[0,254]之间的代价地图，导航时按照地图方格中的数值进行路径规划
 
-##### 3.2.5.2 Hector
+#### 4.3.4.2 Hector
 
 `Hector`算法框架是基于高斯牛顿
 （Hector 在机器人快速转向时很容易发生错误匹配，建出的地图发生错位，原因主要是优化算法容易陷入局部最小值）
@@ -3664,7 +4164,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172707169.webp" alt="image-20240127172707169" style="zoom: 50%;" />
 
-##### 3.2.5.3 Karto
+#### 4.3.4.3 Karto
 
 `Karto`算法框架是基于图优化
 
@@ -3674,7 +4174,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172725405.webp" alt="image-20240127172725405" style="zoom:50%;" />
 
-##### 3.2.5.4 Cartographer
+#### 4.3.4.4 Cartographer
 
 `Cartographer`算法框架是基于图优化cartographer在不同环境下，调整参数和传感器配置，就能工作
 大部分数据集，cartographer表现更优。ActiveSubmaps2D类中的submaps_列表实际最多只两个submap，一个认为是old_map，另一个认为是new_map，类似于滑窗操作。
@@ -3689,13 +4189,13 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 ![image-20240127172736432](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240127172736432.webp)
 
-#### 3.2.6 pgm 转 posegraph
+### 4.3.5 pgm 转 posegraph
 
-> Contributors: 唐锦梁
+> Contributor: 唐锦梁
 
-##### 3.2.6.1 精修编辑 pgm 地图
+#### 4.3.5.1 精修编辑 pgm 地图
 
-> 参考文献：
+> 参考资料：
 >
 > [14] [ROS—PGM地图文件的编辑 | 闫金钢的Blog - https://yanjingang.com/](https://yanjingang.com/blog/?p=8597)
 
@@ -3705,7 +4205,7 @@ roslaunch turn_on_什么机器人 map_saver.launch   //保存地图
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217152911916.webp" alt="image-20250217152911916" style="zoom: 25%;" />
 
-##### 3.2.6.2 使用 Ogm2Pgbm 获取带有点云和位姿的 rosbag
+#### 4.3.5.2 使用 Ogm2Pgbm 获取带有点云和位姿的 rosbag
 
 安装过程如下
 
@@ -3834,7 +4334,7 @@ roslaunch ogm2pgbm ogm2pgbm.launch map_file:=/root/workspace/map/$MAP_NAME.yaml 
    docker cp $CONTAINER_ID:$CONTAINER_PATH $DST_PATH
    ```
 
-##### 3.2.6.3 将 .bag 转换为 .db3
+#### 4.3.5.3 将 .bag 转换为 .db3
 
 > 以下操作均在宿主机中进行
 
@@ -3855,7 +4355,7 @@ rosbags-convert --src ogm2pgbm_sensordata.bag \
   --exclude-topic /rosout /robot/map /rosout_agg
 ```
 
-##### 3.2.6.4 播放 rosbag 并制图
+#### 4.3.5.4 播放 rosbag 并制图
 
 > 以下操作均在宿主机中进行
 
@@ -3901,13 +4401,13 @@ rosbags-convert --src ogm2pgbm_sensordata.bag \
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250217153213246.webp" alt="image-20250217153213246" style="zoom: 25%;" />
 
-### 3.3 cmake
+### 4.3.6 cmake进阶
 
 cmake主要是用来方便管理c++工程文件，链接所需要的库依赖，再编译生成可执行文件
 
 控制从源码到可执行文件的整个构建流程，包括编译、链接、测试等步骤。它还支持分布式编译，加速大项目的编译速度。
 
-#### 3.3.1 常见问题
+#### 4.3.6.1 常见问题
 
 1.`target_compile_definitions` 的宏定义内容在VSCode编辑器中中无法识别
 
@@ -3927,7 +4427,7 @@ cmake主要是用来方便管理c++工程文件，链接所需要的库依赖，
 }
 ```
 
-#### 3.3.2 直接编译C++工程文件
+#### 4.3.6.2 直接编译C++工程文件
 
 * example：
 
@@ -3961,9 +4461,9 @@ fmt::fmt
 
 * 把所有的cpp、hpp文件都放在当前目录下，直接生成一个可执行文件main即可
 
-#### 3.3.3 ROS1平台上编译
+#### 4.3.6.3 ROS1平台上编译
 
-##### 3.3.3.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用
+##### 4.3.6.3.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用
 
 * add_definitions(-Wall -Werror -Wno-enum-compare)  
 
@@ -4185,7 +4685,7 @@ endif ()```
 </package>
 ```
 
-##### 3.3.3.2 ROS1上生成自定义消息类型
+##### 4.3.6.3.2 ROS1上生成自定义消息类型
 
 * 在package.xml添加两项：
 
@@ -4216,9 +4716,9 @@ catkin_package(
 
 ```
 
-#### 3.3.4 ROS2 平台上编译
+#### 4.3.6.4 ROS2 平台上编译
 
-##### 3.3.4.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用（对比ROS1，大同小异）
+##### 4.3.6.4.1 需求：编译一个rm__common功能包，作为动态链接库给其他功能包使用（对比ROS1，大同小异）
 
 * example：
 
@@ -4313,7 +4813,7 @@ ament_package()
 </package>
 ```
 
-##### 3.3.4.2 其他功能包要使用rm_common包
+##### 4.3.6.4.2 其他功能包要使用rm_common包
 
 * example
 
@@ -4409,7 +4909,7 @@ ament_package()
 </package>
 ```
 
-##### 3.3.4.3 在ROS2中如果要生成自定义消息类型
+##### 4.3.6.4.3 在ROS2中如果要生成自定义消息类型
 
 * example
 
@@ -4488,2149 +4988,11 @@ ament_package()
 </package>
 ```
 
-### 3.4 yolov8
 
-> Contributors: 程英杰
 
-#### 3.4.1 目标检测与语义分割的区别
+# 5.项目与兵种开发
 
-##### 3.4.1.1 语义分割的目标
-
-语义分割的任务是对输入的图像进行逐像素的分类，标记出像素级别的物体。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/图像逐像素的分类-1708443883528-1.webp" alt="图像逐像素的分类" style="zoom:33%;" />
-
-如上图，图1中把猫、天空、树、草地进行了逐像素的分类；图2中把牛、天空、树、草地进行了逐像素的分类。
-
-##### 3.4.1.2 目标检测的目标
-
-目标检测的任务是对输入的图像进行物体检测，标注物体在图像上的位置，以及该位置上物体属于哪个分类。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/模型位置标注和做出分类-1708443893034-3.webp" alt="模型位置标注和做出分类" style="zoom:33%;" />
-
-如上图，模型把图中的人、狗、马分别进行了位置标注，并且也给出了对应的分类类别。
-
-##### 3.4.1.3 小结
-
-蕴含信息都包含分类信息和位置信息。
-
-但是语义分割所标记的物体是像素级别的颗粒度的，而目标检测标记的物体是其外切框。
-
-#### 3.4.2 训练
-
-##### 3.4.2.1 安装
-
-Pytorch环境安装省略
-
-```bash
-pip install ultralytics
-```
-
-##### 3.4.2.2 准备数据集
-
-Yolo团队为模型设计了专用数据集格式"YOLO"，要训练yolov8，必须确认数据集为yolo格式。
-
-yolo直接采用txt文件保存模型的labels标签，如下图，每一行都代表着该图像中的一个标签GT
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo数据集格式-1708443900929-5.webp" alt="yolo数据集格式" style="zoom: 50%;" />
-
-目前大部分数据集的保存都是以voc格式，如果你拿到了voc格式的数据集，需要进行转换。
-
-相关链接：[https://blog.csdn.net/kuabiku/article/details/132088402]()
-
-本次使用西南大学 已标注数据集链接： https://pan.baidu.com/s/1oMtdgmBN5xQZTbv2bSLtog?pwd=z3gc
-
-该数据集的标签数据已经是yolo格式
-
-**处理数据集并调整配置文件**
-
-模型训练配置文件(config.yaml)示例：
-
-```yaml
-path: data_xn # dataset root dir
-train: images/train # ./data_xn/images/train
-val: images/test # ./data_xn/images/test
-test: # test images (optional)
-
-# Classes
-names:
-  0: person
-  1: bicycle
-  2: car
-# ...
-```
-
-其中  `path`  是数据集相对于`config.yaml`所在目录的路径，也可以填写绝对路径
-
-`train`和`val`分别是训练集和评估集，该字段中的路径将会与`path`中的路径相拼接
-
-`names`是模型分类数据的信息，从`0`开始，分类数量应不小于训练数据中所标注的类别标签的数量。`西南大学 已标注数据集`的最大类别为35，因此`names`中的分类应该从`0`-`34`.
-
-`西南大学 已标注数据集`数据集文件夹`data_xn`的存放格式应该更改为：
-
-```bash
-data_xn
-    ├─images
-    │  ├─test
-    │  └─train
-    ├─labels
-    │  ├─test
-    │  └─train
-```
-
-其中，`images`下每个子目录中直接存放了图片；`labels`下每个子目录中存放了对应的标注数据(txt文件)
-
-> *训练前，ultralytics会自动读取这写文件夹下的每张图片和标注，并生成* **缓存** *以便于下次训练直接复用。因此如果对数据集进行了改动，再次训练时应将缓存文件* `data_xn/labels/train.cache`和`data_xn/labels/test.cache` *删去以应用更改*
-
-##### 3.4.2.3 训练
-
-**准备预训练模型**
-
-对于不同任务，Yolov8准备了不同的预训练模型，具有不同的输出格式。目标检测是Yolov8的主任务，因此所有模型均可使用。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolov8预训练模型-1708443909325-7.webp" alt="yolov8预训练模型" style="zoom:33%;" />
-
-下载地址：[Releases · ultralytics/assets · GitHub](https://github.com/ultralytics/assets/releases) 提供了ultralytics库提供的所有预训练模型的下载，此处下载最小的默认模型
-
-下载命令：
-
-```bash
-wget https://github.com/ultralytics/assets/releases/download/v8.1.0/yolov8n.pt
-```
-
-**编写训练代码**
-
-在项目根目录创建`datasets`，并将准备好的数据集`data_xn`剪切进去。
-
-将下载好的预训练模型文件`yolov8n.pt`放入项目根目录
-
-在项目根目录创建`train.py`:
-
-```python
-from ultralytics import YOLO
-if __name__ == "__main__":
-
-    # 加载预训练数据集
-    model = YOLO('yolov8n.pt')
-    
-    # 按照配置文件的定义开始训练，训练3个epochs
-    results = model.train(data='config.yaml', epochs=3,lr0=1E-2)
-
-    # model.val()
-    # train方法在训练完成后自动对模型进行评估， 因此不需要调用 model.val()
-
-    #导出模型为ONNX格式
-    model.export(format='onnx', dynamic=True)
-```
-
-> 由于Windows下处理数据集需要创建多个workers，因此，需要将接口调用写在__main__下以防止`Freeze_support Error`
->
-> <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/Freeze_support_Error提示报错-1708443920532-9.webp" alt="Freeze_support_Error提示报错" style="zoom: 50%;" />
-
-**然后运行train.py就可以开始训练了**
-
-**查看训练结果**
-
-训练结果保存在项目根目录`runs`文件夹下，`runs/detect`存放了`目标检测`任务的训练模型和评估结果
-
-关于评估指标的解释，见：[https://blog.csdn.net/java1314777/article/details/134154676]()
-
-模型(权重)文件存放在相应模型文件夹中的`weights`文件夹
-
-#### 3.4.3 使用ONNX调用
-
-[生成ONNX文件参考资料](https://docs.ultralytics.com/modes/export/)
-
-ONNX Runtime提供了跨平台调用模型的统一接口
-
-生成并使用ONNX文件的步骤如下:
-
-1. 生成ONNX文件:
-   从下面的文件结构开始,通过上面的步骤已经得到了训练过程当中综合准确率最好的模型`best.pt`和模型最后的训练结果`last.pt`
-2. <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/weights权重文件展示图-1708443930529-11.webp" alt="weights权重文件展示图" style="zoom:33%;" />
-
-然后是在pycharm控制台打开之前下载了 `ultralytics`的anaconda环境，然后在控制台输入下面的指令
-
-~~~bash
-yolo export model=runs/detect/train6/weights/best.pt format=onnx  int8=true simplify=true dynamic=true
-~~~
-
-在`best.pt`所在的文件夹当中得到了`best.onnx`。
-
->参数解释
->前两个命令 yolo export 指的是使用yolo的相关命令 做导出任务
->model后面跟的参数是训练得到的模型文件路径
->format后面是模型导出的格式 [(yolo官网上模型导出的格式)](https://docs.ultralytics.com/zh/modes/export/#arguments)
->后面的参数也是官网上的相关介绍
->
-><img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/yolo官网文件导出参数的介绍-1708443946517-13.webp" alt="yolo官网文件导出参数的介绍" style="zoom: 40%;" />
->
->这里我使用了 int8 simplify dynamic 用来简化模型加快计算速度
-
-
-当然根据官网也可以使用python将模型文件导出 下面是相关的代码
-
-~~~python
-from ultralytics import YOLO
-# Load a model
-model = YOLO('runs/detect/train6/weights/best.pt')  # load a custom trained model
-# Export the model
-model.export(format='onnx', int8=True, dynamic=True, simplify=True)
-~~~
-
-
-2. 编写python调用ONNX文件
-   [调用ONNX文件参考资料](https://zhuanlan.zhihu.com/p/670622368)
-
-首先先import这些库文件
-
-~~~python 
-import onnxruntime as ort
-import cv2
-import numpy as np
-~~~
-
-然后加载ONNX文件
-
-~~~python
-import onnxruntime as ort
-session = ort.InferenceSession("yolov8m-seg.onnx", providers=["CPUExecutionProvider"]) # 使用CPU加载计算模型
-~~~
-
-后续的代码和相关的解释都在注释当中写的比较详细,这里就直接贴代码了
-
-~~~python
-# %%
-import onnxruntime as ort
-import cv2
-import numpy as np
-
-# 这个函数是将图片数据转换为模型输入格式 (预处理函数)
-def prepare_input(bgr_image, width, height):
-    image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)  # 将图片从BGR格式转换为RGB格式
-    # cv2.imshow(bgr_image)
-    image = cv2.resize(image, (width, height)).astype(np.float32) # 将图片resize到模型输入尺寸640x640
-    image = image / 255.0  #归一化
-    image = np.transpose(image, (2, 0, 1)) # 将图像数据的通道顺序由HWC调整为CHW
-    input_tensor = np.expand_dims(image, axis=0) # 扩展数据维度，将数据的维度调整为NCHW
-    #axis=0表示在第0维增加一个维度
-    #经过预处理后，输入数据input_tensor的维度变为[1, 3, 640, 640]，与模型的输入尺寸一致。
-    return input_tensor
-# 计算两个方框之间的IOU值的大小 计算方式是 两个方框交集面积/并集面积
-# 参考资料 http://t.csdnimg.cn/zTN73
-def iou(rec_1,rec_2):
-        '''
-        rec_1:左上角(rec_1[0],rec_1[1])    右下角：(rec_1[2],rec_1[3])
-        rec_2:左上角(rec_2[0],rec_2[1])    右下角：(rec_2[2],rec_2[3])
-        （rec_1）
-        1--------1
-        1   1----1------1
-        1---1----1      1
-            1           1
-            1-----------1 （rec_2）
-        '''
-        s_rec1=(rec_1[2]-rec_1[0])*(rec_1[3]-rec_1[1])   #第一个bbox面积 = 长×宽
-        s_rec2=(rec_2[2]-rec_2[0])*(rec_2[3]-rec_2[1])   #第二个bbox面积 = 长×宽
-        sum_s=s_rec1+s_rec2                              #总面积
-        left=max(rec_1[0],rec_2[0])                      #交集左上角顶点横坐标
-        right=min(rec_1[2],rec_2[2])                     #交集右下角顶点横坐标
-        bottom=max(rec_1[1],rec_2[1])                    #交集左上角顶点纵坐标
-        top=min(rec_1[3],rec_2[3])                       #交集右下角顶点纵坐标
-        if left >= right or top <= bottom:               #不存在交集的情况
-            return 0
-        else:
-            inter=(right-left)*(top-bottom)              #求交集面积
-            iou=(inter/(sum_s-inter))*1.0                #计算IOU
-            return iou
-session = ort.InferenceSession(
-     "D:\\ProgramFiles\\ultralytics-main\\runs\\detect\\train6\\weights\\best.onnx", # 模型文件路径 
-     providers=["CPUExecutionProvider"])  # 模型路径 还有使用CPU计算
-video = cv2.VideoCapture("D:\\opencv_image\\video_zhuangjiaban.mp4") # 读取视频文件
-# %%
-# 1. 把OpenCV读取的BGR格式的图片转换为RGB格式；
-# 2. 把图片resize到模型输入尺寸640x640；
-# 3. 对像素值除以255做归一化操作；
-# 4. 把图像数据的通道顺序由HWC调整为CHW；
-# 5. 扩展数据维度，将数据的维度调整为NCHW。
-while True:
-    model_width = 640
-    model_height = 640
-    ret, image = video.read()
-    if(ret==False):
-       continue      
-    image_height, image_width, _ = image.shape
-    input_tensor = prepare_input(image, model_width, model_height)
-    outputs = session.run(None, {session.get_inputs()[0].name: input_tensor})
-    # %%
-    #squeeze函数是用于删除shape中为1的维度，对output0做transpose操作是为了方便后续操作
-    # print(outputs[0].shape)
-    output0 = np.squeeze(outputs[0]).transpose()
-    # print("outputs[0].shape shape:", outputs[0].shape)
-    # print("output0 shape:", output0.shape)
-    # %%
-    boxes = output0
-    # print(boxes.shape) # 输出结果是 (8400,40)
-    # 这里的boxes是一个二维数组，第一维是目标框的数量，第二维是目标框的属性，包括目标框的坐标和类别概率等信息。
-    # 咱们细说第二维的属性：前4个元素是目标框的坐标信息，分别是目标框的中心坐标(x,y)和宽高(w,h)，后36个元素是目标框的类别概率信息，每个类别的概率占4个元素。
-    # 所以[8400,40] 就代表着 8400个目标框，每个目标框有40个属性
-    # boxes shape: (8400, 84)
-    # masks shape: (8400, 32)
-    # %%
-    objects = []
-    for row in boxes:
-        prob = row[4:40].max()
-        if prob < 0.2:
-            continue
-        class_id = row[4:40].argmax()
-        label = class_id
-        xc, yc, w, h = row[:4]
-        # // 把x1, y1, x2, y2的坐标恢复到原始图像坐标
-        x1 = (xc - w / 2) / model_width * image_width
-        y1 = (yc - h / 2) / model_height * image_height
-        x2 = (xc + w / 2) / model_width * image_width
-        y2 = (yc + h / 2) / model_height * image_height
-        # // 获取实例分割mask
-        # mask = get_mask(row[84:25684], (x1, y1, x2, y2), image_width, image_height)
-        # // 从mask中提取轮廓
-        # polygon = get_polygon(mask, x1, y1)
-        objects.append([x1, y1, x2, y2, label, prob])
-    # %%
-    objects.sort(key=lambda x: x[5], reverse=True)
-    # %%
-    # objects.sort(key=lambda x: x[5], reverse=True)
-    # // NMS
-    results = []
-    while len(objects) > 0:
-        print(objects[0])
-        results.append(objects[0]) # 我们想要与第一个框进行比较 所以不能让第一个框和自己作比较
-        # 如果 iou过大(超过了0.5)的话 就删除这个object 保留iou小的object
-        objects = [object for object in objects if iou([object[0],object[1],object[2],object[3]], 
-                                                    [objects[0][0],objects[0][1],objects[0][2],objects[0][3]]) < 0.5]
-        # 这里就是将 objects中和第一个object的iou大于0.5的object删除掉
-    # %%
-    # 定义矩形的左上角和右下角坐标
-    # 设置矩形颜色为红色（BGR格式）
-    color = (0, 0, 255)
-    thickness = 1 # 若想要填充矩形则将此值改为-1或者大于等于0的数字
-    # 在图像上绘制矩形
-    for result in results:
-        print(result)
-        start_point = (int(result[0]), int(result[1]))
-        end_point = (int(result[2]), int(result[3]))
-        cv2.rectangle(image, start_point, end_point, color, thickness)
-    cv2.imshow('window name',image)
-    if cv2.waitKey(10) & 0xFF == ord('q'):
-            break
-cv2.destroyAllWindows()
-~~~
-
-
-<div STYLE="page-break-after: always;"></div>
-
-### 3.5 调试技巧
-
-#### 3.5.1 录制终端会话到文件
-**启动录制**
-
-```bash
-script my_session.log
-```
-执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
-
-**停止录制**
-
-当操作完成需要结束录制时，可以使用以下任意一种方法：
-
-- **输入命令：** `exit`
-- **快捷键：** `Ctrl` + `D`
-
-系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
-
-## 4 文档维护
-
-> Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
-
-> 参考文献：
->
-> [3] [【Typora 教程】手把手教你如何用Typora撰写笔记](https://www.bilibili.com/video/BV1h84y1Y7nn/?vd_source=436470546f64e53b7d4516956091ffd7)
-
-软件：Typora
-
-以Typora编辑器以及Mardown+latex语法为例
-
-### 4.1 标题
-
->语法：# (一级标题)  ## (二级标题)  ### (三级标题) ......
-
->代码：
->
->```text
-># 这是一级标题
->## 这是二级标题
->```
-
->效果:
->\# 这是一级标题
->\#\# 这是二级标题
-
->快捷键:
->
->* Ctrl+数字1~6可以快速将选中的文本调成对应级别的标题
->* Ctrl+0可以快速将选中的文本调成普通文本
->* Ctrl+加号/减号对标题级别进行加减
-
-### 4.2 分割线
-
->语法:  ---或者***+回车
-
->代码:
->
->```text
->---或者***
->```
-
->效果:
-
------
-
-注意：*会自动补全另一个，字体显示不一致*；减号三个即可
-
-### 4.3 文字显示
-
-#### 4.3.1 字体
-
->语法:
->
->* 粗体:  用一对双星号包裹
->* 删除线:  用一对双飘号包裹
->* 下划线:  用一对u标签包裹
->* 斜体:  用一对单星号包裹
->* 高亮:  用一对双等号包裹
-
->代码:
->
->```text
->**这是粗体**
->~~这是删除线~~
-><u>这是下划线</u>
->*这是斜体*
->==这是高亮==
->```
-
->效果:
-**这是粗体**
-~~这是删除线~~
-<u>这是下划线</u>
-*这是斜体*
-==这是高亮==
-
->快捷键:
->
->* 加粗:  Ctrl+B
->* 删除线:  Shift+Alt+5
->* 下划线:  Ctrl+U
->* 斜体:  Ctrl+I
-
-#### 4.3.2 上下标
-
->代码:
->
->```text
->x^{2}
->H_{2}O
->```
-
->效果:
->$x^{2}$
->$H_{2}O$
-
-### 4.4 列表
-
-#### 4.4.1 无序列表
-
->代码:
->
->```text
->*/-/+ +空格
->```
-
->效果:
->1.只有同一级别:
->
->* 苹果
->* 香蕉
->* 橘子
->
->2.子集类:
->
->* 一级分类
->  * 二级分类 
->    * 三级分类
-
->快捷键:  Ctrl+Shift+]
-
-#### 4.4.2 有序列表
-
->代码:
->
->```text
->数字+.+空格
->```
-
->效果:
->1. 第一个标题
->2. 第二个标题
->3. 第三个标题
->
->   * 子内容1
->     * 子内容2
->4. 第四个标题
-
->快捷键:  Ctrl+Shift+[
-
-#### 4.4.3 任务列表
-
->代码:
->
->```text
->- [ ] 吃早餐
->- [x] 背单词
->```
-
->效果:
->- [ ] 吃早餐
->- [x] 背单词
-
-### 4.5 区块显示
-
->代码:
->
->```text
->>+回车
->```
-
->效果:
->>这是最外层区块
->
->>>这是内层区块
->
->>>>这是最内层区块
-
-### 4.6 代码显示
-
-#### 4.6.1 行内代码
-
-代码：
-
-```
-`sudo rm -rf /*`
-```
-
-`sudo rm -rf /*`
-
->快捷键:  Ctrl+Shift+`
-
-#### 4.6.2 代码块
-
-点击代码块可以选择代码语言（要输入才会显示有什么选择），选择后会有代码高亮（也可以把语言标识写在第一行的三个点旁边以设置语言）
-
-如：cpp（即C++）、python、cmake等
-
-~~~markdown
-```
-代码块
-```
-~~~
-
-例如C++代码：
-
-````markdown
-```cpp
-代码块
-```
-````
-
-代码高亮效果：
-
-```cpp
-#include<iostream>
-using namespace std;
-
-int main()
-{
-    cout << "Hello World!" << endl;
-    return 0;
-}
-```
-
->快捷键:  Ctrl+Shift+K
-
-### 4.7 链接
-
->代码:
->
->```text
->www.baidu.com
->[百度一下](https://www.baidu.com)
->[百度一下](https://www.baidu.com "https://www.baidu.com")
->```
-
->效果:
->www.baidu.com
->[百度一下](https://www.baidu.com)
->[百度一下](https://www.baidu.com "https://www.baidu.com")
-
->快捷键:  Ctrl+K
-
-### 4.8 脚注
-
->说明:  对文本进行解释说明。
-
->代码: 
->
->```text
->[^文本]
->[^文本]:解释说明
->```
-
->应用:
->这是一个技术\[^①\]
->
->\[^①\]: 这是一个非常好用的框架。
-
-实际效果为在文本后显示^后的文本
-
-点击该文本后会跳转至文档最末尾并列出`[^①]:` 后内容
-
-### 4.9 图片插入
-
-```markdown
-![描述](图片链接或本地路径)
-```
-
-如：
-
-```markdown
-![5](./Sirius 战队2023视觉组培训20231029/5.webp)
-```
-
-![5](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5.webp)
-
->快捷键:  Ctrl+Shift+I
-
-### 4.10 表格
-
->代码:
->```text
->|  1   |  2   |  3   |
->| :--- | :--: | ---: |
->|  4   |  5   |  6   |
->|  7   |  8   |  9   |
->|  10  |  11  |  12  |
->```
-
->效果:
-
-| 1   |   2   |    3 |
-| --- | :---: | ---: |
-| 4   |   5   |    6 |
-| 7   |   8   |    9 |
-| 10  |  11   |   12 |
-
->快捷键:  Ctrl+T
-
-### 4.11 流程图
-
-#### 4.11.1 横向流程图
-
-> 代码:
->
-> ````text
-> ```mermaid
-> graph LR
-> A[方形]==>B(圆角)
-> B==>C{条件a}
-> C-->|a=1|D[结果1]
-> C-->|a=2|E[结果2]
-> F[横向流程图]
-> ```
-> ````
-
->效果:
->```mermaid
->graph LR
->A[方形]==>B(圆角)
->B==>C{条件a}
->C-->|a=1|D[结果1]
->C-->|a=2|E[结果2]
->F[横向流程图]
->```
-
-#### 4.11.2 竖向流程图
-
-> 代码:
->
-> ````text
-> ```mermaid
-> graph TD
-> A[方形]==>B(圆角)
-> B==>C{条件a}
-> C-->|a=1|D[结果1]
-> C-->|a=2|E[结果2]
-> F[竖向流程图]
-> ```
-> ````
-
->效果:
->```mermaid
->graph TD
->A[方形]==>B(圆角)
->B==>C{条件a}
->C-->|a=1|D[结果1]
->C-->|a=2|E[结果2]
->F[竖向流程图]
->```
-
-### 4.12 表情符号
-
->代码:
->```text
->:happy:、:cry:、:man:
->```
-
->效果:
-:happy:、 :cry:、 :man:
-
-### 4.13 数学公式（Latex）
-
-#### 4.13.1 公式的插入
-
-**①行中公式**
-
->代码:
->
->```text
->$公式$
->```
-
->效果:
-$公式$
-
-**②独立公式**
-
->代码:
->
->```text
->$$
->公式
->$$
->```
-
->效果:
-$$
-公式
-$$
-
-#### 4.13.2 上下标
-
->代码:
->
->```text
->$x^{y^z}=(1+e^x)^{-2xy^w}$
->$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
->```
-
->效果:
-$x^{y^z}=(1+e^x)^{-2xy^w}$
-$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
-
-#### 4.13.3 括号和分隔符
-
->代码:
->
->```text
->$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
->$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
->$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
->```
-
->效果:
-$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
-$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
-$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
-
-#### 4.13.4 分数
-
->代码:
->
->```text
->$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
->```
-
->效果:
-$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
-
-#### 4.13.5 开方
-
->代码:
->
->```text
->$\sqrt[根指数,省略时为2]{被开方数}$
->```
-
->效果:
-$\sqrt{2}\quad\sqrt[3]{2}$
-
-#### 4.13.6 省略号
-
->代码:
->
->```text
->$\cdots\quad\ldots\quad\vdots\quad\ddots$
->```
-
->效果:
-$\cdots\quad\ldots\quad\vdots\quad\ddots$
-
-#### 4.13.7 矢量和均值
-
->代码:
->
->```text
->$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
->```
-
->效果:
-$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
-
-#### 4.13.8 积分
-
->代码:
->
->```text
->$$
->\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
->$$
->```
-
->效果:
-$$
-\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
-$$
-
-#### 4.13.9 极限
-
->代码:
->
->```text
->$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
->```
-
->效果:
-$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
-
-#### 4.13.10 累加、累乘及交集、并集
-
->```text
->$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
->```
-
->效果:
-$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
-
-#### 4.13.11 希腊字母
-
-| 语法                          | 字母                            | 语法                    | 字母                      | 语法               | 字母                 |
-| :---------------------------- | ------------------------------- | ----------------------- | ------------------------- | ------------------ | -------------------- |
-| \Alpha(\alpha)                | $\Alpha(\alpha)$                | \Beta(\beta)            | $\Beta(\beta)$            | \Gamma(\gamma)     | $\Gamma(\gamma)$     |
-| \Epsilon(\epsilon)\varepsilon | $\Epsilon(\epsilon)\varepsilon$ | \Zeta(\zeta)            | $\Zeta(\zeta)$            | \Eta(\eta)         | $\Eta(\eta)$         |
-| \Iota(\iota)                  | $\Iota(\iota)$                  | \Kappa(\kappa)\varkappa | $\Kappa(\kappa)\varkappa$ | \Lambda(\lambda)   | $\Lambda(\lambda)$   |
-| \Nu(\nu)                      | $\Nu(\nu)$                      | \Xi(\xi)                | $\Xi(\xi)$                | \Omicron(\omicron) | $\Omicron(\omicron)$ |
-| \Rho(\rho)\varrho             | $\Rho(\rho)\varrho$             | \Sigma(\sigma)\varsigma | $\Sigma(\sigma)\varsigma$ | \Tau(\tau)         | $\Tau(\tau)$         |
-| \Phi(\phi)\varphi             | $\Phi(\phi)\varphi$             | \Chi(\chi)              | $\Chi(\chi)$              | \Psi(\psi)         | $\Psi(\psi)$         |
-| \Delta(\delta)                | $\Delta(\delta)$                | \Theta(\theta)\vartheta | $\Theta(\theta)\vartheta$ | \Mu(\mu)           | $\Mu(\mu)$           |
-| \Pi(\pi)\varpi                | $\Pi(\pi)\varpi$                | \Omega(\omega)          | $\Omega(\omega)$          | \upsilon           | $\upsilon$           |
-| \ell                          | $\ell$                          | \eth                    | $\eth$                    | \hbar              | $\hbar$              |
-| \hslash                       | $\hslash$                       | \mho                    | $\mho$                    | \partial           | $\partial$           |
-
-#### 4.13.12 特殊字符
-
-**①说明**
-
->可以在字符前使用`\large`或`\small`以显示更大或更小的字符。${\LARGE A}{\Large A}{\large A}A{\small A}$
-
-**②关系运算符**
-
-| 输入      | 显示        | 输入              | 显示                | 输入         | 显示         |
-| --------- | ----------- | ----------------- | ------------------- | ------------ | ------------ |
-| \pm(\mp)  | $\pm(\mp)$  | \times            | $\times$            | \div         | $\div$       |
-| \nmid     | $\nmid$     | \cdot             | $\cdot$             | \mid         | $\mid$       |
-| \bigodot  | $\bigodot$  | \bigotimes        | $\bigotimes$        | \bigoplus    | $\bigoplus$  |
-| \ge       | $\ge$       | \le               | $\le$               | \ll          | $\ll$        |
-| \geqslant | $\geqslant$ | \leqslant         | $\leqslant$         | \neq         | $\neq$       |
-| \approx   | $\approx$   | \xlongequal{文本} | $\xlongequal{文本}$ | \triangleq   | $\triangleq$ |
-| \sim      | $\sim$      | \doteq            | $\doteq$            | \equiv       | $\equiv$     |
-| \cong     | $\cong$     | \propto           | $\propto$           | \parallel(\\ | )            |
-| \prec     | $\prec$     | \pmod{2}          | $\pmod{2}$          | \bmod        | $\bmod{2}$   |
-
-**③集合运算符**
-
-| 输入      | 显示        | 输入        | 显示          | 输入       | 显示         |
-| --------- | ----------- | ----------- | ------------- | ---------- | ------------ |
-| \emptyset | $\emptyset$ | \varnothing | $\varnothing$ |            |              |
-| \subset   | $\subset$   | \subseteq   | $\subseteq$   | \subsetneq | $\subsetneq$ |
-| \supset   | $\supset$   | \supseteq   | $\supseteq$   | \supsetneq | $\supsetneq$ |
-| \bigcap   | $\bigcap$   | \bigcup     | $\bigcup$     | \setminus  | $\setminus$  |
-| \bigvee   | $\bigvee$   | \bigwedge   | $\bigwedge$   |            |              |
-| \in       | $\in$       | \notin      | $\notin$      | \ni        | $\ni$        |
-
-**④三角运算符**
-
-| 输入    | 显示      | 输入 | 显示   | 输入   | 显示     |
-| ------- | --------- | ---- | ------ | ------ | -------- |
-| \circ   | $\circ$   | \bot | $\bot$ | \angle | $\angle$ |
-| \degree | $\degree$ |      |        |        |          |
-
-**⑤微积分运算符**
-
-| 输入  | 显示    | 输入   | 显示     | 输入      | 显示     |
-| ----- | ------- | ------ | -------- | --------- | -------- |
-| \int  | $\int$  | \iint  | $\iint$  | \iiint    | $\iiint$ |
-| \oint | $\oint$ | \oiint | $\oiint$ | \prime(‘) | $\prime$ |
-| \lim  | $\lim$  | \infin | $\infin$ | \nabla    | $\nabla$ |
-
-**⑥逻辑运算符**
-
-| 输入     | 显示       | 输入       | 显示         | 输入   | 显示     |
-| -------- | ---------- | ---------- | ------------ | ------ | -------- |
-| \because | $\because$ | \therefore | $\therefore$ |        |          |
-| \forall  | $\forall$  | \exist     | $\exist$     |        |          |
-| \not>    | $\not>$    | \not<      | $\not<$      |        |          |
-| \land    | $\land$    | \lor       | $\lor$       | \lnot  | $\lnot$  |
-| \top     | $\top$     | \vdash     | $\vdash$     | \vDash | $\vDash$ |
-
-**⑦带帽符号**
-
-| 输入       | 显示         | 输入            | 显示              |
-| ---------- | ------------ | --------------- | ----------------- |
-| \hat{xy}   | $\hat{xy}$   | \widehat{xyz}   | $\widehat{xyz}$   |
-| \tilde{xy} | $\tilde{xy}$ | \widetilde{xyz} | $\widetilde{xyz}$ |
-| \check{x}  | $\check{x}$  | \breve{y}       | $\breve{y}$       |
-| \grave{x}  | $\grave{x}$  | \acute{y}       | $\acute{y}$       |
-| \dot{x}    | $\dot{x}$    | \ddot{x}        | $\ddot{x}$        |
-
-
-**⑧选取符号**
-
-| 输入                           | 显示                             | 输入                            | 显示                              |
-| ------------------------------ | -------------------------------- | ------------------------------- | --------------------------------- |
-| \fbox{a+b+c+d}                 | $\fbox{a+b+c+d}$                 |                                 |                                   |
-| \overbrace{xx\cdots x}^{10个x} | $\overbrace{xx\cdots x}^{10个x}$ | \underbrace{xx\cdots x}_{10个x} | $\underbrace{xx\cdots x}_{10个x}$ |
-
-**⑨箭头符号**
-
-| 输入           | 显示             | 输入              | 显示                | 输入                | 显示                  |
-| -------------- | ---------------- | ----------------- | ------------------- | ------------------- | --------------------- |
-| \leftarrow     | $\leftarrow$     | \rightarrow       | $\rightarrow$       | \leftrightarrow     | $\leftrightarrow$     |
-| \longleftarrow | $\longleftarrow$ | \longrightarrow   | $\longrightarrow$   | \longleftrightarrow | $\longleftrightarrow$ |
-| \Leftarrow     | $\Leftarrow$     | \Rightarrow       | $\Rightarrow$       | \Leftrightarrow     | $\Leftrightarrow$     |
-| \Longleftarrow | $\Longleftarrow$ | \Longrightarrow   | $\Longrightarrow$   | \Longleftrightarrow | $\Longleftrightarrow$ |
-| \uparrow       | $\uparrow$       | \downarrow        | $\downarrow$        | \updownarrow        | $\updownarrow$        |
-| \Uparrow       | $\Uparrow$       | \Downarrow        | $\Downarrow$        | \Updownarrow        | $\Updownarrow$        |
-| \to            | $\to$            | \swarrow          | $\swarrow$          | \nearrow            | $\nearrow$            |
-| \gets          | $\gets$          | \searrow          | $\searrow$          | \nwarrow            | $\nwarrow$            |
-| \mapsto        | $\mapsto$        | \rightrightarrows | $\rightrightarrows$ |                     |                       |
-
-**⑩空格**
-
-| 输入 | 效果 | 输入 | 效果 | 输入    | 效果 |
-| ---- | ---- | ---- | ---- | ------- | ---- |
-| \\!  | $    | \!   | $    | 默认    | $    |    | $ | \quad  | $ | \quad  | $ |
-| \,   | $    | \,   | $    | \;(\\ ) | $    | \; | $ | \qquad | $ | \qquad | $ |
-
-#### 4.13.13 字体
-
-> 代码:
->
-> ```text
-> ${\字体{需要转换的字符}}$
-> ```
-
-| 输入 | 说明     | 显示            | 输入  | 说明       | 显示                 |
-| ---- | -------- | --------------- | ----- | ---------- | -------------------- |
-| \rm  | 罗马体   | ${\rm{Sample}}$ | \cal  | 花体       | ${\cal{Sample}}$     |
-| \it  | 意大利体 | ${\it{Sample}}$ | \Bbb  | 黑板粗体   | ${\Bbb{Sample}}$     |
-| \bf  | 粗体     | ${\bf{Sample}}$ | \mit  | 数学斜体   | ${\mathit{Sample}}$  |
-| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$ |
-| \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$    |
-
-#### 4.13.14 大括号和行标
-
->说明:  使用`\left`和`\right`来创建自动匹配高度的`()`、`[]`、`{}`、`.`。在每个公式末尾使用`\tag{行标}`来实现行标。
-
->代码:
->
->```text
->$$
->f\left(
->\left[
->\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a
->\right]
->^{\dfrac{3}{2}}
->\right)
->\tag{行标}
->$$
->```
-
->效果:
-$$
-f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
-$$
-
->说明:如果你想将行内显示的分隔符也变大,也可以使用`\middle`命令
-
->代码:
->
->```text
->$$
->\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
->$$
->```
-
->效果:
-$$
-\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
-$$
-
-#### 4.13.15 其他命令
-
-**①注释文字**
-
->代码:
->
->```text
->$\text{文字}$
->```
-
->效果:
-$$
-f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
-$$
-
-**③文字颜色**
-
->* 适用新旧浏览器
->  代码:
->
->```text
->$\color{颜色}{文字}$
->```
-
-| 输入    | 显示                     | 输入   | 显示                    | 输入   | 显示                    |
-| ------- | ------------------------ | ------ | ----------------------- | ------ | ----------------------- |
-| black   | $\color{black}{color}$   | grey   | $\color{grey}{color}$   | silver | $\color{silver}{color}$ |
-| white   | $\color{white}{color}$   | maroon | $\color{maroon}{color}$ | red    | $\color{red}{color}$    |
-| yellow  | $\color{yellow}{color}$  | lime   | $\color{lime}{color}$   | olive  | $\color{olive}{color}$  |
-| green   | $\color{green}{color}$   | teal   | $\color{teal}{color}$   | auqa   | $\color{auqa}{color}$   |
-| blue    | $\color{blue}{color}$    | navy   | $\color{navy}{color}$   | purple | $\color{purple}{color}$ |
-| fuchsia | $\color{fuchsia}{color}$ |        |                         |        |                         |
-
->* 适用新版浏览器
->  代码:
->
->```text
->$\color{#rgb}{文字}$    (注:其中r、g、b可以输入0~9和a~f来分别表示红色、绿色和蓝色的纯度)
->```
-
-| 输入 | 输出                  | 输入 | 输出                  | 输入 | 输出                  | 输入 | 输出                  |
-| ---- | --------------------- | ---- | --------------------- | ---- | --------------------- | ---- | --------------------- |
-| #000 | $\color{#000}{color}$ | #005 | $\color{#005}{color}$ | #00A | $\color{#00A}{color}$ | #00F | $\color{#00F}{color}$ |
-| #500 | $\color{#500}{color}$ | #505 | $\color{#505}{color}$ | #50A | $\color{#50A}{color}$ | #50F | $\color{#50F}{color}$ |
-| #A00 | $\color{#A00}{color}$ | #A05 | $\color{#A05}{color}$ | #A0A | $\color{#A0A}{color}$ | #A0F | $\color{#A0F}{color}$ |
-| #F00 | $\color{#F00}{color}$ | #F05 | $\color{#F05}{color}$ | #F0A | $\color{#F0A}{color}$ | #F0F | $\color{#F0F}{color}$ |
-| #050 | $\color{#050}{color}$ | #055 | $\color{#055}{color}$ | #05A | $\color{#05A}{color}$ | #05F | $\color{#05F}{color}$ |
-| #550 | $\color{#550}{color}$ | #555 | $\color{#555}{color}$ | #55A | $\color{#55A}{color}$ | #55F | $\color{#55F}{color}$ |
-| #A50 | $\color{#A50}{color}$ | #A55 | $\color{#A55}{color}$ | #A5A | $\color{#A5A}{color}$ | #A5F | $\color{#A5F}{color}$ |
-| #F50 | $\color{#F50}{color}$ | #F55 | $\color{#F55}{color}$ | #F5A | $\color{#F5A}{color}$ | #F5F | $\color{#F5F}{color}$ |
-| #0A0 | $\color{#0A0}{color}$ | #0A5 | $\color{#0A5}{color}$ | #0AA | $\color{#0AA}{color}$ | #0AF | $\color{#0AF}{color}$ |
-| #5A0 | $\color{#5A0}{color}$ | #5A5 | $\color{#5A5}{color}$ | #5AA | $\color{#5AA}{color}$ | #5AF | $\color{#5AF}{color}$ |
-| #AA0 | $\color{#AA0}{color}$ | #AA5 | $\color{#AA5}{color}$ | #AAA | $\color{#AAA}{color}$ | #AAF | $\color{#AAF}{color}$ |
-| #FA0 | $\color{#FA0}{color}$ | #FA5 | $\color{#FA5}{color}$ | #FAA | $\color{#FAA}{color}$ | #FAF | $\color{#FAF}{color}$ |
-| #0F0 | $\color{#0F0}{color}$ | #0F5 | $\color{#0F5}{color}$ | #0FA | $\color{#0FA}{color}$ | #0FF | $\color{#0FF}{color}$ |
-| #5F0 | $\color{#5F0}{color}$ | #5F5 | $\color{#5F5}{color}$ | #5FA | $\color{#5FA}{color}$ | #5FF | $\color{#5FF}{color}$ |
-| #AF0 | $\color{#AF0}{color}$ | #AF5 | $\color{#AF5}{color}$ | #AFA | $\color{#AFA}{color}$ | #AFF | $\color{#AFF}{color}$ |
-| #FF0 | $\color{#FF0}{color}$ | #FF5 | $\color{#FF5}{color}$ | #FFA | $\color{#FFA}{color}$ | #FFF | $\color{#FFF}{color}$ |
-
-**③删除线**
-
->说明:  使用`\require{cancle}`声明，再使用`\cancle{字符}`、`\bcancle{字符}`、`\xcancle{字符}`、`\cancleto{字符}{字符}`来实现各种**片段删除线**效果。
-
->代码:
->
->```text
->$$
->\require{cancel}\begin{array}{r1}
->\verb|y+\cancel{x}|&y+\cancel{x}\\
->\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
->\verb|y+\bcancel{x}|&y+\bcancel{x}\\
->\verb|y+\xcancel{x}|&y+\xcancel{x}\\
->\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
->\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
->\end{array}
->$$
->```
-
->效果:
-$$
-\require{cancel}
-\begin{array}{ll}
-\verb|y+\cancel{x}| & y+\cancel{x} \\
-\verb|y+\cancel{y+x}| & y+\cancel{y+x} \\
-\verb|y+\bcancel{x}| & y+\bcancel{x} \\
-\verb|y+\xcancel{x}| & y+\xcancel{x} \\
-\verb|y+\cancelto{0}{x}| & y+\cancelto{0}{x} \\
-\verb|\frac{1\cancel9}{\cancel95}=\frac15| & \frac{1\cancel9}{\cancel95}=\frac15 \\
-\end{array}
-$$
-
-
->说明:  使用`\require{enclose}`来允许**整段删除线**的显示，再使用`\enclose{删除线效果}{字符}`来使用各种整段删除线效果。其中，删除线效果有`horizontalstrike`、`verticalstrike`、`updiagonalstrike`和`downdiagonalstrike`,可以叠加使用。
-
->代码:
->
->```text
->$$
->\require{enclose}\begin{array}{r1}
->\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
->\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
->\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
->\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
->\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
->\end{array}
->$$
->```
-
->效果:
-$$
-\require{enclose}\begin{array}{rl}
-\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
-\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
-\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
-\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
-\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
-\end{array}
-$$
-
-#### 4.13.16 矩阵
-
-**①无框矩阵**
-
->代码:
->
->```text
->$$
->\begin{matrix}
->1&x&x^2\\
->1&y&y^2\\
->1&z&z^2\\
->\end{matrix}
->$$
->```
-
->效果:
-$$
-\begin{matrix}
-1&x&x^2\\
-1&y&y^2\\
-1&z&z^2\\
-\end{matrix}
-$$
-
-**②边框矩阵**
-
->说明:  在开头将`matrix`替换为`pmatrix`、`bmatrix`、`Bmatrix`、`vmatrix`、`Vmatrix`。
-
-| matrix                               | pmatrix                                | bmatrix                                | Bmatrix                                | vmatrix                                | Vmatrix                                |
-| ------------------------------------ | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| $\begin{matrix}1&2\\3&4\end{matrix}$ | $\begin{pmatrix}1&2\\3&4\end{pmatrix}$ | $\begin{bmatrix}1&2\\3&4\end{bmatrix}$ | $\begin{Bmatrix}1&2\\3&4\end{Bmatrix}$ | $\begin{vmatrix}1&2\\3&4\end{vmatrix}$ | $\begin{Vmatrix}1&2\\3&4\end{Vmatrix}$ |
-
-**③带分割线的矩阵**
-
->说明:  可以使用`cc|c`来在一个三列矩阵中插入分割线。
-
->代码:
->
->```text
->$$
->\left[
->\begin{array}{cc|c}
->1&2&3\\
->4&5&6
->\end{array}
->\right]
->$$
->```
-
->效果:
-$$
-\left[
-\begin{array}{cc|c}
-1&2&3\\
-4&5&6
-\end{array}
-\right]
-$$
-
-**④行中矩阵**
-
->代码:
->
->```text
->$\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
->```
-
->效果:
-$\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
-
-#### 4.13.17 方程式序列
-
->说明:  可以使用`\begin{align}...\end{align}`来创建一列整齐且默认右对齐的方程式序列。请注意`{align}`是**自动编号**的，使用`{align*}`来声明停止自动编号，也可以使用`\notag`来取消特定行的自动编号。在需要的时候，你可以使用`\begin{equation}...\end{equation}`来强制表达式自动编号。
-
->代码:
->$$
->\begin{align}
->f(x)&=1+1\\
->&=2
->\end{align}
->$$
->
->$$
->\begin{equation}
->\left[
->\begin{array}{cc|c}
->1&2&3\\
->4&5&6
->\end{array}
->\right]
->\end{equation}
->$$
->
->
->
->```text
->$$
->\begin{align}
->\sqrt{37}=\sqrt{\dfrac{73^2-1}{12^2}}\\
->&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
->&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
->&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
->\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
->\end{align}
->$$
->***
->
->$$
->\begin{align*}
->v+m&=0&\text{Given}\tag1\\
->-w&=-w+0&\text{additive identity}\tag2\\
->-w+0&=-w+(v+w)&\text{equations $(1)$ and $(2)$}
->\end{align*}
->$$
->```
-
->效果:
-$$
-\begin{align}
-\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
-&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
-&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
-&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
-&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
-\end{align}
-$$
-
-***
-
-$$
-\begin{align*}
-v+m&=0&\text{Given}\tag1\\
--w&=-w+0&\text{additive identity}\tag2\\
--w+0&=-w+(v+w)&\text{equations $(1)$ and $(2)$}
-\end{align*}
-$$
-
-你可以使用`\label{标签}`来创建一个标签，就如上面的方程式序列中展示的那样，之后使用`\eqref{标签}`引用你想引用的公式，效果为：$\eqref{A}$。如果不想要括号，可以输入`\ref{标签}`，效果为：公式 $\ref{A}$。
-
-公式1和2的不同列之间存在间隔，如果你不想要，可以通过将`align`替换为`alignat{1}`来去除列间隔。
-
-#### 4.13.18 条件表达式
-
->说明:  使用`\begin{cases}`来创造一组默认左对齐的条件表达式,在每一行插入`&`来指定需要对齐的内容,并在每一行结尾处使用`\\`,以`\end{cases}`结尾。
-
->代码:
->
->```text
->$$
->f(n)=
->\begin{cases}
->n/2,&\text{if $n$ is even}\\
->3n+1,&\text{if $n$ is odd}
->\end{cases}
->$$
->```
-
->效果:
-$$
-f(n)=
-\begin{cases}
-n/2,&\text{if $n$ is even}\\
-3n+1,&\text{if $n$ is odd}
-\end{cases}
-$$
-
-#### 4.13.19 配置行高
-
->说明:  可以使用`\\[2ex]`语句替代该行末尾的`\\`来让编译器适配 , 其中`[ex]`指一个"X-Height" , 即x字母高度 , 也可以使用`[3ex]`或`[4ex]`等。
-
->代码:
->
->```text
->$$
->f(n)=
->\begin{cases}
->\dfrac n2,&\text{if $n$ is even}\\[2ex]
->3n+1,&\text{if $n$ is odd}
->\end{cases}\tag{适配[2ex]}
->$$
->***
->
->$$
->f(n)=
->\begin{cases}
->\dfrac n2,&\text{if $n$ is even}\\
->3n+1,&\text{if $n$ is odd}
->\end{cases}\tag{不适配[2ex]}
->$$
->```
-
->效果:
-$$
-f(n)=
-\begin{cases}
-\dfrac n2,&\text{if $n$ is even}\\[2ex]
-3n+1,&\text{if $n$ is odd}
-\end{cases}\tag{适配[2ex]}
-$$
-
-***
-
-$$
-f(n)=
-\begin{cases}
-\dfrac n2,&\text{if $n$ is even}\\
-3n+1,&\text{if $n$ is odd}
-\end{cases}\tag{不适配[2ex]}
-$$
-
-#### 4.13.20 数组与表格
-
->说明:  数组与表格均以`\begin{array}`开头,并在其后定义列数及每一列的文本对齐方式,`c` `l` `r`分别代表居中、左对齐及右对齐。若要插入垂直分割线，在定义中插入`|`，若要插入水平分割线，在定义中加入`\hline`。
-
->代码:
->
->```text
->$$
->\begin{array}{c|lcr}
->n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
->\hline
->1&0.24&1&125\\
->2&-1&189&-8\\
->3&-20&2000&1+10i
->\end{array}
->$$
->```
-
->效果:
-$$
-\begin{array}{c|lcr}
-n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
-\hline
-1&0.24&1&125\\
-2&-1&189&-8\\
-3&-20&2000&1+10i
-\end{array}
-$$
-
-#### 4.13.21 嵌套表格或数组
-
->代码:
->
->```text
->$$
->% outer vertical array of arrays 外层垂直表格
->\begin{array}{c}
->% inner horizontal array of arrays 内层水平表格
->\begin{array}{cc}
->% inner array of minimum values 内层"最小值"数组
->\begin{array}{c|cccc}
->\text{min}&0&1&2&3\\
->\hline
->0&0&0&0&0\\
->1&0&1&1&1\\
->2&0&1&2&2\\
->3&0&1&2&3\\
->\end{array}
->&
->% inner array of maximum values 内层"最大值"数组
->\begin{array}{c|cccc}
->\text{max}&0&1&2&3\\
->\hline
->0&0&1&2&3\\
->1&1&1&2&3\\
->2&2&2&2&3\\
->3&3&3&3&3
->\end{array}
->\end{array}
->% 内层第一行表格组结束
->\\
->% inner array of delta values 内层第二行Delta值数组
->\begin{array}{c|cccc}
->\Delta&0&1&2&3\\
->\hline
->0&0&1&2&3\\
->1&1&0&1&2\\
->2&2&1&0&1\\
->3&3&2&1&0
->\end{array}
->% 内层第二行表格组结束
->\end{array}
->$$
->```
-
->效果:
->$$
->% outer vertical array of arrays 外层垂直表格
->\begin{array}{c}
->% inner horizontal array of arrays 内层水平表格
->\begin{array}{cc}
->% inner array of minimum values 内层"最小值"数组
->\begin{array}{c|cccc}
->\text{min}&0&1&2&3\\
->\hline
->0&0&0&0&0\\
->1&0&1&1&1\\
->2&0&1&2&2\\
->3&0&1&2&3\\
->\end{array}
->&
->% inner array of maximum values 内层"最大值"数组
->\begin{array}{c|cccc}
->\text{max}&0&1&2&3\\
->\hline
->0&0&1&2&3\\
->1&1&1&2&3\\
->2&2&2&2&3\\
->3&3&3&3&3
->\end{array}
->\end{array}
->% 内层第一行表格组结束
->\\
->% inner array of delta values 内层第二行Delta值数组
->\begin{array}{c|cccc}
->\Delta&0&1&2&3\\
->\hline
->0&0&1&2&3\\
->1&1&0&1&2\\
->2&2&1&0&1\\
->3&3&2&1&0
->\end{array}
->% 内层第二行表格组结束
->\end{array}
->$$
-
-#### 4.13.22 方程组
-
->说明:  使用`\begin{array}...\end{array}`和`\left\{...\right.`来创建一个方程组,或者你也可以使用条件表达式组`\begin{cases}...\end{cases}`来实现相同效果。
-
->代码:
->
->```text
->$$
->\left\{
->\begin{array}{l}
->a_1x+b_1y+c_1z=d_1\\
->a_2x+b_2y+c_2z=d_2\\
->a_3x+b_3y+c_1z=d_3
->\end{array}
->\right.
->\quad\text{或者}\quad
->\begin{cases}
->a_1x+b_1y+c_1z=d_1\\
->a_2x+b_2y+c_2z=d_2\\
->a_3x+b_3y+c_1z=d_3
->\end{cases}
->$$
->```
-
->效果:
->$$
->\left\{
->\begin{array}{l}
->a_1x+b_1y+c_1z=d_1\\
->a_2x+b_2y+c_2z=d_2\\
->a_3x+b_3y+c_1z=d_3
->\end{array}
->\right.
->\quad\text{或者}\quad
->\begin{cases}
->a_1x+b_1y+c_1z=d_1\\
->a_2x+b_2y+c_2z=d_2\\
->a_3x+b_3y+c_1z=d_3
->\end{cases}
->$$
-
-#### 4.13.23 连分式
-
->说明:  就像`\frac`一样,使用`\cfrac`或`\dfrac`来创建一个连分式,不要使用普通的`\frac`或`\over`来创建,否则看起来会**很恶心**。
-
->代码:
->
->```text
->$$
->x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
->$$
->```
-
->效果:
->$$
->x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
->$$
-
->反例:
->
->```text
->x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
->```
-
->效果:
->$$
->x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
->$$
-
->补充:  当然,你可以使用`\frac`来表达连分数的**紧缩记法**。
-
->代码:
->
->```text
->$$
->x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
->$$
->```
-
->效果:
->$$
->x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
->$$
-
-#### 4.13.24 交换图表
-
->说明:  使用一行`$\require{AMScd}$`语句来允许交换图表的显示,并通过在开头使用`\begin{CD}`,结尾使用`\end{CD}`来创建。
-
->代码:
->
->```text
->$$
->\require{AMScd}
->\begin{CD}
->A@>a>>B\\
->@VbVV\# @VcVV\\
->C @>>d> D
->\end{CD}
->$$
->```
-
->效果:
-$$
-\begin{CD}
-A@>a>>B\\
-@V b V V\# @VV c V\\
-C @>>d> D
-\end{CD}
-$$
-
->补充:  其中,`@>>>`代表右箭头、`@<<<`代表左箭头、`@VVV`代表下箭头、`@AAA`代表上箭头、`@=`代表水平双实线、`@|`代表竖直双实线、`@.`代表没有箭头。在`@>>>`的`>>>`之间任意插入文字即代表该箭头的注释文字。
-
->代码:
->
->```text
->$$
->\begin{CD}
->A@>>>B@>{\text{very long label}}>>C\\
->@.@AAA@|\\
->D@=E@<<<F
->\end{CD}
->$$
->```
-
->效果:
-$$
-\begin{CD}
-A@>>>B@>{\text{very long label}}>>C\\
-@.@AAA@|\\
-D@=E@<<<F
-\end{CD}
-$$
-
-#### 4.13.25 其他
-
->* 搜索$\LaTeX$
-
-### 4.14 支持的HTML元素
-
-#### 4.14.1 文本居中
-
->代码
->
->```text
-><center>内容</center>
->```
-
->效果
->
-><center>内容</center>
-
-#### 4.14.2 快捷键显示
-
->代码:
->
->```text
-><kbd>内容</kbd>
->```
-
->效果:
-<kbd>内容</kbd>
-
-#### 4.14.3 加粗
-
->代码:
->
->```text
-><b>加粗</b>
->```
-
->效果:
-<b>加粗</b>
-
-#### 4.14.4 倾斜
-
->代码:
->
->```text
-><i>倾斜</i>
->```
-
->效果:
-<i>倾斜</i>
-
-#### 4.14.5 上下标
-
->代码:
->
->```text
->开始<sup>123hi你好</sup>
->开始<sub>321hi你好</sub>
->```
-
->效果:
-开始<sup>123hi你好</sup>
-开始<sub>321hi你好</sub>
-
-#### 4.14.6 填充的黑色箭头
-
-> 代码：
->
-> ```text
-> &#x27A4;
-> ```
-
-> 效果：
-> &#x27A4;
-
-#### 4.14.7 分页符
-
-代码：
-
-```html
-<div STYLE="page-break-after: always;"></div>
-```
-
-效果为生成pdf时遇到分页符则新开一页再放分页符后内容
-
-<div STYLE="page-break-after: always;"></div>
-
-### 4.15 文档在线版本维护
-> Contributors: 唐锦梁
-
-#### 4.15.1 前言
-
-视觉组虽然保留了一份可用的文档，但长期面临系统性维护缺失的问题。原有的 PDF 发行版更新滞后，而直接访问 GitHub 仓库又常受网络环境影响，导致文档利用率低下。虽然曾尝试迁移至飞书，但鉴于飞书对文件插入的限制以及对 Markdown 和 LaTeX 语法的支持不足，最终决定继续以 GitHub 为主要托管平台，以保障文档的格式兼容性与版本管理。
-
-为解决 GitHub 直接阅读体验不佳的问题，我们采用 **Cloudflare Pages** 功能，将文档仓库部署为 Serverless 的静态在线网站。这不仅保证了访问速度，也实现了文档内容的自动化同步更新。
-
-文档的在线版本基于 Cloudflare 的 pages 功能，实现 serverless 的在线文档部署。
-
-> 注意：以下流程用作记录部署原理和复现步骤，现 Docsify 环境已部署完毕，仓库内容的任何变动均会自动触发构建并同步至在线文档
-
-#### 4.15.2 Github 仓库配置流程
-
-在 GitHub 仓库根目录添加 `index.html` 文件，配置 Docsify 框架
-
-**关键配置说明：** 由于使用 Typora 编辑的 Markdown 文件常采用非标准的 CSS 语法 `style="zoom:50%;"` 来缩放图片，Docsify 默认无法解析该属性。因此，我们在配置中通过正则表达式插件，在渲染前将 `style="zoom:..."` 自动替换为标准的 `style="width:..."`，以确保图片显示正常。
-
-`index.html` 完整内容如下：
-
-```html
-<!DOCTYPE html>
-<html lang="zh-cn">
-
-<head>
-    <meta charset="UTF-8">
-    <title>北林 RoboMaster 视觉组文档</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="从入门到精通">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
-
-    <style>
-        /* 移动端优化 */
-        .markdown-section img {
-            max-width: 100%;
-        }
-
-        /* 修复 KaTeX 公式可能出现的滚动条问题 */
-        .katex-display {
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="app">加载中...</div>
-
-    <script>
-        window.$docsify = {
-            name: '北林视觉组教程',
-            homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
-            loadSidebar: false,
-            subMaxLevel: 3,
-            auto2top: true,
-            coverpage: false,
-
-            // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
-            latex: {
-                inlineOpen: '$',
-                inlineClose: '$',
-                blockOpen: '$$',
-                blockClose: '$$',
-                kramed: false, // 禁用 kramed 兼容模式，使用默认 marked
-                customOptions: {} // 这里可以透传 KaTeX 的原生配置
-            },
-
-            plugins: [
-                function (hook, vm) {
-                    hook.beforeEach(function (html) {
-                        // 将 style="zoom:..." 替换为 style="width:..."
-                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
-                    });
-                }
-            ]
-        }
-    </script>
-
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
-
-    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-
-</body>
-
-</html>
-```
-
-#### 4.15.3 Cloudflare 部署流程
-
-登录 Cloudflare 控制面板，点击 "计算和AI" 栏目下的 "Workers 和  Pages"
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-00-15.webp" alt="image-20260122195736676" style="zoom:50%;" />
-
-进入 "Workers 和  Pages" 后，点击 "创建应用程序"，点击下方小字 `开始使用` （因为我们要使用 pages，默认是 workers）
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-03-17.webp" alt="image-20260122195736676" style="zoom:50%;" />
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-05-23.webp" alt="image-20260122195736676" style="zoom:50%;" />
-
-选择 "导入现有 Git 存储库" 后 `开始使用`，在随后的页面选择你 fork 的 `BJFU-Vision-Group-from-Beginner-to-Master` 仓库（需要将你的 GitHub 连接至 Cloudflare ），再点击 `开始设置`。进入下一个页面后无需改动，直接点击 `保存并部署即可`
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-06-53.webp" alt="image-20260122195736676" style="zoom:50%;" />
-
-#### 4.15.4 自动更新机制
-
-部署完成后，Cloudflare Pages 会与 GitHub 仓库建立 Webhook 连接。每当仓库（或指定的 Fork 分支）有新代码 Push 时，Cloudflare 会自动触发构建。通常等待约 30 秒后刷新网页，即可看到最新的文档内容。
-
-### 4.16 文档图片维护
-
-#### 4.16.1 统一分辨率
-
-由于文档中的图片来源混杂（设备拍照、高分屏截图等），分辨率差异巨大。过大的图片不仅增加仓库体积，还可能导致在 Typora 或在线文档中显示比例失调。
-
-为此，我们提供了一个 Python 脚本，用于**批量处理高分辨率且体积过大**的图片。
-
-**脚本逻辑：** 脚本会遍历指定目录，仅对同时满足以下条件的图片进行处理，防止误伤长截图或流程图：
-
-- **宽度** > `width_threshold` (默认 2500px)
-- **文件体积** > `size_threshold_mb` (默认 1.5MB)
-
-处理动作为将其缩放至 `target_width` (默认 2000px) 并保存至 `resized_output` 子目录。
-
-**依赖安装：** 需确保安装 Pillow 库：`pip install Pillow`
-
-```python
-import os
-import sys
-import argparse
-from PIL import Image
-
-
-def resize_images(input_dir, width_threshold=2500, size_threshold_mb=1.5, target_width=2000):
-    """
-    1. 遍历 input_dir
-    2. 条件：宽度 > 2500 且 文件体积 > 1.5MB
-    3. 动作：缩放到 2000 宽，保存到 resized_output 子文件夹
-    """
-
-    # 1. 基础校验
-    if not os.path.exists(input_dir):
-        print(f"错误：找不到路径 '{input_dir}'")
-        return
-
-    # 2. 计算字节阈值 (1.5MB = 1.5 * 1024 * 1024 字节)
-    size_threshold_bytes = size_threshold_mb * 1024 * 1024
-
-    # 3. 创建输出目录
-    output_dir = os.path.join(input_dir, "resized_output")
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    supported_formats = ('.jpg', '.jpeg', '.webp', '.bmp', '.tiff', '.webp')
-    count = 0
-
-    print("-" * 50)
-    print(f"扫描目录: {input_dir}")
-    print(f"过滤条件: 宽度 > {width_threshold}px 且 体积 > {size_threshold_mb}MB")
-    print("-" * 50)
-
-    files = os.listdir(input_dir)
-
-    for filename in files:
-        if filename.lower().endswith(supported_formats):
-            file_path = os.path.join(input_dir, filename)
-
-            try:
-                # 获取文件大小 (字节)
-                file_size_bytes = os.path.getsize(file_path)
-                # 换算成 MB 用于显示
-                file_size_mb = file_size_bytes / (1024 * 1024)
-
-                # 优化：如果文件本身很小，直接跳过，不用打开图片读取像素，节省性能
-                # (如果你希望严格打印所有图片的尺寸，可以去掉这个预判断)
-                if file_size_bytes <= size_threshold_bytes:
-                    continue
-
-                with Image.open(file_path) as img:
-                    width, height = img.size
-
-                    # 核心判断逻辑：宽度超标 AND 体积超标
-                    if width > width_threshold and file_size_bytes > size_threshold_bytes:
-
-                        # 计算新尺寸
-                        ratio = target_width / width
-                        new_height = int(height * ratio)
-
-                        # 执行缩放
-                        resized_img = img.resize((target_width, new_height), Image.Resampling.LANCZOS)
-
-                        # 保存
-                        save_path = os.path.join(output_dir, filename)
-                        resized_img.save(save_path)
-
-                        print(f"[处理] {filename}")
-                        print(f"      - 原参数: 宽{width}px | 体积 {file_size_mb:.2f}MB")
-                        print(f"      - 新参数: 宽{target_width}px -> 保存至子目录")
-                        count += 1
-                    else:
-                        # 虽然体积够大，但宽度不够，所以不处理
-                        pass
-
-            except Exception as e:
-                print(f"[错误] 无法读取 {filename}: {e}")
-
-    print("-" * 50)
-    if count == 0:
-        print("未发现满足条件的图片（同时满足宽>2500且体积>1.5MB）。")
-        # 清理空目录
-        if os.path.exists(output_dir) and not os.listdir(output_dir):
-            os.rmdir(output_dir)
-    else:
-        print(f"任务完成！共压缩 {count} 张图片。")
-        print(f"输出路径: {output_dir}")
-
-
-def get_path_from_user():
-    """获取动态路径输入"""
-    parser = argparse.ArgumentParser(description="图片压缩脚本")
-    parser.add_argument("path", nargs="?", help="图片文件夹路径")
-    args = parser.parse_args()
-
-    if args.path:
-        return args.path
-
-    while True:
-        path = input("请输入图片文件夹路径 (输入 q 退出): ").strip()
-        path = path.strip('"').strip("'")  # 去除可能的引号
-
-        if path.lower() == 'q':
-            sys.exit()
-
-        if os.path.isdir(path):
-            return path
-        else:
-            print("路径无效，请重新输入。")
-
-
-if __name__ == "__main__":
-    target_path = get_path_from_user()
-    resize_images(target_path)
-```
-
-#### 4.16.2 统一图片格式(WebP)
-
-WebP 是一种由 **Google** 推出的现代图像格式，旨在在保证画质的同时，大幅减小图片文件体积，适用于网页和移动端应用。
-
-具有高压缩率、支持有损与无损压缩、支持透明通道、支持动画、支持元数据等特性。
-
-可以提高加载速度，减少网页流量，提高用户体验并节省带宽与存储空间。WebP 一个格式即可覆盖 JPEG、PNG、GIF 的主要使用场景。
-
-现代浏览器对 WebP 都有良好的支持。
-
-以下是一个使用 `libwebp` 库的批量 JPEG/PNG 转WebP 的简易 python 示例（多进程批量处理）
-
-> 注意：使用前需确保系统内已配置 `libwebp`，Windows中可下载 Google 官方的预编译版本 [下载并安装 WebP  | Google for Developers](https://developers.google.com/speed/webp/download?hl=zh-cn)，选择对应的系统和处理器架构，将解压出来的文件夹下的 `bin` 目录添加至系统环境变量并重启计算机。
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-43-57.webp" alt="image-20260122195736676" style="zoom:50%;" />
-
-该脚本的主要功能为对传入文件夹下的 `.jpg` `.jpeg` `.png` 格式的图片转换为 WebP，转换 `.png` 默认使用无损模式；由于 `.jpg` `.jpeg` 自身即为有损压缩，故可能出现转换后的 WebP 文件大于源文件的情况，故脚本中还加入了是否保留大体积文件的功能。
-
-```python
-import os
-import subprocess
-import multiprocessing
-import argparse
-import sys
-from pathlib import Path
-
-
-def convert_to_webp(file_info):
-    # 解包参数：新增 keep_larger (是否保留大体积文件)
-    file_path, quality_jpg, keep_original, source_root, output_root, keep_larger = file_info
-    file_path = Path(file_path)
-
-    # --- 计算输出路径 ---
-    if output_root:
-        try:
-            rel_path = file_path.relative_to(source_root)
-        except ValueError:
-            rel_path = Path(file_path.name)
-        output_path = output_root / rel_path.with_suffix('.webp')
-        try:
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-        except FileExistsError:
-            pass
-    else:
-        output_path = file_path.with_suffix('.webp')
-    # ------------------
-
-    ext = file_path.suffix.lower()
-
-    if ext == '.png':
-        cmd = ["cwebp", "-lossless", str(file_path), "-o", str(output_path)]
-    elif ext in ['.jpg', '.jpeg']:
-        cmd = ["cwebp", "-q", str(quality_jpg), "-m", "6", "-sharp_yuv", str(file_path), "-o", str(output_path)]
-    else:
-        return
-
-    try:
-        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-
-        if output_path.exists():
-            orig_size = file_path.stat().st_size
-            webp_size = output_path.stat().st_size
-
-            is_smaller = webp_size < orig_size
-
-            # 逻辑判断：
-            # 1. 如果体积变小 -> 总是保留
-            # 2. 如果体积变大 且 用户允许保留(keep_larger) -> 保留
-            # 3. 如果体积变大 且 用户不允许 -> 删除 WebP
-
-            if not is_smaller and not keep_larger:
-                print(f"[-] 忽略 {file_path.name}: 转换后体积变大 ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
-                output_path.unlink()  # 删除生成的 webp
-            else:
-                # 确定提示前缀
-                prefix = "[+]" if is_smaller else "[!]"
-                status_msg = "优化" if is_smaller else "保留(体积增大)"
-
-                print(f"{prefix} {status_msg}: {file_path.name} ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
-
-                # 只有在决定保留 WebP 的情况下，才检查是否需要删除原图
-                if not keep_original:
-                    file_path.unlink()
-
-    except Exception as e:
-        print(f"[!] 错误 {file_path.name}: {e}")
-
-
-def main():
-    parser = argparse.ArgumentParser(description="图片批量转 WebP 脚本")
-    parser.add_argument("path", nargs="?", help="源文件夹路径")
-    parser.add_argument("-o", "--output", help="输出文件夹名称或路径")
-    parser.add_argument("-q", "--quality", type=int, default=90, help="JPG 质量 (默认 90)")
-    parser.add_argument("--delete", action="store_true", help="转换成功后删除原图")
-    # 新增命令行参数
-    parser.add_argument("--keep-larger", action="store_true", help="即使 WebP 体积大于原图也保留")
-
-    args = parser.parse_args()
-
-    source_path = args.path
-    output_input = args.output
-    keep_larger = args.keep_larger
-
-    # --- 1. 获取源路径 ---
-    if not source_path:
-        print(">>> 提示：你可以直接将文件夹拖入此窗口")
-        source_path = input("1. 请输入[图片源文件夹]路径: ").strip()
-        source_path = source_path.replace('"', '').replace("'", "")
-
-    source_dir = Path(source_path).resolve()
-
-    if not source_dir.is_dir():
-        print(f"❌ 错误: '{source_path}' 不是一个有效的文件夹。")
-        sys.exit(1)
-
-    # --- 2. 获取输出路径 ---
-    if not output_input:
-        print(f"\n>>> (可选) 请输入输出文件夹名称 (默认为原目录)")
-        output_input = input("2. 请输入[输出文件夹]名称/路径: ").strip()
-        output_input = output_input.replace('"', '').replace("'", "")
-
-    output_dir = None
-    if output_input:
-        p_out = Path(output_input)
-        if p_out.is_absolute():
-            output_dir = p_out
-        else:
-            output_dir = source_dir / p_out
-
-    # --- 3. 询问是否保留大文件 (仅在没有通过命令行指定时询问) ---
-    if not args.path and not keep_larger:
-        print("\n>>> (可选) 默认情况下，如果 WebP 比原图大，脚本会忽略该文件")
-        k_input = input("3. 是否强制保留体积变大的 WebP? (输入 y 保留，直接回车不保留): ").strip().lower()
-        if k_input == 'y':
-            keep_larger = True
-
-    # 扫描任务
-    extensions = ['*.png', '*.jpg', '*.jpeg']
-    files_to_process = []
-
-    print("\n🔍 正在扫描文件...")
-    for ext in extensions:
-        for p in source_dir.rglob(ext):
-            if output_dir and output_dir in p.parents:
-                continue
-            # 将 keep_larger 传入参数元组
-            files_to_process.append((p, args.quality, not args.delete, source_dir, output_dir, keep_larger))
-
-    if not files_to_process:
-        print("⚠️ 未发现可转换的图片文件。")
-        return
-
-    target_msg = f" -> {output_dir}" if output_dir else " (原目录)"
-    keep_msg = "是 (强制格式统一)" if keep_larger else "否 (体积优先)"
-
-    print(f"\n🚀 开始处理: {len(files_to_process)} 张图片")
-    print(f"📂 来源: {source_dir}")
-    print(f"📂 目标:{target_msg}")
-    print(f"💾 强制保留大文件: {keep_msg}")
-    print("-" * 30)
-
-    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
-        pool.map(convert_to_webp, files_to_process)
-
-    print("-" * 30)
-    print("✅ 所有任务已完成！")
-
-    if not args.path:
-        input("\n按回车键退出...")
-
-
-if __name__ == "__main__":
-    main()
-```
-
-## 5 各兵种相关文档
-
-### 5.1 哨兵
-
-> Contributors: 洪佳
-
-#### 5.1.1 装置和线
-
-| 设备             | 输入   | 其他   |
-| ---------------- | ------ | ------ |
-| 分电板           | CAN线  | 其他线 |
-| 4个全向轮        | 信号线 | 电源线 |
-| 拨弹电机         | 信号线 | 电源线 |
-| 2个摩擦轮        | 信号线 | 电源线 |
-| 荧光弹丸充能装置 | /      | 电源线 |
-| YAW轴电机        | 信号线 | 电源线 |
-| PITCH轴电机      | 信号线 | 电源线 |
-
-#### 5.1.2 对应实物和示意模型
-
-**分电板**
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.webp" alt="image-20240123145741592" style="zoom: 25%;" />
-
-
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.webp" alt="image-20240123145852713" style="zoom:25%;" />
-
-#### 5.1.3 接线
-
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
-
-<div STYLE="page-break-after: always;"></div>
-
-## 6 视觉开发文档(MiracleVision)
-
-### 6.0 前置要求
+## 5.0 前置要求
 
 确保MiniPC在车上，并正确连接**电源线**、**摄像头**、**C板串口**（若需要整车测试）。
 
@@ -6640,27 +5002,29 @@ if __name__ == "__main__":
 
 **注意**：MiniPC启动时必须连接摄像头，否则可能遇到无法启动的情况；使用完毕后，先使用`poweroff`关闭MiniPC，再下电。
 
-### 6.1  部署
+## 5.1  视觉工程部署
 
-#### 6.1.1 源代码仓库
+### 5.1.1 部署与编译
+
+#### 5.1.1.1源代码仓库
 
 源代码仓库：[dgsyrc/MiracleVision: A robot vision project for RoboMaster - https://github.com/](https://github.com/dgsyrc/MiracleVision)
 
-#### 6.1.2 必要环境依赖
+### 5.1.2 必要环境依赖
 
-OpenCV（安装参考 `2.2` 内容）
+OpenCV（安装参考 `2.1.1` 内容）
 
 [fmt]([fmtlib/fmt: A modern formatting library - https://github.com/](https://github.com/fmtlib/fmt))
 
 [mindvision 工业相机 SDK](https://pan.baidu.com/s/1CHb8mEZtElr9zUweLXUcmA) 提取码 rm24
 
-onnxruntime（安装参考 `2.11` 内容）
+onnxruntime（安装参考 `2.3.5` 内容）
 
-#### 6.1.3 安装
+### 5.1.3 安装
 
-先按照  `2.2` 内容安装好OpenCV 4.5.5
+先按照  `2.1.1` 内容安装好OpenCV 4.5.5
 
-以及按照 `2.11` 内容安装好onnxruntime
+以及按照 `2.3.5` 内容安装好onnxruntime
 
 使用下列命令下载项目源码
 
@@ -6703,9 +5067,9 @@ make -j4
 sudo ./bin/MiracleVision
 ```
 
-### 6.2 配置文件
+### 5.1.2 配置文件详解
 
-#### 6.2.1 angle_solve
+#### 5.1.2.1 angle_solve
 
 `angle_solve_config.xml`
 
@@ -6732,7 +5096,7 @@ sudo ./bin/MiracleVision
 | ARMOR_DISTANCE   | 标定时装甲板实际距离 | float | cm   |
 | SPEED_ARG        | 子弹速度系数         | float | -    |
 
-#### 6.2.2 armor
+#### 5.1.2.2 armor
 
 `basic_armor_config.xml`
 
@@ -6964,7 +5328,7 @@ sudo ./bin/MiracleVision
 | ARMOR_TYPE_TH          | 大小装甲板分界宽高比                     | int  | 0.1                            |
 | ARMOR_BIG_ASPECT_MAX   | 装甲板最大宽高比                         | int  | 0.1                            |
 
-#### 6.2.3 serial
+#### 5.2.2.3 serial
 
 `uart_serial_config.xml`
 
@@ -6994,11 +5358,13 @@ sudo ./bin/MiracleVision
 | SET_BAUDRATE            | 波特率             | int    | B115200 (1), B921600 (10) |
 | SHOW_SERIAL_INFORMATION | 控制台串口信息输出 | bool   | Disable (0), Enable (1)   |
 
-### 6.3 调试
+### 5.1.3 调试与自启动
 
 打开调试模式，启动自瞄程序
 
-#### 6.3.1 阈值
+#### 5.1.3.1调试
+
+##### 5.1.3.1.1 阈值
 
 对代码进行以下修改，使之实时显示摄像头效果。
 
@@ -7018,7 +5384,7 @@ sudo ./bin/MiracleVision
 
 ![微信图片_20250912224518](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/微信图片_20250912224518.webp)
 
-#### 6.3.2 串口
+##### 5.1.3.1.2 串口
 
 查看控制台是否有 `[rec_info]` 串口解码信息输出，检查获取的各个参数是否正常
 
@@ -7034,7 +5400,7 @@ sudo ./bin/MiracleVision
 
 无法解决则更换串口模块 【注意：模块的芯片应为 `CP2102` （串口名称 `/dev/USB01` ）或模块使用STLink-V2.1（串口名称 `/dev/ACM01` ）】
 
-#### 6.3.3 装甲板跟随
+##### 5.1.3.1.3 装甲板跟随
 
 使用手持装甲板模块测试识别是否正常（远近，左右）
 
@@ -7054,7 +5420,7 @@ sudo ./bin/MiracleVision
 - 相机卡顿，在 UI 以及控制台可见卡顿现象，插拔相机以及重启程序，若不能解决，尝试更换相机在minipc的插入接口（换C口/反面USB口）【一般是相机供电不足引起】
 - 电控方面接收问题，找电控开调试查
 
-#### 6.3.4 弹道补偿调整
+##### 5.1.3.1.4 弹道补偿调整
 
 确认跟随正常后，开始调整弹速系数，改变装甲板远近/左右（固定靶），机器人开火
 
@@ -7066,9 +5432,9 @@ sudo ./bin/MiracleVision
 
 修改幅度不要超过 `0.2`，多次调试确定最佳参数
 
-### 6.4 自启动
+#### 5.1.3.2 自启动
 
-#### 6.4.1 配置脚本
+##### 5.1.3.2.1 配置脚本
 
 放在目录 `MiracleVision/` 下，命名为 `start.sh`
 
@@ -7082,7 +5448,7 @@ cd /home/username/Desktop/MiracleVision/build
 exit 0
 ```
 
-#### 6.4.2 配置服务
+##### 5.1.3.2.2 配置服务
 
 打开目录 `/etc/systemd/system/`
 
@@ -7122,9 +5488,9 @@ sudo systemctl enable autoaim.service
 sudo systemctl status autoaim.service
 ```
 
-### 6.5 串口协议
+### 5.1.4 串口协议
 
-#### 6.5.1 接收数据
+#### 5.1.4.1 接收数据
 
 
 | 数据位 | 内容                      | 解释                                                                                          |
@@ -7161,7 +5527,7 @@ sudo systemctl status autoaim.service
 | 16             | 合并高低八位接收为short (int16_t)类型转换为float类型后/100 |
 | 8              | 接收为unsigned char (u_int8_t)类型转换为float类型/10       |
 
-#### 6.5.2 发送数据
+#### 5.1.4.2 发送数据
 
 
 | 数据位 | 内容                                  | 解释                                                             |
@@ -7192,7 +5558,1796 @@ sudo systemctl status autoaim.service
 
 <div STYLE="page-break-after: always;"></div>
 
-## 7 参考文献
+## 5.2 特定兵种开发
+
+### 5.2.1 哨兵
+
+> Contributor: 洪佳
+
+#### 5.2.1.1 装置和线
+
+| 设备             | 输入   | 其他   |
+| ---------------- | ------ | ------ |
+| 分电板           | CAN线  | 其他线 |
+| 4个全向轮        | 信号线 | 电源线 |
+| 拨弹电机         | 信号线 | 电源线 |
+| 2个摩擦轮        | 信号线 | 电源线 |
+| 荧光弹丸充能装置 | /      | 电源线 |
+| YAW轴电机        | 信号线 | 电源线 |
+| PITCH轴电机      | 信号线 | 电源线 |
+
+#### 5.2.1.2 对应实物和示意模型
+
+**分电板**
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145741592.webp" alt="image-20240123145741592" style="zoom: 25%;" />
+
+
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123145852713.webp" alt="image-20240123145852713" style="zoom:25%;" />
+
+#### 5.2.1.3 接线
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
+
+<div STYLE="page-break-after: always;"></div>
+以下为旧版文档→
+
+# 6. 文档规范与维护
+
+
+> Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
+
+> 参考资料：
+>
+> [3] [【Typora 教程】手把手教你如何用Typora撰写笔记](https://www.bilibili.com/video/BV1h84y1Y7nn/?vd_source=436470546f64e53b7d4516956091ffd7)
+
+软件：Typora
+
+以Typora编辑器以及Mardown+latex语法为例
+
+## 6.1 Markdown 与 Typora 教程
+
+### 6.1.1 标题
+
+>语法：# (一级标题)  ## (二级标题)  ### (三级标题) ......
+
+>代码：
+>
+>```text
+># 这是一级标题
+>## 这是二级标题
+>```
+
+>效果:
+>\# 这是一级标题
+>\#\# 这是二级标题
+
+>快捷键:
+>
+>* Ctrl+数字1~6可以快速将选中的文本调成对应级别的标题
+>* Ctrl+0可以快速将选中的文本调成普通文本
+>* Ctrl+加号/减号对标题级别进行加减
+
+### 6.1.2 分割线
+
+>语法:  ---或者***+回车
+
+>代码:
+>
+>```text
+>---或者***
+>```
+
+>效果:
+
+-----
+
+注意：*会自动补全另一个，字体显示不一致*；减号三个即可
+
+### 6.1.3 文字显示
+
+#### 6.1.3.1 字体
+
+>语法:
+>
+>* 粗体:  用一对双星号包裹
+>* 删除线:  用一对双飘号包裹
+>* 下划线:  用一对u标签包裹
+>* 斜体:  用一对单星号包裹
+>* 高亮:  用一对双等号包裹
+
+>代码:
+>
+>```text
+>**这是粗体**
+>~~这是删除线~~
+><u>这是下划线</u>
+>*这是斜体*
+>==这是高亮==
+>```
+
+>效果:
+**这是粗体**
+~~这是删除线~~
+<u>这是下划线</u>
+*这是斜体*
+==这是高亮==
+
+>快捷键:
+>
+>* 加粗:  Ctrl+B
+>* 删除线:  Shift+Alt+5
+>* 下划线:  Ctrl+U
+>* 斜体:  Ctrl+I
+
+#### 6.1.3.2 上下标
+
+>代码:
+>
+>```text
+>x^{2}
+>H_{2}O
+>```
+
+>效果:
+>$x^{2}$
+>$H_{2}O$
+
+### 6.1.4 列表
+
+#### 6.1.4.1 无序列表
+
+>代码:
+>
+>```text
+>*/-/+ +空格
+>```
+
+>效果:
+>1.只有同一级别:
+>
+>* 苹果
+>* 香蕉
+>* 橘子
+>
+>2.子集类:
+>
+>* 一级分类
+>  * 二级分类 
+>    * 三级分类
+
+>快捷键:  Ctrl+Shift+]
+
+#### 6.1.4.2 有序列表
+
+>代码:
+>
+>```text
+>数字+.+空格
+>```
+
+>效果:
+>1. 第一个标题
+>2. 第二个标题
+>3. 第三个标题
+>
+>   * 子内容1
+>     * 子内容2
+>4. 第四个标题
+
+>快捷键:  Ctrl+Shift+[
+
+#### 6.1.4.3 任务列表
+
+>代码:
+>
+>```text
+>- [ ] 吃早餐
+>- [x] 背单词
+>```
+
+>效果:
+>- [ ] 吃早餐
+>- [x] 背单词
+
+### 6.1.5 区块显示
+
+>代码:
+>
+>```text
+>>+回车
+>```
+
+>效果:
+>>这是最外层区块
+>
+>>>这是内层区块
+>
+>>>>这是最内层区块
+
+### 6.1.6 代码显示
+
+#### 6.1.6.1 行内代码
+
+代码：
+
+```
+`sudo rm -rf /*`
+```
+
+`sudo rm -rf /*`
+
+>快捷键:  Ctrl+Shift+`
+
+#### 6.1.6.2 代码块
+
+点击代码块可以选择代码语言（要输入才会显示有什么选择），选择后会有代码高亮（也可以把语言标识写在第一行的三个点旁边以设置语言）
+
+如：cpp（即C++）、python、cmake等
+
+~~~markdown
+```
+代码块
+```
+~~~
+
+例如C++代码：
+
+````markdown
+```cpp
+代码块
+```
+````
+
+代码高亮效果：
+
+```cpp
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Hello World!" << endl;
+    return 0;
+}
+```
+
+>快捷键:  Ctrl+Shift+K
+
+### 6.1.7 链接
+
+>代码:
+>
+>```text
+>www.baidu.com
+>[百度一下](https://www.baidu.com)
+>[百度一下](https://www.baidu.com "https://www.baidu.com")
+>```
+
+>效果:
+>www.baidu.com
+>[百度一下](https://www.baidu.com)
+>[百度一下](https://www.baidu.com "https://www.baidu.com")
+
+>快捷键:  Ctrl+K
+
+### 6.1.8 脚注
+
+>说明:  对文本进行解释说明。
+
+>代码: 
+>
+>```text
+>[^文本]
+>[^文本]:解释说明
+>```
+
+>应用:
+>这是一个技术\[^①\]
+>
+>\[^①\]: 这是一个非常好用的框架。
+
+实际效果为在文本后显示^后的文本
+
+点击该文本后会跳转至文档最末尾并列出`[^①]:` 后内容
+
+### 6.1.9 图片插入
+
+```markdown
+![描述](图片链接或本地路径)
+```
+
+如：
+
+```markdown
+![5](./Sirius 战队2023视觉组培训20231029/5.webp)
+```
+
+![5](./北京林业大学RoboMaster机甲大师视觉组从入门到精通/5.webp)
+
+>快捷键:  Ctrl+Shift+I
+
+### 6.1.10 表格
+
+>代码:
+>```text
+>|  1   |  2   |  3   |
+>| :--- | :--: | ---: |
+>|  4   |  5   |  6   |
+>|  7   |  8   |  9   |
+>|  10  |  11  |  12  |
+>```
+
+>效果:
+
+| 1   |   2   |    3 |
+| --- | :---: | ---: |
+| 4   |   5   |    6 |
+| 7   |   8   |    9 |
+| 10  |  11   |   12 |
+
+>快捷键:  Ctrl+T
+
+### 6.1.11 流程图
+
+#### 6.1.11.1 横向流程图
+
+> 代码:
+>
+> ````text
+> ```mermaid
+> graph LR
+> A[方形]==>B(圆角)
+> B==>C{条件a}
+> C-->|a=1|D[结果1]
+> C-->|a=2|E[结果2]
+> F[横向流程图]
+> ```
+> ````
+
+>效果:
+>```mermaid
+>graph LR
+>A[方形]==>B(圆角)
+>B==>C{条件a}
+>C-->|a=1|D[结果1]
+>C-->|a=2|E[结果2]
+>F[横向流程图]
+>```
+
+#### 6.1.11.2 竖向流程图
+
+> 代码:
+>
+> ````text
+> ```mermaid
+> graph TD
+> A[方形]==>B(圆角)
+> B==>C{条件a}
+> C-->|a=1|D[结果1]
+> C-->|a=2|E[结果2]
+> F[竖向流程图]
+> ```
+> ````
+
+>效果:
+>```mermaid
+>graph TD
+>A[方形]==>B(圆角)
+>B==>C{条件a}
+>C-->|a=1|D[结果1]
+>C-->|a=2|E[结果2]
+>F[竖向流程图]
+>```
+
+### 6.1.12 表情符号
+
+>代码:
+>```text
+>:happy:、:cry:、:man:
+>```
+
+>效果:
+:happy:、 :cry:、 :man:
+
+### 6.1.13 数学公式（Latex）
+
+#### 6.1.13.1 公式的插入
+
+**①行中公式**
+
+>代码:
+>
+>```text
+$公式$
+>```
+
+>效果:
+$公式$
+
+**②独立公式**
+
+>代码:
+>
+>```text
+>$$
+>公式
+>$$
+>```
+
+>效果:
+$$
+公式
+$$
+
+#### 6.1.13.2 上下标
+
+>代码:
+>
+>```text
+>$x^{y^z}=(1+e^x)^{-2xy^w}$
+>$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
+>```
+
+效果:
+
+$x^{y^z}=(1+e^x)^{-2xy^w}$
+
+$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
+
+#### 6.1.13.3 括号和分隔符
+
+>代码:
+>
+>```text
+>$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
+>$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
+>$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
+>```
+
+>效果:
+$\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\quad\rbrace\quad\lVert\quad\rVert$
+$f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
+$\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
+
+#### 6.1.13.4 分数
+
+>代码:
+>
+>```text
+>$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
+>```
+
+>效果:
+$\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
+
+#### 6.1.13.5 开方
+
+>代码:
+>
+>```text
+>$\sqrt[根指数,省略时为2]{被开方数}$
+>```
+
+>效果:
+$\sqrt{2}\quad\sqrt[3]{2}$
+
+#### 6.1.13.6 省略号
+
+>代码:
+>
+>```text
+>$\cdots\quad\ldots\quad\vdots\quad\ddots$
+>```
+
+>效果:
+$\cdots\quad\ldots\quad\vdots\quad\ddots$
+
+#### 6.1.13.7 矢量和均值
+
+>代码:
+>
+>```text
+>$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
+>```
+
+>效果:
+$\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
+
+#### 6.1.13.8 积分
+
+>代码:
+>
+>```text
+>$$
+>\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
+>$$
+>```
+
+>效果:
+$$
+\iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
+$$
+
+#### 6.1.13.9 极限
+
+>代码:
+>
+>```text
+>$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
+>```
+
+>效果:
+$\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
+
+#### 6.1.13.10 累加、累乘及交集、并集
+
+>```text
+>$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
+>```
+
+>效果:
+$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
+
+#### 6.1.13.11 希腊字母
+
+| 语法                          | 字母                            | 语法                    | 字母                      | 语法               | 字母                 |
+| :---------------------------- | ------------------------------- | ----------------------- | ------------------------- | ------------------ | -------------------- |
+| \Alpha(\alpha)                | $\Alpha(\alpha)$                | \Beta(\beta)            | $\Beta(\beta)$            | \Gamma(\gamma)     | $\Gamma(\gamma)$     |
+| \Epsilon(\epsilon)\varepsilon | $\Epsilon(\epsilon)\varepsilon$ | \Zeta(\zeta)            | $\Zeta(\zeta)$            | \Eta(\eta)         | $\Eta(\eta)$         |
+| \Iota(\iota)                  | $\Iota(\iota)$                  | \Kappa(\kappa)\varkappa | $\Kappa(\kappa)\varkappa$ | \Lambda(\lambda)   | $\Lambda(\lambda)$   |
+| \Nu(\nu)                      | $\Nu(\nu)$                      | \Xi(\xi)                | $\Xi(\xi)$                | \Omicron(\omicron) | $\Omicron(\omicron)$ |
+| \Rho(\rho)\varrho             | $\Rho(\rho)\varrho$             | \Sigma(\sigma)\varsigma | $\Sigma(\sigma)\varsigma$ | \Tau(\tau)         | $\Tau(\tau)$         |
+| \Phi(\phi)\varphi             | $\Phi(\phi)\varphi$             | \Chi(\chi)              | $\Chi(\chi)$              | \Psi(\psi)         | $\Psi(\psi)$         |
+| \Delta(\delta)                | $\Delta(\delta)$                | \Theta(\theta)\vartheta | $\Theta(\theta)\vartheta$ | \Mu(\mu)           | $\Mu(\mu)$           |
+| \Pi(\pi)\varpi                | $\Pi(\pi)\varpi$                | \Omega(\omega)          | $\Omega(\omega)$          | \upsilon           | $\upsilon$           |
+| \ell                          | $\ell$                          | \eth                    | $\eth$                    | \hbar              | $\hbar$              |
+| \hslash                       | $\hslash$                       | \mho                    | $\mho$                    | \partial           | $\partial$           |
+
+#### 6.1.13.12 特殊字符
+
+**①说明**
+
+>可以在字符前使用`\large`或`\small`以显示更大或更小的字符。${\LARGE A}{\Large A}{\large A}A{\small A}$
+
+**②关系运算符**
+
+| 输入      | 显示        | 输入              | 显示                | 输入         | 显示         |
+| --------- | ----------- | ----------------- | ------------------- | ------------ | ------------ |
+| \pm(\mp)  | $\pm(\mp)$  | \times            | $\times$            | \div         | $\div$       |
+| \nmid     | $\nmid$     | \cdot             | $\cdot$             | \mid         | $\mid$       |
+| \bigodot  | $\bigodot$  | \bigotimes        | $\bigotimes$        | \bigoplus    | $\bigoplus$  |
+| \ge       | $\ge$       | \le               | $\le$               | \ll          | $\ll$        |
+| \geqslant | $\geqslant$ | \leqslant         | $\leqslant$         | \neq         | $\neq$       |
+| \approx   | $\approx$   | \xlongequal{文本} | $\xlongequal{文本}$ | \triangleq   | $\triangleq$ |
+| \sim      | $\sim$      | \doteq            | $\doteq$            | \equiv       | $\equiv$     |
+| \cong     | $\cong$     | \propto           | $\propto$           | \parallel(\\ | )            |
+| \prec     | $\prec$     | \pmod{2}          | $\pmod{2}$          | \bmod        | $\bmod{2}$   |
+
+**③集合运算符**
+
+| 输入      | 显示        | 输入        | 显示          | 输入       | 显示         |
+| --------- | ----------- | ----------- | ------------- | ---------- | ------------ |
+| \emptyset | $\emptyset$ | \varnothing | $\varnothing$ |            |              |
+| \subset   | $\subset$   | \subseteq   | $\subseteq$   | \subsetneq | $\subsetneq$ |
+| \supset   | $\supset$   | \supseteq   | $\supseteq$   | \supsetneq | $\supsetneq$ |
+| \bigcap   | $\bigcap$   | \bigcup     | $\bigcup$     | \setminus  | $\setminus$  |
+| \bigvee   | $\bigvee$   | \bigwedge   | $\bigwedge$   |            |              |
+| \in       | $\in$       | \notin      | $\notin$      | \ni        | $\ni$        |
+
+**④三角运算符**
+
+| 输入    | 显示      | 输入 | 显示   | 输入   | 显示     |
+| ------- | --------- | ---- | ------ | ------ | -------- |
+| \circ   | $\circ$   | \bot | $\bot$ | \angle | $\angle$ |
+| \degree | $\degree$ |      |        |        |          |
+
+**⑤微积分运算符**
+
+| 输入  | 显示    | 输入   | 显示     | 输入      | 显示     |
+| ----- | ------- | ------ | -------- | --------- | -------- |
+| \int  | $\int$  | \iint  | $\iint$  | \iiint    | $\iiint$ |
+| \oint | $\oint$ | \oiint | $\oiint$ | \prime(‘) | $\prime$ |
+| \lim  | $\lim$  | \infin | $\infin$ | \nabla    | $\nabla$ |
+
+**⑥逻辑运算符**
+
+| 输入     | 显示       | 输入       | 显示         | 输入   | 显示     |
+| -------- | ---------- | ---------- | ------------ | ------ | -------- |
+| \because | $\because$ | \therefore | $\therefore$ |        |          |
+| \forall  | $\forall$  | \exist     | $\exist$     |        |          |
+| \not>    | $\not>$    | \not<      | $\not<$      |        |          |
+| \land    | $\land$    | \lor       | $\lor$       | \lnot  | $\lnot$  |
+| \top     | $\top$     | \vdash     | $\vdash$     | \vDash | $\vDash$ |
+
+**⑦带帽符号**
+
+| 输入       | 显示         | 输入            | 显示              |
+| ---------- | ------------ | --------------- | ----------------- |
+| \hat{xy}   | $\hat{xy}$   | \widehat{xyz}   | $\widehat{xyz}$   |
+| \tilde{xy} | $\tilde{xy}$ | \widetilde{xyz} | $\widetilde{xyz}$ |
+| \check{x}  | $\check{x}$  | \breve{y}       | $\breve{y}$       |
+| \grave{x}  | $\grave{x}$  | \acute{y}       | $\acute{y}$       |
+| \dot{x}    | $\dot{x}$    | \ddot{x}        | $\ddot{x}$        |
+
+
+**⑧选取符号**
+
+| 输入                           | 显示                             | 输入                            | 显示                              |
+| ------------------------------ | -------------------------------- | ------------------------------- | --------------------------------- |
+| \fbox{a+b+c+d}                 | $\fbox{a+b+c+d}$                 |                                 |                                   |
+| \overbrace{xx\cdots x}^{10个x} | $\overbrace{xx\cdots x}^{10个x}$ | \underbrace{xx\cdots x}_{10个x} | $\underbrace{xx\cdots x}_{10个x}$ |
+
+**⑨箭头符号**
+
+| 输入           | 显示             | 输入              | 显示                | 输入                | 显示                  |
+| -------------- | ---------------- | ----------------- | ------------------- | ------------------- | --------------------- |
+| \leftarrow     | $\leftarrow$     | \rightarrow       | $\rightarrow$       | \leftrightarrow     | $\leftrightarrow$     |
+| \longleftarrow | $\longleftarrow$ | \longrightarrow   | $\longrightarrow$   | \longleftrightarrow | $\longleftrightarrow$ |
+| \Leftarrow     | $\Leftarrow$     | \Rightarrow       | $\Rightarrow$       | \Leftrightarrow     | $\Leftrightarrow$     |
+| \Longleftarrow | $\Longleftarrow$ | \Longrightarrow   | $\Longrightarrow$   | \Longleftrightarrow | $\Longleftrightarrow$ |
+| \uparrow       | $\uparrow$       | \downarrow        | $\downarrow$        | \updownarrow        | $\updownarrow$        |
+| \Uparrow       | $\Uparrow$       | \Downarrow        | $\Downarrow$        | \Updownarrow        | $\Updownarrow$        |
+| \to            | $\to$            | \swarrow          | $\swarrow$          | \nearrow            | $\nearrow$            |
+| \gets          | $\gets$          | \searrow          | $\searrow$          | \nwarrow            | $\nwarrow$            |
+| \mapsto        | $\mapsto$        | \rightrightarrows | $\rightrightarrows$ |                     |                       |
+
+**⑩空格**
+
+| 输入 | 效果 | 输入 | 效果 | 输入    | 效果 |
+| ---- | ---- | ---- | ---- | ------- | ---- |
+| \\!  | $    | \!   | $    | 默认    | $    |    | $ | \quad  | $ | \quad  | $ |
+| \,   | $    | \,   | $    | \;(\\ ) | $    | \; | $ | \qquad | $ | \qquad | $ |
+
+#### 6.1.13.13 字体
+
+> 代码:
+>
+> ```text
+> ${\字体{需要转换的字符}}$
+> ```
+
+| 输入 | 说明     | 显示            | 输入  | 说明       | 显示                 |
+| ---- | -------- | --------------- | ----- | ---------- | -------------------- |
+| \rm  | 罗马体   | ${\rm{Sample}}$ | \cal  | 花体       | ${\cal{Sample}}$     |
+| \it  | 意大利体 | ${\it{Sample}}$ | \Bbb  | 黑板粗体   | ${\Bbb{Sample}}$     |
+| \bf  | 粗体     | ${\bf{Sample}}$ | \mit  | 数学斜体   | ${\mathit{Sample}}$  |
+| \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$ |
+| \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$    |
+
+#### 6.1.13.14 大括号和行标
+
+>说明:  使用`\left`和`\right`来创建自动匹配高度的`()`、`[]`、`{}`、`.`。在每个公式末尾使用`\tag{行标}`来实现行标。
+
+>代码:
+>
+>```text
+>$$
+>f\left(
+>\left[
+>\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a
+>\right]
+>^{\dfrac{3}{2}}
+>\right)
+>\tag{行标}
+>$$
+>```
+
+>效果:
+$$
+f\left(\left[\dfrac{1+\{x,y\}}{\left(\dfrac{x}{y}+\dfrac{y}{x}\right)(u+1)}+a\right]^{\dfrac{3}{2}}\right)\tag{行标}
+$$
+
+>说明:如果你想将行内显示的分隔符也变大,也可以使用`\middle`命令
+
+>代码:
+>
+>```text
+>$$
+>\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
+>$$
+>```
+
+>效果:
+$$
+\left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
+$$
+
+#### 6.1.13.15 其他命令
+
+**①注释文字**
+
+>代码:
+>
+>```text
+>$\text{文字}$
+>```
+
+>效果:
+$$
+f(n)=\begin{cases}n/2,&\text{if $n$ is even}\\3n+1,&\text{if $n$ is odd}\end{cases}
+$$
+
+**③文字颜色**
+
+>* 适用新旧浏览器
+>  代码:
+>
+>```text
+>$\color{颜色}{文字}$
+>```
+
+| 输入    | 显示                     | 输入   | 显示                    | 输入   | 显示                    |
+| ------- | ------------------------ | ------ | ----------------------- | ------ | ----------------------- |
+| black   | $\color{black}{color}$   | grey   | $\color{grey}{color}$   | silver | $\color{silver}{color}$ |
+| white   | $\color{white}{color}$   | maroon | $\color{maroon}{color}$ | red    | $\color{red}{color}$    |
+| yellow  | $\color{yellow}{color}$  | lime   | $\color{lime}{color}$   | olive  | $\color{olive}{color}$  |
+| green   | $\color{green}{color}$   | teal   | $\color{teal}{color}$   | auqa   | $\color{auqa}{color}$   |
+| blue    | $\color{blue}{color}$    | navy   | $\color{navy}{color}$   | purple | $\color{purple}{color}$ |
+| fuchsia | $\color{fuchsia}{color}$ |        |                         |        |                         |
+
+>* 适用新版浏览器
+>  代码:
+>
+>```text
+>$\color{#rgb}{文字}$    (注:其中r、g、b可以输入0~9和a~f来分别表示红色、绿色和蓝色的纯度)
+>```
+
+| 输入 | 输出                  | 输入 | 输出                  | 输入 | 输出                  | 输入 | 输出                  |
+| ---- | --------------------- | ---- | --------------------- | ---- | --------------------- | ---- | --------------------- |
+| #000 | $\color{#000}{color}$ | #005 | $\color{#005}{color}$ | #00A | $\color{#00A}{color}$ | #00F | $\color{#00F}{color}$ |
+| #500 | $\color{#500}{color}$ | #505 | $\color{#505}{color}$ | #50A | $\color{#50A}{color}$ | #50F | $\color{#50F}{color}$ |
+| #A00 | $\color{#A00}{color}$ | #A05 | $\color{#A05}{color}$ | #A0A | $\color{#A0A}{color}$ | #A0F | $\color{#A0F}{color}$ |
+| #F00 | $\color{#F00}{color}$ | #F05 | $\color{#F05}{color}$ | #F0A | $\color{#F0A}{color}$ | #F0F | $\color{#F0F}{color}$ |
+| #050 | $\color{#050}{color}$ | #055 | $\color{#055}{color}$ | #05A | $\color{#05A}{color}$ | #05F | $\color{#05F}{color}$ |
+| #550 | $\color{#550}{color}$ | #555 | $\color{#555}{color}$ | #55A | $\color{#55A}{color}$ | #55F | $\color{#55F}{color}$ |
+| #A50 | $\color{#A50}{color}$ | #A55 | $\color{#A55}{color}$ | #A5A | $\color{#A5A}{color}$ | #A5F | $\color{#A5F}{color}$ |
+| #F50 | $\color{#F50}{color}$ | #F55 | $\color{#F55}{color}$ | #F5A | $\color{#F5A}{color}$ | #F5F | $\color{#F5F}{color}$ |
+| #0A0 | $\color{#0A0}{color}$ | #0A5 | $\color{#0A5}{color}$ | #0AA | $\color{#0AA}{color}$ | #0AF | $\color{#0AF}{color}$ |
+| #5A0 | $\color{#5A0}{color}$ | #5A5 | $\color{#5A5}{color}$ | #5AA | $\color{#5AA}{color}$ | #5AF | $\color{#5AF}{color}$ |
+| #AA0 | $\color{#AA0}{color}$ | #AA5 | $\color{#AA5}{color}$ | #AAA | $\color{#AAA}{color}$ | #AAF | $\color{#AAF}{color}$ |
+| #FA0 | $\color{#FA0}{color}$ | #FA5 | $\color{#FA5}{color}$ | #FAA | $\color{#FAA}{color}$ | #FAF | $\color{#FAF}{color}$ |
+| #0F0 | $\color{#0F0}{color}$ | #0F5 | $\color{#0F5}{color}$ | #0FA | $\color{#0FA}{color}$ | #0FF | $\color{#0FF}{color}$ |
+| #5F0 | $\color{#5F0}{color}$ | #5F5 | $\color{#5F5}{color}$ | #5FA | $\color{#5FA}{color}$ | #5FF | $\color{#5FF}{color}$ |
+| #AF0 | $\color{#AF0}{color}$ | #AF5 | $\color{#AF5}{color}$ | #AFA | $\color{#AFA}{color}$ | #AFF | $\color{#AFF}{color}$ |
+| #FF0 | $\color{#FF0}{color}$ | #FF5 | $\color{#FF5}{color}$ | #FFA | $\color{#FFA}{color}$ | #FFF | $\color{#FFF}{color}$ |
+
+**③删除线**
+
+>说明:  使用`\require{cancle}`声明，再使用`\cancle{字符}`、`\bcancle{字符}`、`\xcancle{字符}`、`\cancleto{字符}{字符}`来实现各种**片段删除线**效果。
+
+>代码:
+>
+>```text
+>$$
+>\require{cancel}\begin{array}{r1}
+>\verb|y+\cancel{x}|&y+\cancel{x}\\
+>\verb|y+\cancel{y+x}|&y+\cancel{y+x}\\
+>\verb|y+\bcancel{x}|&y+\bcancel{x}\\
+>\verb|y+\xcancel{x}|&y+\xcancel{x}\\
+>\verb|y+\cancelto{0}{x}|&y+\cancelto{0}{x}\\
+>\verb+\frac{1\cancel9}{\cancel95}=\frac15+&\frac{1\cancel9}{\cancel95}=\frac15\\
+>\end{array}
+>$$
+>```
+
+>效果:
+$$
+\require{cancel}
+\begin{array}{ll}
+\verb|y+\cancel{x}| & y+\cancel{x} \\
+\verb|y+\cancel{y+x}| & y+\cancel{y+x} \\
+\verb|y+\bcancel{x}| & y+\bcancel{x} \\
+\verb|y+\xcancel{x}| & y+\xcancel{x} \\
+\verb|y+\cancelto{0}{x}| & y+\cancelto{0}{x} \\
+\verb|\frac{1\cancel9}{\cancel95}=\frac15| & \frac{1\cancel9}{\cancel95}=\frac15 \\
+\end{array}
+$$
+
+
+>说明:  使用`\require{enclose}`来允许**整段删除线**的显示，再使用`\enclose{删除线效果}{字符}`来使用各种整段删除线效果。其中，删除线效果有`horizontalstrike`、`verticalstrike`、`updiagonalstrike`和`downdiagonalstrike`,可以叠加使用。
+
+>代码:
+>
+>```text
+>$$
+>\require{enclose}\begin{array}{r1}
+>\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
+>\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
+>\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
+>\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
+>\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
+>\end{array}
+>$$
+>```
+
+>效果:
+$$
+\require{enclose}\begin{array}{rl}
+\verb|\enclose{horizontalstrike}{x+y}|&\enclose{horizontalstrike}{x+y}\\
+\verb|\enclose{verticalstrike}{\frac xy}|&\enclose{verticalstrike}{\frac xy}\\
+\verb|\enclose{updiagonalstrike}{x+y}|&\enclose{updiagonalstrike}{x+y}\\
+\verb|\enclose{downdiagonalstrike}{x+y}|&\enclose{downdiagonalstrike}{x+y}\\
+\verb|\enclose{horizontalstrike,updiagonalstrike}{x+y}|&\enclose{horizontalstrike,updiagonalstrike}{x+y}\\
+\end{array}
+$$
+
+#### 6.1.13.16 矩阵
+
+**①无框矩阵**
+
+>代码:
+>
+>```text
+>$$
+>\begin{matrix}
+>1&x&x^2\\
+>1&y&y^2\\
+>1&z&z^2\\
+>\end{matrix}
+>$$
+>```
+
+>效果:
+$$
+\begin{matrix}
+1&x&x^2\\
+1&y&y^2\\
+1&z&z^2\\
+\end{matrix}
+$$
+
+**②边框矩阵**
+
+>说明:  在开头将`matrix`替换为`pmatrix`、`bmatrix`、`Bmatrix`、`vmatrix`、`Vmatrix`。
+
+| matrix                               | pmatrix                                | bmatrix                                | Bmatrix                                | vmatrix                                | Vmatrix                                |
+| ------------------------------------ | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| $\begin{matrix}1&2\\3&4\end{matrix}$ | $\begin{pmatrix}1&2\\3&4\end{pmatrix}$ | $\begin{bmatrix}1&2\\3&4\end{bmatrix}$ | $\begin{Bmatrix}1&2\\3&4\end{Bmatrix}$ | $\begin{vmatrix}1&2\\3&4\end{vmatrix}$ | $\begin{Vmatrix}1&2\\3&4\end{Vmatrix}$ |
+
+**③带分割线的矩阵**
+
+>说明:  可以使用`cc|c`来在一个三列矩阵中插入分割线。
+
+>代码:
+>
+>```text
+>$$
+>\left[
+>\begin{array}{cc|c}
+>1&2&3\\
+>4&5&6
+>\end{array}
+>\right]
+>$$
+>```
+
+>效果:
+$$
+\left[
+\begin{array}{cc|c}
+1&2&3\\
+4&5&6
+\end{array}
+\right]
+$$
+
+**④行中矩阵**
+
+>代码:
+>
+>```text
+>$\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
+>```
+
+>效果:
+$\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
+
+#### 6.1.13.17 方程式序列
+
+>说明:  可以使用`\begin{align}...\end{align}`来创建一列整齐且默认右对齐的方程式序列。请注意`{align}`是**自动编号**的，使用`{align*}`来声明停止自动编号，也可以使用`\notag`来取消特定行的自动编号。在需要的时候，你可以使用`\begin{equation}...\end{equation}`来强制表达式自动编号。
+
+>代码:
+>$$
+>\begin{align}
+>f(x)&=1+1\\
+>&=2
+>\end{align}
+>$$
+>
+>$$
+>\begin{equation}
+>\left[
+>\begin{array}{cc|c}
+>1&2&3\\
+>4&5&6
+>\end{array}
+>\right]
+>\end{equation}
+>$$
+>
+>
+>
+>```text
+>$$
+>\begin{align}
+>\sqrt{37}=\sqrt{\dfrac{73^2-1}{12^2}}\\
+>&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
+>&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
+>&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
+>\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
+>\end{align}
+>$$
+>***
+>
+>$$
+>\begin{align*}
+>v+m&=0&\text{Given}\tag1\\
+>-w&=-w+0&\text{additive identity}\tag2\\
+>-w+0&=-w+(v+w)&\text{equations $(1)$ and $(2)$}
+>\end{align*}
+>$$
+>```
+
+>效果:
+$$
+\begin{align}
+\sqrt{37}&=\sqrt{\dfrac{73^2-1}{12^2}}\\
+&=\sqrt{\dfrac{73^2}{12^2}\cdot\dfrac{73^2-1}{73^2}}\\
+&=\sqrt{\dfrac{73^2}{12^2}}\sqrt{\dfrac{73^2-1}{73^2}}\notag\\
+&=\dfrac{73}{12}\sqrt{1-\dfrac{1}{73^2}}\\
+&\approx\dfrac{73}{12}\left(1-\dfrac{1}{2\cdot73^2}\right)\label{A}
+\end{align}
+$$
+
+***
+
+$$
+\begin{align*}
+v+m&=0&\text{Given}\tag1\\
+-w&=-w+0&\text{additive identity}\tag2\\
+-w+0&=-w+(v+w)&\text{equations $(1)$ and $(2)$}
+\end{align*}
+$$
+
+你可以使用`\label{标签}`来创建一个标签，就如上面的方程式序列中展示的那样，之后使用`\eqref{标签}`引用你想引用的公式，效果为：$\eqref{A}$。如果不想要括号，可以输入`\ref{标签}`，效果为：公式 $\ref{A}$。
+
+公式1和2的不同列之间存在间隔，如果你不想要，可以通过将`align`替换为`alignat{1}`来去除列间隔。
+
+#### 6.1.13.18 条件表达式
+
+>说明:  使用`\begin{cases}`来创造一组默认左对齐的条件表达式,在每一行插入`&`来指定需要对齐的内容,并在每一行结尾处使用`\\`,以`\end{cases}`结尾。
+
+>代码:
+>
+>```text
+>$$
+>f(n)=
+>\begin{cases}
+>n/2,&\text{if $n$ is even}\\
+>3n+1,&\text{if $n$ is odd}
+>\end{cases}
+>$$
+>```
+
+>效果:
+$$
+f(n)=
+\begin{cases}
+n/2,&\text{if $n$ is even}\\
+3n+1,&\text{if $n$ is odd}
+\end{cases}
+$$
+
+#### 6.1.13.19 配置行高
+
+>说明:  可以使用`\\[2ex]`语句替代该行末尾的`\\`来让编译器适配 , 其中`[ex]`指一个"X-Height" , 即x字母高度 , 也可以使用`[3ex]`或`[4ex]`等。
+
+>代码:
+>
+>```text
+>$$
+>f(n)=
+>\begin{cases}
+>\dfrac n2,&\text{if $n$ is even}\\[2ex]
+>3n+1,&\text{if $n$ is odd}
+>\end{cases}\tag{适配[2ex]}
+>$$
+>***
+>
+>$$
+>f(n)=
+>\begin{cases}
+>\dfrac n2,&\text{if $n$ is even}\\
+>3n+1,&\text{if $n$ is odd}
+>\end{cases}\tag{不适配[2ex]}
+>$$
+>```
+
+>效果:
+$$
+f(n)=
+\begin{cases}
+\dfrac n2,&\text{if $n$ is even}\\[2ex]
+3n+1,&\text{if $n$ is odd}
+\end{cases}\tag{适配[2ex]}
+$$
+
+***
+
+$$
+f(n)=
+\begin{cases}
+\dfrac n2,&\text{if $n$ is even}\\
+3n+1,&\text{if $n$ is odd}
+\end{cases}\tag{不适配[2ex]}
+$$
+
+#### 6.1.13.20 数组与表格
+
+>说明:  数组与表格均以`\begin{array}`开头,并在其后定义列数及每一列的文本对齐方式,`c` `l` `r`分别代表居中、左对齐及右对齐。若要插入垂直分割线，在定义中插入`|`，若要插入水平分割线，在定义中加入`\hline`。
+
+>代码:
+>
+>```text
+>$$
+>\begin{array}{c|lcr}
+>n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
+>\hline
+>1&0.24&1&125\\
+>2&-1&189&-8\\
+>3&-20&2000&1+10i
+>\end{array}
+>$$
+>```
+
+>效果:
+$$
+\begin{array}{c|lcr}
+n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
+\hline
+1&0.24&1&125\\
+2&-1&189&-8\\
+3&-20&2000&1+10i
+\end{array}
+$$
+
+#### 6.1.13.21 嵌套表格或数组
+
+>代码:
+>
+>```text
+>$$
+>% outer vertical array of arrays 外层垂直表格
+>\begin{array}{c}
+>% inner horizontal array of arrays 内层水平表格
+>\begin{array}{cc}
+>% inner array of minimum values 内层"最小值"数组
+>\begin{array}{c|cccc}
+>\text{min}&0&1&2&3\\
+>\hline
+>0&0&0&0&0\\
+>1&0&1&1&1\\
+>2&0&1&2&2\\
+>3&0&1&2&3\\
+>\end{array}
+>&
+>% inner array of maximum values 内层"最大值"数组
+>\begin{array}{c|cccc}
+>\text{max}&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&1&2&3\\
+>2&2&2&2&3\\
+>3&3&3&3&3
+>\end{array}
+>\end{array}
+>% 内层第一行表格组结束
+>\\
+>% inner array of delta values 内层第二行Delta值数组
+>\begin{array}{c|cccc}
+>\Delta&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&0&1&2\\
+>2&2&1&0&1\\
+>3&3&2&1&0
+>\end{array}
+>% 内层第二行表格组结束
+>\end{array}
+>$$
+>```
+
+>效果:
+>$$
+>% outer vertical array of arrays 外层垂直表格
+>\begin{array}{c}
+>% inner horizontal array of arrays 内层水平表格
+>\begin{array}{cc}
+>% inner array of minimum values 内层"最小值"数组
+>\begin{array}{c|cccc}
+>\text{min}&0&1&2&3\\
+>\hline
+>0&0&0&0&0\\
+>1&0&1&1&1\\
+>2&0&1&2&2\\
+>3&0&1&2&3\\
+>\end{array}
+>&
+>% inner array of maximum values 内层"最大值"数组
+>\begin{array}{c|cccc}
+>\text{max}&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&1&2&3\\
+>2&2&2&2&3\\
+>3&3&3&3&3
+>\end{array}
+>\end{array}
+>% 内层第一行表格组结束
+>\\
+>% inner array of delta values 内层第二行Delta值数组
+>\begin{array}{c|cccc}
+>\Delta&0&1&2&3\\
+>\hline
+>0&0&1&2&3\\
+>1&1&0&1&2\\
+>2&2&1&0&1\\
+>3&3&2&1&0
+>\end{array}
+>% 内层第二行表格组结束
+>\end{array}
+>$$
+
+#### 6.1.13.22 方程组
+
+>说明:  使用`\begin{array}...\end{array}`和`\left\{...\right.`来创建一个方程组,或者你也可以使用条件表达式组`\begin{cases}...\end{cases}`来实现相同效果。
+
+>代码:
+>
+>```text
+>$$
+>\left\{
+>\begin{array}{l}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{array}
+>\right.
+>\quad\text{或者}\quad
+>\begin{cases}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{cases}
+>$$
+>```
+
+>效果:
+>$$
+>\left\{
+>\begin{array}{l}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{array}
+>\right.
+>\quad\text{或者}\quad
+>\begin{cases}
+>a_1x+b_1y+c_1z=d_1\\
+>a_2x+b_2y+c_2z=d_2\\
+>a_3x+b_3y+c_1z=d_3
+>\end{cases}
+>$$
+
+#### 6.1.13.23 连分式
+
+>说明:  就像`\frac`一样,使用`\cfrac`或`\dfrac`来创建一个连分式,不要使用普通的`\frac`或`\over`来创建,否则看起来会**很恶心**。
+
+>代码:
+>
+>```text
+>$$
+>x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
+>$$
+>```
+
+>效果:
+>$$
+>x=a_0+\cfrac{1^2}{a_1+\cfrac{2^2}{a_2+\cfrac{3^2}{a_3+\cfrac{4^2}{a_4+\cdots}}}}
+>$$
+
+>反例:
+>
+>```text
+>x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
+>```
+
+>效果:
+>$$
+>x=a_0+\frac{1^2}{a_1+\frac{2^2}{a_2+\frac{3^2}{a_3+\frac{4^2}{a_4+\cdots}}}}
+>$$
+
+>补充:  当然,你可以使用`\frac`来表达连分数的**紧缩记法**。
+
+>代码:
+>
+>```text
+>$$
+>x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
+>$$
+>```
+
+>效果:
+>$$
+>x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
+>$$
+
+#### 6.1.13.24 交换图表
+
+>说明:  使用一行`$\require{AMScd}$`语句来允许交换图表的显示,并通过在开头使用`\begin{CD}`,结尾使用`\end{CD}`来创建。
+
+>代码:
+>
+>```text
+>$$
+>\require{AMScd}
+>\begin{CD}
+>A@>a>>B\\
+>@VbVV\# @VcVV\\
+>C @>>d> D
+>\end{CD}
+>$$
+>```
+
+>效果:
+$$
+\begin{CD}
+A@>a>>B\\
+@V b V V\# @VV c V\\
+C @>>d> D
+\end{CD}
+$$
+
+>补充:  其中,`@>>>`代表右箭头、`@<<<`代表左箭头、`@VVV`代表下箭头、`@AAA`代表上箭头、`@=`代表水平双实线、`@|`代表竖直双实线、`@.`代表没有箭头。在`@>>>`的`>>>`之间任意插入文字即代表该箭头的注释文字。
+
+>代码:
+>
+>```text
+>$$
+>\begin{CD}
+>A@>>>B@>{\text{very long label}}>>C\\
+>@.@AAA@|\\
+>D@=E@<<<F
+>\end{CD}
+>$$
+>```
+
+>效果:
+$$
+\begin{CD}
+A@>>>B@>{\text{very long label}}>>C\\
+@.@AAA@|\\
+D@=E@<<<F
+\end{CD}
+$$
+
+#### 6.1.13.25 其他
+
+>* 搜索$\LaTeX$
+
+### 6.1.14 支持的HTML元素
+
+#### 6.1.14.1 文本居中
+
+>代码
+>
+>```text
+><center>内容</center>
+>```
+
+>效果
+>
+><center>内容</center>
+
+#### 6.1.14.2 快捷键显示
+
+>代码:
+>
+>```text
+><kbd>内容</kbd>
+>```
+
+>效果:
+<kbd>内容</kbd>
+
+#### 6.1.14.3 加粗
+
+>代码:
+>
+>```text
+><b>加粗</b>
+>```
+
+>效果:
+<b>加粗</b>
+
+#### 6.1.14.4 倾斜
+
+>代码:
+>
+>```text
+><i>倾斜</i>
+>```
+
+>效果:
+<i>倾斜</i>
+
+#### 6.1.14.5 上下标
+
+>代码:
+>
+>```text
+>开始<sup>123hi你好</sup>
+>开始<sub>321hi你好</sub>
+>```
+
+>效果:
+开始<sup>123hi你好</sup>
+开始<sub>321hi你好</sub>
+
+#### 6.1.14.6 填充的黑色箭头
+
+> 代码：
+>
+> ```text
+> &#x27A4;
+> ```
+
+> 效果：
+> &#x27A4;
+
+#### 6.1.14.7 分页符
+
+代码：
+
+```html
+<div STYLE="page-break-after: always;"></div>
+```
+
+效果为生成pdf时遇到分页符则新开一页再放分页符后内容
+
+<div STYLE="page-break-after: always;"></div>
+
+## 6.2 文档在线部署
+> Contributor: 唐锦梁
+
+### 6.2.1 前言
+
+视觉组虽然保留了一份可用的文档，但长期面临系统性维护缺失的问题。原有的 PDF 发行版更新滞后，而直接访问 GitHub 仓库又常受网络环境影响，导致文档利用率低下。虽然曾尝试迁移至飞书，但鉴于飞书对文件插入的限制以及对 Markdown 和 LaTeX 语法的支持不足，最终决定继续以 GitHub 为主要托管平台，以保障文档的格式兼容性与版本管理。
+
+为解决 GitHub 直接阅读体验不佳的问题，我们采用 **Cloudflare Pages** 功能，将文档仓库部署为 Serverless 的静态在线网站。这不仅保证了访问速度，也实现了文档内容的自动化同步更新。
+
+文档的在线版本基于 Cloudflare 的 pages 功能，实现 serverless 的在线文档部署。
+
+> 注意：以下流程用作记录部署原理和复现步骤，现 Docsify 环境已部署完毕，仓库内容的任何变动均会自动触发构建并同步至在线文档
+
+### 6.2.2 Github 仓库配置流程
+
+在 GitHub 仓库根目录添加 `index.html` 文件，配置 Docsify 框架
+
+**关键配置说明：** 由于使用 Typora 编辑的 Markdown 文件常采用非标准的 CSS 语法 `style="zoom:50%;"` 来缩放图片，Docsify 默认无法解析该属性。因此，我们在配置中通过正则表达式插件，在渲染前将 `style="zoom:..."` 自动替换为标准的 `style="width:..."`，以确保图片显示正常。
+
+`index.html` 完整内容如下：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>北林 RoboMaster 视觉组文档</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="从入门到精通">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+
+    <style>
+        /* 移动端优化 */
+        .markdown-section img {
+            max-width: 100%;
+        }
+
+        /* 修复 KaTeX 公式可能出现的滚动条问题 */
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">加载中...</div>
+
+    <script>
+        window.$docsify = {
+            name: '北林视觉组教程',
+            homepage: '北京林业大学RoboMaster机甲大师视觉组从入门到精通.md',
+            loadSidebar: false,
+            subMaxLevel: 3,
+            auto2top: true,
+            coverpage: false,
+
+            // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
+            latex: {
+                inlineOpen: '$',
+                inlineClose: '$',
+                blockOpen: '$$',
+                blockClose: '$$',
+                kramed: false, // 禁用 kramed 兼容模式，使用默认 marked
+                customOptions: {} // 这里可以透传 KaTeX 的原生配置
+            },
+
+            plugins: [
+                function (hook, vm) {
+                    hook.beforeEach(function (html) {
+                        // 将 style="zoom:..." 替换为 style="width:..."
+                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                    });
+                }
+            ]
+        }
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-latex@0"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+</body>
+
+</html>
+```
+
+### 6.2.3 Cloudflare 部署流程
+
+登录 Cloudflare 控制面板，点击 "计算和AI" 栏目下的 "Workers 和  Pages"
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-00-15.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+进入 "Workers 和  Pages" 后，点击 "创建应用程序"，点击下方小字 `开始使用` （因为我们要使用 pages，默认是 workers）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-03-17.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-05-23.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+选择 "导入现有 Git 存储库" 后 `开始使用`，在随后的页面选择你 fork 的 `BJFU-Vision-Group-from-Beginner-to-Master` 仓库（需要将你的 GitHub 连接至 Cloudflare ），再点击 `开始设置`。进入下一个页面后无需改动，直接点击 `保存并部署即可`
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-06-53.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+### 6.2.4 自动更新机制
+
+部署完成后，Cloudflare Pages 会与 GitHub 仓库建立 Webhook 连接。每当仓库（或指定的 Fork 分支）有新代码 Push 时，Cloudflare 会自动触发构建。通常等待约 30 秒后刷新网页，即可看到最新的文档内容。
+
+## 6.3 文档图片维护
+
+### 6.3.1 统一分辨率
+
+由于文档中的图片来源混杂（设备拍照、高分屏截图等），分辨率差异巨大。过大的图片不仅增加仓库体积，还可能导致在 Typora 或在线文档中显示比例失调。
+
+为此，我们提供了一个 Python 脚本，用于**批量处理高分辨率且体积过大**的图片。
+
+**脚本逻辑：** 脚本会遍历指定目录，仅对同时满足以下条件的图片进行处理，防止误伤长截图或流程图：
+
+- **宽度** > `width_threshold` (默认 2500px)
+- **文件体积** > `size_threshold_mb` (默认 1.5MB)
+
+处理动作为将其缩放至 `target_width` (默认 2000px) 并保存至 `resized_output` 子目录。
+
+**依赖安装：** 需确保安装 Pillow 库：`pip install Pillow`
+
+```python
+import os
+import sys
+import argparse
+from PIL import Image
+
+
+def resize_images(input_dir, width_threshold=2500, size_threshold_mb=1.5, target_width=2000):
+    """
+    1. 遍历 input_dir
+    2. 条件：宽度 > 2500 且 文件体积 > 1.5MB
+    3. 动作：缩放到 2000 宽，保存到 resized_output 子文件夹
+    """
+
+    # 1. 基础校验
+    if not os.path.exists(input_dir):
+        print(f"错误：找不到路径 '{input_dir}'")
+        return
+
+    # 2. 计算字节阈值 (1.5MB = 1.5 * 1024 * 1024 字节)
+    size_threshold_bytes = size_threshold_mb * 1024 * 1024
+
+    # 3. 创建输出目录
+    output_dir = os.path.join(input_dir, "resized_output")
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    supported_formats = ('.jpg', '.jpeg', '.webp', '.bmp', '.tiff', '.webp')
+    count = 0
+
+    print("-" * 50)
+    print(f"扫描目录: {input_dir}")
+    print(f"过滤条件: 宽度 > {width_threshold}px 且 体积 > {size_threshold_mb}MB")
+    print("-" * 50)
+
+    files = os.listdir(input_dir)
+
+    for filename in files:
+        if filename.lower().endswith(supported_formats):
+            file_path = os.path.join(input_dir, filename)
+
+            try:
+                # 获取文件大小 (字节)
+                file_size_bytes = os.path.getsize(file_path)
+                # 换算成 MB 用于显示
+                file_size_mb = file_size_bytes / (1024 * 1024)
+
+                # 优化：如果文件本身很小，直接跳过，不用打开图片读取像素，节省性能
+                # (如果你希望严格打印所有图片的尺寸，可以去掉这个预判断)
+                if file_size_bytes <= size_threshold_bytes:
+                    continue
+
+                with Image.open(file_path) as img:
+                    width, height = img.size
+
+                    # 核心判断逻辑：宽度超标 AND 体积超标
+                    if width > width_threshold and file_size_bytes > size_threshold_bytes:
+
+                        # 计算新尺寸
+                        ratio = target_width / width
+                        new_height = int(height * ratio)
+
+                        # 执行缩放
+                        resized_img = img.resize((target_width, new_height), Image.Resampling.LANCZOS)
+
+                        # 保存
+                        save_path = os.path.join(output_dir, filename)
+                        resized_img.save(save_path)
+
+                        print(f"[处理] {filename}")
+                        print(f"      - 原参数: 宽{width}px | 体积 {file_size_mb:.2f}MB")
+                        print(f"      - 新参数: 宽{target_width}px -> 保存至子目录")
+                        count += 1
+                    else:
+                        # 虽然体积够大，但宽度不够，所以不处理
+                        pass
+
+            except Exception as e:
+                print(f"[错误] 无法读取 {filename}: {e}")
+
+    print("-" * 50)
+    if count == 0:
+        print("未发现满足条件的图片（同时满足宽>2500且体积>1.5MB）。")
+        # 清理空目录
+        if os.path.exists(output_dir) and not os.listdir(output_dir):
+            os.rmdir(output_dir)
+    else:
+        print(f"任务完成！共压缩 {count} 张图片。")
+        print(f"输出路径: {output_dir}")
+
+
+def get_path_from_user():
+    """获取动态路径输入"""
+    parser = argparse.ArgumentParser(description="图片压缩脚本")
+    parser.add_argument("path", nargs="?", help="图片文件夹路径")
+    args = parser.parse_args()
+
+    if args.path:
+        return args.path
+
+    while True:
+        path = input("请输入图片文件夹路径 (输入 q 退出): ").strip()
+        path = path.strip('"').strip("'")  # 去除可能的引号
+
+        if path.lower() == 'q':
+            sys.exit()
+
+        if os.path.isdir(path):
+            return path
+        else:
+            print("路径无效，请重新输入。")
+
+
+if __name__ == "__main__":
+    target_path = get_path_from_user()
+    resize_images(target_path)
+```
+
+### 6.3.2 统一图片格式(WebP)
+
+WebP 是一种由 **Google** 推出的现代图像格式，旨在在保证画质的同时，大幅减小图片文件体积，适用于网页和移动端应用。
+
+具有高压缩率、支持有损与无损压缩、支持透明通道、支持动画、支持元数据等特性。
+
+可以提高加载速度，减少网页流量，提高用户体验并节省带宽与存储空间。WebP 一个格式即可覆盖 JPEG、PNG、GIF 的主要使用场景。
+
+现代浏览器对 WebP 都有良好的支持。
+
+以下是一个使用 `libwebp` 库的批量 JPEG/PNG 转WebP 的简易 python 示例（多进程批量处理）
+
+> 注意：使用前需确保系统内已配置 `libwebp`，Windows中可下载 Google 官方的预编译版本 [下载并安装 WebP  | Google for Developers](https://developers.google.com/speed/webp/download?hl=zh-cn)，选择对应的系统和处理器架构，将解压出来的文件夹下的 `bin` 目录添加至系统环境变量并重启计算机。
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-43-57.webp" alt="image-20260122195736676" style="zoom:50%;" />
+
+该脚本的主要功能为对传入文件夹下的 `.jpg` `.jpeg` `.png` 格式的图片转换为 WebP，转换 `.png` 默认使用无损模式；由于 `.jpg` `.jpeg` 自身即为有损压缩，故可能出现转换后的 WebP 文件大于源文件的情况，故脚本中还加入了是否保留大体积文件的功能。
+
+```python
+import os
+import subprocess
+import multiprocessing
+import argparse
+import sys
+from pathlib import Path
+
+
+def convert_to_webp(file_info):
+    # 解包参数：新增 keep_larger (是否保留大体积文件)
+    file_path, quality_jpg, keep_original, source_root, output_root, keep_larger = file_info
+    file_path = Path(file_path)
+
+    # --- 计算输出路径 ---
+    if output_root:
+        try:
+            rel_path = file_path.relative_to(source_root)
+        except ValueError:
+            rel_path = Path(file_path.name)
+        output_path = output_root / rel_path.with_suffix('.webp')
+        try:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+        except FileExistsError:
+            pass
+    else:
+        output_path = file_path.with_suffix('.webp')
+    # ------------------
+
+    ext = file_path.suffix.lower()
+
+    if ext == '.png':
+        cmd = ["cwebp", "-lossless", str(file_path), "-o", str(output_path)]
+    elif ext in ['.jpg', '.jpeg']:
+        cmd = ["cwebp", "-q", str(quality_jpg), "-m", "6", "-sharp_yuv", str(file_path), "-o", str(output_path)]
+    else:
+        return
+
+    try:
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+
+        if output_path.exists():
+            orig_size = file_path.stat().st_size
+            webp_size = output_path.stat().st_size
+
+            is_smaller = webp_size < orig_size
+
+            # 逻辑判断：
+            # 1. 如果体积变小 -> 总是保留
+            # 2. 如果体积变大 且 用户允许保留(keep_larger) -> 保留
+            # 3. 如果体积变大 且 用户不允许 -> 删除 WebP
+
+            if not is_smaller and not keep_larger:
+                print(f"[-] 忽略 {file_path.name}: 转换后体积变大 ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
+                output_path.unlink()  # 删除生成的 webp
+            else:
+                # 确定提示前缀
+                prefix = "[+]" if is_smaller else "[!]"
+                status_msg = "优化" if is_smaller else "保留(体积增大)"
+
+                print(f"{prefix} {status_msg}: {file_path.name} ({orig_size // 1024}KB -> {webp_size // 1024}KB)")
+
+                # 只有在决定保留 WebP 的情况下，才检查是否需要删除原图
+                if not keep_original:
+                    file_path.unlink()
+
+    except Exception as e:
+        print(f"[!] 错误 {file_path.name}: {e}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="图片批量转 WebP 脚本")
+    parser.add_argument("path", nargs="?", help="源文件夹路径")
+    parser.add_argument("-o", "--output", help="输出文件夹名称或路径")
+    parser.add_argument("-q", "--quality", type=int, default=90, help="JPG 质量 (默认 90)")
+    parser.add_argument("--delete", action="store_true", help="转换成功后删除原图")
+    # 新增命令行参数
+    parser.add_argument("--keep-larger", action="store_true", help="即使 WebP 体积大于原图也保留")
+
+    args = parser.parse_args()
+
+    source_path = args.path
+    output_input = args.output
+    keep_larger = args.keep_larger
+
+    # --- 1. 获取源路径 ---
+    if not source_path:
+        print(">>> 提示：你可以直接将文件夹拖入此窗口")
+        source_path = input("1. 请输入[图片源文件夹]路径: ").strip()
+        source_path = source_path.replace('"', '').replace("'", "")
+
+    source_dir = Path(source_path).resolve()
+
+    if not source_dir.is_dir():
+        print(f"❌ 错误: '{source_path}' 不是一个有效的文件夹。")
+        sys.exit(1)
+
+    # --- 2. 获取输出路径 ---
+    if not output_input:
+        print(f"\n>>> (可选) 请输入输出文件夹名称 (默认为原目录)")
+        output_input = input("2. 请输入[输出文件夹]名称/路径: ").strip()
+        output_input = output_input.replace('"', '').replace("'", "")
+
+    output_dir = None
+    if output_input:
+        p_out = Path(output_input)
+        if p_out.is_absolute():
+            output_dir = p_out
+        else:
+            output_dir = source_dir / p_out
+
+    # --- 3. 询问是否保留大文件 (仅在没有通过命令行指定时询问) ---
+    if not args.path and not keep_larger:
+        print("\n>>> (可选) 默认情况下，如果 WebP 比原图大，脚本会忽略该文件")
+        k_input = input("3. 是否强制保留体积变大的 WebP? (输入 y 保留，直接回车不保留): ").strip().lower()
+        if k_input == 'y':
+            keep_larger = True
+
+    # 扫描任务
+    extensions = ['*.png', '*.jpg', '*.jpeg']
+    files_to_process = []
+
+    print("\n🔍 正在扫描文件...")
+    for ext in extensions:
+        for p in source_dir.rglob(ext):
+            if output_dir and output_dir in p.parents:
+                continue
+            # 将 keep_larger 传入参数元组
+            files_to_process.append((p, args.quality, not args.delete, source_dir, output_dir, keep_larger))
+
+    if not files_to_process:
+        print("⚠️ 未发现可转换的图片文件。")
+        return
+
+    target_msg = f" -> {output_dir}" if output_dir else " (原目录)"
+    keep_msg = "是 (强制格式统一)" if keep_larger else "否 (体积优先)"
+
+    print(f"\n🚀 开始处理: {len(files_to_process)} 张图片")
+    print(f"📂 来源: {source_dir}")
+    print(f"📂 目标:{target_msg}")
+    print(f"💾 强制保留大文件: {keep_msg}")
+    print("-" * 30)
+
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+        pool.map(convert_to_webp, files_to_process)
+
+    print("-" * 30)
+    print("✅ 所有任务已完成！")
+
+    if not args.path:
+        input("\n按回车键退出...")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+# 7 参考资料
 
 > [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
 >
