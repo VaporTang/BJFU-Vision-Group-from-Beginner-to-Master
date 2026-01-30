@@ -2274,7 +2274,7 @@ show_predictions(model, test_loader, num_images=10)
 
 
 <div STYLE="page-break-after: always;"></div>
-### 2.3.5 onnxruntime用于模型部署推理
+### 2.3.5 onnxruntime
 
 > Contributor: 叶睿聪 (dgsyrc@github)
 
