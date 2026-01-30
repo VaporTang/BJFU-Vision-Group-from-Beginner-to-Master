@@ -5018,7 +5018,7 @@ OpenCV（安装参考 `2.1.1` 内容）
 
 [mindvision 工业相机 SDK](https://pan.baidu.com/s/1CHb8mEZtElr9zUweLXUcmA) 提取码 rm24
 
-onnxruntime（安装参考 `2.11` 内容）
+onnxruntime（安装参考 `2.3.5` 内容）
 
 ### 5.1.3 安装
 
