@@ -2389,7 +2389,12 @@ sudo make install
 > Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
 ## 3.1计算平台
-### 3.1.1 参数（以 NUC 11 为例）
+
+### 3.1.1 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
+
+#### 3.1.1.1 参数（以 NUC 11 为例）
 
 | 属性                | 参数                 |
 | ------------------- | -------------------- |
@@ -2514,8 +2519,11 @@ sudo make install
 
 > 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
 ---------------
-以下为旧版文档↓	
-### 1.1 分电板
+​	
+
+### 3.3.2 分电板与变压器
+
+#### 3.3.2.1 分电板
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/18699e1ea2ee028460c4f58b1745654.webp" alt="18699e1ea2ee028460c4f58b1745654" style="zoom:45%;" />
 
@@ -2526,38 +2534,31 @@ sudo make install
 图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
 
 
-### 1.3 DC-DC（24V-19V）变压器
+#### 3.3.2.2 DC-DC（24V-19V）变压器
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
 
 黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
+### 3.3.3 USB转TTL与线缆
 
+#### 3.3.3.1 USB-Camera
 
-### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/08a5392ef1d3008638ac2a90dda4d21.webp" alt="08a5392ef1d3008638ac2a90dda4d21" style="zoom:45%;" />
-
-
-
-
-### 1.8 各种线缆
-
-
-
-#### 1.8.2 RJ45 网线
+#### 3.3.3.2 RJ45 网线
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2f466c0c655938d4d5c702e4f1fbab6.webp" alt="2f466c0c655938d4d5c702e4f1fbab6" style="zoom:45%;" />
 
-#### 1.8.3 HDMI-HDMI
+#### 3.3.3.3 HDMI-HDMI
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/80f5ba37c6e61304e75df6b1f33f020.webp" alt="80f5ba37c6e61304e75df6b1f33f020" style="zoom:45%;" />
 
-### 1.9 USB to TTL
+#### 3.3.3.4 USB to TTL
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b90b6f486a7c52c8164661e95f615ac.webp" alt="b90b6f486a7c52c8164661e95f615ac" style="zoom:45%;" />
 
-#### 1.9.1 接口
+##### 3.3.3.4.1 接口
 
 | 接口 | 用法          |
 | ---- | ------------- |
@@ -2566,13 +2567,15 @@ sudo make install
 | RXD  | 接另一端的TXD |
 | GND  | 接GND（地线） |
 
-### 1.10 手持装甲板调试模块
+## 3.4 调试工具
+
+### 3.4.1 手持装甲板调试模块
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/151b52ccd467ac9988ac2c418025d3c.webp" alt="151b52ccd467ac9988ac2c418025d3c" style="zoom:45%;" />
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62aed7e72d7f0bdbc0e1b6a25fb92d0.webp" alt="62aed7e72d7f0bdbc0e1b6a25fb92d0" style="zoom:45%;" />
 
-#### 1.10.1 参数
+#### 3.4.1.1 参数
 
 | 颜色 | 状态 |
 | ---- | ---- |
@@ -2580,7 +2583,7 @@ sudo make install
 | 蓝色 | 蓝方 |
 | 紫色 | 离线 |
 
-#### 1.10.2 拆解
+#### 3.4.1.2 拆解
 
 装甲板的内部结构设计相对简单。四个角分别安装有压力传感器模块，两侧则分布着LED灯条。经过拆解分析可知，灯条部分的小板模块采用4Pin供电输入方式，灯条上的11块小板在电气上为并联结构。
 
@@ -2604,32 +2607,25 @@ sudo make install
 - 红光 LED 支路应串联 **110 Ω** 限流电阻；
 - 蓝光 LED 支路应串联 **55 Ω** 限流电阻。
 
+### 3.4.2 裁判系统服务器
 
+> Contributor: 邱万理
 
-## 2 环境配置
-
-
-
-
-### 2.7 裁判系统服务器
-
-> Contributors: 邱万理
-
-#### 2.7.1 前期准备
+#### 3.4.2.1 前期准备
 
 硬件：路由器（以小米路由器为例）、网线
 
 软件：mysql(实际使用感觉非必要）、RoboMaster_Server(很多版本会闪退，自己多换几个赛季的试试，这里以2020年版本为例)
 
-#### 2.7.2 配置路由器
+#### 3.4.2.2. 配置路由器
 
-##### 2.7.2.1 连接方式
+##### 3.4.2.2.1 连接方式
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240121233742010.webp" alt="image-20240121233742010" style="zoom: 25%;" />
 
 注意网线和电脑连接时接2号的LAN口，而不是接3号的WAN口
 
-##### 2.7.2.2 开始配置
+##### 3.4.2.2.2 开始配置
 
 首先安装上述连接方式连接，Wifi连上Xiaomi并打开小米路由器设置网页http://miwifi.com/
 
@@ -2683,9 +2679,9 @@ SSID也就是名称(如图中的Xiaomi_C952)自己定义，但是最好是字母
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7.webp" alt="aff9fc9a-52ec-4d6f-b2db-fb696be2c7d7" style="zoom: 33%;" />
 
-#### 2.7.3 软件安装
+#### 3.4.2.3 软件安装
 
-##### 2.7.3.1 MySQL
+##### 3.4.2.3.1 MySQL
 
 ①进入官网下载MySQL，版本可以选择低一些，mysql-8.0.31-win64.zip
 
@@ -2780,7 +2776,7 @@ net start mysql
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/72d90abc-034e-403d-9564-fb58e2498213.webp" alt="72d90abc-034e-403d-9564-fb58e2498213" style="zoom:33%;" />
 
-##### 2.7.3.2 大疆官方服务器
+##### 3.4.2.3.2 大疆官方服务器
 
 前往RoboMaster官网下载服务器客户端(RoboMaster产品->裁判系统->软件产品）
 
@@ -2804,7 +2800,7 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/62fe3d5b-ddda-40f3-ac83-a2506ec3d61b.webp" alt="62fe3d5b-ddda-40f3-ac83-a2506ec3d61b" style="zoom:33%;" />
 
-#### 2.7.4 完整流程
+#### 3.4.2.4 完整流程
 
 当以上3步都能大致实现之后，可以开始使用我们的服务器
 
@@ -2822,7 +2818,7 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 连接成功后可以通过主页面左上角感叹号是否消失判断
 
-#### 2.7.5 可能遇到的问题
+#### 2.4.2.5 可能遇到的问题
 
 - 主控右上角显示连接上Wifi，但是左上角感叹号仍存在？
 
