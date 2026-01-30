@@ -1131,7 +1131,7 @@ script my_session.log
 
 *方法适用于Ubuntu 20.04/22.04 以及WSL中的Ubuntu 20.04/22.04*
 
-#### 2.2.1.1安装步骤
+#### 2.1.1.1安装步骤
 
 进入Ubuntu，把U盘里面当时拷进去的三个包复制到桌面
 
@@ -1204,7 +1204,7 @@ make -j8
 
 若出现 `Hello OpenCV` 则说明配置成功
 
-#### 2.2.1.2 常见问题
+#### 2.1.1.2 常见问题
 
 - 提示ippicv库下载失败
 
@@ -2384,12 +2384,12 @@ sudo make install
 
 
 
-## 3.硬件平台认知（Hardware）
+# 3.硬件平台认知（Hardware）
 
 > Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
-### 3.1计算平台
-#### 3.1.1 参数（以 NUC 11 为例）
+## 3.1计算平台
+### 3.1.1 参数（以 NUC 11 为例）
 
 | 属性                | 参数                 |
 | ------------------- | -------------------- |
@@ -2401,7 +2401,7 @@ sudo make install
 | USB 3.1 接口        | 3个                  |
 | 雷电3接口（Type-C） | 2个                  |
 
-#### 3.1.2 各种接口/硬件位置
+### 3.1.2 各种接口/硬件位置
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1d1e8cd56f0fd7f411cd46dc9643828.webp" alt="1d1e8cd56f0fd7f411cd46dc9643828" style="zoom:45%;" />
 
@@ -2411,17 +2411,17 @@ sudo make install
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/99019c63fdd45189d07e09be77347de.webp" alt="99019c63fdd45189d07e09be77347de" style="zoom:45%;" />
 
-#### 3.1.3外置MiniPC完整装机展示
+### 3.1.3外置MiniPC完整装机展示
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/b45c596c6c32b25fc59b4dd740a779a-1699090162011-17.webp" alt="b45c596c6c32b25fc59b4dd740a779a" style="zoom:45%;" />
 
 <div STYLE="page-break-after: always;"></div>
 
-### 3.2传感器
+## 3.2传感器
 
-#### 3.2.1 工业相机
+### 3.2.1 工业相机
 
-##### 3.2.1.1 参数
+#### 3.2.1.1 参数
 
 制造商：迈德威视（MindVision）
 
@@ -2429,11 +2429,12 @@ sudo make install
 
 镜头：6mm焦距 F2.0光圈 1/1.8″靶面
 
-##### 3.2.1.2 接口
+#### 3.2.1.2 接口
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
-#### 3.2.2激光雷达
-##### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
+### 3.2.2激光雷达
+
+#### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
 
 | 参数                    | 说明                                   |
 | ----------------------- | -------------------------------------- |
@@ -2458,11 +2459,11 @@ sudo make install
 | **尺寸**                | 65×65×60 mm                            |
 | **重量**                | 265 g                                  |
 
-##### 3.2.2.2官方文档与手册
+#### 3.2.2.2官方文档与手册
 
 [Downloads - Mid-360 激光雷达 - Livox](https://www.livoxtech.com/cn/mid-360/downloads) （包含 Mid-360 3D模型）
 
-##### 3.2.2.3 配置
+#### 3.2.2.3 配置
 
 **硬件连接：**使用航插一分二线连接 Mid-360 与 MiniPC (RJ 45 网口)、XT30 供电
 
@@ -2474,18 +2475,20 @@ sudo make install
 
 > 切勿将 PC 的 IP 地址设置为与雷达 IP（如 `192.168.1.153`）完全相同，否则会导致 **IP 冲突**，无法连接
 
-##### 3.2.2.4SDK
+#### 3.2.2.4SDK
 
 ***placeholder，update later by VaporTang***
 
 ***compile sdk、ip config、Livox Viewer2、pb_rm_nav environment config and more.***
-#### 3.2.3 USB-Camera
+
+### 3.2.3 USB-Camera
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
-### 3.3电源与通信
-#### 3.3.1电源与电池管理
+## 3.3电源与通信
 
-##### 3.3.1.1 电池架
+### 3.3.1电源与电池管理
+
+#### 3.3.1.1 电池架
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/f602d63510250d8df700e72b8e18b27.webp" alt="f602d63510250d8df700e72b8e18b27" style="zoom:45%;" />
 
@@ -2497,6 +2500,19 @@ sudo make install
 
 > **操作建议：** 在与电控组进行联合调试时，**请勿直接切断整车电源**。正确的断电顺序为：先将 MiniPC 关机操作，待其完全关闭后，再断开电池电源（或关闭总开关）。
 
+#### 3.3.1.2 电池
+
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
+
+电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
+
+电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
+
+旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
+
+> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
+
+> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
 ---------------
 以下为旧版文档↓	
 ### 1.1 分电板
@@ -2516,19 +2532,7 @@ sudo make install
 
 黄色接头为XT30母头（接分电板XT30公头），黑色为DC5525（接迷你PC电源）
 
-### 1.4 电池
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/ee686cae28e617f72c13250f16f13dd.webp" alt="ee686cae28e617f72c13250f16f13dd" style="zoom:45%;" />
-
-电池开关机：圆形按钮为开关，短按一次再长按（约2s）打开（关闭同理）
-
-电量查看：关机状态下短按一次，LED 指示灯将显示当前电量
-
-旧款电池型号为大疆 TB47/48 之智能飞行电池。新款电池型号为大疆 Matrice 4D 。另附哈尔滨工程大学同学对大疆智能电池的使用手册 [【分享帖】RM-大疆智能电池使用手册](https://bbs.robomaster.com/article/9289)
-
-> 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
-
-> 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
 
 ### 1.5 MiniPC（NUC 11  / NUC 12 / Piesia U5-125H）
 
@@ -3329,7 +3333,7 @@ cvtColor(src, dst, code, dstCn = 0); // 依次为原始图像、目标图像、�
 
 #### 3.2.2 IMU与里程计融合
 
-> Contributors: 洪佳
+> Contributor: 洪佳
 
 > 参考资料：
 >
@@ -5578,9 +5582,9 @@ sudo systemctl status autoaim.service
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
 
 <div STYLE="page-break-after: always;"></div>
-以下为旧版文档→ 
+以下为旧版文档→
 
-## 6. 文档维护
+# 6. 文档维护
 
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
@@ -5593,7 +5597,9 @@ sudo systemctl status autoaim.service
 
 以Typora编辑器以及Mardown+latex语法为例
 
-### 4.1 标题
+## 6.1 Markdown 与 Typora 教程
+
+### 6.1.1 标题
 
 >语法：# (一级标题)  ## (二级标题)  ### (三级标题) ......
 
@@ -5614,7 +5620,7 @@ sudo systemctl status autoaim.service
 >* Ctrl+0可以快速将选中的文本调成普通文本
 >* Ctrl+加号/减号对标题级别进行加减
 
-### 4.2 分割线
+### 6.1.2 分割线
 
 >语法:  ---或者***+回车
 
@@ -5630,9 +5636,9 @@ sudo systemctl status autoaim.service
 
 注意：*会自动补全另一个，字体显示不一致*；减号三个即可
 
-### 4.3 文字显示
+### 6.1.3 文字显示
 
-#### 4.3.1 字体
+#### 6.1.3.1 字体
 
 >语法:
 >
@@ -5666,7 +5672,7 @@ sudo systemctl status autoaim.service
 >* 下划线:  Ctrl+U
 >* 斜体:  Ctrl+I
 
-#### 4.3.2 上下标
+#### 6.1.3.2 上下标
 
 >代码:
 >
@@ -5679,9 +5685,9 @@ sudo systemctl status autoaim.service
 >$x^{2}$
 >$H_{2}O$
 
-### 4.4 列表
+### 6.1.4 列表
 
-#### 4.4.1 无序列表
+#### 6.1.4.1 无序列表
 
 >代码:
 >
@@ -5704,7 +5710,7 @@ sudo systemctl status autoaim.service
 
 >快捷键:  Ctrl+Shift+]
 
-#### 4.4.2 有序列表
+#### 6.1.4.2 有序列表
 
 >代码:
 >
@@ -5723,7 +5729,7 @@ sudo systemctl status autoaim.service
 
 >快捷键:  Ctrl+Shift+[
 
-#### 4.4.3 任务列表
+#### 6.1.4.3 任务列表
 
 >代码:
 >
@@ -5736,7 +5742,7 @@ sudo systemctl status autoaim.service
 >- [ ] 吃早餐
 >- [x] 背单词
 
-### 4.5 区块显示
+### 6.1.5 区块显示
 
 >代码:
 >
@@ -5751,9 +5757,9 @@ sudo systemctl status autoaim.service
 >
 >>>>这是最内层区块
 
-### 4.6 代码显示
+### 6.1.6 代码显示
 
-#### 4.6.1 行内代码
+#### 6.1.6.1 行内代码
 
 代码：
 
@@ -5765,7 +5771,7 @@ sudo systemctl status autoaim.service
 
 >快捷键:  Ctrl+Shift+`
 
-#### 4.6.2 代码块
+#### 6.1.6.2 代码块
 
 点击代码块可以选择代码语言（要输入才会显示有什么选择），选择后会有代码高亮（也可以把语言标识写在第一行的三个点旁边以设置语言）
 
@@ -5800,7 +5806,7 @@ int main()
 
 >快捷键:  Ctrl+Shift+K
 
-### 4.7 链接
+### 6.1.7 链接
 
 >代码:
 >
@@ -5817,7 +5823,7 @@ int main()
 
 >快捷键:  Ctrl+K
 
-### 4.8 脚注
+### 6.1.8 脚注
 
 >说明:  对文本进行解释说明。
 
@@ -5837,7 +5843,7 @@ int main()
 
 点击该文本后会跳转至文档最末尾并列出`[^①]:` 后内容
 
-### 4.9 图片插入
+### 6.1.9 图片插入
 
 ```markdown
 ![描述](图片链接或本地路径)
@@ -5853,7 +5859,7 @@ int main()
 
 >快捷键:  Ctrl+Shift+I
 
-### 4.10 表格
+### 6.1.10 表格
 
 >代码:
 >```text
@@ -5874,9 +5880,9 @@ int main()
 
 >快捷键:  Ctrl+T
 
-### 4.11 流程图
+### 6.1.11 流程图
 
-#### 4.11.1 横向流程图
+#### 6.1.11.1 横向流程图
 
 > 代码:
 >
@@ -5901,7 +5907,7 @@ int main()
 >F[横向流程图]
 >```
 
-#### 4.11.2 竖向流程图
+#### 6.1.11.2 竖向流程图
 
 > 代码:
 >
@@ -5926,7 +5932,7 @@ int main()
 >F[竖向流程图]
 >```
 
-### 4.12 表情符号
+### 6.1.12 表情符号
 
 >代码:
 >```text
@@ -5936,16 +5942,16 @@ int main()
 >效果:
 :happy:、 :cry:、 :man:
 
-### 4.13 数学公式（Latex）
+### 6.1.13 数学公式（Latex）
 
-#### 4.13.1 公式的插入
+#### 6.1.13.1 公式的插入
 
 **①行中公式**
 
 >代码:
 >
 >```text
->$公式$
+$公式$
 >```
 
 >效果:
@@ -5966,7 +5972,7 @@ $$
 公式
 $$
 
-#### 4.13.2 上下标
+#### 6.1.13.2 上下标
 
 >代码:
 >
@@ -5975,11 +5981,13 @@ $$
 >$\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
 >```
 
->效果:
+效果:
+
 $x^{y^z}=(1+e^x)^{-2xy^w}$
+
 $\sideset{^1_2}{^3_4}{\underset{6}\bigotimes}$
 
-#### 4.13.3 括号和分隔符
+#### 6.1.13.3 括号和分隔符
 
 >代码:
 >
@@ -5994,7 +6002,7 @@ $\langle\quad\rangle\quad\lceil\quad\rceil\quad\lfloor\quad\rfloor\quad\lbrace\q
 $f(x,y,z)=3y^2z\left(3+\dfrac{7x+5}{1+y^2}\right)$
 $\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
 
-#### 4.13.4 分数
+#### 6.1.13.4 分数
 
 >代码:
 >
@@ -6005,7 +6013,7 @@ $\left.\dfrac{\mathrm{d}u}{\mathrm{d}x}\right|_{x=0}$
 >效果:
 $\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
 
-#### 4.13.5 开方
+#### 6.1.13.5 开方
 
 >代码:
 >
@@ -6016,7 +6024,7 @@ $\frac{a}{b}\quad\dfrac{a}{b}\quad {a\over b}$
 >效果:
 $\sqrt{2}\quad\sqrt[3]{2}$
 
-#### 4.13.6 省略号
+#### 6.1.13.6 省略号
 
 >代码:
 >
@@ -6027,7 +6035,7 @@ $\sqrt{2}\quad\sqrt[3]{2}$
 >效果:
 $\cdots\quad\ldots\quad\vdots\quad\ddots$
 
-#### 4.13.7 矢量和均值
+#### 6.1.13.7 矢量和均值
 
 >代码:
 >
@@ -6038,7 +6046,7 @@ $\cdots\quad\ldots\quad\vdots\quad\ddots$
 >效果:
 $\overrightarrow{E(\vec{r})}\quad\overleftarrow{E(\vec{r})}\quad\overleftrightarrow{E(\vec{r})}\quad\underrightarrow{E(\vec{r})}\quad\underleftarrow{E(\vec{r})}\quad\underleftrightarrow{E(\vec{r})}\quad\overline{v}=\bar{v}\quad\underline{v}$
 
-#### 4.13.8 积分
+#### 6.1.13.8 积分
 
 >代码:
 >
@@ -6053,7 +6061,7 @@ $$
 \iint\limits_D\left(\dfrac{\partial Q}{\partial x}-\dfrac{\partial P}{\partial y}\right){\rm d}x{\rm d}y=\oint\limits_LP{\rm d}x+Q{\rm d}y
 $$
 
-#### 4.13.9 极限
+#### 6.1.13.9 极限
 
 >代码:
 >
@@ -6064,7 +6072,7 @@ $$
 >效果:
 $\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 
-#### 4.13.10 累加、累乘及交集、并集
+#### 6.1.13.10 累加、累乘及交集、并集
 
 >```text
 >$\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
@@ -6073,7 +6081,7 @@ $\lim\limits_{n\to\infin}(1+\dfrac{1}{n})^n=e$
 >效果:
 $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcup\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\bigcap\limits_{i=1}^n\dfrac{1}{n^2}$
 
-#### 4.13.11 希腊字母
+#### 6.1.13.11 希腊字母
 
 | 语法                          | 字母                            | 语法                    | 字母                      | 语法               | 字母                 |
 | :---------------------------- | ------------------------------- | ----------------------- | ------------------------- | ------------------ | -------------------- |
@@ -6088,7 +6096,7 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 | \ell                          | $\ell$                          | \eth                    | $\eth$                    | \hbar              | $\hbar$              |
 | \hslash                       | $\hslash$                       | \mho                    | $\mho$                    | \partial           | $\partial$           |
 
-#### 4.13.12 特殊字符
+#### 6.1.13.12 特殊字符
 
 **①说明**
 
@@ -6183,7 +6191,7 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 | \\!  | $    | \!   | $    | 默认    | $    |    | $ | \quad  | $ | \quad  | $ |
 | \,   | $    | \,   | $    | \;(\\ ) | $    | \; | $ | \qquad | $ | \qquad | $ |
 
-#### 4.13.13 字体
+#### 6.1.13.13 字体
 
 > 代码:
 >
@@ -6199,7 +6207,7 @@ $\sum\limits_{i=1}^n\dfrac{1}{n^2}\quad and\quad\prod\limits_{i=1}^n\dfrac{1}{n^
 | \sf  | 等线体   | ${\sf{Sample}}$ | \scr  | 手写体     | ${\mathscr{Sample}}$ |
 | \tt  | 打字机体 | ${\tt{Sample}}$ | \frak | 旧德式字体 | ${\frak{Sample}}$    |
 
-#### 4.13.14 大括号和行标
+#### 6.1.13.14 大括号和行标
 
 >说明:  使用`\left`和`\right`来创建自动匹配高度的`()`、`[]`、`{}`、`.`。在每个公式末尾使用`\tag{行标}`来实现行标。
 
@@ -6237,7 +6245,7 @@ $$
 \left\langle q\middle\|\dfrac{\dfrac{x}{y}}{\dfrac{u}{v}}\middle|p\right\rangle
 $$
 
-#### 4.13.15 其他命令
+#### 6.1.13.15 其他命令
 
 **①注释文字**
 
@@ -6356,7 +6364,7 @@ $$
 \end{array}
 $$
 
-#### 4.13.16 矩阵
+#### 6.1.13.16 矩阵
 
 **①无框矩阵**
 
@@ -6427,7 +6435,7 @@ $$
 >效果:
 $\bigl(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\bigr)$
 
-#### 4.13.17 方程式序列
+#### 6.1.13.17 方程式序列
 
 >说明:  可以使用`\begin{align}...\end{align}`来创建一列整齐且默认右对齐的方程式序列。请注意`{align}`是**自动编号**的，使用`{align*}`来声明停止自动编号，也可以使用`\notag`来取消特定行的自动编号。在需要的时候，你可以使用`\begin{equation}...\end{equation}`来强制表达式自动编号。
 
@@ -6498,7 +6506,7 @@ $$
 
 公式1和2的不同列之间存在间隔，如果你不想要，可以通过将`align`替换为`alignat{1}`来去除列间隔。
 
-#### 4.13.18 条件表达式
+#### 6.1.13.18 条件表达式
 
 >说明:  使用`\begin{cases}`来创造一组默认左对齐的条件表达式,在每一行插入`&`来指定需要对齐的内容,并在每一行结尾处使用`\\`,以`\end{cases}`结尾。
 
@@ -6523,7 +6531,7 @@ n/2,&\text{if $n$ is even}\\
 \end{cases}
 $$
 
-#### 4.13.19 配置行高
+#### 6.1.13.19 配置行高
 
 >说明:  可以使用`\\[2ex]`语句替代该行末尾的`\\`来让编译器适配 , 其中`[ex]`指一个"X-Height" , 即x字母高度 , 也可以使用`[3ex]`或`[4ex]`等。
 
@@ -6567,7 +6575,7 @@ f(n)=
 \end{cases}\tag{不适配[2ex]}
 $$
 
-#### 4.13.20 数组与表格
+#### 6.1.13.20 数组与表格
 
 >说明:  数组与表格均以`\begin{array}`开头,并在其后定义列数及每一列的文本对齐方式,`c` `l` `r`分别代表居中、左对齐及右对齐。若要插入垂直分割线，在定义中插入`|`，若要插入水平分割线，在定义中加入`\hline`。
 
@@ -6596,7 +6604,7 @@ n&\text{左对齐}&\text{居中对齐}&\text{右对齐}\\
 \end{array}
 $$
 
-#### 4.13.21 嵌套表格或数组
+#### 6.1.13.21 嵌套表格或数组
 
 >代码:
 >
@@ -6683,7 +6691,7 @@ $$
 >\end{array}
 >$$
 
-#### 4.13.22 方程组
+#### 6.1.13.22 方程组
 
 >说明:  使用`\begin{array}...\end{array}`和`\left\{...\right.`来创建一个方程组,或者你也可以使用条件表达式组`\begin{cases}...\end{cases}`来实现相同效果。
 
@@ -6724,7 +6732,7 @@ $$
 >\end{cases}
 >$$
 
-#### 4.13.23 连分式
+#### 6.1.13.23 连分式
 
 >说明:  就像`\frac`一样,使用`\cfrac`或`\dfrac`来创建一个连分式,不要使用普通的`\frac`或`\over`来创建,否则看起来会**很恶心**。
 
@@ -6767,7 +6775,7 @@ $$
 >x=a_0+\frac{1^2}{a_1+}\frac{2^2}{a_2+}\frac{3^2}{a_3+}\frac{4^2}{a_4+}\cdots
 >$$
 
-#### 4.13.24 交换图表
+#### 6.1.13.24 交换图表
 
 >说明:  使用一行`$\require{AMScd}$`语句来允许交换图表的显示,并通过在开头使用`\begin{CD}`,结尾使用`\end{CD}`来创建。
 
@@ -6816,13 +6824,13 @@ D@=E@<<<F
 \end{CD}
 $$
 
-#### 4.13.25 其他
+#### 6.1.13.25 其他
 
 >* 搜索$\LaTeX$
 
-### 4.14 支持的HTML元素
+### 6.1.14 支持的HTML元素
 
-#### 4.14.1 文本居中
+#### 6.1.14.1 文本居中
 
 >代码
 >
@@ -6834,7 +6842,7 @@ $$
 >
 ><center>内容</center>
 
-#### 4.14.2 快捷键显示
+#### 6.1.14.2 快捷键显示
 
 >代码:
 >
@@ -6845,7 +6853,7 @@ $$
 >效果:
 <kbd>内容</kbd>
 
-#### 4.14.3 加粗
+#### 6.1.14.3 加粗
 
 >代码:
 >
@@ -6856,7 +6864,7 @@ $$
 >效果:
 <b>加粗</b>
 
-#### 4.14.4 倾斜
+#### 6.1.14.4 倾斜
 
 >代码:
 >
@@ -6867,7 +6875,7 @@ $$
 >效果:
 <i>倾斜</i>
 
-#### 4.14.5 上下标
+#### 6.1.14.5 上下标
 
 >代码:
 >
@@ -6880,7 +6888,7 @@ $$
 开始<sup>123hi你好</sup>
 开始<sub>321hi你好</sub>
 
-#### 4.14.6 填充的黑色箭头
+#### 6.1.14.6 填充的黑色箭头
 
 > 代码：
 >
@@ -6891,7 +6899,7 @@ $$
 > 效果：
 > &#x27A4;
 
-#### 4.14.7 分页符
+#### 6.1.14.7 分页符
 
 代码：
 
@@ -6903,10 +6911,10 @@ $$
 
 <div STYLE="page-break-after: always;"></div>
 
-### 4.15 文档在线版本维护
-> Contributors: 唐锦梁
+## 6.2 文档在线部署
+> Contributor: 唐锦梁
 
-#### 4.15.1 前言
+### 6.2.1 前言
 
 视觉组虽然保留了一份可用的文档，但长期面临系统性维护缺失的问题。原有的 PDF 发行版更新滞后，而直接访问 GitHub 仓库又常受网络环境影响，导致文档利用率低下。虽然曾尝试迁移至飞书，但鉴于飞书对文件插入的限制以及对 Markdown 和 LaTeX 语法的支持不足，最终决定继续以 GitHub 为主要托管平台，以保障文档的格式兼容性与版本管理。
 
@@ -6916,7 +6924,7 @@ $$
 
 > 注意：以下流程用作记录部署原理和复现步骤，现 Docsify 环境已部署完毕，仓库内容的任何变动均会自动触发构建并同步至在线文档
 
-#### 4.15.2 Github 仓库配置流程
+### 6.2.2 Github 仓库配置流程
 
 在 GitHub 仓库根目录添加 `index.html` 文件，配置 Docsify 框架
 
@@ -6999,7 +7007,7 @@ $$
 </html>
 ```
 
-#### 4.15.3 Cloudflare 部署流程
+### 6.2.3 Cloudflare 部署流程
 
 登录 Cloudflare 控制面板，点击 "计算和AI" 栏目下的 "Workers 和  Pages"
 
@@ -7015,13 +7023,13 @@ $$
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2026-01-22 20-06-53.webp" alt="image-20260122195736676" style="zoom:50%;" />
 
-#### 4.15.4 自动更新机制
+### 6.2.4 自动更新机制
 
 部署完成后，Cloudflare Pages 会与 GitHub 仓库建立 Webhook 连接。每当仓库（或指定的 Fork 分支）有新代码 Push 时，Cloudflare 会自动触发构建。通常等待约 30 秒后刷新网页，即可看到最新的文档内容。
 
-### 4.16 文档图片维护
+## 6.3 文档图片维护
 
-#### 4.16.1 统一分辨率
+### 6.3.1 统一分辨率
 
 由于文档中的图片来源混杂（设备拍照、高分屏截图等），分辨率差异巨大。过大的图片不仅增加仓库体积，还可能导致在 Typora 或在线文档中显示比例失调。
 
@@ -7154,7 +7162,7 @@ if __name__ == "__main__":
     resize_images(target_path)
 ```
 
-#### 4.16.2 统一图片格式(WebP)
+### 6.3.2 统一图片格式(WebP)
 
 WebP 是一种由 **Google** 推出的现代图像格式，旨在在保证画质的同时，大幅减小图片文件体积，适用于网页和移动端应用。
 
@@ -7330,11 +7338,7 @@ if __name__ == "__main__":
 ```
 
 
-## 6 视觉开发文档(MiracleVision)
-
-
-
-## 7 参考资料
+# 7 参考资料
 
 > [1] [TensorFlow GPU不可用，WSL2安装\_tensorflow wsl2\_坠星不坠的博客-CSDN博客 - https://blog.csdn.net/](https://blog.csdn.net/qq_40016005/article/details/130203903)
 >
