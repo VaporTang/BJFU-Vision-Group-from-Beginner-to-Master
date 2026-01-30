@@ -1124,7 +1124,7 @@ script my_session.log
 
 系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
 
-# 2 基础环境配置核心算法环境配置 (The Libraries)
+# 2 核心算法环境配置
 ## 2.1传统视觉环境	
 ### 2.1.1OpenCV 安装
 > Contributors: 叶睿聪 (dgsyrc@github)
@@ -2384,7 +2384,7 @@ sudo make install
 
 
 
-# 3.硬件平台认知（Hardware）
+# 3.硬件
 
 > Contributors: 叶睿聪 (dgsyrc@github)、唐锦梁
 
@@ -2489,6 +2489,7 @@ sudo make install
 ### 3.2.3 USB-Camera
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/933e30e4a2df9666cdfb1555044c951.webp" alt="933e30e4a2df9666cdfb1555044c951" style="zoom:45%;" />
+
 ## 3.3电源与通信
 
 ### 3.3.1电源与电池管理
@@ -2518,8 +2519,6 @@ sudo make install
 > 若发现**外壳鼓包**、**变形**或接口处有黑色烧蚀痕迹，**绝对禁止上电**。若发现电池温度烫手，应静置冷却；若充电时异常发热，请立即断电。
 
 > 请不要低估这块电池内蕴含的能量，使用电池时请保持敬畏
----------------
-​	
 
 ### 3.3.2 分电板与变压器
 
@@ -2818,7 +2817,7 @@ https://www.robomaster.com/zh-CN/products/components/detail/2518
 
 连接成功后可以通过主页面左上角感叹号是否消失判断
 
-#### 2.4.2.5 可能遇到的问题
+#### 3.4.2.5 可能遇到的问题
 
 - 主控右上角显示连接上Wifi，但是左上角感叹号仍存在？
 
@@ -5590,7 +5589,7 @@ sudo systemctl status autoaim.service
 <div STYLE="page-break-after: always;"></div>
 以下为旧版文档→
 
-# 6. 文档维护
+# 6. 文档规范与维护
 
 
 > Contributors: 叶睿聪 (dgsyrc@github)、洪佳、唐锦梁
