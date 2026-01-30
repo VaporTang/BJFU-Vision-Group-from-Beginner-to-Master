@@ -5008,7 +5008,7 @@ ament_package()
 
 ### 5.1.2 必要环境依赖
 
-OpenCV（安装参考 `2.2` 内容）
+OpenCV（安装参考 `2.1.1` 内容）
 
 [fmt]([fmtlib/fmt: A modern formatting library - https://github.com/](https://github.com/fmtlib/fmt))
 
