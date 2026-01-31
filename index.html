@@ -40,6 +40,21 @@
             auto2top: true,
             coverpage: false,
 
+            // --- 新增：全文搜索配置 ---
+            search: {
+                placeholder: '搜索文档...',
+                noData: '找不到结果',
+                depth: 3,
+            },
+
+            // --- 新增：字数统计 ---
+            count: {
+                countable: true,
+                fontsize: '0.9em',
+                color: 'rgb(90,90,90)',
+                language: 'chinese'
+            },
+
             // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
             latex: {
                 inlineOpen: '$',
@@ -53,8 +68,10 @@
             plugins: [
                 function (hook, vm) {
                     hook.beforeEach(function (html) {
-                        // 将 style="zoom:..." 替换为 style="width:..."
-                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                        // 1. 修复 Typora zoom 样式
+                        // 2. 为所有图片添加 loading="lazy" 属性，防止大图阻塞页面渲染
+                        let res = html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                        return res.replace(/<img /g, '<img loading="lazy" ');
                     });
                 }
             ]
@@ -70,6 +87,13 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <script src="//unpkg.com/docsify-count/dist/countable.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cmake.min.js"></script>
 </body>
 
 </html>

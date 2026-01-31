@@ -2119,6 +2119,7 @@ else:
 ```
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
+
 #### 2.3.4.2 测试例：mnist手写数字识别
 
 安装 `matplotlib` 包（在虚拟环境下安装）
@@ -2274,6 +2275,7 @@ show_predictions(model, test_loader, num_images=10)
 
 
 <div STYLE="page-break-after: always;"></div>
+
 ### 2.3.5 onnxruntime
 
 > Contributor: 叶睿聪 (dgsyrc@github)
@@ -2441,6 +2443,7 @@ sudo make install
 #### 3.2.1.2 接口
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0cdadb03833111a5741565dff2caa2e.webp" alt="0cdadb03833111a5741565dff2caa2e" style="zoom:45%;" />
+
 ### 3.2.2激光雷达
 
 #### 3.2.2.1 参数（以 [Livox Mid-360](https://www.livoxtech.com/cn/mid-360) 为例）
