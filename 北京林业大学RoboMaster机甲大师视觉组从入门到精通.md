@@ -2119,6 +2119,7 @@ else:
 ```
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20250204153322387.webp" alt="image-20250204153322387" style="zoom:50%;" />
+
 #### 2.3.4.2 测试例：mnist手写数字识别
 
 安装 `matplotlib` 包（在虚拟环境下安装）
