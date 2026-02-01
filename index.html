@@ -8,6 +8,9 @@
     <meta name="description" content="从入门到精通">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
     <link rel="icon"
         href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ctext%20y='.9em'%20font-size='90'%3E🪻%3C/text%3E%3C/svg%3E">
 
@@ -15,6 +18,11 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 
     <style>
+        body {
+            /* 优先使用系统字体，最后才用网络字体，加快首屏显示 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        }
+
         /* 移动端优化 */
         .markdown-section img {
             max-width: 100%;
@@ -40,6 +48,21 @@
             auto2top: true,
             coverpage: false,
 
+            // --- 新增：全文搜索配置 ---
+            search: {
+                placeholder: '搜索文档...',
+                noData: '找不到结果',
+                depth: 3,
+            },
+
+            // --- 新增：字数统计 ---
+            count: {
+                countable: true,
+                fontsize: '0.9em',
+                color: 'rgb(90,90,90)',
+                language: 'chinese'
+            },
+
             // docsify-latex 配置 (通常默认即可，这里显式配置以防万一)
             latex: {
                 inlineOpen: '$',
@@ -53,8 +76,10 @@
             plugins: [
                 function (hook, vm) {
                     hook.beforeEach(function (html) {
-                        // 将 style="zoom:..." 替换为 style="width:..."
-                        return html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                        // 1. 修复 Typora zoom 样式
+                        // 2. 为所有图片添加 loading="lazy" 属性，防止大图阻塞页面渲染
+                        let res = html.replace(/style="zoom:\s*([^;"]+)(;?)"/g, 'style="width: $1$2; max-width: 100%;"');
+                        return res.replace(/<img /g, '<img loading="lazy" ');
                     });
                 }
             ]
@@ -70,6 +95,13 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+    <script src="//unpkg.com/docsify-count/dist/countable.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cmake.min.js"></script>
 </body>
 
 </html>
