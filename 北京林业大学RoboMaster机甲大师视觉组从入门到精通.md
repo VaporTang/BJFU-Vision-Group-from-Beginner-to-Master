@@ -1107,26 +1107,40 @@ Ubuntu 下载，根据系统架构选择 `NoMachine for Linux DEB（amd64）`：
 
 同时建议登出后点击右下角齿轮，设置为 `Ubuntu on Xorg`，可解决相关问题
 
-### 1.3.4录制终端会话到文件
-**启动录制**
+### 1.3.4 终端工具
+
+> 可选
+
+> Contributors: 唐锦梁
+
+命令行（SSH）是上位机交互的基石。相比图形化界面，它几乎不占用系统带宽和算力，是代码编译、进程监控和文件管理的最佳方式。
+
+#### 1.3.4.1 服务端配置（上位机端）
+
+> 通常语境下，服务端就是指你的 Ubuntu 系统或视觉组算法最终部署运行的 MiniPC
 
 ```bash
-script my_session.log
+# 1. 更新软件源
+sudo apt update
+
+# 2. 安装 OpenSSH Server
+sudo apt install openssh-server
+
+# 3. 确认服务状态（应显示 active (running)）
+sudo systemctl status ssh
+
+# 4. 允许防火墙通过 SSH
+sudo ufw allow ssh
 ```
-执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
 
-**停止录制**
-
-当操作完成需要结束录制时，可以使用以下任意一种方法：
-
-- **输入命令：** `exit`
-- **快捷键：** `Ctrl` + `D`
-
-系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
+#### 1.3.4.2 客户端软件
 
 # 2 核心算法环境配置
+
 ## 2.1传统视觉环境	
+
 ### 2.1.1OpenCV 安装
+
 > Contributors: 叶睿聪 (dgsyrc@github)
 
 *方法适用于Ubuntu 20.04/22.04 以及WSL中的Ubuntu 20.04/22.04*
@@ -2540,7 +2554,7 @@ sudo make install
 图二所示分电板：RM标志上方为XT60母头，分电板上有七个XT30公头，一个2Pin CAN1(in)、一个4Pin CAN2(in)，六个2Pin CAN(out)
 
 
-#### 3.3.2.2 DC-DC（24V-19V）变压器
+#### 3.3.2.2 DC-DC（24V-19V）降压模块
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/39ad3e5dfeabc94585db165b306ff72.webp" alt="39ad3e5dfeabc94585db165b306ff72" style="zoom:45%;" />
 
@@ -5491,6 +5505,25 @@ sudo systemctl enable autoaim.service
 sudo systemctl status autoaim.service
 ```
 
+#### 5.1.3.3 录制终端会话到文件
+
+**启动录制**
+
+```bash
+script my_session.log
+```
+
+执行上述命令后，系统会提示 Script started, file is my_session.log。此时，你在终端做的任何操作（包括 Vim 编辑、由命令产生的输出等）都会被实时写入 my_session.log 文件中。
+
+**停止录制**
+
+当操作完成需要结束录制时，可以使用以下任意一种方法：
+
+- **输入命令：** `exit`
+- **快捷键：** `Ctrl` + `D`
+
+系统会提示 `Script done, file is my_session.log`，表示录制结束并已保存文件。
+
 ### 5.1.4 串口协议
 
 #### 5.1.4.1 接收数据
@@ -5594,7 +5627,39 @@ sudo systemctl status autoaim.service
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/image-20240123150219314.webp" alt="image-20240123150219314" style="zoom: 15%;" />
 
 <div STYLE="page-break-after: always;"></div>
-以下为旧版文档→
+
+## 5.3 上位机性能优化
+
+### 5.3.1 远程控制软软件
+
+> Contributors: 唐锦梁
+
+在车载机器人的实际调试过程中，若依赖物理外设进行交互，往往需要携带一套繁琐的硬件设备：
+
+- 显示设备：便携屏 × 1、HDMI转miniHDMI线 × 1、屏幕供电线 × 1
+- 输入设备：键盘 × 1、鼠标 × 1
+- 其他配件：充电宝 × 1（为屏幕供电）、拓展坞 × 1（解决接口不足）
+
+这显然是非常不便且非常不优雅的。同时上位机在车载环境下通常无法连接物理显示器，因此建议使用远程桌面或 SSH 协议进行代码部署、调试与监控。
+
+在远程控制软件选型与配置时，必须遵循以下原则以保障视觉组相关算法的运行效率：
+
+- 资源占用低： 远程软件不应占用过多的 CPU 和 GPU 资源，避免抢占宝贵的上位机算力
+- 低延迟： 为满足基本的调试和开发需要，画面应相对清晰且不卡顿
+- 局域网优先： 不依赖外网转发服务器的局域网方案相对而言泛用性更强且不受三方软件的收费服务制约
+
+#### 5.3.1.1 图形化远程控制
+
+> ⚠️ **性能警示：** Jetson Orin Nano 等部分嵌入式平台 阉割了 NVENC 硬件编码器。这意味着图形化远程桌面的画面压缩将完全依赖 CPU 软解/软编，这会对系统负载产生显著影响，甚至导致系统卡顿。在此类平台上，建议优先使用 5.3.1.2 章节的命令行方案，仅在必要时开启图形界面
+
+- NoMachine
+  - 局域网、在图形化的远程控制方案中对 CPU资源的占用相对较小、支持共享剪贴板（可传输文件）、延迟低、画质高
+
+#### 5.3.1.2 命令行远程控制
+
+对于代码编译、脚本运行、文件管理及系统监控，SSH (Secure Shell) 是最高效、最稳定且资源占用几乎为零的方案。
+
+
 
 # 6. 文档规范与维护
 
