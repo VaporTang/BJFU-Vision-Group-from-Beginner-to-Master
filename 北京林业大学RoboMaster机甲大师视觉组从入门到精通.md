@@ -1152,38 +1152,116 @@ MobaXterm 被称为远程计算的“瑞士军刀”。对于视觉组而言，�
    - *Portable edition*：免安装版，解压即用（可放入 U 盘）
 2. **连接配置**：
    - 点击左上角 `Session` -> `SSH`。
-   - **Remote host**: 输入上位机 IP 地址（例如 `192.168.1.100`）。
-   - **Specify username**: 输入上位机用户名（例如 `piesia-01`）。
-   - 点击 `OK`，输入密码即可连接。
+   - **Remote host**: 输入上位机 IP 地址（例如 `192.168.1.100`）
+   - **Specify username**: 输入上位机用户名（例如 `piesia-01`）
+   - 点击 `OK`，输入密码即可连接
 
-> **注意**：初次连接时，若想启用图形回传，请确保设置中 `X11-Forwarding` 处于勾选状态（默认已勾选）。
+> **注意**：初次连接时，若想启用图形回传，请确保设置中 `X11-Forwarding` 处于勾选状态（默认已勾选）
 
 ##### 1.3.4.2.2 Tabby (跨平台/高颜值)
 
 > 颜值即正义 (
 
-如果你希望在 Windows 上追求更现代化的 UI 体验或者你正在使用 macOS，Tabby (原 Terminus) 是更好的选择。它是基于 Web 技术构建的终端，界面极度舒适，且配置可同步。
+如果你希望在 Windows 上追求更现代化的 UI 体验或者你正在使用 macOS，Tabby (原 Terminus) 是更好的选择。它是基于 Web 技术构建的终端，界面极度舒适，且配置可同步
 
 **主要特性：**
 
-- **跨平台**：完美支持 Windows, macOS 和 Linux。
-- **SFTP 支持**：拥有独立的 SFTP 面板。
-- **高度可定制**：支持各种配色方案、字体连字（Ligatures）和快捷键映射。
-- **智能补全**：内置部分命令提示功能。
+- **跨平台**：完美支持 Windows, macOS 和 Linux
+- **SFTP 支持**：拥有独立的 SFTP 面板
+- **高度可定制**：支持各种配色方案、字体连字（Ligatures）和快捷键映射
+- **智能补全**：内置部分命令提示功能
 
 **安装教程：**
 
-1. **下载**：访问 [Tabby GitHub Release](https://github.com/Eugeny/tabby/releases) 页面。
-   - **Windows**: 下载 `tabby-x.x.x-setup-x64.exe `。
-   - **macOS**: 下载 `tabby-x.x.x-macos-arm64.dmg` (M芯片) 或 `x86_64` (Intel芯片)。
+1. **下载**：访问 [Tabby GitHub Release](https://github.com/Eugeny/tabby/releases) 页面
+   - **Windows**: 下载 `tabby-x.x.x-setup-x64.exe `
+   - **macOS**: 下载 `tabby-x.x.x-macos-arm64.dmg` (M芯片) 或 `x86_64` (Intel芯片)
 2. **配置**：
-   - 启动软件，点击右上角齿轮图标进入 `Settings`。
-   - 选择 `Profiles & connections` -> `New profile`。
-   - 选择 `SSH connection`。
-   - 填入 `Name` (任意命名), `Host` (IP地址), `Username` (用户名)。
-   - 保存后，点击播放键图标即可连接。
+   - 启动软件，点击右上角齿轮图标进入 `Settings`
+   - 选择 `Profiles & connections` -> `New profile`
+   - 选择 `SSH connection`
+   - 填入 `Name` (任意命名), `Host` (IP地址), `Username` (用户名)
+   - 保存后，点击播放键图标即可连接
 
-> **提示**：Tabby 默认不支持 X11 Forwarding。如果使用 Tabby 且需要查看远程图像，通常需要配合单独安装 XServer 软件（如 VcXsrv 或 XQuartz）。
+> **提示**：Tabby 默认不支持 X11 Forwarding。如果使用 Tabby 且需要查看远程图像，通常需要配合单独安装 XServer 软件（如 VcXsrv 或 XQuartz）
+
+##### 1.3.4.2.3 VSCode Remote 开发配置
+
+> 如习惯使用 VSCode，则强烈推荐此方案
+
+传统的开发模式是：“本地写代码 -> 传输文件到上位机 -> 终端编译运行”。 **VSCode Remote 模式**是：“直接编辑上位机文件 -> 自动同步保存 -> 集成终端直接编译”
+
+VSCode 配合 **Remote - SSH** 插件，允许我们将本地的 VSCode 界面作为“前端”，而将 MiniPC（上位机）作为“后端”运行编译环境。这意味着你可以在舒适的 Windows/macOS 界面下写代码，而实际的编译和运行环境完全是在 Linux 上
+
+###### 1.3.4.2.3.1 安装与连接
+
+1. **安装插件**：
+   - 打开 VSCode，点击左侧侧边栏的扩展图标（Extensions）
+   - 搜索 `Remote - SSH` 并安装（由 Microsoft 官方发布）
+2. **配置主机**：
+   - 安装完成后，点击左下角的绿色图标 `><`（Open a Remote Window）
+   - 选择 `Connect to Host...` -> `Configure SSH Hosts...`
+   - 选择第一个配置文件（通常是 `C:\Users\你的用户名\.ssh\config` 或 `~/.ssh/config`）
+   - 在文件中按以下格式添加你的上位机信息：
+
+代码段
+
+```
+Host RM-MiniPC
+    HostName 192.168.1.100  # 替换为上位机实际 IP
+    User piesia-01          # 替换为上位机用户名
+    Port 22
+```
+
+1. **发起连接**：
+   - 保存文件后再次点击左下角绿色图标
+   - 选择 `Connect to Host...`，现在你应该能看到 `piesia-01` 出现在列表中
+   - 点击连接，选择 `Linux` 作为目标平台，输入密码即可
+   - 连接成功后，左下角会显示 `SSH: piesia-01`
+
+###### 1.3.4.2.3.2 远程环境配置（关键）
+
+连接成功并不代表配置结束。在 Remote 模式下，**插件是分两处安装的**：
+
+1. **UI 类插件**（如主题、图标）：安装在本地
+2. **功能类插件**（如 C++、Python、CMake）：**必须安装在远程服务端（MiniPC）上**
+
+**必装的远程插件：** 请在连接 SSH 状态下，打开扩展面板，你会看到 `SSH: piesia-01 - INSTALLED` 分组。请确保在此处安装以下插件，见本文 1.3.1 VSCode 部分安装的相关插件
+
+###### 1.3.4.2.3.3 免密登录配置
+
+在调试比赛代码时，如果每次连接或重连都要输入密码会非常浪费时间。我们需要配置 **SSH Key** 实现免密登录。
+
+**Windows终端执行以下命令**
+
+```bash
+# 在本地生成密钥对（一路回车即可）
+ssh-keygen -t rsa
+```
+
+
+
+1. **复制本机公钥：**
+
+- 在电脑文件夹地址栏输入 `%USERPROFILE%\.ssh` 并回车。
+
+- 用记事本打开 `id_rsa.pub` 文件，全选并复制里面的内容（通常是以 ssh-rsa 开头的一长串字符）。
+
+2. **连接上位机：**
+
+- 使用 VS Code 连接到远程主机（此时还需要输入密码）。
+
+3. **修改远程文件：**
+
+- 在 VS Code 中，点击 `文件` -> `打开文件...`。
+
+- 在顶部的路径栏输入：`/home/piesia-01/.ssh/authorized_keys` (如果提示找不到文件，就先只打开 `/home/piesia-01/`，然后新建文件夹 `.ssh` 和文件 `authorized_keys`)。
+
+- 将刚才复制的公钥内容粘贴到这个文件的最后一行。
+
+- 保存 (`Ctrl + S`)。
+
+配置完成后，再次使用 VS Code 连接或使用终端登录时，将不再询问密码。
 
 # 2 核心算法环境配置
 
@@ -5680,7 +5758,7 @@ script my_session.log
 
 ## 5.3 上位机性能优化
 
-### 5.3.1 远程控制软软件
+### 5.3.1 远程控制软件
 
 > Contributors: 唐锦梁
 
@@ -5707,9 +5785,139 @@ script my_session.log
 
 #### 5.3.1.2 命令行远程控制
 
-对于代码编译、脚本运行、文件管理及系统监控，SSH (Secure Shell) 是最高效、最稳定且资源占用几乎为零的方案。
+针对代码编译、脚本执行、文件管理及系统监控等任务，SSH (Secure Shell) 是高效、稳定且资源占用极低的解决方案。正如本文 1.3.4 节所述，现有三种主流客户端可供选择：VSCode 在开发集成方面表现优异，MobaXterm 以功能丰富全面著称，Tabby 则拥有现代化的美观界面。建议根据具体应用场景及个人操作习惯择优选取。
+
+### 5.3.2 上位机选型
+
+在 RM 比赛中，受限于成本和尺寸等因素，有以下常见的上位机选型方案
+
+- X86 架构
+
+  - Intel NUC 系列（如 NUC 11、NUC 10、NUC 8）
+
+    - 特点：通常没有独立显卡，但是包含核显
+
+      > 队内目前有 3 台 NUC 11
+
+  - 派勤工控机 系列
+
+    - 特点：NUC 的国产替代方案，形态与接口布局类似，性价比较高
+
+      > 队内目前有 4 台派勤的工控机，其中 2 台 CPU 为 i7-1260P，2台为 U5-125H
+
+  - 雷神 MIX-G 系列
+
+    - 特点：高性能方案。该系列最大的优势在于搭载了 RTX 4060 等独立显卡，但相对而言体积重量较大且价格昂贵
+
+      > 队内暂无，后期可尝试采购该系列
+  
+- ARM 架构
+
+  - Jetson Orin Nano
+    - 特点：典型的强 GPU 弱 CPU 平台
+      - **GPU 强悍：** 搭载 NVIDIA Ampere 架构 GPU，CUDA 生态，TensorRT 加速效果极佳
+      - **CPU 瓶颈明显：** 搭载的 ARM CPU 单核性能较弱
+      - **工程痛点：** 编译大型 C++ 工程（如复杂的 ROS 包）速度极慢（20~30min，这在赛场上显然是无法接受的），且运行高频的导航规划时可能会因 CPU 满载导致延迟和漂移问题
+    
+  - RK3588 开发板（如 Orange Pi 5 / 5 Plus）
+    - 特点：均衡性能： 8核 CPU（4大核+4小核）性能尚可，优于 Jetson Nano 系列；内置 6TOPS 算力的 NPU（但是调用较繁琐），性价比高
+      - **开发门槛：** NPU 使用需依赖瑞芯微的 RKNN 框架，模型转换和部署比 NVIDIA TensorRT 麻烦，且对 ROS 的支持需要自行折腾系统环境
+
+### 5.3.3 上位机性能测试软件
+
+> 可考虑使用 GParted 硬盘克隆方便测试不同的机器
+
+#### 5.3.3.1 CPU 性能测试
+
+Sysbench 是一个模块化的、跨平台的多线程性能测试工具，主要用于评估 CPU 的整数计算能力和多线程并发处理能力
+
+**安装：**
+
+```bash
+sudo apt install sysbench
+```
+
+**单核性能测试**（评估单线程逻辑处理能力，如复杂的路径规划算法）：
+
+```bash
+sysbench cpu --cpu-max-prime=20000 --threads=1 run
+# 关注输出中的 "events per second" (数值越大越好)
+```
+
+**多核性能测试**（评估并行处理能力，如编译代码、多节点 ROS 通信）：
+
+```bash
+sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
+# threads设置为CPU核心数
+```
 
 
+
+#### 5.3.3.2 GPU 性能测试
+
+glmark2
+
+**安装：**
+
+```bash
+sudo apt install glmark2
+```
+
+**测试：**
+
+```bash
+glmark2
+```
+
+#### 5.3.3.3 磁盘 I/O 性能测试
+
+在比赛中，录制高带宽的 rosbag（如点云+相机流）对磁盘写入速度要求极高。
+
+- **测试** (测试 4K 随机写入，模拟日志记录场景)：
+
+  ```bash
+  sysbench fileio --file-total-size=5G --file-test-mode=rndwr prepare
+  sysbench fileio --file-total-size=5G --file-test-mode=rndwr run
+  sysbench fileio --file-total-size=5G --file-test-mode=rndwr cleanup
+  ```
+
+### 5.3.4 系统稳定性与压力测试
+
+机器人是在相对封闭、振动且可能高温的环境下运行的，**散热**对其性能有极大影响
+
+#### 5.3.4.1 烤机测试
+
+**Stress-ng** 用于模拟 CPU 满载，检测系统是否会因过热而降频或死机
+
+**安装**：
+
+```bash
+sudo apt install stress-ng
+```
+
+**测试**：
+
+```bash
+stress-ng --cpu $(nproc) --timeout 600s
+```
+
+**验收标准**： 在运行期间，配合监控软件观察 CPU 频率是否大幅下降。若出现严重降频，说明散热存在问题，需改进风道或更换硅脂。
+
+### 5.3.5 实时性能监控工具
+
+在代码调试和比赛运行期间，我们需要轻量级的工具来监控资源
+
+#### 5.3.5.1 通用系统监控
+
+- **Htop**：
+  - **安装：**`sudo apt install htop`
+  - **运行：**`htop`
+  - 经典工具，查看各 CPU 核心负载、内存占用及僵尸进程
+- **Btop** (推荐)：
+  - **安装：**`sudo apt install btop`
+  - **运行：**`btop`
+  - 界面更现代，自带网络上传/下载速率监控和磁盘 I/O 图表，信息密度比 htop 更高
+  - **btop 的一大特点是支持鼠标操作**。你可以直接点击界面上的按钮、进程或菜单，这对于新手非常友好
 
 # 6. 文档规范与维护
 
