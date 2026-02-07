@@ -5840,15 +5840,15 @@ sudo apt install sysbench
 **单核性能测试**（评估单线程逻辑处理能力，如复杂的路径规划算法）：
 
 ```bash
-sysbench cpu --cpu-max-prime=20000 --threads=1 run
 # 关注输出中的 "events per second" (数值越大越好)
+sysbench cpu --cpu-max-prime=20000 --threads=1 run
 ```
 
 **多核性能测试**（评估并行处理能力，如编译代码、多节点 ROS 通信）：
 
 ```bash
-sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
 # threads设置为CPU核心数
+sysbench cpu --cpu-max-prime=20000 --threads=$(nproc) run
 ```
 
 
