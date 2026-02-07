@@ -5815,8 +5815,8 @@ script my_session.log
 
   - Jetson Orin Nano
     - 特点：典型的强 GPU 弱 CPU 平台
-      - **GPU 强悍：** 搭载 NVIDIA Ampere 架构 GPU，CUDA 生态，TensorRT 加速效果极佳
-      - **CPU 瓶颈明显：** 搭载的 ARM CPU 单核性能较弱
+      - GPU 强悍：搭载 NVIDIA Ampere 架构 GPU，CUDA 生态，TensorRT 加速效果极佳
+      - CPU 瓶颈明显：搭载的 ARM CPU 单核性能较弱
       - **工程痛点：** 编译大型 C++ 工程（如复杂的 ROS 包）速度极慢（20~30min，这在赛场上显然是无法接受的），且运行高频的导航规划时可能会因 CPU 满载导致延迟和漂移问题
     
   - RK3588 开发板（如 Orange Pi 5 / 5 Plus）
