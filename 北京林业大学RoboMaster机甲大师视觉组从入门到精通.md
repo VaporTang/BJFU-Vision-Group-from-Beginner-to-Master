@@ -1135,6 +1135,56 @@ sudo ufw allow ssh
 
 #### 1.3.4.2 客户端软件
 
+##### 1.3.4.2.1 MobaXterm (Windows 首选)
+
+MobaXterm 被称为远程计算的“瑞士军刀”。对于视觉组而言，它最大的优势在于自带 X Server。这意味着当你无法连接显示器时，依然可以通过 SSH 隧道将 OpenCV 等的图像窗口回传显示在你的笔记本上，这对调试代码至关重要。
+
+**主要特性：**
+
+- **X11 Forwarding**：原生支持远程图形界面显示
+- **SFTP 侧边栏**：连接 SSH 时自动挂载文件系统，方便通过拖拽上传/下载视频和日志文件
+- **多协议支持**：集成 SSH, VNC, FTP, 串口（Serial）等多种协议
+
+**安装教程：**
+
+1. **下载**：访问 [MobaXterm 官网](https://mobaxterm.mobatek.net/download.html)，选择 **Home Edition (Free)**。
+   - *Installer edition*：传统安装版
+   - *Portable edition*：免安装版，解压即用（可放入 U 盘）
+2. **连接配置**：
+   - 点击左上角 `Session` -> `SSH`。
+   - **Remote host**: 输入上位机 IP 地址（例如 `192.168.1.100`）。
+   - **Specify username**: 输入上位机用户名（例如 `piesia-01`）。
+   - 点击 `OK`，输入密码即可连接。
+
+> **注意**：初次连接时，若想启用图形回传，请确保设置中 `X11-Forwarding` 处于勾选状态（默认已勾选）。
+
+##### 1.3.4.2.2 Tabby (跨平台/高颜值)
+
+> 颜值即正义 (
+
+如果你希望在 Windows 上追求更现代化的 UI 体验或者你正在使用 macOS，Tabby (原 Terminus) 是更好的选择。它是基于 Web 技术构建的终端，界面极度舒适，且配置可同步。
+
+**主要特性：**
+
+- **跨平台**：完美支持 Windows, macOS 和 Linux。
+- **SFTP 支持**：拥有独立的 SFTP 面板。
+- **高度可定制**：支持各种配色方案、字体连字（Ligatures）和快捷键映射。
+- **智能补全**：内置部分命令提示功能。
+
+**安装教程：**
+
+1. **下载**：访问 [Tabby GitHub Release](https://github.com/Eugeny/tabby/releases) 页面。
+   - **Windows**: 下载 `tabby-x.x.x-setup-x64.exe `。
+   - **macOS**: 下载 `tabby-x.x.x-macos-arm64.dmg` (M芯片) 或 `x86_64` (Intel芯片)。
+2. **配置**：
+   - 启动软件，点击右上角齿轮图标进入 `Settings`。
+   - 选择 `Profiles & connections` -> `New profile`。
+   - 选择 `SSH connection`。
+   - 填入 `Name` (任意命名), `Host` (IP地址), `Username` (用户名)。
+   - 保存后，点击播放键图标即可连接。
+
+> **提示**：Tabby 默认不支持 X11 Forwarding。如果使用 Tabby 且需要查看远程图像，通常需要配合单独安装 XServer 软件（如 VcXsrv 或 XQuartz）。
+
 # 2 核心算法环境配置
 
 ## 2.1传统视觉环境	
