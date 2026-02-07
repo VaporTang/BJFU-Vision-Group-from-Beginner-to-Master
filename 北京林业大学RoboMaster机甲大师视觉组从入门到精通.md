@@ -5756,7 +5756,7 @@ script my_session.log
 
 <div STYLE="page-break-after: always;"></div>
 
-## 5.3 上位机性能优化
+## 5.3 上位机选型与性能评估
 
 ### 5.3.1 远程控制软件
 
