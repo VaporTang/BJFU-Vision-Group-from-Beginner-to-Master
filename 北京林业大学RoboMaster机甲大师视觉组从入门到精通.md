@@ -5937,6 +5937,97 @@ stress-ng --cpu $(nproc) --timeout 600s
     - 硬同步：通过硬件信号线让激光雷达和 IMU 的时间戳物理对齐，精度极高（微秒级），效果最好
     - 软同步：依赖软件估算时间差，容易受系统负载和传输延迟影响，导致在剧烈运动或旋转时，定位发生漂移
 
+## 5.5 强化学习
+
+### 5.5.1 Isaac Lab 与 Isaac Sim 性能优化
+
+#### 5.5.1.1 运行模式优化
+
+在强化学习（RL）训练任务中，图形渲染会占用大量 GPU 显存和 CUDA Core 资源。对于不需要实时观察的训练过程，建议剥离渲染管线
+
+**原理：** 禁用 USD Stage 的视口渲染，仅保留物理引擎计算（PhysX）和 Tensor 数据流
+
+**预期收益：** 训练 FPS (Frames Per Second) 提升 **5% ~ 10%**，显存占用降低约 1-2 GB
+
+**实施方法：** 在运行 Python 训练脚本时，根据 Isaac Lab 的启动参数添加 `--headless` 标志
+
+```bash
+# 示例：运行一个强化学习环境
+./isaaclab.sh -p source/standalone/workflows/rsl_rl/train.py --task Isaac-Ant-v0 --headless
+```
+
+- 注意：如果代码中使用了 `AppLauncher` 类，请确保传递了 `headless=True` 参数配置
+
+#### 5.5.1.2 硬件性能调度
+
+##### 5.5.1.2.1 CPU 优化
+
+Linux 默认的电源策略通常为 `powersave` 或 `ondemand`，这会导致 CPU 在处理突发物理计算时频繁变频，增加延迟
+
+**实施方法：** 使用 `cpupower` 工具将所有核心锁定在最高频率
+
+```bash
+# 1. 安装工具
+sudo apt update
+sudo apt install linux-tools-common linux-tools-generic
+
+# 2. 查看当前模式
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+# 3. 设置为性能模式 (Performance) (重启后会回到默认的模式)
+sudo cpupower frequency-set -g performance
+```
+
+##### 5.5.1.2.2 GPU 优化
+
+长时间训练会导致显存（VRAM）和核心温度飙升，触发 NVIDIA 驱动的**热节流**，导致训练速度突然下降
+
+**实施方法：**
+
+1. **启用风扇手动控制：** 打开 `NVIDIA X Server Settings` -> `Thermal Settings` -> 勾选 `Enable GPU Fan Control` -> 手动拉至 **85% - 100%**。 *(注：若无法调整，可能需要修改 `/etc/X11/xorg.conf` 添加 `Coolbits` 选项)*
+
+2. **监控命令：**
+
+   ```bash
+   watch -n 1 nvidia-smi
+   ```
+
+   关注 `Pwr:Usage/Cap` 是否稳定，以及 `Temp` 是否超过 80°C
+
+##### 5.5.1.2.3 资产管理与网络环境
+
+**本地化资产缓存**
+Isaac Sim 严重依赖 NVIDIA Nucleus 服务器提供的 USD 资产（环境、材质、机器人模型）
+
+- 问题现象： 加载场景时进度条卡在 `Connecting to Nucleus...` 或训练中途报错 `Failed to resolve path`
+
+优化方案：
+
+- 下载 Omniverse Cache： 在 Omniverse Launcher 中安装 "Cache" 应用，并在设置中分配足够的磁盘空间（建议 SSD 50GB+）
+
+- 预下载资产： 对于常用的 `Isaac/Environments` 或 `Isaac/Robots`，建议通过 Nucleus Navigator 手动下载到本地盘符（Localhost），并在代码中将资产路径指向本地路径而非云端路径
+
+**网络连接**
+由于 NVIDIA 的资产服务器位于海外，国内直连丢包率极高
+
+关键问题：
+
+- 材质缺失： 仿真环境全是灰模或粉色棋盘格
+
+- 训练崩溃： 物理引擎初始化时因无法下载材质贴图而触发 `Segmentation Fault`
+
+建议： 必须配置系统级或终端级代理（Proxy）
+
+```bash
+# 在运行 Isaac Lab 前的终端设置代理 (示例端口7890)
+export http_proxy=http://127.0.0.1:7890
+export https_proxy=http://127.0.0.1:7890
+export no_proxy=localhost,127.0.0.1,::1
+```
+
+> 提示： 确保你的代理软件开启了 TUN 模式 或正确接管了终端流量
+
+
 # 6. 文档规范与维护
 
 
