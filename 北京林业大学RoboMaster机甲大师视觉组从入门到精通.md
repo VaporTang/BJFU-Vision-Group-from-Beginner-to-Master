@@ -483,7 +483,7 @@ sudo apt-get install -y boot-repair && boot-repair
 
 按工具提示执行完所有步骤后，重启就能够自动进入grub的启动选择页面了
 
-**③ Ubuntu与Windows双系统切换后Windows系统时间异常（通常相差8小时）  **
+**③ Ubuntu与Windows双系统切换后Windows系统时间异常（通常相差8小时）**
 
 **触发原因：**Linux 默认将主板硬件时钟（RTC）视为 UTC 时间（世界协调时间）。其在显示时间时，会根据设置的时区（如中国 CST +8）自动加上偏移量。Windows 默认将主板硬件时钟视为 Local Time（本地时间）
 
