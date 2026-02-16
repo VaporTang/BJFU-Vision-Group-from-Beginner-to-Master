@@ -1147,7 +1147,7 @@ MobaXterm 被称为远程计算的“瑞士军刀”。对于视觉组而言，�
 
 **安装教程：**
 
-1. **下载**：访问 [MobaXterm 官网](https://mobaxterm.mobatek.net/download.html)，选择 **Home Edition (Free)**。
+1. **下载**：访问 [MobaXterm 官网](https://mobaxterm.mobatek.net/download.html)，选择 <b>Home Edition (Free)</b>。
    - *Installer edition*：传统安装版
    - *Portable edition*：免安装版，解压即用（可放入 U 盘）
 2. **连接配置**：
