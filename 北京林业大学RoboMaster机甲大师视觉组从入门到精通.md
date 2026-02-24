@@ -1008,6 +1008,8 @@ cmake --version
 
 #### 1.3.3.1 基本介绍
 
+> 你可以在 **Android** 和 **iOS / iPadOS** 上进行远程控制，但这两个系统本身只能作为控制端，无法作为被控端。 
+
 **NoMachine** 是一款跨平台的远程桌面软件，广泛适用于 Linux、Windows、Android 以及 ARM 架构设备等几乎所有主流操作系统。虽然市面上还有向日葵、ToDesk 等常见的远程工具，但 **NoMachine** 开源极其跨平台性，成为了本项目的首选方案。
 
 #### 1.3.3.2 安装NoMachine
