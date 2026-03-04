@@ -5547,7 +5547,112 @@ sudo ./bin/MiracleVision
 
 无法解决则更换串口模块 【注意：模块的芯片应为 `CP2102` （串口名称 `/dev/USB01` ）或模块使用STLink-V2.1（串口名称 `/dev/ACM01` ）】
 
-##### 5.1.3.1.3 装甲板跟随
+##### 5.1.3.1.3 多串口 udev 规则绑定（多串口配置）
+
+> Contributor: 唐锦梁
+
+在开发过程中，同一台 MiniPC 经常需要连接多个 USB 串口模块。如果系统每次重启或模块的插拔顺序不同，可能导致串口设备号（如 `/dev/ttyUSB0` 和 `/dev/ttyUSB1`）发生错乱。为解决此问题，需要使用 `udev` 规则对特定的串口模块进行一对一的标识与绑定，生成固定的硬件别名。
+
+**步骤 1：获取第一个串口模块的序列号**
+
+首先，仅将**第一个**串口模块插入 MiniPC。查看当前系统识别到的串口设备：
+
+```bash
+ls /dev/ttyUSB*
+```
+
+通常终端会输出如下结果：
+
+```bash
+/dev/ttyUSB0
+```
+
+> **注意**：如果输出的不是 `/dev/ttyUSB0`，请在后续的命令中将 `ttyUSB0` 替换为你实际看到的设备名称。
+
+接下来，读取该模块的唯一序列号：
+
+> **提示**：部分廉价或盗版芯片可能缺少唯一的序列号，这会导致 udev 规则无法准确区分设备。建议选用质量可靠的串口模块（笔者使用的是基于 FT232 芯片的模块）。
+
+```bash
+udevadm info -a -n /dev/ttyUSB0 | grep '{serial}'
+```
+
+终端输出示例如下：
+
+```bash
+    ATTRS{serial}=="BG02D7B8"
+    ATTRS{serial}=="0000:00:14.0"
+```
+
+其中 `ATTRS{serial}=="BG02D7B8"` 对应的值即为**该模块**的序列号，请将其记录下来。
+
+**步骤 2：获取其他串口模块的序列号**
+
+拔掉第一个串口模块，插入**第二个**串口模块（如有更多模块，操作同理），再次执行查询命令：
+
+```bash
+udevadm info -a -n /dev/ttyUSB0 | grep '{serial}'
+```
+
+终端输出示例如下：
+
+```bash
+    ATTRS{serial}=="BG02DKQZ"
+    ATTRS{serial}=="0000:00:14.0"
+```
+
+同样，记录下第二个模块的序列号（此处为 `BG02DKQZ`）。
+
+**步骤 3：编写并保存 udev 规则**
+
+获取所有模块的序列号后，将绑定规则写入系统配置文件中：
+
+```bash
+sudo nano /etc/udev/rules.d/99-usb-serial.rules
+```
+
+在文件中填入以下内容：
+
+```bash
+ACTION=="add", KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="BG02D7B8", MODE="0666", SYMLINK+="ttyUSB_chassis"
+ACTION=="add", KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="BG02DKQZ", MODE="0666", SYMLINK+="ttyUSB_referee"
+```
+
+> **参数说明**：
+> * 请将 `ATTRS{serial}` 的值替换为你刚刚记录的实际序列号。
+> * `SYMLINK+=` 后面的值是该串口的固定别名，建议使用有明确语义的名称。例如，`ttyUSB_chassis` 表示与底盘通信的串口，`ttyUSB_referee` 表示接收大疆裁判系统数据的串口。
+> * `MODE="0666"` 用于赋予普通用户读写权限，避免运行节点时出现权限报错。
+> 
+> 
+
+**步骤 4：刷新并加载系统规则**
+
+保存文件并退出（在 nano 中使用 `Ctrl+O` 保存，回车确认，`Ctrl+X` 退出）。随后执行以下命令，让系统立即加载并应用新增的规则：
+
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
+**步骤 5：验证配置是否生效**
+
+重新插拔一下这两个 USB 模块，运行以下命令查看软链接（别名）是否成功生成：
+
+```bash
+ls -l /dev/ttyUSB*
+```
+
+如果输出结果类似如下内容，即表示配置成功。后续在代码的配置文件中，直接使用我们设置好的固定别名（如 `/dev/ttyUSB_chassis`）来调用串口即可。
+
+```bash
+crw-rw-rw- 1 root dialout 188, 0  3月  4 12:10 /dev/ttyUSB0
+crw-rw-rw- 1 root dialout 188, 1  3月  4 12:10 /dev/ttyUSB1
+lrwxrwxrwx 1 root root         7  3月  4 12:10 /dev/ttyUSB_chassis -> ttyUSB0
+lrwxrwxrwx 1 root root         7  3月  4 12:10 /dev/ttyUSB_referee -> ttyUSB1
+```
+
+
+##### 5.1.3.1.4 装甲板跟随
 
 使用手持装甲板模块测试识别是否正常（远近，左右）
 
@@ -5567,7 +5672,7 @@ sudo ./bin/MiracleVision
 - 相机卡顿，在 UI 以及控制台可见卡顿现象，插拔相机以及重启程序，若不能解决，尝试更换相机在minipc的插入接口（换C口/反面USB口）【一般是相机供电不足引起】
 - 电控方面接收问题，找电控开调试查
 
-##### 5.1.3.1.4 弹道补偿调整
+##### 5.1.3.1.5 弹道补偿调整
 
 确认跟随正常后，开始调整弹速系数，改变装甲板远近/左右（固定靶），机器人开火
 
