@@ -2928,19 +2928,21 @@ net start mysql
 
 ##### 3.4.2.3.2 大疆官方服务器
 
-前往RoboMaster官网下载服务器客户端(RoboMaster产品->裁判系统->软件产品）
+前往RoboMaster官网下载服务器客户端(赛事产品->赛事引擎）
 
-各赛季的版本不一定都出来了，并且有些版本的会闪退，自己根据电脑情况多尝试几个版本即可，这里使用的是2020年的服务器客户端
+按需下载联盟赛/对抗赛相关的裁判系统赛事引擎软件即可
+
+各赛季的版本不一定都出来了，并且有些版本的会闪退，自己根据电脑情况多尝试几个版本即可(闪退大概率是因为电脑上缺少相关依赖和运行时环境)，这里使用的是2026年的服务器客户端
 
 https://www.robomaster.com/zh-CN/products/components/detail/2518
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/0e5d6040-a014-4b9c-9e91-c7eb86a37b42.webp" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/PixPin_2026-04-05_18-24-10.png" alt="0e5d6040-a014-4b9c-9e91-c7eb86a37b42" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2ff831b2-b26c-4607-88e7-0e59d7789b9b.webp" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/PixPin_2026-04-05_18-20-43.png" alt="2ff831b2-b26c-4607-88e7-0e59d7789b9b" style="zoom:20%;" />
 
-<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/1e4ce0be-abaf-4f0e-8df7-9b74f38bee76.webp" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:33%;" />
+<img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/PixPin_2026-04-05_18-29-21.png" alt="1e4ce0be-abaf-4f0e-8df7-9b74f38bee76" style="zoom:20%;" />
 
-2020赛季的服务器RoboMaster Server里面文件如下图，打开RMServerStart.exe文件，直接点击最下面的StartAll，进入后Play能够打开以下界面即可。
+2026赛季的服务器RoboMaster Server里面文件如下图，打开RMServerStart.exe文件，直接点击最下面的StartAll，进入后Play能够打开以下界面即可。
 
 <img src="./北京林业大学RoboMaster机甲大师视觉组从入门到精通/2befb81e-b765-4d33-8ed4-525afc8437be.webp" alt="2befb81e-b765-4d33-8ed4-525afc8437be" style="zoom:33%;" />
 
